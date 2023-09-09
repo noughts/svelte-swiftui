@@ -1,3 +1,24 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import UiTabBar from "$lib/UITabBar.svelte";
+</script>
+
+<svelte:head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+</svelte:head>
+
+<div class="root">
+	<div class="content">content</div>
+	<UiTabBar />
+</div>
+
+<style>
+	.root {
+		width: 375px;
+		height: 667px;
+		display: flex;
+		flex-direction: column;
+	}
+	.content {
+		flex-grow: 2;
+	}
+</style>
