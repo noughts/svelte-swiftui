@@ -10,13 +10,28 @@
 		items = items.concat(item);
 	}
 	function pop() {
-		items = items.slice();
+		const newAry = [...items];
+		newAry.pop();
+		items = newAry;
+		console.log("pop", items);
 	}
 </script>
 
-<div>
+<div class="root">
 	<slot />
 	{#each items as item}
-		<svelte:component this={item.component} {...item.args} />
+		<div class="item">
+			<svelte:component this={item.component} {...item.args} />
+		</div>
 	{/each}
 </div>
+
+<style>
+	.root{
+		position: relative;
+	}
+	.item{
+		position: absolute;
+		inset:0;
+	}
+</style>
