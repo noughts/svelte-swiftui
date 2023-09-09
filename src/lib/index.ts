@@ -5,6 +5,9 @@ export { default as UITab } from "./UITab.svelte"
 export { default as UITabBar } from "./UITabBar.svelte"
 export { default as MaterialSymbol } from "./MaterialSymbol.svelte"
 export { default as NavigationView } from "./NavigationView.svelte"
+export { default as VStack } from "./VStack.svelte"
+export { default as HStack } from "./HStack.svelte"
+export { default as Spacer } from "./Spacer.svelte"
 
 export type SceneContext = {
 	push: (item: SceneItem) => void
