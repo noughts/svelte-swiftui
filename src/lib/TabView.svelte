@@ -3,7 +3,7 @@
 	import type { UITabBarItem } from "./UITabBarItem.js";
 	export let selection = 0;
 	export let items: UITabBarItem[];
-	console.log($$slots);
+	// console.log($$slots);
 </script>
 
 <div class="root">

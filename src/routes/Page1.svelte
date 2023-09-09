@@ -1,9 +1,10 @@
 <script lang="ts">
     import { getContext } from "svelte";
+    import Page2 from "./Page2.svelte";
 
 	const sceneContext = getContext("Scene") as any;
 	function onPresentButtonTap() {
-		sceneContext.push()
+		sceneContext.push({component:Page2})
 	}
 </script>
 
