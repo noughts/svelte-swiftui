@@ -1,1 +1,1 @@
-//
+import UITabBar from "$lib/UITabBar.svelte"
