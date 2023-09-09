@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { setContext } from "svelte";
 	import type { SceneItem } from "./index.js";
-
-	let items: SceneItem[] = [];
-
 	setContext("Scene", { push, pop });
 
+	let items: SceneItem[] = [];
 	function push(item: SceneItem) {
 		items = items.concat(item);
 	}
@@ -17,6 +15,13 @@
 	}
 </script>
 
+<svelte:head>
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
+	/>
+</svelte:head>
+
 <div class="root">
 	<slot />
 	{#each items as item}
@@ -27,11 +32,11 @@
 </div>
 
 <style>
-	.root{
+	.root {
 		position: relative;
 	}
-	.item{
+	.item {
 		position: absolute;
-		inset:0;
+		inset: 0;
 	}
 </style>
