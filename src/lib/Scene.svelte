@@ -26,7 +26,7 @@
 <div class="root">
 	<slot />
 	{#each items as item}
-		<div class="item" transition:fly={{ y: 500, opacity: 1 }}>
+		<div class="item" transition:fly={{ y: "100%", opacity: 1 }}>
 			<svelte:component this={item.component} {...item.args} />
 		</div>
 	{/each}

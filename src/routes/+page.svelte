@@ -26,6 +26,6 @@
 
 <style>
     .root {
-        background-color: #ddd;
+        background-color: #eee;
     }
 </style>
