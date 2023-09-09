@@ -19,8 +19,8 @@
 
 <style>
 	.root {
-		width: 375px;
-		height: 667px;
+		width: 100%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 	}

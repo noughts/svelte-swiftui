@@ -34,6 +34,8 @@
 
 <style>
 	.root {
+		max-width: 480px;
+		height: 100dvh;
 		position: relative;
 	}
 	.item {
