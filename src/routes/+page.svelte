@@ -4,7 +4,7 @@
     import type { UITabBarItem } from "$lib/UITabBarItem.js";
     import Page1 from "./Page1.svelte";
     import Page2 from "./Page2.svelte";
-    import "./globals.css"
+    import "./globals.css";
 
     const items: UITabBarItem[] = [
         { title: "ホーム", icon: "home" },
@@ -15,9 +15,17 @@
     ];
 </script>
 
-<Scene>
-    <TabView {items} selection={0}>
-        <Page1 slot="0" />
-        <Page2 slot="1" />
-    </TabView>
-</Scene>
+<div class="root">
+    <Scene>
+        <TabView {items} selection={0}>
+            <Page1 slot="0" />
+            <Page2 slot="1" />
+        </TabView>
+    </Scene>
+</div>
+
+<style>
+    .root {
+        background-color: #ddd;
+    }
+</style>

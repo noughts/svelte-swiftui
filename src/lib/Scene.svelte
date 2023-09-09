@@ -34,8 +34,12 @@
 
 <style>
 	.root {
-		max-width: 480px;
+		width: 100%;
 		height: 100dvh;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+		background-color: white;
 		position: relative;
 	}
 	.item {
