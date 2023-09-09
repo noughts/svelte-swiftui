@@ -12,7 +12,6 @@
 		const newAry = [...items];
 		newAry.pop();
 		items = newAry;
-		console.log("pop", items);
 	}
 </script>
 
