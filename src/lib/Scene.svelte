@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { setContext } from "svelte";
 	import type { SceneItem } from "./index.js";
+	import { fly } from "svelte/transition";
 	setContext("Scene", { push, pop });
 
 	let items: SceneItem[] = [];
@@ -25,7 +26,7 @@
 <div class="root">
 	<slot />
 	{#each items as item}
-		<div class="item">
+		<div class="item" transition:fly={{ y: 500, opacity: 1 }}>
 			<svelte:component this={item.component} {...item.args} />
 		</div>
 	{/each}
