@@ -1,13 +1,13 @@
 <script lang="ts">
-    import MaterialSymbol from "./MaterialSymbol.svelte";
-    import type { UITabBarItem } from "./UITabBarItem.js";
+	import MaterialSymbol from "./MaterialSymbol.svelte";
+	import type { UITabBarItem } from "./UITabBarItem.js";
 
-	export let item:UITabBarItem;
+	export let item: UITabBarItem;
 	export let selected: boolean = false;
-	const color = selected ? "blue" : "gray";
+	$: color = selected ? "blue" : "gray";
 </script>
 
-<button on:click class="root" style:color="{color}">
+<button on:click class="root" style:color>
 	<MaterialSymbol icon={item.icon} />
 	<div class="name">{item.title}</div>
 </button>

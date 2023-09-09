@@ -3,11 +3,15 @@
 	import type { UITabBarItem } from "./UITabBarItem.js";
 	export let selection = 0;
 	export let items: UITabBarItem[];
+
+	function onTabClick(index:number){
+		selection = index;
+	}
 </script>
 
 <div class="root">
 	{#each items as item, index (item.title)}
-		<UiTab {item} selected={index == selection} />
+		<UiTab {item} selected={index == selection} on:click={e=>{onTabClick(index)}} />
 	{/each}
 </div>
 
