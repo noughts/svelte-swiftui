@@ -4,7 +4,7 @@
     import Page2 from "./Page2.svelte";
 </script>
 
-<TabView>
-    <Page1 />
-    <Page2 />
+<TabView selection={0}>
+    <Page1 slot="0" />
+    <Page2 slot="1" />
 </TabView>
