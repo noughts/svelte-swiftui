@@ -1,14 +1,14 @@
 <script lang="ts">
-    import LandmarkRow from "./LandmarkRow.svelte";
+	import VStack from "$lib/VStack.svelte";
+	import LandmarkRow from "./LandmarkRow.svelte";
 
-	const landmarks = [
-		{name:"Turtle Rock"},
-		{name:"Silver Salmon Creek"}
-	]
+	const landmarks = [{ name: "Turtle Rock" }, { name: "Silver Salmon Creek" }];
 </script>
 
 <div>
-	{#each landmarks as landmark}
-		<LandmarkRow {landmark} />
-	{/each}
+	<VStack>
+		{#each landmarks as landmark}
+			<LandmarkRow {landmark} />
+		{/each}
+	</VStack>
 </div>
