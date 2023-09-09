@@ -10,6 +10,11 @@ export type SceneContext = {
 	pop: () => void;
 }
 
+export type NavigationContext = {
+	push: (item: SceneItem) => void
+	pop: () => void;
+}
+
 export type SceneItem = {
 	component: any;
 	args: any;

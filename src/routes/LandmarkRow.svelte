@@ -4,7 +4,7 @@
 	export let landmark: Landmark;
 </script>
 
-<button class="root">{landmark.name}</button>
+<button on:click class="root">{landmark.name}</button>
 
 <style>
 	.root {

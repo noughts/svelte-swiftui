@@ -2,7 +2,7 @@
 	import { setContext } from "svelte";
 	import type { SceneItem } from "./index.js";
 	import { fly } from "svelte/transition";
-	setContext("Navigation", { push, pop });
+	setContext("navigation", { push, pop });
 
 	let items: SceneItem[] = [];
 	function push(item: SceneItem) {
