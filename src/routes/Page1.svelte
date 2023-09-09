@@ -1,10 +1,11 @@
 <script lang="ts">
-    import { getContext } from "svelte";
-    import Page2 from "./Page2.svelte";
+	import { getContext } from "svelte";
+	import Page2 from "./Page2.svelte";
+	import type { SceneContext } from "$lib/index.js";
 
-	const sceneContext = getContext("Scene") as any;
+	const sceneContext = getContext("Scene") as SceneContext;
 	function onPresentButtonTap() {
-		sceneContext.push({component:Page2})
+		sceneContext.push({ component: Page2, args: {title:"hello"} });
 	}
 </script>
 
