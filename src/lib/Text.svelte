@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { styleToString } from '$lib/utils/SvelteUtil';
 	import type { Properties } from 'csstype';
+    import { styleToString } from './Util.js';
 	export let maxLines = 0;
 	export let fontSize = 15;
 	export let style: Properties = {};

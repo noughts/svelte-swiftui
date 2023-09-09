@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Properties, Property } from "csstype";
-	import { styleToString } from "../utils/SvelteUtil";
+    import { styleToString } from "./Util.js";
 	export let style: Properties = {};
 	export let spacing: number = 0;
 	export let alignItems: Property.AlignItems = "stretch";
