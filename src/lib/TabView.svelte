@@ -1,6 +1,8 @@
 <script lang="ts">
 	import UiTabBar from "$lib/UITabBar.svelte";
+    import type { UITabBarItem } from "./UITabBarItem.js";
 	export let selection = 0;
+	export let items:UITabBarItem[];
 	console.log($$slots);
 </script>
 
@@ -12,7 +14,7 @@
 			<slot name="1" />
 		{/if}
 	</div>
-	<UiTabBar />
+	<UiTabBar {items} />
 </div>
 
 <style>

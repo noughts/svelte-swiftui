@@ -1,13 +1,14 @@
 <script lang="ts">
 	import UiTab from "./UITab.svelte";
+	import type { UITabBarItem } from "./UITabBarItem.js";
+	export let selection = 0;
+	export let items: UITabBarItem[];
 </script>
 
 <div class="root">
-	<UiTab icon="home" name="ホーム" selected />
-	<UiTab icon="partly_cloudy_day" name="天気" />
-	<UiTab icon="confirmation_number" name="クーポン" />
-	<UiTab icon="search" name="検索" />
-	<UiTab icon="account_circle" name="プロフィール" />
+	{#each items as item, index (item.title)}
+		<UiTab {item} selected={index == selection} />
+	{/each}
 </div>
 
 <style>
@@ -17,6 +18,5 @@
 		align-items: center;
 		flex-shrink: 0;
 		border-top: solid 0.5px var(--separator);
-		
 	}
 </style>
