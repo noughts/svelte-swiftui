@@ -4,6 +4,7 @@
 	import LandmarkRow from "./LandmarkRow.svelte";
     import type { NavigationContext } from "$lib/index.js";
 	const navContext = getContext("navigation") as NavigationContext;
+	console.log(navContext)
 
 	const landmarks = [{ name: "Turtle Rock" }, { name: "Silver Salmon Creek" }];
 </script>

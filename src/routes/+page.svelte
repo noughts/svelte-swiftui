@@ -1,4 +1,5 @@
 <script lang="ts">
+    import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
     import type { UITabBarItem } from "$lib/UITabBarItem.js";
@@ -18,7 +19,9 @@
 <div class="root">
     <Scene>
         <TabView {items} selection={0}>
-            <LandmarkList slot="0" />
+            <NavigationView slot="0">
+                <LandmarkList />
+            </NavigationView>
             <Page2 slot="1" />
         </TabView>
     </Scene>
