@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { UINavigationItem } from "$lib/index.js";
+	import type { NavigationItem } from "$lib/index.js";
 
-	export let items: UINavigationItem[];
+	export let items: NavigationItem[];
 	$: topItem = items[items.length - 1];
 </script>
 

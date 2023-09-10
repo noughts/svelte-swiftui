@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
-    import type { NavigationContext, SceneItem } from "./index.js";
+	import type { NavigationContext, NavigationItem, SceneItem } from "./index.js";
 	setContext<NavigationContext>("navigation", { push, pop });
 
-	let items: SceneItem[] = [];
-	function push(item: SceneItem) {
+	export let rootItem: NavigationItem;
+	let items: NavigationItem[] = [rootItem];
+	function push(item: NavigationItem) {
 		items = items.concat(item);
 	}
 	function pop() {
@@ -15,12 +16,10 @@
 	}
 </script>
 
-
 <div class="root">
-	<slot />
 	{#each items as item}
 		<div class="item" transition:fly={{ x: "100%", opacity: 1 }}>
-			<svelte:component this={item.component} {...item.args} />
+			<svelte:component this={item.component.class} {...item.component.args} />
 		</div>
 	{/each}
 </div>

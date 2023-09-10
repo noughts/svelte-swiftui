@@ -8,6 +8,11 @@ export { default as VStack } from "./VStack.svelte"
 export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 
+export type Component = {
+	class:any;
+	args?:any;
+}
+
 export type SceneContext = {
 	dark: boolean;
 	tintColor: Property.Color;
@@ -16,7 +21,7 @@ export type SceneContext = {
 }
 
 export type NavigationContext = {
-	push: (item: SceneItem) => void
+	push: (item: NavigationItem) => void
 	pop: () => void;
 }
 
@@ -28,10 +33,10 @@ export type SceneItem = {
 export type UITabBarItem = {
 	title: string
 	icon: string
-	component: any;
-	args?: any;
+	component: Component;
 }
 
-export type UINavigationItem = {
+export type NavigationItem = {
 	title:string;
+	component:Component;
 }
