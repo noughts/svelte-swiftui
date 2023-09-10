@@ -12,7 +12,8 @@ export { default as Spacer } from "./Spacer.svelte"
 export type SceneContext = {
 	dark: boolean;
 	tintColor: Property.Color;
-	push: (item: SceneItem) => void
+	push: <Props extends Record<string, any> = any>
+		(component: SvelteUIComponent<Props, any, any>, props?: Props) => void;
 	pop: () => void;
 }
 
