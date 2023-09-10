@@ -11,7 +11,7 @@
 	let count = 0;
 	setInterval(()=>{
 		count++;
-	},1000)
+	},100)
 </script>
 
 <div class="root">
