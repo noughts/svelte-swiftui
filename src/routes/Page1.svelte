@@ -3,7 +3,7 @@
 	import Page2 from "./Page2.svelte";
 	import type { SceneContext } from "$lib/index.js";
 
-	const sceneContext = getContext("Scene") as SceneContext;
+	const sceneContext = getContext<SceneContext>("scene");
 	function onPresentButtonTap() {
 		sceneContext.push({ component: Page2, args: {title:"hello"} });
 	}

@@ -37,7 +37,6 @@
 <style>
 	.root {
 		width: 100%;
-		max-width: 480px;
 		height: 100%;
 		overflow: hidden;
 		background-color: white;

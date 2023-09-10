@@ -5,6 +5,7 @@
     import type { UITabBarItem } from "$lib/index.js";
     import "../globals.css";
     import LandmarkList from "./LandmarkList.svelte";
+    import Page1 from "./Page1.svelte";
     import Page2 from "./Page2.svelte";
 
     const items: UITabBarItem[] = [
@@ -22,15 +23,14 @@
             <NavigationView slot="0">
                 <LandmarkList />
             </NavigationView>
-            <Page2 slot="1" />
+            <Page1 slot="1" />
         </TabView>
     </Scene>
 </div>
 
 <style>
     .root {
-        background-color: #eee;
-        width: 100%;
+        max-width: 480px;
 		height: 100dvh;
         margin-left: auto;
         margin-right: auto;
