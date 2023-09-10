@@ -1,9 +1,10 @@
 {
 	"name": "svelte-swiftui",
-	"version": "0.0.1",
+	"license": "MIT",
+	"version": "0.0.10",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && npm run package",
+		"build": "vite build && npm run package && npm version patch",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
@@ -37,5 +38,8 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"csstype": "^3.1.2"
+	}
 }
