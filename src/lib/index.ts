@@ -9,12 +9,14 @@ export { default as VStack } from "./VStack.svelte"
 export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 
-export type Node<Props extends Record<string, any> = any> = {
+type DefaultProps = Record<string, any>;
+
+export type Node<Props extends DefaultProps> = {
 	component: SvelteUIComponent<Props, any, any>
 	props?: Props;
 }
 
-export type SceneItem<Props extends Record<string, any> = any> = {
+export type SceneItem<Props extends DefaultProps> = {
 	node:Node<Props>;
 	transition?:string;
 }
@@ -22,9 +24,8 @@ export type SceneItem<Props extends Record<string, any> = any> = {
 export type SceneContext = {
 	dark: boolean;
 	tintColor: Property.Color;
-	push3: <Props extends Record<string, any> = any>(item:SceneItem<Props>) =>void;
-	push2: <Props extends Record<string, any> = any>(node: Node<Props>) => void;
-	push: <Props extends Record<string, any> = any>
+	push: <Props extends DefaultProps>(item:SceneItem<Props>) =>void;
+	_push: <Props extends DefaultProps>
 		(component: SvelteUIComponent<Props, any, any>, props?: Props) => void;
 	pop: () => void;
 }
