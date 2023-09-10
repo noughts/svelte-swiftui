@@ -12,7 +12,8 @@
 </script>
 
 <div class="root" class:dark>
-	{#each items as item, index (item.title)}
+	<div class="tabs">
+		{#each items as item, index (item.title)}
 		<UiTab
 			{item}
 			selected={index == selection}
@@ -21,16 +22,24 @@
 			}}
 		/>
 	{/each}
+	</div>
 </div>
 
 <style>
 	.root {
-		height: 54px;
-		display: flex;
-		align-items: center;
+		height: 88px;
 		flex-shrink: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-start;
 		background-color: #f5f5f5;
 		border-top: solid 0.5px rgba(0 0 0/20%);
+	}
+	.tabs{
+		display: flex;
+		height: 54px;
+		align-items: center;
 	}
 	.dark {
 		border-color: rgba(255 255 255/20%);
