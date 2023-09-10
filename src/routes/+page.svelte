@@ -18,7 +18,7 @@
 </script>
 
 <div class="root">
-    <Scene tintColor="yellow" dark>
+    <Scene tintColor="blue" >
         <TabView {items} selection={0}>
             <NavigationView slot="0">
                 <LandmarkList />
@@ -30,7 +30,6 @@
 
 <style>
     .root {
-        background-color: black;
         max-width: 480px;
 		height: 100dvh;
         margin-left: auto;
