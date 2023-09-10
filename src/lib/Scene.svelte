@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { setContext } from "svelte";
-	import type { SceneContext, SceneItem } from "./index.js";
+	import { SvelteComponent, setContext } from "svelte";
+	import type { SceneContext, SceneItem, SvelteUIComponent } from "./index.js";
 	import { fly } from "svelte/transition";
 
 	export let tintColor = "blue";
@@ -10,7 +10,7 @@
 	setContext<SceneContext>("scene", { push, pop, dark, tintColor });
 
 	let items: SceneItem[] = [rootItem];
-	function push(item: SceneItem) {
+	function push(component:SvelteUIComponent, props:any) {
 		items = items.concat(item);
 	}
 	function pop() {
