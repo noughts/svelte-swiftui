@@ -22,5 +22,6 @@
 		align-items: center;
 		flex-shrink: 0;
 		border-top: solid 0.5px var(--separator);
+		background-color: var(--color);
 	}
 </style>

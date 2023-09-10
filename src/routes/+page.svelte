@@ -18,7 +18,7 @@
 
 <div class="root">
     <Scene>
-        <TabView {items} selection={0}>
+        <TabView {items} selection={0} tabBarColor="red">
             <NavigationView slot="0">
                 <LandmarkList />
             </NavigationView>
