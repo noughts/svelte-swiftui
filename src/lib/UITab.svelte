@@ -12,9 +12,9 @@
 		color = sceneContext.tintColor;
 	} else {
 		if( sceneContext.dark){
-			color = "rgba(255 255 255/50%)"
+			color = "rgba(255 255 255/42%)"
 		}else {
-			color = "rgba(0 0 0/50%)"
+			color = "rgba(0 0 0/42%)"
 		}
 	}
 </script>
@@ -35,7 +35,7 @@
 		justify-content: center;
 	}
 	.name {
-		font-size: 11px;
+		font-size: 9px;
 		font-weight: 600;
 		font-feature-settings: "palt";
 	}

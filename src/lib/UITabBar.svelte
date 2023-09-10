@@ -14,14 +14,14 @@
 <div class="root" class:dark>
 	<div class="tabs">
 		{#each items as item, index (item.title)}
-		<UiTab
-			{item}
-			selected={index == selection}
-			on:click={(e) => {
-				onTabClick(index);
-			}}
-		/>
-	{/each}
+			<UiTab
+				{item}
+				selected={index == selection}
+				on:click={(e) => {
+					onTabClick(index);
+				}}
+			/>
+		{/each}
 	</div>
 </div>
 
@@ -34,15 +34,15 @@
 		align-items: stretch;
 		justify-content: flex-start;
 		background-color: #f5f5f5;
-		border-top: solid 0.5px rgba(0 0 0/20%);
+		border-top: solid 0.1px rgba(0 0 0/15%);
 	}
-	.tabs{
+	.tabs {
 		display: flex;
 		height: 49px;
 		align-items: center;
 	}
 	.dark {
-		border-color: rgba(255 255 255/20%);
-		background-color: #222;
+		border-color: rgba(255 255 255/15%);
+		background-color: #131313;
 	}
 </style>

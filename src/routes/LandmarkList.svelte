@@ -9,10 +9,17 @@
 	const landmarks = [{ name: "Turtle Rock" }, { name: "Silver Salmon Creek" }];
 </script>
 
-<div>
+<div class="root">
 	<VStack>
 		{#each landmarks as landmark}
 			<LandmarkRow {landmark} />
 		{/each}
 	</VStack>
 </div>
+
+<style>
+	.root{
+		height: 100%;
+		background-color:black;
+	}
+</style>
