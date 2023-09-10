@@ -1,10 +1,12 @@
 <script lang="ts">
+    import { getContext } from "svelte";
 	import MaterialSymbol from "./MaterialSymbol.svelte";
-    import type { UITabBarItem } from "./index.js";
+    import type { SceneContext, UITabBarItem } from "./index.js";
+	const sceneContext = getContext<SceneContext>("scene")
 
 	export let item: UITabBarItem;
 	export let selected: boolean = false;
-	$: color = selected ? "blue" : "gray";
+	$: color = selected ? sceneContext.tintColor : "gray";
 </script>
 
 <button on:click class="root" style:color>

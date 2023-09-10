@@ -1,3 +1,4 @@
+import type { Property } from "csstype"
 
 export { default as Scene } from "./Scene.svelte"
 export { default as TabView } from "./TabView.svelte"
@@ -10,6 +11,8 @@ export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 
 export type SceneContext = {
+	theme: "light" | "dark"
+	tintColor: Property.Color;
 	push: (item: SceneItem) => void
 	pop: () => void;
 }
