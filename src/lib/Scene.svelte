@@ -3,7 +3,8 @@
 	import type { SceneContext, SceneItem } from "./index.js";
 	import { fly } from "svelte/transition";
 	export let tintColor = "blue";
-	setContext<SceneContext>("scene", { push, pop, theme: "light", tintColor });
+	export let dark: boolean = false;
+	setContext<SceneContext>("scene", { push, pop, dark, tintColor });
 
 	let items: SceneItem[] = [];
 	function push(item: SceneItem) {

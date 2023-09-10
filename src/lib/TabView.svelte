@@ -3,9 +3,6 @@
     import type { UITabBarItem } from "./index.js";
 	export let selection = 0;
 	export let items: UITabBarItem[];
-	export let tabBarStyle = {
-		color:"white",
-	}
 	// console.log($$slots);
 </script>
 
@@ -17,7 +14,7 @@
 			<slot name="1" />
 		{/if}
 	</div>
-	<UiTabBar {items} bind:selection --color={tabBarStyle.color} />
+	<UiTabBar {items} bind:selection />
 </div>
 
 <style>

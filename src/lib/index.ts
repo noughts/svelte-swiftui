@@ -11,7 +11,7 @@ export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 
 export type SceneContext = {
-	theme: "light" | "dark"
+	dark: boolean;
 	tintColor: Property.Color;
 	push: (item: SceneItem) => void
 	pop: () => void;

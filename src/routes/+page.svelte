@@ -17,7 +17,7 @@
 </script>
 
 <div class="root">
-    <Scene tintColor="red">
+    <Scene tintColor="red" dark>
         <TabView {items} selection={0}>
             <NavigationView slot="0">
                 <LandmarkList />
