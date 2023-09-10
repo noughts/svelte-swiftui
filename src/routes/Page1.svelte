@@ -7,8 +7,8 @@
 
 	const sceneContext = getContext<SceneContext>("scene");
 	function onPresentButtonTap() {
-		// sceneContext.push({ component: Page2, args: { title: "hello" }  });
 		sceneContext.push(DemoScreen, { header: "hoge" });
+		sceneContext.push2({ component: DemoScreen, props: { header: "a" } });
 	}
 </script>
 
