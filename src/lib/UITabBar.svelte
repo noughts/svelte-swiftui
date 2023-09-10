@@ -29,10 +29,11 @@
 		display: flex;
 		align-items: center;
 		flex-shrink: 0;
-		border-top: solid 0.5px rgba(0 0 0/10%);
+		background-color: #f5f5f5;
+		border-top: solid 0.5px rgba(0 0 0/20%);
 	}
 	.dark {
-		border-color: rgba(255 255 255/10%);
+		border-color: rgba(255 255 255/20%);
 		background-color: #222;
 	}
 </style>
