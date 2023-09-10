@@ -19,7 +19,7 @@
 <div class="root">
 	{#each items as item}
 		<div class="item" transition:fly={{ x: "100%", opacity: 1 }}>
-			<svelte:component this={item.component.class} {...item.component.args} />
+			<svelte:component this={item.node.component} {...item.node.props} />
 		</div>
 	{/each}
 </div>
