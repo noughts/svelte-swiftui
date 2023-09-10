@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Properties } from 'csstype';
-    import { styleToString } from './Util.js';
+    import { styleToString } from './internal/Util.js';
 	export let maxLines = 0;
 	export let fontSize = 15;
 	export let style: Properties = {};

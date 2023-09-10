@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Properties } from 'csstype';
-    import { styleToString } from './Util.js';
+    import { styleToString } from './internal/Util.js';
 	export let style: Properties = {};
 	export let spacing = 0;
 	style.gap = spacing + 'px';

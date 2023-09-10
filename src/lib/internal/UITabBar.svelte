@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from "svelte";
-	import UiTab from "./UITab.svelte";
-	import type { SceneContext, UITabBarItem } from "./index.js";
+    import UiTab from "./UITab.svelte";
+    import type { SceneContext, UITabBarItem } from "$lib/index.js";
 	export let selection = 0;
 	export let items: UITabBarItem[];
 	const { dark } = getContext<SceneContext>("scene");

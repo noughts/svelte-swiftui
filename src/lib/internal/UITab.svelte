@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext } from "svelte";
-	import MaterialSymbol from "./MaterialSymbol.svelte";
-	import type { SceneContext, UITabBarItem } from "./index.js";
+	import MaterialSymbol from "../MaterialSymbol.svelte.js";
+	import type { SceneContext, UITabBarItem } from "../index.js";
 	import type { Property } from "csstype";
 	const sceneContext = getContext<SceneContext>("scene");
 

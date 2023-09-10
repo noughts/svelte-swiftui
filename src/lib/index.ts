@@ -31,3 +31,7 @@ export type UITabBarItem = {
 	component: any;
 	args?: any;
 }
+
+export type UINavigationItem = {
+	title:string;
+}
