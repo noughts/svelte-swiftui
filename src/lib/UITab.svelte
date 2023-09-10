@@ -7,7 +7,6 @@
 
 	export let item: UITabBarItem;
 	export let selected: boolean = false;
-	// $: color = selected ? sceneContext.tintColor : "gray";
 	let color: Property.Color;
 	$: if (selected) {
 		color = sceneContext.tintColor;
@@ -29,9 +28,11 @@
 	.root {
 		all: unset;
 		width: 100%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 	}
 	.name {
 		font-size: 11px;

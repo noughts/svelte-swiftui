@@ -27,7 +27,7 @@
 
 <style>
 	.root {
-		height: 88px;
+		height: calc(49px + env(safe-area-inset-bottom));
 		flex-shrink: 0;
 		display: flex;
 		flex-direction: column;
@@ -38,7 +38,7 @@
 	}
 	.tabs{
 		display: flex;
-		height: 54px;
+		height: 49px;
 		align-items: center;
 	}
 	.dark {
