@@ -5,7 +5,7 @@
 
 	const sceneContext = getContext<SceneContext>("scene");
 	function onPresentButtonTap() {
-		sceneContext.push({ component: Page2, args: {title:"hello"} });
+		sceneContext.push({ component: { class: Page2, args: { title: "hello" } } });
 	}
 </script>
 

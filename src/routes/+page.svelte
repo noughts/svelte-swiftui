@@ -7,17 +7,23 @@
 </script>
 
 <div class="root">
-    <Scene tintColor="blue">
-        <TabView
-            items={[
-                { title: "ホーム", icon: "home", component: { class: LandmarkList } },
-                { title: "天気", icon: "partly_cloudy_day", component: {class:Page1} },
-                { title: "クーポン", icon: "confirmation_number", component:  { class: LandmarkList } },
-                { title: "検索", icon: "search", component: {class:Page1} },
-                { title: "プロフィール", icon: "account_circle", component: {class:Page1} },
-            ]}
-        />
-    </Scene>
+    <Scene
+        tintColor="blue"
+        rootItem={{
+            component: {
+                class: TabView,
+                args: {
+                    items: [
+                        { title: "ホーム", icon: "home", component: { class: LandmarkList } },
+                        { title: "天気", icon: "partly_cloudy_day", component: { class: Page1 } },
+                        { title: "クーポン", icon: "confirmation_number", component: { class: LandmarkList } },
+                        { title: "検索", icon: "search", component: { class: Page1 } },
+                        { title: "プロフィール", icon: "account_circle", component: { class: Page1 } },
+                    ],
+                },
+            },
+        }}
+    />
 </div>
 
 <style>

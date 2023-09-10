@@ -26,8 +26,7 @@ export type NavigationContext = {
 }
 
 export type SceneItem = {
-	component: any;
-	args: any;
+	component: Component;
 }
 
 export type UITabBarItem = {
