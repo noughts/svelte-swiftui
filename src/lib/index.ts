@@ -1,4 +1,5 @@
 import type { Property } from "csstype"
+import type { SvelteComponent } from 'svelte'
 
 export { default as Scene } from "./Scene.svelte"
 export { default as TabView } from "./TabView.svelte"
@@ -7,11 +8,6 @@ export { default as NavigationView } from "./NavigationView.svelte"
 export { default as VStack } from "./VStack.svelte"
 export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
-
-export type Component = {
-	class:any;
-	args?:any;
-}
 
 export type SceneContext = {
 	dark: boolean;
@@ -25,17 +21,26 @@ export type NavigationContext = {
 	pop: () => void;
 }
 
-export type SceneItem = {
-	component: Component;
+export type SceneItem<Props extends Record<string, any> = any> = {
+	component: SvelteUIComponent<Props, any, any>;
+	args?: Props;
 }
 
 export type UITabBarItem = {
 	title: string
 	icon: string
-	component: Component;
+	component: SvelteUIComponent;
+	args?: any;
 }
 
 export type NavigationItem = {
-	title:string;
-	component:Component;
+	title: string;
+	component: SvelteUIComponent;
+	args?: any;
 }
+
+export type SvelteUIComponent<
+	Props extends Record<string, any> = any,
+	Events extends Record<string, any> = any,
+	Slots extends Record<string, any> = any
+> = new (...args: any) => SvelteComponent<Props, Events, Slots>
