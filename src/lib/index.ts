@@ -9,44 +9,43 @@ export { default as VStack } from "./VStack.svelte"
 export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 
-type DefaultProps = Record<string, any>;
+export type DefaultProps = Record<string, any>;
 
 export type Node<Props extends DefaultProps> = {
 	component: SvelteUIComponent<Props, any, any>
 	props?: Props;
 }
 
-export type SceneItem<Props extends DefaultProps> = {
+export type SceneItem<Props extends DefaultProps = any> = {
 	node:Node<Props>;
 	transition?:string;
+}
+
+export type UITabBarItem<Props extends DefaultProps = any> = {
+	title: string
+	icon: string
+	node:Node<Props>;
 }
 
 export type SceneContext = {
 	dark: boolean;
 	tintColor: Property.Color;
 	push: <Props extends DefaultProps>(item:SceneItem<Props>) =>void;
-	_push: <Props extends DefaultProps>
-		(component: SvelteUIComponent<Props, any, any>, props?: Props) => void;
+	// _push: <Props extends DefaultProps>(component: SvelteUIComponent<Props, any, any>, props?: Props) => void;
 	pop: () => void;
 }
 
 export type NavigationContext = {
-	push: (item: NavigationItem) => void
+	push: <Props extends DefaultProps>(item: NavigationItem<Props>) => void
 	pop: () => void;
 }
 
 
-export type UITabBarItem = {
-	title: string
-	icon: string
-	component: SvelteUIComponent;
-	args?: any;
-}
 
-export type NavigationItem = {
+
+export type NavigationItem<Props extends DefaultProps = any> = {
 	title: string;
-	component: SvelteUIComponent;
-	args?: any;
+	node:Node<Props>;
 }
 
 export type SvelteUIComponent<

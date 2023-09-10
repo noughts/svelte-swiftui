@@ -10,9 +10,9 @@
     <Scene
         tintColor="blue"
         rootItem={{
-            component: {
-                class: TabView,
-                args: {
+            node: {
+                component: TabView,
+                props: {
                     items: [
                         { title: "ホーム", icon: "home", component: { class: LandmarkList } },
                         { title: "天気", icon: "partly_cloudy_day", component: { class: Page1 } },

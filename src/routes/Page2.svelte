@@ -3,7 +3,6 @@
     import { getContext } from "svelte";
 
 	export let title: string = "dummy title";
-	export let hoge = 123;
 	const context = getContext<SceneContext>("scene");
 
 	function onDismissButtonTap(){

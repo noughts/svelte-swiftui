@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { SvelteComponent, setContext } from "svelte";
-	import type { SceneContext, SceneItem, SvelteUIComponent } from "./index.js";
+	import type { DefaultProps, SceneContext, SceneItem, SvelteUIComponent } from "./index.js";
 	import { fly } from "svelte/transition";
 
 	export let tintColor = "blue";
 	export let dark: boolean = false;
-	export let rootItem: SceneItem;
+	export let rootItem:SceneItem;
 
 	setContext<SceneContext>("scene", { push, pop, dark, tintColor });
 
 	let items: SceneItem[] = [rootItem];
-	function push(component:SvelteUIComponent, props:any) {
+	function push(item:SceneItem) {
 		items = items.concat(item);
 	}
 	function pop() {
@@ -34,7 +34,7 @@
 <div class="root">
 	{#each items as item}
 		<div class="item" transition:fly={{ y: "100%", opacity: 1 }}>
-			<svelte:component this={item.component.class} {...item.component.args} />
+			<svelte:component this={item.node.component} {...item.node.props} />
 		</div>
 	{/each}
 </div>
