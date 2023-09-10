@@ -1,25 +1,23 @@
 <script lang="ts">
-    import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
-    import type { UITabBarItem } from "$lib/index.js";
     import "../globals.css";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
-    import Page2 from "./Page2.svelte";
 
-    const items: UITabBarItem[] = [
-        { title: "ホーム", icon: "home", component: LandmarkList },
-        { title: "天気", icon: "partly_cloudy_day", component:Page1 },
-        // { title: "クーポン", icon: "confirmation_number" },
-        // { title: "検索", icon: "search" },
-        // { title: "プロフィール", icon: "account_circle" },
-    ];
 </script>
 
 <div class="root">
     <Scene tintColor="blue">
-        <TabView {items} selection={0} />
+        <TabView
+            items={[
+                { title: "ホーム", icon: "home", component: LandmarkList },
+                { title: "天気", icon: "partly_cloudy_day", component: Page1 },
+                { title: "クーポン", icon: "confirmation_number", component: Page1 },
+                { title: "検索", icon: "search", component: Page1 },
+                { title: "プロフィール", icon: "account_circle", component: Page1 },
+            ]}
+        />
     </Scene>
 </div>
 
