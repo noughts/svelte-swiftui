@@ -1,18 +1,17 @@
 <script lang="ts">
 	import UiTabBar from "$lib/UITabBar.svelte";
-    import type { UITabBarItem } from "./index.js";
+	import type { UITabBarItem } from "./index.js";
 	export let selection = 0;
 	export let items: UITabBarItem[];
-	// console.log($$slots);
 </script>
 
 <div class="root">
 	<div class="content">
-		{#if selection == 0}
-			<slot name="0" />
-		{:else if selection == 1}
-			<slot name="1" />
-		{/if}
+		{#each items as item, index (item.title)}
+			<div class="item" class:selected={index === selection}>
+				<svelte:component this={item.component} {...item.args} />
+			</div>
+		{/each}
 	</div>
 	<UiTabBar {items} bind:selection />
 </div>
@@ -27,5 +26,14 @@
 	.content {
 		flex-grow: 2;
 		overflow: hidden;
+		position: relative;
+	}
+	.item {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+	}
+	.selected{
+		opacity: 1;
 	}
 </style>

@@ -30,4 +30,6 @@ export type SceneItem = {
 export type UITabBarItem = {
 	title: string
 	icon: string
+	component: any;
+	args?: any;
 }

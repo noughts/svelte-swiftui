@@ -9,29 +9,24 @@
     import Page2 from "./Page2.svelte";
 
     const items: UITabBarItem[] = [
-        { title: "ホーム", icon: "home" },
-        { title: "天気", icon: "partly_cloudy_day" },
-        { title: "クーポン", icon: "confirmation_number" },
-        { title: "検索", icon: "search" },
-        { title: "プロフィール", icon: "account_circle" },
+        { title: "ホーム", icon: "home", component: LandmarkList },
+        { title: "天気", icon: "partly_cloudy_day", component:Page1 },
+        // { title: "クーポン", icon: "confirmation_number" },
+        // { title: "検索", icon: "search" },
+        // { title: "プロフィール", icon: "account_circle" },
     ];
 </script>
 
 <div class="root">
-    <Scene tintColor="blue" >
-        <TabView {items} selection={0}>
-            <NavigationView slot="0">
-                <LandmarkList />
-            </NavigationView>
-            <Page1 slot="1" />
-        </TabView>
+    <Scene tintColor="blue">
+        <TabView {items} selection={0} />
     </Scene>
 </div>
 
 <style>
     .root {
         max-width: 480px;
-		height: 100dvh;
+        height: 100dvh;
         margin-left: auto;
         margin-right: auto;
     }
