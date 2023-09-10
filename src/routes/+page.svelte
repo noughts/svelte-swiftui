@@ -13,7 +13,7 @@
             items={[
                 { title: "ホーム", icon: "home", component: LandmarkList },
                 { title: "天気", icon: "partly_cloudy_day", component: Page1 },
-                { title: "クーポン", icon: "confirmation_number", component: Page1 },
+                { title: "クーポン", icon: "confirmation_number", component: LandmarkList },
                 { title: "検索", icon: "search", component: Page1 },
                 { title: "プロフィール", icon: "account_circle", component: Page1 },
             ]}
