@@ -9,6 +9,7 @@
 	function onPresentButtonTap() {
 		sceneContext.push(DemoScreen, { header: "hoge" });
 		sceneContext.push2({ component: DemoScreen, props: { header: "a" } });
+		sceneContext.push3({ node: { component: DemoScreen, props: { header: "b" } } });
 	}
 </script>
 

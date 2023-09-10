@@ -14,9 +14,15 @@ export type Node<Props extends Record<string, any> = any> = {
 	props?: Props;
 }
 
+export type SceneItem<Props extends Record<string, any> = any> = {
+	node:Node<Props>;
+	transition?:string;
+}
+
 export type SceneContext = {
 	dark: boolean;
 	tintColor: Property.Color;
+	push3: <Props extends Record<string, any> = any>(item:SceneItem<Props>) =>void;
 	push2: <Props extends Record<string, any> = any>(node: Node<Props>) => void;
 	push: <Props extends Record<string, any> = any>
 		(component: SvelteUIComponent<Props, any, any>, props?: Props) => void;
@@ -28,10 +34,6 @@ export type NavigationContext = {
 	pop: () => void;
 }
 
-export type SceneItem<Props extends Record<string, any> = any> = {
-	component: SvelteUIComponent<Props, any, any>;
-	args?: Props;
-}
 
 export type UITabBarItem = {
 	title: string
