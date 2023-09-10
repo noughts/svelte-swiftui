@@ -23,3 +23,8 @@ export type SceneItem = {
 	component: any;
 	args: any;
 }
+
+export type UITabBarItem = {
+	title: string
+	icon: string
+}

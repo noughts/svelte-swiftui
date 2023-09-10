@@ -1,6 +1,6 @@
 <script lang="ts">
 	import MaterialSymbol from "./MaterialSymbol.svelte";
-	import type { UITabBarItem } from "./UITabBarItem.js";
+    import type { UITabBarItem } from "./index.js";
 
 	export let item: UITabBarItem;
 	export let selected: boolean = false;

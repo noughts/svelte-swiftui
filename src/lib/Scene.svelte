@@ -34,10 +34,9 @@
 <style>
 	.root {
 		width: 100%;
-		height: 100dvh;
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
+		max-width: 480px;
+		height: 100%;
+		overflow: hidden;
 		background-color: white;
 		position: relative;
 	}

@@ -2,7 +2,7 @@
     import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
-    import type { UITabBarItem } from "$lib/UITabBarItem.js";
+    import type { UITabBarItem } from "$lib/index.js";
     import "../globals.css";
     import LandmarkList from "./LandmarkList.svelte";
     import Page2 from "./Page2.svelte";
@@ -30,5 +30,9 @@
 <style>
     .root {
         background-color: #eee;
+        width: 100%;
+		height: 100dvh;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
