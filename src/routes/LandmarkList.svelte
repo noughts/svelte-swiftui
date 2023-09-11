@@ -17,6 +17,7 @@
 
 <div class="root">
 	<VStack>
+		<div>{dummy}</div>
 		{#each landmarks as landmark}
 			<LandmarkRow {landmark} />
 		{/each}

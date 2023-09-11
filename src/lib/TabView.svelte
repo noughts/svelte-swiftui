@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { UITabBarItem } from "./index.js";
+	import type { TabBarItem } from "./index.js";
     import UiTabBar from "./internal/UITabBar.svelte";
 	export let selection = 0;
-	export let items: UITabBarItem[];
+	export let items: TabBarItem[];
 </script>
 
 <div class="root">

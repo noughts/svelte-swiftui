@@ -13,7 +13,7 @@ export { default as Spacer } from "./Spacer.svelte"
 export function createSceneItem<Props extends DefaultProps>(data: SceneItem<Props>): SceneItem<Props> {
 	return { component: data.component, props: data.props, transition: data.transition };
 }
-export function createTabBarItem<Props extends DefaultProps>(data: UITabBarItem<Props>): UITabBarItem<Props> {
+export function createTabBarItem<Props extends DefaultProps>(data: TabBarItem<Props>): TabBarItem<Props> {
 	return { component: data.component, props: data.props, title: data.title, icon: data.icon };
 }
 export function createNaivationItem<Props extends DefaultProps>(data: NavigationItem<Props>): NavigationItem<Props> {
@@ -26,16 +26,16 @@ export function createNaivationItem<Props extends DefaultProps>(data: Navigation
 export type DefaultProps = Record<string, any>;
 
 export type SceneItem<Props extends DefaultProps = any> = {
-	component: SvelteUIComponent<Props, any, any>
+	component: SvelteUIComponent<Props>
 	props: Props;
 	transition?: string;
 }
 
 
-export type UITabBarItem<Props extends DefaultProps = any> = {
+export type TabBarItem<Props extends DefaultProps = any> = {
 	title: string
 	icon: string
-	component: SvelteUIComponent<Props, any, any>
+	component: SvelteUIComponent<Props>
 	props: Props;
 }
 
@@ -43,7 +43,6 @@ export type SceneContext = {
 	dark: boolean;
 	tintColor: Property.Color;
 	push: <Props extends DefaultProps>(item: SceneItem<Props>) => void;
-	// _push: <Props extends DefaultProps>(component: SvelteUIComponent<Props, any, any>, props?: Props) => void;
 	pop: () => void;
 }
 
@@ -57,7 +56,7 @@ export type NavigationContext = {
 
 export type NavigationItem<Props extends DefaultProps = any> = {
 	title: string;
-	component: SvelteUIComponent<Props, any, any>
+	component: SvelteUIComponent<Props>
 	props: Props;
 }
 
