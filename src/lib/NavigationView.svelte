@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
-    import type { NavigationContext, SceneItem } from "./index.js";
+	import type { NavigationContext, NavigationItem } from "./index.js";
+	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	setContext<NavigationContext>("navigation", { push, pop });
 
-	let items: SceneItem[] = [];
-	function push(item: SceneItem) {
+	export let rootItem: NavigationItem;
+	let items: NavigationItem[] = [rootItem];
+	function push(item: NavigationItem) {
 		items = items.concat(item);
 	}
 	function pop() {
@@ -15,14 +17,15 @@
 	}
 </script>
 
-
 <div class="root">
-	<slot />
-	{#each items as item}
-		<div class="item" transition:fly={{ x: "100%", opacity: 1 }}>
-			<svelte:component this={item.component} {...item.args} />
-		</div>
-	{/each}
+	<UiNavigationBar {items} on:backButtonTap={pop} />
+	<div class="items">
+		{#each items as item, index}
+			<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "100%", opacity: 1 }}>
+				<svelte:component this={item.component} {...item.props} />
+			</div>
+		{/each}
+	</div>
 </div>
 
 <style>
@@ -30,9 +33,25 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
+		display: flex;
+		flex-direction: column;
+	}
+	.items {
+		position: relative;
+		flex-grow: 2;
+		overflow: hidden;
 	}
 	.item {
 		position: absolute;
 		inset: 0;
+		overflow-y: scroll;
+		transition-property: transform, filter;
+		transition-duration: 0.3s;
+		transform: translateX(-50%);
+		filter:brightness(80%);
+	}
+	.top {
+		transform: translateX(0);
+		filter:brightness(100%);
 	}
 </style>

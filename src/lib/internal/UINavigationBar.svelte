@@ -1,22 +1,36 @@
 <script lang="ts">
-	import type { UINavigationItem } from "$lib/index.js";
-
-	export let items: UINavigationItem[];
-	$: topItem = items[items.length - 1];
+	import type { NavigationItem } from "$lib/index.js";
+	import { fly } from "svelte/transition";
+	import NavigationBarItemView from "./NavigationBarItemView.svelte";
+	export let items: NavigationItem[];
 </script>
 
 <div class="root">
-	<div class="title">{topItem.title}</div>
+	{#each items as item, index}
+		<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "50%" }}>
+			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
+		</div>
+	{/each}
 </div>
 
 <style>
-	.root{
+	.root {
 		position: relative;
 		height: 44px;
-		
+		flex-shrink: 0;
+		background-color: white;
+		border-bottom: solid 0.1px rgba(0 0 0/15%);
 	}
-	.title{
-		font-size: 16px;
-		font-weight: 600;
+	.item {
+		position: absolute;
+		inset: 0;
+		transition-property: transform, opacity;
+		transition-duration: 0.3s;
+		transform: translateX(-50%);
+		opacity: 0;
+	}
+	.top{
+		transform: translateX(0);
+		opacity: 1;
 	}
 </style>

@@ -1,0 +1,6 @@
+.SvelteScene{
+	--ui-chrome-light: #f5f5f5;
+	--ui-chrome-dark: #1c1c1c;
+	--ui-text-light:red;
+	--ui-text-dark:white;
+}

@@ -1,13 +1,34 @@
 <script lang="ts">
 	import VStack from "$lib/VStack.svelte";
-	import { getContext, onMount } from "svelte";
-	import LandmarkRow from "./LandmarkRow.svelte";
 	import type { NavigationContext } from "$lib/index.js";
-	import NavigationView from "$lib/NavigationView.svelte";
+	import { getContext } from "svelte";
+	import LandmarkRow from "./LandmarkRow.svelte";
+	import type { Landmark } from "./Landmark.js";
+	import LandmarkDetail from "./LandmarkDetail.svelte";
 	const navContext = getContext("navigation") as NavigationContext;
-	// console.log(navContext)
 
-	const landmarks = [{ name: "Turtle Rock" }, { name: "Silver Salmon Creek" }];
+	const landmarks = [
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+	];
+
+	function onCellTap(landmark: Landmark) {
+		navContext.push({ component: LandmarkDetail, props: { landmark }, title: landmark.name });
+	}
 
 	let count = 0;
 	setInterval(() => {
@@ -16,14 +37,12 @@
 </script>
 
 <div class="root">
-	<NavigationView>
-		<VStack>
-			{#each landmarks as landmark}
-				<LandmarkRow {landmark} />
-			{/each}
-			<div>{count}</div>
-		</VStack>
-	</NavigationView>
+	<VStack>
+		<div>{count}</div>
+		{#each landmarks as landmark}
+			<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
+		{/each}
+	</VStack>
 </div>
 
 <style>
