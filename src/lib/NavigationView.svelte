@@ -15,10 +15,14 @@
 		newAry.pop();
 		items = newAry;
 	}
+
+	function onBackButtonTap(){
+
+	}
 </script>
 
 <div class="root">
-	<UiNavigationBar {items} />
+	<UiNavigationBar {items} on:backButtonTap={onBackButtonTap} />
 	<div class="items">
 		{#each items as item}
 			<div class="item" transition:fly={{ x: "100%", opacity: 1 }}>
