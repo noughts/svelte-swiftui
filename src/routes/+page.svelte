@@ -1,9 +1,12 @@
 <script lang="ts">
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
+    import type { DefaultProps, SceneItem, UITabBarItem } from "$lib/index.js";
     import "../globals.css";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
+
+    const hoge:UITabBarItem = {title:"hoge", icon:"", node:{component:LandmarkList,props:{}}}
 </script>
 
 <div class="root">

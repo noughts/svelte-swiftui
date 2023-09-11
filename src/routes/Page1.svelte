@@ -3,11 +3,14 @@
 	import LandmarkRow from "./LandmarkRow.svelte";
 	import Page2 from "./Page2.svelte";
 	import DemoScreen from "./DemoScreen.svelte";
-    import type { NavigationContext, SceneContext } from "$lib/index.js";
+	import type { DefaultProps, NavigationContext, SceneContext, SceneItem, SvelteUIComponent } from "$lib/index.js";
 
 	const sceneContext = getContext<SceneContext>("scene");
+
+	const sceneItem: SceneItem = { node: { component: DemoScreen, props: { aaa: 1 } } };
+
 	function onPresentButtonTap() {
-		sceneContext.push({ node: { component: DemoScreen } });
+		sceneContext.push({ node: { component: DemoScreen, props: { header: "a" } } });
 	}
 </script>
 
