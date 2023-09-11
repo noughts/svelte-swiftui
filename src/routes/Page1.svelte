@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext } from "svelte";
+	import { getContext, type ComponentProps } from "svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
 	import Page2 from "./Page2.svelte";
 	import DemoScreen from "./DemoScreen.svelte";
@@ -7,7 +7,7 @@
 
 	const sceneContext = getContext<SceneContext>("scene");
 
-	const sceneItem: SceneItem = { node: { component: DemoScreen, props: { aaa: 1 } } };
+	const sceneItem: SceneItem<ComponentProps<DemoScreen>> = { node: { component: DemoScreen, props: { header:"" } } };
 
 	function onPresentButtonTap() {
 		sceneContext.push({ node: { component: DemoScreen, props: { header: "a" } } });
