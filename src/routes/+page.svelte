@@ -2,7 +2,7 @@
     import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
-    import { createNaivationItem, createNode, createSceneItem, createTabBarItem } from "$lib/index.js";
+    import { createNaivationItem, createSceneItem, createTabBarItem } from "$lib/index.js";
     import "../globals.css";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
@@ -21,17 +21,15 @@
     <Scene
         tintColor="blue"
         rootItem={{
-            node: {
-                component: TabView,
-                props: {
-                    items: [
-                        item1,
-                        { title: "天気", icon: "partly_cloudy_day", component: Page1 },
-                        { title: "クーポン", icon: "confirmation_number", node: { component: LandmarkList } },
-                        { title: "検索", icon: "search", node: { component: Page1 } },
-                        { title: "プロフィール", icon: "account_circle", node: { component: Page1 } },
-                    ],
-                },
+            component: TabView,
+            props: {
+                items: [
+                    item1,
+                    { title: "天気", icon: "partly_cloudy_day", component: Page1 },
+                    { title: "クーポン", icon: "confirmation_number", component: LandmarkList },
+                    { title: "検索", icon: "search", component: Page1 },
+                    { title: "プロフィール", icon: "account_circle", component: Page1 },
+                ],
             },
         }}
     />

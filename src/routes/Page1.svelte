@@ -5,13 +5,9 @@
 
 	const sceneContext = getContext<SceneContext>("scene");
 
-	const sceneItem: SceneItem<ComponentProps<DemoScreen>> = { node: { component: DemoScreen, props: { title:"" } } };
-
 	function onPresentButtonTap() {
-		sceneContext.push({ node: { component: DemoScreen, props: { title: "a" } } });
+		sceneContext.push({ component: DemoScreen, props: { title: "a" } });
 	}
-
-
 </script>
 
 <div>

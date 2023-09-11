@@ -10,11 +10,8 @@ export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 
 
-export function createSceneItem<Props extends DefaultProps>(component: SvelteUIComponent<Props>, props?: Props, transition?: string): SceneItem {
-	return { node: { component, props }, transition };
-}
-export function createNode<Props extends DefaultProps>(data: SvelteNode<Props>): SvelteNode {
-	return { component: data.component, props: data.props };
+export function createSceneItem<Props extends DefaultProps>(data: SceneItem<Props>): SceneItem {
+	return { component: data.component, props: data.props, transition: data.transition };
 }
 export function createTabBarItem<Props extends DefaultProps>(data: UITabBarItem<Props>): UITabBarItem {
 	return { component: data.component, props: data.props, title: data.title, icon: data.icon };
@@ -26,13 +23,9 @@ export function createNaivationItem<Props extends DefaultProps>(data: Navigation
 
 export type DefaultProps = Record<string, any>;
 
-export type SvelteNode<Props extends DefaultProps = any> = {
+export type SceneItem<Props extends DefaultProps = any> = {
 	component: SvelteUIComponent<Props, any, any>
 	props?: Props;
-}
-
-export type SceneItem<Props extends DefaultProps = any> = {
-	node: SvelteNode<Props>;
 	transition?: string;
 }
 

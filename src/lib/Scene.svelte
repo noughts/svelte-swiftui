@@ -34,7 +34,7 @@
 <div class="root">
 	{#each items as item}
 		<div class="item" transition:fly={{ y: "100%", opacity: 1 }}>
-			<svelte:component this={item.node.component} {...item.node.props} />
+			<svelte:component this={item.component} {...item.props} />
 		</div>
 	{/each}
 </div>
