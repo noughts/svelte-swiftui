@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { NavigationItem } from "$lib/index.js";
+	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
+import type { NavigationItem } from "$lib/index.js";
 	import { createEventDispatcher } from "svelte";
 
 	export let items: NavigationItem[];
@@ -11,7 +12,9 @@
 
 <div class="root">
 	{#if showBackButton}
-		<button class="backButton" on:click={(e) => dispatch("backButtonTap")}>Back</button>
+		<button class="backButton" on:click={(e) => dispatch("backButtonTap")}>
+			<MaterialSymbol icon="arrow_back_ios" /><div class="backLabel">Back</div>
+		</button>
 	{:else}
 		<div />
 	{/if}
@@ -31,6 +34,17 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		padding: 0 8px;
+	}
+	.backButton{
+		all:unset;
+		color:blue;
+		display: flex;
+		align-items: center;
+		font-size:16px;
+	}
+	.backLabel{
+		margin-left: -8px;
 	}
 	.title {
 		font-size: 16px;
