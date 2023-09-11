@@ -48,7 +48,7 @@
 		transition-property: transform, filter;
 		transition-duration: 0.3s;
 		transform: translateX(-50%);
-		filter:brightness(67%);
+		filter:brightness(80%);
 	}
 	.top {
 		transform: translateX(0);

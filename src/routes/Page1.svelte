@@ -10,7 +10,14 @@
 	}
 </script>
 
-<div>
+<div class="root">
 	<h1>Page1</h1>
 	<button on:click={onPresentButtonTap}>present</button>
 </div>
+
+<style>
+	.root{
+		background-color: white;
+		height: 100%;
+	}
+</style>

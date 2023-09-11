@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { SvelteComponent, setContext } from "svelte";
-	import type { DefaultProps, SceneContext, SceneItem, SvelteUIComponent } from "./index.js";
+	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
+	import type { SceneContext, SceneItem } from "./index.js";
 
 	export let tintColor = "blue";
 	export let dark: boolean = false;
-	export let rootItem:SceneItem;
+	export let rootItem: SceneItem;
 
 	setContext<SceneContext>("scene", { push, pop, dark, tintColor });
 
 	let items: SceneItem[] = [rootItem];
-	function push(item:SceneItem) {
+	function push(item: SceneItem) {
 		items = items.concat(item);
 	}
 	function pop() {
@@ -32,8 +32,8 @@
 </svelte:head>
 
 <div class="root">
-	{#each items as item}
-		<div class="item" transition:fly={{ y: "100%", opacity: 1 }}>
+	{#each items as item, index}
+		<div class="item" class:top={index == items.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
 			<svelte:component this={item.component} {...item.props} />
 		</div>
 	{/each}
@@ -50,5 +50,10 @@
 	.item {
 		position: absolute;
 		inset: 0;
+		transition: filter 0.3s;
+		filter:brightness(80%);
+	}
+	.top{
+		filter:brightness(100%);
 	}
 </style>
