@@ -51,6 +51,6 @@
 	}
 	.top {
 		transform: translateX(0);
-		filter:brightness(1);
+		filter:brightness(100%);
 	}
 </style>

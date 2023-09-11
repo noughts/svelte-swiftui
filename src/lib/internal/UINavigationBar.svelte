@@ -7,7 +7,7 @@
 
 <div class="root">
 	{#each items as item, index}
-		<div class="item" transition:fly={{x:"50%"}}>
+		<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "50%" }}>
 			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
 		</div>
 	{/each}
@@ -21,8 +21,16 @@
 		background-color: white;
 		border-bottom: solid 0.1px rgba(0 0 0/15%);
 	}
-	.item{
+	.item {
 		position: absolute;
-		inset:0;
+		inset: 0;
+		transition-property: transform, opacity;
+		transition-duration: 0.3s;
+		transform: translateX(-50%);
+		opacity: 0;
+	}
+	.top{
+		transform: translateX(0);
+		opacity: 1;
 	}
 </style>
