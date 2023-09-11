@@ -36,6 +36,10 @@
 		display: flex;
 		flex-direction: column;
 	}
+	.items{
+		position: relative;
+		flex-grow: 2;
+	}
 	.item {
 		position: absolute;
 		inset: 0;
