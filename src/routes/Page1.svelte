@@ -1,16 +1,14 @@
 <script lang="ts">
+	import type { SceneContext, SceneItem } from "$lib/index.js";
 	import { getContext, type ComponentProps } from "svelte";
-	import LandmarkRow from "./LandmarkRow.svelte";
-	import Page2 from "./Page2.svelte";
 	import DemoScreen from "./DemoScreen.svelte";
-	import type { DefaultProps, NavigationContext, SceneContext, SceneItem, SvelteNode, SvelteUIComponent } from "$lib/index.js";
 
 	const sceneContext = getContext<SceneContext>("scene");
 
-	const sceneItem: SceneItem<ComponentProps<DemoScreen>> = { node: { component: DemoScreen, props: { header:"" } } };
+	const sceneItem: SceneItem<ComponentProps<DemoScreen>> = { node: { component: DemoScreen, props: { title:"" } } };
 
 	function onPresentButtonTap() {
-		sceneContext.push({ node: { component: DemoScreen, props: { header: "a" } } });
+		sceneContext.push({ node: { component: DemoScreen, props: { title: "a" } } });
 	}
 
 

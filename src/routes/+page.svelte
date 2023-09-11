@@ -17,11 +17,11 @@
                 component: TabView,
                 props: {
                     items: [
-                        { title: "ホーム", icon: "home", component: { class: LandmarkList } },
-                        { title: "天気", icon: "partly_cloudy_day", component: { class: Page1 } },
-                        { title: "クーポン", icon: "confirmation_number", component: { class: LandmarkList } },
-                        { title: "検索", icon: "search", component: { class: Page1 } },
-                        { title: "プロフィール", icon: "account_circle", component: { class: Page1 } },
+                        { title: "ホーム", icon: "home", node: { component: LandmarkList } },
+                        { title: "天気", icon: "partly_cloudy_day", node: { component: Page1 } },
+                        { title: "クーポン", icon: "confirmation_number", node: { component: LandmarkList } },
+                        { title: "検索", icon: "search", node: { component: Page1 } },
+                        { title: "プロフィール", icon: "account_circle", node: { component: Page1 } },
                     ],
                 },
             },
