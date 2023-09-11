@@ -10,15 +10,17 @@ export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 
 
-export function createSceneItem<Props extends DefaultProps>(data: SceneItem<Props>): SceneItem {
+export function createSceneItem<Props extends DefaultProps>(data: SceneItem<Props>): SceneItem<Props> {
 	return { component: data.component, props: data.props, transition: data.transition };
 }
-export function createTabBarItem<Props extends DefaultProps>(data: UITabBarItem<Props>): UITabBarItem {
+export function createTabBarItem<Props extends DefaultProps>(data: UITabBarItem<Props>): UITabBarItem<Props> {
 	return { component: data.component, props: data.props, title: data.title, icon: data.icon };
 }
-export function createNaivationItem<Props extends DefaultProps>(data: NavigationItem<Props>): NavigationItem {
+export function createNaivationItem<Props extends DefaultProps>(data: NavigationItem<Props>): NavigationItem<Props> {
 	return { component: data.component, props: data.props, title: data.title };
 }
+
+
 
 
 export type DefaultProps = Record<string, any>;
