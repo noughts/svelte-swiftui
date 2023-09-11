@@ -1,5 +1,5 @@
 import type { Property } from "csstype"
-import type { SvelteComponent } from 'svelte'
+import type { SvelteComponent, ComponentProps } from 'svelte'
 
 export { default as Scene } from "./Scene.svelte"
 export { default as TabView } from "./TabView.svelte"
@@ -11,26 +11,26 @@ export { default as Spacer } from "./Spacer.svelte"
 
 export type DefaultProps = Record<string, any>;
 
-export type Node<Props extends DefaultProps> = {
+export type SvelteNode<Props extends DefaultProps> = {
 	component: SvelteUIComponent<Props, any, any>
 	props?: Props;
 }
 
 export type SceneItem<Props extends DefaultProps = any> = {
-	node:Node<Props>;
-	transition?:string;
+	node: SvelteNode<Props>;
+	transition?: string;
 }
 
 export type UITabBarItem<Props extends DefaultProps = any> = {
 	title: string
 	icon: string
-	node:Node<Props>;
+	node: SvelteNode<Props>;
 }
 
 export type SceneContext = {
 	dark: boolean;
 	tintColor: Property.Color;
-	push: <Props extends DefaultProps>(item:SceneItem<Props>) =>void;
+	push: <Props extends DefaultProps>(item: SceneItem<Props>) => void;
 	// _push: <Props extends DefaultProps>(component: SvelteUIComponent<Props, any, any>, props?: Props) => void;
 	pop: () => void;
 }
@@ -45,7 +45,7 @@ export type NavigationContext = {
 
 export type NavigationItem<Props extends DefaultProps = any> = {
 	title: string;
-	node:Node<Props>;
+	node: SvelteNode<Props>;
 }
 
 export type SvelteUIComponent<
