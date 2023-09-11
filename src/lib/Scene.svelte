@@ -2,6 +2,7 @@
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import type { SceneContext, SceneItem } from "./index.js";
+	import "./svelte-swiftui.css"
 
 	export let tintColor = "blue";
 	export let dark: boolean = false;
@@ -31,7 +32,7 @@
 	/>
 </svelte:head>
 
-<div class="root">
+<div class="SvelteScene">
 	{#each items as item, index}
 		<div class="item" class:top={index == items.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
 			<svelte:component this={item.component} {...item.props} />
@@ -40,7 +41,7 @@
 </div>
 
 <style>
-	.root {
+	.SvelteScene {
 		width: 100%;
 		height: 100%;
 		overflow: hidden;

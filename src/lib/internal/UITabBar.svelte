@@ -33,7 +33,7 @@
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: flex-start;
-		background-color: #f5f5f5;
+		background-color: var(--ui-chrome-light);
 		border-top: solid 0.1px rgba(0 0 0/15%);
 	}
 	.tabs {
@@ -43,6 +43,6 @@
 	}
 	.dark {
 		border-color: rgba(255 255 255/15%);
-		background-color: #131313;
+		background-color: var(--ui-chrome-dark);
 	}
 </style>

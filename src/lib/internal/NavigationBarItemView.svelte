@@ -53,5 +53,6 @@
 		align-items: center;
 		justify-content: center;
 		pointer-events: none;
+		color:var(--ui-text-light);
 	}
 </style>
