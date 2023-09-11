@@ -7,8 +7,6 @@
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	const navContext = getContext("navigation") as NavigationContext;
 
-	export let dummy: string;
-
 	const landmarks = [
 		{ name: "Turtle Rock" },
 		{ name: "Silver Salmon Creek" },

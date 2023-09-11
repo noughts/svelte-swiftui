@@ -17,7 +17,7 @@
                         rootItem: createNaivationItem({
                             title: "ホーム",
                             component: LandmarkList,
-                            props: { dummy: "hoge" },
+                            props: {},
                         }),
                     },
                     title: "ホーム",
@@ -28,7 +28,7 @@
                     title: "クーポン",
                     icon: "confirmation_number",
                     component: LandmarkList,
-                    props: { dummy: "hoge" },
+                    props: {},
                 }),
                 createTabBarItem({ title: "検索", icon: "search", component: Page1, props: {} }),
                 createTabBarItem({ title: "プロフィール", icon: "account_circle", component: Page1, props: {} }),
