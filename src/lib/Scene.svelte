@@ -5,10 +5,10 @@
 	import "./svelte-swiftui.css"
 
 	export let tintColor = "blue";
-	export let dark: boolean = false;
+	export let theme: "light"|"dark"|"system" = "system";
 	export let rootItem: SceneItem;
 
-	setContext<SceneContext>("scene", { push, pop, dark, tintColor });
+	setContext<SceneContext>("scene", { push, pop, theme, tintColor });
 
 	let items: SceneItem[] = [rootItem];
 	function push(item: SceneItem) {

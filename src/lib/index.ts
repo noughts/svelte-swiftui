@@ -8,6 +8,7 @@ export { default as NavigationView } from "./NavigationView.svelte"
 export { default as VStack } from "./VStack.svelte"
 export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
+export { default as Text } from "./Text.svelte"
 
 
 export function createSceneItem<Props extends DefaultProps>(data: SceneItem<Props>): SceneItem<Props> {
@@ -40,7 +41,7 @@ export type TabBarItem<Props extends DefaultProps = any> = {
 }
 
 export type SceneContext = {
-	dark: boolean;
+	theme: "light" | "dark" | "system";
 	tintColor: Property.Color;
 	push: <Props extends DefaultProps>(item: SceneItem<Props>) => void;
 	pop: () => void;
