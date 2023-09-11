@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
-	import type { NavigationContext, NavigationItem, SceneItem } from "./index.js";
+	import type { NavigationContext, NavigationItem } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	setContext<NavigationContext>("navigation", { push, pop });
 
@@ -15,14 +15,13 @@
 		newAry.pop();
 		items = newAry;
 	}
-
 </script>
 
 <div class="root">
 	<UiNavigationBar {items} on:backButtonTap={pop} />
 	<div class="items">
-		{#each items as item}
-			<div class="item" transition:fly={{ x: "100%", opacity: 1 }}>
+		{#each items as item, index}
+			<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "100%", opacity: 1 }}>
 				<svelte:component this={item.component} {...item.props} />
 			</div>
 		{/each}
@@ -37,7 +36,7 @@
 		display: flex;
 		flex-direction: column;
 	}
-	.items{
+	.items {
 		position: relative;
 		flex-grow: 2;
 		overflow: hidden;
@@ -46,5 +45,12 @@
 		position: absolute;
 		inset: 0;
 		overflow-y: scroll;
+		transition: transform 0.3s ease, filter 0.3s ease;
+		transform: translateX(-50%);
+		filter:brightness(67%);
+	}
+	.top {
+		transform: translateX(0);
+		filter:brightness(1);
 	}
 </style>

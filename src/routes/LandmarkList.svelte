@@ -27,7 +27,6 @@
 	];
 
 	function onCellTap(landmark: Landmark) {
-		console.log(navContext);
 		navContext.push({ component: LandmarkDetail, props: { landmark }, title: landmark.name });
 	}
 
