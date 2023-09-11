@@ -2,6 +2,7 @@
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import type { NavigationContext, NavigationItem, SceneItem } from "./index.js";
+	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	setContext<NavigationContext>("navigation", { push, pop });
 
 	export let rootItem: NavigationItem;
@@ -17,11 +18,14 @@
 </script>
 
 <div class="root">
-	{#each items as item}
-		<div class="item" transition:fly={{ x: "100%", opacity: 1 }}>
-			<svelte:component this={item.node.component} {...item.node.props} />
-		</div>
-	{/each}
+	<UiNavigationBar {items} />
+	<div class="items">
+		{#each items as item}
+			<div class="item" transition:fly={{ x: "100%", opacity: 1 }}>
+				<svelte:component this={item.node.component} {...item.node.props} />
+			</div>
+		{/each}
+	</div>
 </div>
 
 <style>
@@ -29,6 +33,8 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
+		display: flex;
+		flex-direction: column;
 	}
 	.item {
 		position: absolute;
