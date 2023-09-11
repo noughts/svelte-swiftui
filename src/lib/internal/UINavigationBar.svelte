@@ -7,7 +7,7 @@
 
 <div class="root">
 	{#each items as item, index}
-		<div class="item" transition:fly>
+		<div class="item" transition:fly={{x:"50%"}}>
 			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
 		</div>
 	{/each}
