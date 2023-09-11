@@ -38,7 +38,7 @@
 </script>
 
 <div class="root">
-    <Scene tintColor="blue" rootItem={sceneRootItem} />
+    <Scene tintColor="#ff00cc" rootItem={sceneRootItem} />
 </div>
 
 <style>
