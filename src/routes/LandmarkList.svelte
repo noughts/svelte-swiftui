@@ -41,11 +41,10 @@
 
 <div class="root">
 	<VStack>
-		<div>{dummy}</div>
+		<div>{count}</div>
 		{#each landmarks as landmark}
 			<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
 		{/each}
-		<div>{count}</div>
 	</VStack>
 </div>
 

@@ -32,8 +32,10 @@
 		position: absolute;
 		inset: 0;
 		opacity: 0;
+		pointer-events: none;
 	}
 	.selected{
 		opacity: 1;
+		pointer-events: auto;
 	}
 </style>

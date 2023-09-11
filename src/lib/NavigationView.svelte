@@ -39,9 +39,11 @@
 	.items{
 		position: relative;
 		flex-grow: 2;
+		overflow: hidden;
 	}
 	.item {
 		position: absolute;
 		inset: 0;
+		overflow-y: scroll;
 	}
 </style>
