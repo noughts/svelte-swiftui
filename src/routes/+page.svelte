@@ -1,12 +1,20 @@
 <script lang="ts">
+    import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
-    import type { DefaultProps, SceneItem, UITabBarItem } from "$lib/index.js";
+    import { createNaivationItem, createNode, createSceneItem, createTabBarItem } from "$lib/index.js";
     import "../globals.css";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
 
-    const hoge:UITabBarItem = {title:"hoge", icon:"", node:{component:LandmarkList,props:{}}}
+    const item1 = createTabBarItem({
+        component: NavigationView,
+        props: {
+            rootItem: createNaivationItem({ title: "ホーム", component: LandmarkList, props: { dummy: "hoge" } }),
+        },
+        title: "ホーム",
+        icon: "home",
+    });
 </script>
 
 <div class="root">
@@ -17,8 +25,8 @@
                 component: TabView,
                 props: {
                     items: [
-                        { title: "ホーム", icon: "home", node: { component: LandmarkList } },
-                        { title: "天気", icon: "partly_cloudy_day", node: { component: Page1 } },
+                        item1,
+                        { title: "天気", icon: "partly_cloudy_day", component: Page1 },
                         { title: "クーポン", icon: "confirmation_number", node: { component: LandmarkList } },
                         { title: "検索", icon: "search", node: { component: Page1 } },
                         { title: "プロフィール", icon: "account_circle", node: { component: Page1 } },

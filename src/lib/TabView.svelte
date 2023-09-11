@@ -9,7 +9,7 @@
 	<div class="content">
 		{#each items as item, index (item.title)}
 			<div class="item" class:selected={index === selection}>
-				<svelte:component this={item.node.component} {...item.node.props} />
+				<svelte:component this={item.component} {...item.props} />
 			</div>
 		{/each}
 	</div>
