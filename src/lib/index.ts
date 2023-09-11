@@ -27,7 +27,7 @@ export type DefaultProps = Record<string, any>;
 
 export type SceneItem<Props extends DefaultProps = any> = {
 	component: SvelteUIComponent<Props, any, any>
-	props?: Props;
+	props: Props;
 	transition?: string;
 }
 
@@ -36,7 +36,7 @@ export type UITabBarItem<Props extends DefaultProps = any> = {
 	title: string
 	icon: string
 	component: SvelteUIComponent<Props, any, any>
-	props?: Props;
+	props: Props;
 }
 
 export type SceneContext = {
@@ -58,7 +58,7 @@ export type NavigationContext = {
 export type NavigationItem<Props extends DefaultProps = any> = {
 	title: string;
 	component: SvelteUIComponent<Props, any, any>
-	props?: Props;
+	props: Props;
 }
 
 export type SvelteUIComponent<

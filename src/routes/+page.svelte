@@ -7,32 +7,38 @@
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
 
-    const item1 = createTabBarItem({
-        component: NavigationView,
+    const sceneRootItem = createSceneItem({
+        component: TabView,
         props: {
-            rootItem: createNaivationItem({ title: "ホーム", component: LandmarkList, props: { dummy: "hoge" } }),
+            items: [
+                createTabBarItem({
+                    component: NavigationView,
+                    props: {
+                        rootItem: createNaivationItem({
+                            title: "ホーム",
+                            component: LandmarkList,
+                            props: { dummy: "hoge" },
+                        }),
+                    },
+                    title: "ホーム",
+                    icon: "home",
+                }),
+                createTabBarItem({ title: "天気", icon: "partly_cloudy_day", component: Page1, props: {} }),
+                createTabBarItem({
+                    title: "クーポン",
+                    icon: "confirmation_number",
+                    component: LandmarkList,
+                    props: { dummy: "hoge" },
+                }),
+                createTabBarItem({ title: "検索", icon: "search", component: Page1, props: {} }),
+                createTabBarItem({ title: "プロフィール", icon: "account_circle", component: Page1, props: {} }),
+            ],
         },
-        title: "ホーム",
-        icon: "home",
     });
 </script>
 
 <div class="root">
-    <Scene
-        tintColor="blue"
-        rootItem={{
-            component: TabView,
-            props: {
-                items: [
-                    item1,
-                    { title: "天気", icon: "partly_cloudy_day", component: Page1 },
-                    { title: "クーポン", icon: "confirmation_number", component: LandmarkList },
-                    { title: "検索", icon: "search", component: Page1 },
-                    { title: "プロフィール", icon: "account_circle", component: Page1 },
-                ],
-            },
-        }}
-    />
+    <Scene tintColor="blue" rootItem={sceneRootItem} />
 </div>
 
 <style>
