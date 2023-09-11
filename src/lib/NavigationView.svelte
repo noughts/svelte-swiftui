@@ -45,7 +45,8 @@
 		position: absolute;
 		inset: 0;
 		overflow-y: scroll;
-		transition: transform 0.3s ease, filter 0.3s ease;
+		transition-property: transform, filter;
+		transition-duration: 0.3s;
 		transform: translateX(-50%);
 		filter:brightness(67%);
 	}
