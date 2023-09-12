@@ -7,6 +7,7 @@
 
 	const navContext = getContext<NavigationContext>("navigation");
 	navContext.updateTitle("hoge")
+	navContext.updateRightButtonItem({title:"close"})
 </script>
 
 <div class="root">

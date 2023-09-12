@@ -11,7 +11,7 @@
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="root" class:dark>
+<div class="NavigationBarItemView" class:dark>
 	{#if showBackButton}
 		<button class="backButton" on:click={(e) => dispatch("backButtonTap")} style:color>
 			<MaterialSymbol icon="arrow_back_ios" />
@@ -20,13 +20,18 @@
 	{:else}
 		<div />
 	{/if}
-	<div />
+
+	{#if item.rightButtonItem}
+		<button>{item.rightButtonItem.title}</button>
+	{:else}
+		<div />
+	{/if}
 
 	<div class="title">{item.title}</div>
 </div>
 
 <style>
-	.root {
+	.NavigationBarItemView {
 		width: 100%;
 		height: 100%;
 		position: relative;
@@ -37,8 +42,8 @@
 		padding: 0 8px;
 		color: var(--ui-text-light);
 	}
-	.dark{
-		color:var(--ui-text-dark);
+	.dark {
+		color: var(--ui-text-dark);
 	}
 	.backButton {
 		all: unset;
@@ -58,6 +63,5 @@
 		align-items: center;
 		justify-content: center;
 		pointer-events: none;
-		
 	}
 </style>

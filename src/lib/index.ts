@@ -18,7 +18,13 @@ export function createTabBarItem<Props extends DefaultProps>(data: TabBarItem<Pr
 	return { component: data.component, props: data.props, title: data.title, icon: data.icon };
 }
 export function createNaivationItem<Props extends DefaultProps>(data: NavigationItem<Props>): NavigationItem<Props> {
-	return { component: data.component, props: data.props, title: data.title, hidesNavigationBarWhenPushed: data.hidesNavigationBarWhenPushed };
+	return {
+		component: data.component,
+		props: data.props,
+		title: data.title,
+		hidesNavigationBarWhenPushed: data.hidesNavigationBarWhenPushed,
+		rightButtonItem: data.rightButtonItem
+	};
 }
 
 
@@ -50,10 +56,14 @@ export type SceneContext = {
 export type NavigationContext = {
 	push: <Props extends DefaultProps>(item: NavigationItem<Props>) => void
 	pop: () => void;
-	getTopItem: () => NavigationItem;
-	updateTitle:(title:string)=>void;
+	updateTitle: (title: string) => void;
+	updateRightButtonItem: (item: UIBarButtonItem) => void;
 }
 
+export type UIBarButtonItem = {
+	title?: string;
+	icon?: string;
+}
 
 
 
@@ -62,6 +72,7 @@ export type NavigationItem<Props extends DefaultProps = any> = {
 	component: SvelteUIComponent<Props>
 	props: Props;
 	hidesNavigationBarWhenPushed?: boolean;
+	rightButtonItem?: UIBarButtonItem;
 }
 
 export type SvelteUIComponent<

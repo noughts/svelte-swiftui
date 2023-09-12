@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
-	import type { NavigationContext, NavigationItem } from "./index.js";
+	import type { NavigationContext, NavigationItem, UIBarButtonItem } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
-	setContext<NavigationContext>("navigation", { push, pop, getTopItem, updateTitle });
+	setContext<NavigationContext>("navigation", { push, pop, updateTitle, updateRightButtonItem });
 
 	export let rootItem: NavigationItem;
 	let items: NavigationItem[] = [rootItem];
@@ -15,13 +15,15 @@
 		newAry.pop();
 		items = newAry;
 	}
-	function getTopItem(){
-		return items[items.length-1];
-	}
-	function updateTitle(title:string){
-		const newItem = items[items.length - 1]
+	function updateTitle(title: string) {
+		const newItem = items[items.length - 1];
 		newItem.title = title;
-		items[items.length-1] = newItem;
+		items[items.length - 1] = newItem;
+	}
+	function updateRightButtonItem(item: UIBarButtonItem) {
+		const newItem = items[items.length - 1];
+		newItem.rightButtonItem = item;
+		items[items.length - 1] = newItem;
 	}
 	$: topItem = items[items.length - 1];
 </script>
@@ -59,7 +61,7 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		z-index:2;
+		z-index: 2;
 	}
 	.items {
 		position: relative;
@@ -76,8 +78,8 @@
 		transform: translateX(-50%);
 		filter: brightness(80%);
 	}
-	.navBarHidden{
-		top:0;
+	.navBarHidden {
+		top: 0;
 	}
 	.top {
 		transform: translateX(0);

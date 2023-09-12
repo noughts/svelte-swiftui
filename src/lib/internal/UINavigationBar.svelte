@@ -7,7 +7,7 @@
 	const { dark } = getContext<SceneContext>("scene");
 </script>
 
-<div class="root" class:dark>
+<div class="UINavigationBar" class:dark>
 	{#each items as item, index}
 		<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "50%" }}>
 			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
@@ -16,7 +16,8 @@
 </div>
 
 <style>
-	.root {
+	.UINavigationBar {
+		width: 100%;
 		position: relative;
 		height: 44px;
 		flex-shrink: 0;
