@@ -41,7 +41,7 @@ export type TabBarItem<Props extends DefaultProps = any> = {
 }
 
 export type SceneContext = {
-	theme: "light" | "dark" | "system";
+	dark:boolean;
 	tintColor: Property.Color;
 	push: <Props extends DefaultProps>(item: SceneItem<Props>) => void;
 	pop: () => void;

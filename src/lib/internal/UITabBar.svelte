@@ -4,7 +4,7 @@
 	import type { SceneContext, TabBarItem } from "$lib/index.js";
 	export let selection = 0;
 	export let items: TabBarItem[];
-	const { theme } = getContext<SceneContext>("scene");
+	const { dark } = getContext<SceneContext>("scene");
 
 	function onTabClick(index: number) {
 		selection = index;

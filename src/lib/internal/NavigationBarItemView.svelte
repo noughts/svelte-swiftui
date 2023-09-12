@@ -3,14 +3,15 @@
 	import type { NavigationItem, SceneContext } from "$lib/index.js";
 	import { createEventDispatcher, getContext } from "svelte";
 	const sceneContext = getContext<SceneContext>("scene");
+	const dark = sceneContext.dark;
 	const color = sceneContext.tintColor;
 	export let item: NavigationItem;
-	export let showBackButton:boolean;
+	export let showBackButton: boolean;
 
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="root">
+<div class="root" class:dark>
 	{#if showBackButton}
 		<button class="backButton" on:click={(e) => dispatch("backButtonTap")} style:color>
 			<MaterialSymbol icon="arrow_back_ios" />
@@ -34,6 +35,10 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 8px;
+		color: var(--ui-text-light);
+	}
+	.dark{
+		color:var(--ui-text-dark);
 	}
 	.backButton {
 		all: unset;
@@ -53,6 +58,6 @@
 		align-items: center;
 		justify-content: center;
 		pointer-events: none;
-		color:var(--ui-text-light);
+		
 	}
 </style>

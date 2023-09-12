@@ -2,13 +2,13 @@
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import type { SceneContext, SceneItem } from "./index.js";
-	import "./svelte-swiftui.css"
+	import "./svelte-swiftui.css";
 
 	export let tintColor = "blue";
-	export let theme: "light"|"dark"|"system" = "system";
+	export let theme: "light" | "dark" | "system" = "system";
 	export let rootItem: SceneItem;
 
-	setContext<SceneContext>("scene", { push, pop, theme, tintColor });
+	setContext<SceneContext>("scene", { push, pop, dark: theme == "dark", tintColor });
 
 	let items: SceneItem[] = [rootItem];
 	function push(item: SceneItem) {
@@ -52,9 +52,9 @@
 		position: absolute;
 		inset: 0;
 		transition: filter 0.3s;
-		filter:brightness(80%);
+		filter: brightness(80%);
 	}
-	.top{
-		filter:brightness(100%);
+	.top {
+		filter: brightness(100%);
 	}
 </style>
