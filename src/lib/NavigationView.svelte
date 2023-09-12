@@ -3,7 +3,7 @@
 	import { fly } from "svelte/transition";
 	import type { NavigationContext, NavigationItem, UIBarButtonItem } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
-	setContext<NavigationContext>("navigation", { push, pop, updateTitle, updateRightButtonItem });
+	setContext<NavigationContext>("navigation", { push, pop, updateTitle, updateRightButtonItem, updateLeftButtonItem });
 
 	export let rootItem: NavigationItem;
 	let items: NavigationItem[] = [rootItem];
@@ -23,6 +23,11 @@
 	function updateRightButtonItem(item: UIBarButtonItem) {
 		const newItem = items[items.length - 1];
 		newItem.rightButtonItem = item;
+		items[items.length - 1] = newItem;
+	}
+	function updateLeftButtonItem(item: UIBarButtonItem) {
+		const newItem = items[items.length - 1];
+		newItem.leftButtonItem = item;
 		items[items.length - 1] = newItem;
 	}
 	$: topItem = items[items.length - 1];

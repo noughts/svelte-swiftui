@@ -63,6 +63,7 @@ export type NavigationContext = {
 	pop: () => void;
 	updateTitle: (title: string) => void;
 	updateRightButtonItem: (item: UIBarButtonItem) => void;
+	updateLeftButtonItem: (item: UIBarButtonItem) => void;
 }
 
 export type UIBarButtonItem = {

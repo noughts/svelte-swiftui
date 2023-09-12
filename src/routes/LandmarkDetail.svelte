@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getNavigationContext } from "$lib/index.js";
-	import type { Landmark } from "./Landmark.js";
-	import MapView from "./MapView.svelte";
+    import type { Landmark } from "./Landmark.js";
+    import MapView from "./MapView.svelte";
 
 	export let landmark: Landmark;
 
@@ -13,6 +13,7 @@
 			console.log(landmark);
 		},
 	});
+
 
 	function showMap() {
 		navContext.push({ component: MapView, props: { landmark }, title: "Map" });
