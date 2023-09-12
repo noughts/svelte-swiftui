@@ -1,12 +1,28 @@
 <script lang="ts">
-	import type { SceneContext, SceneItem } from "$lib/index.js";
+	import { createNaivationItem, type SceneContext, type SceneItem } from "$lib/index.js";
 	import { getContext, type ComponentProps } from "svelte";
 	import DemoScreen from "./DemoScreen.svelte";
+	import NavigationView from "$lib/NavigationView.svelte";
 
 	const sceneContext = getContext<SceneContext>("scene");
 
 	function onPresentButtonTap() {
-		sceneContext.push({ component: DemoScreen, props: { title: "a" } });
+		sceneContext.push({
+			component: NavigationView,
+			props: {
+				rootItem: createNaivationItem({
+					component: DemoScreen,
+					title: "Demo",
+					props: { title: "from Page 1" },
+					rightButtonItem: {
+						title: "Close",
+						action: () => {
+							sceneContext.pop();
+						},
+					},
+				}),
+			},
+		});
 	}
 </script>
 
@@ -16,7 +32,7 @@
 </div>
 
 <style>
-	.root{
+	.root {
 		background-color: white;
 		height: 100%;
 	}

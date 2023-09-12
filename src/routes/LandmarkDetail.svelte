@@ -6,7 +6,6 @@
 	export let landmark: Landmark;
 
 	const navContext = getContext<NavigationContext>("navigation");
-	navContext.updateTitle("hoge");
 	navContext.updateRightButtonItem({ title: "Close", bold: true, action:()=>{
 		console.log(landmark);
 	} });

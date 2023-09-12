@@ -2,7 +2,7 @@
     import type { SceneContext } from "$lib/index.js";
     import { getContext } from "svelte";
 
-	export let title: string = "dummy title";
+	export let title: string;
 	const context = getContext<SceneContext>("scene");
 
 	function onDismissButtonTap(){
