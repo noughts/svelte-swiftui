@@ -20,6 +20,12 @@
 							sceneContext.pop();
 						},
 					},
+					leftButtonItem: {
+						title: "キャラクター変更",
+						action: () => {
+							alert("キャラクター変更")
+						},
+					},
 				}),
 			},
 		});

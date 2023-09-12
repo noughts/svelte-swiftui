@@ -12,7 +12,14 @@
 </script>
 
 <div class="NavigationBarItemView" class:dark>
-	{#if showBackButton}
+	{#if item.leftButtonItem}
+		<button
+			class="button"
+			on:click={(e) => item.rightButtonItem?.action()}
+			style:color
+			class:bold={item.leftButtonItem.bold}>{item.leftButtonItem.title}</button
+		>
+	{:else if showBackButton}
 		<button class="backButton" on:click={(e) => dispatch("backButtonTap")} style:color>
 			<MaterialSymbol icon="arrow_back_ios" />
 			<div class="backLabel">Back</div>

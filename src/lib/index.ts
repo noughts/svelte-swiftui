@@ -64,7 +64,7 @@ export type UIBarButtonItem = {
 	title?: string;
 	icon?: string;
 	bold?: boolean;
-	action:Function;
+	action: Function;
 }
 
 
@@ -75,6 +75,7 @@ export type NavigationItem<Props extends DefaultProps = any> = {
 	props: Props;
 	hidesNavigationBarWhenPushed?: boolean;
 	rightButtonItem?: UIBarButtonItem;
+	leftButtonItem?: UIBarButtonItem;
 }
 
 export type SvelteUIComponent<
