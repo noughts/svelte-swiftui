@@ -1,5 +1,11 @@
+<script lang="ts" context="module">
+	export function getNavigationContext() {
+		return getContext<NavigationContext>("navigation");
+	}
+</script>
+
 <script lang="ts">
-	import { setContext } from "svelte";
+	import { getContext, setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import type { NavigationContext, NavigationItem, UIBarButtonItem } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";

@@ -1,5 +1,11 @@
+<script lang="ts" context="module">
+	export function getSceneContext():SceneContext{
+		return getContext<SceneContext>("scene");
+	}
+</script>
+
 <script lang="ts">
-	import { setContext } from "svelte";
+	import { getContext, setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import type { SceneContext, SceneItem } from "./index.js";
 	import "./svelte-swiftui.css";

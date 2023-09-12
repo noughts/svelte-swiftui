@@ -1,5 +1,5 @@
 import type { Property } from "csstype"
-import type { SvelteComponent, ComponentProps } from 'svelte'
+import type { SvelteComponent } from "svelte"
 
 export { default as Scene } from "./Scene.svelte"
 export { default as TabView } from "./TabView.svelte"
@@ -27,9 +27,6 @@ export function createNaivationItem<Props extends DefaultProps>(data: Navigation
 		leftButtonItem: data.leftButtonItem,
 	};
 }
-
-
-
 
 export type DefaultProps = Record<string, any>;
 

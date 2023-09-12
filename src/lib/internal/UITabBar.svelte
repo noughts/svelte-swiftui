@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { getContext } from "svelte";
+	import { getSceneContext } from "$lib/Scene.svelte";
+	import type { TabBarItem } from "$lib/index.js";
 	import UiTab from "./UITab.svelte";
-	import type { SceneContext, TabBarItem } from "$lib/index.js";
 	export let selection = 0;
 	export let items: TabBarItem[];
-	const { dark } = getContext<SceneContext>("scene");
+	const { dark } = getSceneContext();
 
 	function onTabClick(index: number) {
 		selection = index;

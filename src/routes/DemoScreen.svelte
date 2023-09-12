@@ -1,9 +1,8 @@
 <script lang="ts">
-    import type { SceneContext } from "$lib/index.js";
-    import { getContext } from "svelte";
+    import { getSceneContext } from "$lib/Scene.svelte";
 
 	export let title: string;
-	const context = getContext<SceneContext>("scene");
+	const context = getSceneContext();
 
 	function onDismissButtonTap(){
 		context.pop();

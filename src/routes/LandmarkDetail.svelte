@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { getContext } from "svelte";
+	import { getNavigationContext } from "$lib/NavigationView.svelte";
 	import type { Landmark } from "./Landmark.js";
-	import type { NavigationContext } from "$lib/index.js";
 	import MapView from "./MapView.svelte";
 
 	export let landmark: Landmark;
 
-	const navContext = getContext<NavigationContext>("navigation");
+	const navContext = getNavigationContext();
 	navContext.updateRightButtonItem({
 		title: "Done",
 		bold: true,

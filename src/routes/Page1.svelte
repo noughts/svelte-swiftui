@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { createNaivationItem, type SceneContext, type SceneItem } from "$lib/index.js";
-	import { getContext, type ComponentProps } from "svelte";
-	import DemoScreen from "./DemoScreen.svelte";
+	import { createNaivationItem } from "$lib/index.js";
 	import NavigationView from "$lib/NavigationView.svelte";
+	import { getSceneContext } from "$lib/Scene.svelte";
+	import DemoScreen from "./DemoScreen.svelte";
 
-	const sceneContext = getContext<SceneContext>("scene");
+	const sceneContext = getSceneContext();
 
 	function onPresentButtonTap() {
 		sceneContext.push({
@@ -15,8 +15,8 @@
 					title: "Demo",
 					props: { title: "from Page 1" },
 					rightButtonItem: {
-						icon:"close",
-						title:"Done",
+						icon: "close",
+						title: "Done",
 						bold: true,
 						action: () => {
 							sceneContext.pop();
