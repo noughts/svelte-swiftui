@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from "$lib/Button.svelte";
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
 	import type { NavigationItem, SceneContext } from "$lib/index.js";
 	import { createEventDispatcher, getContext } from "svelte";
@@ -13,12 +14,13 @@
 
 <div class="NavigationBarItemView" class:dark>
 	{#if item.leftButtonItem}
-		<button
-			class="button"
-			on:click={(e) => item.rightButtonItem?.action()}
-			style:color
-			class:bold={item.leftButtonItem.bold}>{item.leftButtonItem.title}</button
-		>
+		<Button
+			on:click={(e) => item.leftButtonItem?.action()}
+			{color}
+			bold={item.leftButtonItem.bold}
+			title={item.leftButtonItem.title}
+			icon={item.leftButtonItem.icon}
+		/>
 	{:else if showBackButton}
 		<button class="backButton" on:click={(e) => dispatch("backButtonTap")} style:color>
 			<MaterialSymbol icon="arrow_back_ios" />
@@ -29,12 +31,13 @@
 	{/if}
 
 	{#if item.rightButtonItem}
-		<button
-			class="button"
+		<Button
 			on:click={(e) => item.rightButtonItem?.action()}
-			style:color
-			class:bold={item.rightButtonItem.bold}>{item.rightButtonItem.title}</button
-		>
+			{color}
+			bold={item.rightButtonItem.bold}
+			title={item.rightButtonItem.title}
+			icon={item.rightButtonItem.icon}
+		/>
 	{:else}
 		<div />
 	{/if}
@@ -54,12 +57,6 @@
 		padding: 0 8px;
 		color: var(--ui-text-light);
 		font-size: 16px;
-	}
-	.button {
-		all: unset;
-	}
-	.button.bold {
-		font-weight: 600;
 	}
 	.dark {
 		color: var(--ui-text-dark);

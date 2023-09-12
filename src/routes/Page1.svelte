@@ -15,7 +15,9 @@
 					title: "Demo",
 					props: { title: "from Page 1" },
 					rightButtonItem: {
-						title: "Close",
+						icon:"close",
+						title:"Done",
+						bold: true,
 						action: () => {
 							sceneContext.pop();
 						},
@@ -23,7 +25,7 @@
 					leftButtonItem: {
 						title: "キャラクター変更",
 						action: () => {
-							alert("キャラクター変更")
+							alert("キャラクター変更");
 						},
 					},
 				}),

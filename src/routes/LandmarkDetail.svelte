@@ -8,7 +8,7 @@
 
 	const navContext = getContext<NavigationContext>("navigation");
 	navContext.updateRightButtonItem({
-		title: "Close",
+		title: "Done",
 		bold: true,
 		action: () => {
 			console.log(landmark);

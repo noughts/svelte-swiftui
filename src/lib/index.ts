@@ -23,7 +23,8 @@ export function createNaivationItem<Props extends DefaultProps>(data: Navigation
 		props: data.props,
 		title: data.title,
 		hidesNavigationBarWhenPushed: data.hidesNavigationBarWhenPushed,
-		rightButtonItem: data.rightButtonItem
+		rightButtonItem: data.rightButtonItem,
+		leftButtonItem: data.leftButtonItem,
 	};
 }
 
