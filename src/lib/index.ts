@@ -63,6 +63,8 @@ export type NavigationContext = {
 export type UIBarButtonItem = {
 	title?: string;
 	icon?: string;
+	bold?: boolean;
+	action:Function;
 }
 
 

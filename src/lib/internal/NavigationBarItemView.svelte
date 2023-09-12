@@ -22,7 +22,12 @@
 	{/if}
 
 	{#if item.rightButtonItem}
-		<button>{item.rightButtonItem.title}</button>
+		<button
+			class="button"
+			on:click={(e) => item.rightButtonItem?.action()}
+			style:color
+			class:bold={item.rightButtonItem.bold}>{item.rightButtonItem.title}</button
+		>
 	{:else}
 		<div />
 	{/if}
@@ -41,6 +46,13 @@
 		justify-content: space-between;
 		padding: 0 8px;
 		color: var(--ui-text-light);
+		font-size: 16px;
+	}
+	.button {
+		all: unset;
+	}
+	.button.bold {
+		font-weight: 600;
 	}
 	.dark {
 		color: var(--ui-text-dark);
@@ -49,13 +61,11 @@
 		all: unset;
 		display: flex;
 		align-items: center;
-		font-size: 16px;
 	}
 	.backLabel {
 		margin-left: -8px;
 	}
 	.title {
-		font-size: 16px;
 		font-weight: 600;
 		position: absolute;
 		inset: 0;

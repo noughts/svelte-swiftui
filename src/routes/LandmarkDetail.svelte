@@ -1,13 +1,15 @@
 <script lang="ts">
-    import { getContext } from "svelte";
-    import type { Landmark } from "./Landmark.js";
-    import type { NavigationContext } from "$lib/index.js";
+	import { getContext } from "svelte";
+	import type { Landmark } from "./Landmark.js";
+	import type { NavigationContext } from "$lib/index.js";
 
-	export let landmark:Landmark;
+	export let landmark: Landmark;
 
 	const navContext = getContext<NavigationContext>("navigation");
-	navContext.updateTitle("hoge")
-	navContext.updateRightButtonItem({title:"close"})
+	navContext.updateTitle("hoge");
+	navContext.updateRightButtonItem({ title: "Close", bold: true, action:()=>{
+		console.log(landmark);
+	} });
 </script>
 
 <div class="root">
@@ -16,7 +18,7 @@
 </div>
 
 <style>
-	.root{
+	.root {
 		width: 100%;
 		height: 100%;
 		background-color: white;
