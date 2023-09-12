@@ -1,9 +1,3 @@
-<script lang="ts" context="module">
-	export function getSceneContext():SceneContext{
-		return getContext<SceneContext>("scene");
-	}
-</script>
-
 <script lang="ts">
 	import { getContext, setContext } from "svelte";
 	import { fly } from "svelte/transition";

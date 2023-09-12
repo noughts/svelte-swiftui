@@ -1,5 +1,5 @@
 import type { Property } from "csstype"
-import type { SvelteComponent } from "svelte"
+import { getContext, type SvelteComponent } from "svelte"
 
 export { default as Scene } from "./Scene.svelte"
 export { default as TabView } from "./TabView.svelte"
@@ -9,6 +9,10 @@ export { default as VStack } from "./VStack.svelte"
 export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 export { default as Text } from "./Text.svelte"
+
+export function getSceneContext(){
+	return getContext<SceneContext>("scene");
+}
 
 
 export function createSceneItem<Props extends DefaultProps>(data: SceneItem<Props>): SceneItem<Props> {
