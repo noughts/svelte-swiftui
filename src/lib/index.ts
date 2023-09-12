@@ -18,7 +18,7 @@ export function createTabBarItem<Props extends DefaultProps>(data: TabBarItem<Pr
 	return { component: data.component, props: data.props, title: data.title, icon: data.icon };
 }
 export function createNaivationItem<Props extends DefaultProps>(data: NavigationItem<Props>): NavigationItem<Props> {
-	return { component: data.component, props: data.props, title: data.title };
+	return { component: data.component, props: data.props, title: data.title, hidesNavigationBarWhenPushed: data.hidesNavigationBarWhenPushed };
 }
 
 
@@ -41,7 +41,7 @@ export type TabBarItem<Props extends DefaultProps = any> = {
 }
 
 export type SceneContext = {
-	dark:boolean;
+	dark: boolean;
 	tintColor: Property.Color;
 	push: <Props extends DefaultProps>(item: SceneItem<Props>) => void;
 	pop: () => void;
@@ -59,6 +59,7 @@ export type NavigationItem<Props extends DefaultProps = any> = {
 	title: string;
 	component: SvelteUIComponent<Props>
 	props: Props;
+	hidesNavigationBarWhenPushed?: boolean;
 }
 
 export type SvelteUIComponent<

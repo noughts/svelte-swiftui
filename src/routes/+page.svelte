@@ -18,6 +18,7 @@
                             title: "ホーム",
                             component: LandmarkList,
                             props: {},
+                            hidesNavigationBarWhenPushed: true,
                         }),
                     },
                     title: "ホーム",
@@ -38,7 +39,7 @@
 </script>
 
 <div class="root">
-    <Scene tintColor="#ff00cc" theme="dark" rootItem={sceneRootItem} />
+    <Scene tintColor="#ff00cc" theme="light" rootItem={sceneRootItem} />
 </div>
 
 <style>

@@ -27,7 +27,11 @@
 	];
 
 	function onCellTap(landmark: Landmark) {
-		navContext.push({ component: LandmarkDetail, props: { landmark }, title: landmark.name });
+		navContext.push({
+			component: LandmarkDetail,
+			props: { landmark },
+			title: landmark.name,
+		});
 	}
 
 	let count = 0;

@@ -15,10 +15,13 @@
 		newAry.pop();
 		items = newAry;
 	}
+	$: topItem = items[items.length - 1];
 </script>
 
 <div class="root">
-	<UiNavigationBar {items} on:backButtonTap={pop} />
+	{#if !topItem.hidesNavigationBarWhenPushed }
+		<UiNavigationBar {items} on:backButtonTap={pop} />
+	{/if}
 	<div class="items">
 		{#each items as item, index}
 			<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "100%", opacity: 1 }}>
@@ -48,10 +51,10 @@
 		transition-property: transform, filter;
 		transition-duration: 0.3s;
 		transform: translateX(-50%);
-		filter:brightness(80%);
+		filter: brightness(80%);
 	}
 	.top {
 		transform: translateX(0);
-		filter:brightness(100%);
+		filter: brightness(100%);
 	}
 </style>
