@@ -1,9 +1,3 @@
-<script lang="ts" context="module">
-	export function getNavigationContext() {
-		return getContext<NavigationContext>("navigation");
-	}
-</script>
-
 <script lang="ts">
 	import { getContext, setContext } from "svelte";
 	import { fly } from "svelte/transition";

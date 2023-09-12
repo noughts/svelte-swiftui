@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Button from "$lib/Button.svelte";
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
-	import type { NavigationItem, SceneContext } from "$lib/index.js";
-	import { createEventDispatcher, getContext } from "svelte";
-	const sceneContext = getContext<SceneContext>("scene");
+	import { getSceneContext, type NavigationItem } from "$lib/index.js";
+	import { createEventDispatcher } from "svelte";
+	const sceneContext = getSceneContext();
 	const dark = sceneContext.dark;
 	const color = sceneContext.tintColor;
 	export let item: NavigationItem;

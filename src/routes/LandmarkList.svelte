@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { getNavigationContext } from "$lib/NavigationView.svelte";
 	import VStack from "$lib/VStack.svelte";
+    import { getNavigationContext } from "$lib/index.js";
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";

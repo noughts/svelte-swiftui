@@ -10,8 +10,11 @@ export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 export { default as Text } from "./Text.svelte"
 
-export function getSceneContext(){
+export function getSceneContext() {
 	return getContext<SceneContext>("scene");
+}
+export function getNavigationContext() {
+	return getContext<NavigationContext>("navigation");
 }
 
 

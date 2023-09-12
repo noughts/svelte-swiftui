@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getNavigationContext } from "$lib/NavigationView.svelte";
+    import { getNavigationContext } from "$lib/index.js";
 	import type { Landmark } from "./Landmark.js";
 	import MapView from "./MapView.svelte";
 
