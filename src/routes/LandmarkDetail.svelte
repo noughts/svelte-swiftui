@@ -1,7 +1,12 @@
 <script lang="ts">
+    import { getContext } from "svelte";
     import type { Landmark } from "./Landmark.js";
+    import type { NavigationContext } from "$lib/index.js";
 
 	export let landmark:Landmark;
+
+	const navContext = getContext<NavigationContext>("navigation");
+	navContext.updateTitle("hoge")
 </script>
 
 <div class="root">

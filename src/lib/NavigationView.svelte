@@ -3,7 +3,7 @@
 	import { fly } from "svelte/transition";
 	import type { NavigationContext, NavigationItem } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
-	setContext<NavigationContext>("navigation", { push, pop });
+	setContext<NavigationContext>("navigation", { push, pop, getTopItem, updateTitle });
 
 	export let rootItem: NavigationItem;
 	let items: NavigationItem[] = [rootItem];
@@ -14,6 +14,14 @@
 		const newAry = [...items];
 		newAry.pop();
 		items = newAry;
+	}
+	function getTopItem(){
+		return items[items.length-1];
+	}
+	function updateTitle(title:string){
+		const newItem = items[items.length - 1]
+		newItem.title = title;
+		items[items.length-1] = newItem;
 	}
 	$: topItem = items[items.length - 1];
 </script>

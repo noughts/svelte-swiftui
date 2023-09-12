@@ -50,6 +50,8 @@ export type SceneContext = {
 export type NavigationContext = {
 	push: <Props extends DefaultProps>(item: NavigationItem<Props>) => void
 	pop: () => void;
+	getTopItem: () => NavigationItem;
+	updateTitle:(title:string)=>void;
 }
 
 

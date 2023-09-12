@@ -2,7 +2,7 @@
 	import type { SceneContext, NavigationItem } from "$lib/index.js";
 	import { fly } from "svelte/transition";
 	import NavigationBarItemView from "./NavigationBarItemView.svelte";
-	import { getContext } from "svelte";
+	import { getContext, setContext } from "svelte";
 	export let items: NavigationItem[];
 	const { dark } = getContext<SceneContext>("scene");
 </script>
