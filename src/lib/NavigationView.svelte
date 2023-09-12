@@ -19,12 +19,19 @@
 </script>
 
 <div class="root">
-	{#if !topItem.hidesNavigationBarWhenPushed }
-		<UiNavigationBar {items} on:backButtonTap={pop} />
+	{#if !topItem.hidesNavigationBarWhenPushed}
+		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
+			<UiNavigationBar {items} on:backButtonTap={pop} />
+		</div>
 	{/if}
 	<div class="items">
 		{#each items as item, index}
-			<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "100%", opacity: 1 }}>
+			<div
+				class="item"
+				class:top={index == items.length - 1}
+				class:navBarHidden={item.hidesNavigationBarWhenPushed}
+				transition:fly={{ x: "100%", opacity: 1 }}
+			>
 				<svelte:component this={item.component} {...item.props} />
 			</div>
 		{/each}
@@ -39,6 +46,13 @@
 		display: flex;
 		flex-direction: column;
 	}
+	.navBar {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index:2;
+	}
 	.items {
 		position: relative;
 		flex-grow: 2;
@@ -47,11 +61,15 @@
 	.item {
 		position: absolute;
 		inset: 0;
+		top: 44px;
 		overflow-y: scroll;
 		transition-property: transform, filter;
 		transition-duration: 0.3s;
 		transform: translateX(-50%);
 		filter: brightness(80%);
+	}
+	.navBarHidden{
+		top:0;
 	}
 	.top {
 		transform: translateX(0);
