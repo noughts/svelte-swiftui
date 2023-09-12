@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { getSceneContext } from "$lib/Scene.svelte";
-	import type { TabBarItem } from "$lib/index.js";
+	import { getSceneContext, type TabBarItem } from "$lib/index.js";
 	import UiTab from "./UITab.svelte";
 	export let selection = 0;
 	export let items: TabBarItem[];

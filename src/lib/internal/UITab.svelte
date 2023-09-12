@@ -1,8 +1,8 @@
 <script lang="ts">
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
-	import { getSceneContext } from "$lib/Scene.svelte";
+
 	import type { Property } from "csstype";
-	import type { TabBarItem } from "../index.js";
+	import { getSceneContext, type TabBarItem } from "../index.js";
 	const sceneContext = getSceneContext();
 
 	export let item: TabBarItem;

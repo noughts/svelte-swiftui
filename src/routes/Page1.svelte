@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { createNaivationItem } from "$lib/index.js";
+	import { createNaivationItem, getSceneContext } from "$lib/index.js";
 	import NavigationView from "$lib/NavigationView.svelte";
-	import { getSceneContext } from "$lib/Scene.svelte";
 	import DemoScreen from "./DemoScreen.svelte";
 
 	const sceneContext = getSceneContext();

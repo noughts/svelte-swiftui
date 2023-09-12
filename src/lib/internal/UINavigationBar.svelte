@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { getSceneContext } from "$lib/Scene.svelte";
-	import type { NavigationItem } from "$lib/index.js";
+	import { getSceneContext, type NavigationItem } from "$lib/index.js";
 	import { fly } from "svelte/transition";
 	import NavigationBarItemView from "./NavigationBarItemView.svelte";
 	export let items: NavigationItem[];

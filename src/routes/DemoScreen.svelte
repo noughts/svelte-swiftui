@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getSceneContext } from "$lib/Scene.svelte";
+    import { getSceneContext } from "$lib/index.js";
 
 	export let title: string;
 	const context = getSceneContext();
