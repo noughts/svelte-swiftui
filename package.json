@@ -1,7 +1,7 @@
 {
 	"name": "svelte-swiftui",
 	"license": "MIT",
-	"version": "0.0.19",
+	"version": "0.0.20",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "npm version patch && vite build && npm run package",
