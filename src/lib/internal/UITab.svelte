@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { getContext } from "svelte";
-	import type { SceneContext, TabBarItem } from "../index.js";
+	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
+
 	import type { Property } from "csstype";
-    import MaterialSymbol from "$lib/MaterialSymbol.svelte";
-	const sceneContext = getContext<SceneContext>("scene");
+	import { getSceneContext, type TabBarItem } from "../index.js";
+	const sceneContext = getSceneContext();
 
 	export let item: TabBarItem;
 	export let selected: boolean = false;

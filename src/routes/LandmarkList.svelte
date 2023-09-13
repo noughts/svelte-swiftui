@@ -1,11 +1,10 @@
 <script lang="ts">
 	import VStack from "$lib/VStack.svelte";
-	import type { NavigationContext } from "$lib/index.js";
-	import { getContext } from "svelte";
-	import LandmarkRow from "./LandmarkRow.svelte";
+    import { getNavigationContext } from "$lib/index.js";
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
-	const navContext = getContext("navigation") as NavigationContext;
+	import LandmarkRow from "./LandmarkRow.svelte";
+	const navContext = getNavigationContext();
 
 	const landmarks = [
 		{ name: "Turtle Rock" },
@@ -27,7 +26,11 @@
 	];
 
 	function onCellTap(landmark: Landmark) {
-		navContext.push({ component: LandmarkDetail, props: { landmark }, title: landmark.name });
+		navContext.push({
+			component: LandmarkDetail,
+			props: { landmark },
+			title: landmark.name,
+		});
 	}
 
 	let count = 0;

@@ -1,5 +1,5 @@
 import type { Property } from "csstype"
-import type { SvelteComponent, ComponentProps } from 'svelte'
+import { getContext, type SvelteComponent } from "svelte"
 
 export { default as Scene } from "./Scene.svelte"
 export { default as TabView } from "./TabView.svelte"
@@ -8,6 +8,14 @@ export { default as NavigationView } from "./NavigationView.svelte"
 export { default as VStack } from "./VStack.svelte"
 export { default as HStack } from "./HStack.svelte"
 export { default as Spacer } from "./Spacer.svelte"
+export { default as Text } from "./Text.svelte"
+
+export function getSceneContext() {
+	return getContext<SceneContext>("scene");
+}
+export function getNavigationContext() {
+	return getContext<NavigationContext>("navigation");
+}
 
 
 export function createSceneItem<Props extends DefaultProps>(data: SceneItem<Props>): SceneItem<Props> {
@@ -17,11 +25,15 @@ export function createTabBarItem<Props extends DefaultProps>(data: TabBarItem<Pr
 	return { component: data.component, props: data.props, title: data.title, icon: data.icon };
 }
 export function createNaivationItem<Props extends DefaultProps>(data: NavigationItem<Props>): NavigationItem<Props> {
-	return { component: data.component, props: data.props, title: data.title };
+	return {
+		component: data.component,
+		props: data.props,
+		title: data.title,
+		hidesNavigationBarWhenPushed: data.hidesNavigationBarWhenPushed,
+		rightButtonItem: data.rightButtonItem,
+		leftButtonItem: data.leftButtonItem,
+	};
 }
-
-
-
 
 export type DefaultProps = Record<string, any>;
 
@@ -49,8 +61,17 @@ export type SceneContext = {
 export type NavigationContext = {
 	push: <Props extends DefaultProps>(item: NavigationItem<Props>) => void
 	pop: () => void;
+	updateTitle: (title: string) => void;
+	updateRightButtonItem: (item: UIBarButtonItem) => void;
+	updateLeftButtonItem: (item: UIBarButtonItem) => void;
 }
 
+export type UIBarButtonItem = {
+	title?: string;
+	icon?: string;
+	bold?: boolean;
+	action: Function;
+}
 
 
 
@@ -58,6 +79,9 @@ export type NavigationItem<Props extends DefaultProps = any> = {
 	title: string;
 	component: SvelteUIComponent<Props>
 	props: Props;
+	hidesNavigationBarWhenPushed?: boolean;
+	rightButtonItem?: UIBarButtonItem;
+	leftButtonItem?: UIBarButtonItem;
 }
 
 export type SvelteUIComponent<
