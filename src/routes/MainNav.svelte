@@ -1,12 +1,15 @@
 <script lang="ts">
 	import NavigationView from "$lib/NavigationView.svelte";
 	import { createNaivationItem } from "$lib/index.js";
+    import type LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkList from "./LandmarkList.svelte";
 
 	let nav: NavigationView;
 
 	function onFabTap() {
-		console.log(nav.getTopItem())
+		const hoge = nav.getTopComponent() as LandmarkDetail;
+		// console.log(hoge.getRnd())
+		console.log(hoge)
 	}
 </script>
 

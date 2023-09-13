@@ -1,18 +1,26 @@
 <script lang="ts">
-	import { setContext } from "svelte";
+	import { SvelteComponent, setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import type { NavigationContext, NavigationItem, UIBarButtonItem } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
-	setContext<NavigationContext>("navigation", { push, pop, updateTitle, updateRightButtonItem, updateLeftButtonItem, getTopItem });
+	setContext<NavigationContext>("navigation", {
+		push,
+		pop,
+		updateTitle,
+		updateRightButtonItem,
+		updateLeftButtonItem,
+		getTopItem,
+	});
 
 	export let rootItem: NavigationItem;
 	let items: NavigationItem[] = [rootItem];
+	let topComponent: any;
 	function push(item: NavigationItem) {
 		items = items.concat(item);
 	}
 	function pop() {
-		if( items.length <= 1){
+		if (items.length <= 1) {
 			return;
 		}
 		const newAry = [...items];
@@ -34,8 +42,11 @@
 		newItem.leftButtonItem = item;
 		items[items.length - 1] = newItem;
 	}
-	export function getTopItem():NavigationItem{
+	export function getTopItem(): NavigationItem {
 		return items[items.length - 1];
+	}
+	export function getTopComponent() {
+		return topComponent;
 	}
 	$: topItem = items[items.length - 1];
 </script>
@@ -48,6 +59,7 @@
 	{/if}
 	<div class="items">
 		{#each items as item, index}
+			{@const top = index == items.length - 1}
 			<div
 				class="item"
 				use:swipe={{
@@ -55,11 +67,15 @@
 						pop();
 					},
 				}}
-				class:top={index == items.length - 1}
+				class:top
 				class:navBarHidden={item.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
-				<svelte:component this={item.component} {...item.props} />
+				{#if top}
+					<svelte:component this={item.component} {...item.props} bind:this={topComponent} />
+				{:else}
+					<svelte:component this={item.component} {...item.props} />
+				{/if}
 			</div>
 		{/each}
 	</div>
