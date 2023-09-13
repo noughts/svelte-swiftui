@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { getContext, setContext } from "svelte";
+	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import type { NavigationContext, NavigationItem, UIBarButtonItem } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
-    import { swipe } from "./internal/swipe.js";
-	setContext<NavigationContext>("navigation", { push, pop, updateTitle, updateRightButtonItem, updateLeftButtonItem });
+	import { swipe } from "./internal/swipe.js";
+	setContext<NavigationContext>("navigation", { push, pop, updateTitle, updateRightButtonItem, updateLeftButtonItem, getTopItem });
 
 	export let rootItem: NavigationItem;
 	let items: NavigationItem[] = [rootItem];
@@ -33,6 +33,9 @@
 		const newItem = items[items.length - 1];
 		newItem.leftButtonItem = item;
 		items[items.length - 1] = newItem;
+	}
+	export function getTopItem():NavigationItem{
+		return items[items.length - 1];
 	}
 	$: topItem = items[items.length - 1];
 </script>

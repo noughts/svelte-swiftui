@@ -64,6 +64,7 @@ export type NavigationContext = {
 	updateTitle: (title: string) => void;
 	updateRightButtonItem: (item: UIBarButtonItem) => void;
 	updateLeftButtonItem: (item: UIBarButtonItem) => void;
+	getTopItem: () => NavigationItem;
 }
 
 export type UIBarButtonItem = {
