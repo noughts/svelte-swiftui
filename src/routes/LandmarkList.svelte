@@ -1,10 +1,15 @@
 <script lang="ts">
 	import VStack from "$lib/VStack.svelte";
     import { getNavigationContext } from "$lib/index.js";
+    import { onMount } from "svelte";
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
 	const navContext = getNavigationContext();
+
+	onMount(()=>{
+		console.log("onMount")
+	})
 
 	const landmarks = [
 		{ name: "Turtle Rock" },
