@@ -3,6 +3,7 @@
 	import { fly } from "svelte/transition";
 	import type { NavigationContext, NavigationItem, UIBarButtonItem } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
+    import { swipe } from "./internal/swipe.js";
 	setContext<NavigationContext>("navigation", { push, pop, updateTitle, updateRightButtonItem, updateLeftButtonItem });
 
 	export let rootItem: NavigationItem;
@@ -11,6 +12,9 @@
 		items = items.concat(item);
 	}
 	function pop() {
+		if( items.length <= 1){
+			return;
+		}
 		const newAry = [...items];
 		newAry.pop();
 		items = newAry;
@@ -43,6 +47,11 @@
 		{#each items as item, index}
 			<div
 				class="item"
+				use:swipe={{
+					onSwipeRight() {
+						pop();
+					},
+				}}
 				class:top={index == items.length - 1}
 				class:navBarHidden={item.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
