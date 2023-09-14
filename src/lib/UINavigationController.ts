@@ -11,15 +11,11 @@ export class UINavigationController extends UIViewController {
 
 	constructor(rootViewController: UIViewController) {
 		super(NavigationView, {})
-		rootViewController._navigationController = this;
-		rootViewController._sceneController = this.sceneController;
 		rootViewController.presentingViewController = this;
 		this.viewControllers.set([rootViewController]);
 	}
 
 	push(viewController: UIViewController) {
-		viewController._navigationController = this;
-		viewController._sceneController = this.sceneController;
 		viewController.presentingViewController = this;
 		const current = get(this.viewControllers);
 		this.viewControllers.set(current.concat(viewController));

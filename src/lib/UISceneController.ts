@@ -1,6 +1,6 @@
 import { derived, get, writable } from "svelte/store";
-import Scene from "./Scene.svelte";
 import { UIViewController } from "./UIViewController.js";
+import SceneView from "./SceneView.svelte";
 
 export class UISceneController extends UIViewController {
 
@@ -10,7 +10,7 @@ export class UISceneController extends UIViewController {
 	})
 
 	constructor(rootViewController: UIViewController) {
-		super(Scene, {})
+		super(SceneView, {})
 		rootViewController.presentingViewController = this;
 		this.viewControllers.set([rootViewController]);
 	}

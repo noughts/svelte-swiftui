@@ -4,6 +4,19 @@
 	export let viewController:UIViewController;
 	// console.log(viewController)
 	viewController.navigationItem.title = "Hello!!"
+	viewController.navigationItem.rightBarButtonItem = {
+		title:"Close",
+		action:()=>{
+			viewController.dismiss();
+		}
+	}
+	viewController.navigationItem.leftBarButtonItem = {
+		title:"Change",
+		bold:true,
+		action:()=>{
+			console.log("Change")
+		}
+	}
 
 	function onDismissButtonTap(){
 		viewController.dismiss();

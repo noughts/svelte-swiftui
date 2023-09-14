@@ -1,11 +1,9 @@
 <script lang="ts">
-    import Scene from "$lib/Scene.svelte";
     import { UINavigationController } from "$lib/UINavigationController.js";
     import { UISceneController } from "$lib/UISceneController.js";
     import { UITabBarController } from "$lib/UITabBarController.js";
     import { UIViewController } from "$lib/UIViewController.js";
     import "../globals.css";
-    import DemoScreen from "./DemoScreen.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
 
