@@ -71,7 +71,7 @@
 				class:navBarHidden={item.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
-				<svelte:component this={item.component} {...item.props} bind:this={topComponent} />
+				<svelte:component this={item.component} {...item.props} item={item} bind:this={topComponent} />
 			</div>
 		{/each}
 	</div>

@@ -6,6 +6,8 @@
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
 	const navContext = getNavigationContext();
+	export let item:any;
+	console.log(item)
 
 	const landmarks = [
 		{ name: "Turtle Rock" },
