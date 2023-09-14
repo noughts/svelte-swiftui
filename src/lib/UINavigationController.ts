@@ -1,30 +1,33 @@
+import { get, writable } from "svelte/store";
 import NavigationView from "./internal/NavigationView.svelte";
 import { UIViewController } from "./UIViewController.js";
 
 export class UINavigationController extends UIViewController {
 
-	viewControllers: UIViewController[] = [];
+	readonly viewControllers = writable<UIViewController[]>([]);
 
 	constructor(rootViewController: UIViewController) {
 		super(NavigationView, { rootViewController })
 		rootViewController.navigationController = this;
-		this.viewControllers = [rootViewController];
+		this.viewControllers.set([rootViewController]);
 	}
 
 	get topViewController(): UIViewController {
-		return this.viewControllers[this.viewControllers.length - 1];
+		const vcs = get(this.viewControllers);
+		return vcs[vcs.length - 1];
 	}
 
 	push(viewController: UIViewController) {
 		console.log("push", viewController)
-		this.viewControllers = this.viewControllers.concat(viewController);
+		const current = get(this.viewControllers);
+		this.viewControllers.set(current.concat(viewController));
 	}
 	pop() {
-		if (this.viewControllers.length <= 1) {
+		if (get(this.viewControllers).length <= 1) {
 			return;
 		}
-		const newAry = [...this.viewControllers];
+		const newAry = [...get(this.viewControllers)];
 		newAry.pop();
-		this.viewControllers = newAry;
+		this.viewControllers.set(newAry);
 	}
 }

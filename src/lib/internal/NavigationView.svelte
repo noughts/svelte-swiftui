@@ -9,13 +9,14 @@
 	export let rootViewController: UIViewController;
 	const nc = viewController as UINavigationController;
 
-	$: console.log(nc.viewControllers)
+	const viewControllers = nc.viewControllers;
+	$: console.log($viewControllers)
 </script>
 
 <div class="root">
 	<div class="items">
-		{#each nc.viewControllers as viewController, index}
-			{@const top = index == nc.viewControllers.length - 1}
+		{#each $viewControllers as viewController, index}
+			{@const top = index == $viewControllers.length - 1}
 			<div
 				class="item"
 				use:swipe={{
@@ -34,7 +35,7 @@
 	{#if !nc.topViewController.hidesNavigationBarWhenPushed}
 		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
 			<UiNavigationBar
-				items={nc.viewControllers.map((x) => x.navigationItem)}
+				items={$viewControllers.map((x) => x.navigationItem)}
 				on:backButtonTap={viewController.navigationController?.pop}
 			/>
 		</div>
