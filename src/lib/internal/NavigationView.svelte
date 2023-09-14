@@ -8,6 +8,8 @@
 	export let viewController: UIViewController;
 	export let rootViewController: UIViewController;
 	const nc = viewController as UINavigationController;
+
+	$: console.log(nc.viewControllers)
 </script>
 
 <div class="root">
