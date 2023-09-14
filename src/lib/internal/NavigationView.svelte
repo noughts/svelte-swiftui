@@ -5,11 +5,11 @@
 	import { swipe } from "./swipe.js";
 	import type { UINavigationController } from "$lib/UINavigationController.js";
 
-	export let viewController: UIViewController;
+	export let viewController: UINavigationController;
 	export let rootViewController: UIViewController;
-	const nc = viewController as UINavigationController;
 
-	const viewControllers = nc.viewControllers;
+	const viewControllers = viewController.viewControllers;
+	const topViewController = viewController.topViewController;
 	$: console.log($viewControllers)
 </script>
 
@@ -32,7 +32,7 @@
 			</div>
 		{/each}
 	</div>
-	{#if !nc.topViewController.hidesNavigationBarWhenPushed}
+	{#if !$topViewController.hidesNavigationBarWhenPushed}
 		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
 			<UiNavigationBar
 				items={$viewControllers.map((x) => x.navigationItem)}
