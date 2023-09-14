@@ -2,8 +2,10 @@
     import type { UIViewController } from "$lib/UIViewController.js";
 
 	export let viewController:UIViewController;
+	
 
 	function onPresentButtonTap() {
+		console.log(viewController)
 		/*
 		sceneContext.push({
 			component: NavigationView,

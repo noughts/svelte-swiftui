@@ -1,6 +1,7 @@
 import type { SvelteComponent } from "svelte";
 import type { UINavigationItem, UITabBarItem } from "./index.js";
 import type { UINavigationController } from "./UINavigationController.js";
+import type { UISceneController } from "./UISceneController.js";
 
 export class UIViewController<Props extends DefaultProps = any>{
 
@@ -8,7 +9,7 @@ export class UIViewController<Props extends DefaultProps = any>{
 	navigationItem: UINavigationItem = { title: "placeholder" };
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: "" };
 	navigationController?:UINavigationController;
-	
+	sceneController?:UISceneController;
 
 
 	constructor(readonly component: SvelteUIComponent<Props>, readonly props: Omit<Props, "viewController">, readonly options?: {
