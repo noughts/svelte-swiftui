@@ -9,7 +9,7 @@
 	export function getRnd() {
 		return rnd;
 	}
-
+	viewController.navigationItem.title = landmark.name;
 	viewController.navigationItem.rightBarButtonItem = {
 		title: "Debug",
 		bold: true,
