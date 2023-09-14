@@ -6,7 +6,7 @@
 	export let viewController: UIViewController;
 
 	function onPresentButtonTap() {
-		viewController.sceneController?.present(new UINavigationController(new UIViewController(DemoScreen, {})));
+		viewController.present(new UINavigationController(new UIViewController(DemoScreen, {})));
 	}
 </script>
 

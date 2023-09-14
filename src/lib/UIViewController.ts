@@ -35,21 +35,17 @@ export class UIViewController<Props extends DefaultProps = any>{
 			parent = parent.presentingViewController;
 		}
 	}
-	get sceneController(): UISceneController | null {
-		let parent = this.presentingViewController;
+	get sceneController(): any {
+		let parent: UIViewController | undefined = this;
 		while (true) {
 			if (!parent) return null;
-			if (parent.constructor.name == "UISceneController") {
-				console.log(parent as UISceneController)
-				return parent as UISceneController;
-			}
+			if (parent.constructor.name == "UISceneController") return parent as UISceneController;
 			parent = parent.presentingViewController;
 		}
 	}
 
 	present(viewController: UIViewController) {
 		const sc = this.sceneController;
-		console.log(sc)
 		if (!sc) {
 			throw "UISceneControllerが見つかりません";
 		}
