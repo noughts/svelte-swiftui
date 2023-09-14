@@ -1,16 +1,13 @@
 <script lang="ts">
+	import type { UINavigationController } from "$lib/UINavigationController.js";
 	import { fly } from "svelte/transition";
-	import type { UIViewController } from "../UIViewController.js";
 	import UiNavigationBar from "./UINavigationBar.svelte";
 	import { swipe } from "./swipe.js";
-	import type { UINavigationController } from "$lib/UINavigationController.js";
 
 	export let viewController: UINavigationController;
-	export let rootViewController: UIViewController;
 
 	const viewControllers = viewController.viewControllers;
 	const topViewController = viewController.topViewController;
-	$: console.log($viewControllers)
 </script>
 
 <div class="root">

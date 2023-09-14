@@ -1,26 +1,26 @@
 <script lang="ts">
-    import { getNavigationContext } from "$lib/index.js";
-    import type { Landmark } from "./Landmark.js";
-    import MapView from "./MapView.svelte";
+	import { UIViewController } from "$lib/UIViewController.js";
+	import type { Landmark } from "./Landmark.js";
+	import MapView from "./MapView.svelte";
 
+	export let viewController: UIViewController;
 	export let landmark: Landmark;
-	export let rnd = Math.random()
-	export function getRnd(){
+	export let rnd = Math.random();
+	export function getRnd() {
 		return rnd;
 	}
 
-	const navContext = getNavigationContext();
-	navContext.updateRightButtonItem({
-		title: "Done",
+	viewController.navigationItem.rightBarButtonItem = {
+		title: "Debug",
 		bold: true,
 		action: () => {
 			console.log(landmark);
 		},
-	});
-
+	};
 
 	function showMap() {
-		navContext.push({ component: MapView, props: { landmark }, title: "Map" });
+		console.log(viewController.navigationController)
+		viewController.navigationController?.push(new UIViewController(MapView, { landmark }));
 	}
 </script>
 

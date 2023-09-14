@@ -16,7 +16,6 @@ export class UINavigationController extends UIViewController {
 	}
 
 	push(viewController: UIViewController) {
-		console.log("push", viewController)
 		const current = get(this.viewControllers);
 		this.viewControllers.set(current.concat(viewController));
 	}
