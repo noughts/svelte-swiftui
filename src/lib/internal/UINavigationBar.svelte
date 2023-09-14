@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { getSceneContext, type NavigationItem } from "$lib/index.js";
+	import { getSceneContext, type Controller, type NavigationItem } from "$lib/index.js";
 	import { fly } from "svelte/transition";
 	import NavigationBarItemView from "./NavigationBarItemView.svelte";
-	export let items: NavigationItem[];
+	export let items: Controller[];
 	const { dark } = getSceneContext();
 </script>
 
 <div class="UINavigationBar" class:dark>
 	{#each items as item, index}
 		<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "50%" }}>
-			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
+			<NavigationBarItemView item={item.navigationItem} showBackButton={index >= 1} on:backButtonTap />
 		</div>
 	{/each}
 </div>

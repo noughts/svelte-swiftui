@@ -40,8 +40,9 @@ export type DefaultProps = Record<string, any>;
 export type Controller<Props extends DefaultProps = any> = {
 	component: SvelteUIComponent<Props>
 	props: Props;
-	navigationItem?: UINavigationItem;
+	navigationItem: UINavigationItem;
 	tabBarItem: UITabBarItem;
+	hidesNavigationBarWhenPushed?: boolean;
 }
 
 export type UITabBarItem = {
@@ -51,8 +52,9 @@ export type UITabBarItem = {
 
 export type UINavigationItem = {
 	title: string;
-	leftBarButtonItem: UIBarButtonItem;
-	rightBarButtonItem: UIBarButtonItem;
+	leftBarButtonItem?: UIBarButtonItem;
+	rightBarButtonItem?: UIBarButtonItem;
+
 }
 
 export type SceneItem<Props extends DefaultProps = any> = {
@@ -76,12 +78,9 @@ export type SceneContext = {
 }
 
 export type NavigationContext = {
-	push: <Props extends DefaultProps>(item: NavigationItem<Props>) => void
+	push: <Props extends DefaultProps>(item: Controller<Props>) => void
 	pop: () => void;
-	updateTitle: (title: string) => void;
-	updateRightButtonItem: (item: UIBarButtonItem) => void;
-	updateLeftButtonItem: (item: UIBarButtonItem) => void;
-	getTopItem: () => NavigationItem;
+	getTopItem: () => Controller;
 }
 
 export type UIBarButtonItem = {

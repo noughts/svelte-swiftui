@@ -1,4 +1,5 @@
 <script lang="ts">
+    import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
     import { createSceneItem, createTabBarItem } from "$lib/index.js";
@@ -13,11 +14,37 @@
         props: {
             items: [
                 {
-                    component: DemoScreen,
-                    props: {},
+                    component: NavigationView,
+                    props: {
+                        rootItem: {
+                            component: DemoScreen,
+                            props: {},
+                            tabBarItem: {
+                                title: "ホーム",
+                                icon: "home",
+                            },
+                            navigationItem: {
+                                title: "ホーム",
+                            },
+                        },
+                    },
                     tabBarItem: {
                         title: "ホーム",
                         icon: "home",
+                    },
+                    navigationItem: {
+                        title: "ホーム",
+                    },
+                },
+                {
+                    component: DemoScreen,
+                    props: {},
+                    tabBarItem: {
+                        title: "ホーム2",
+                        icon: "home",
+                    },
+                    navigationItem: {
+                        title: "ホーム2",
                     },
                 },
                 // createTabBarItem({

@@ -6,6 +6,7 @@
 	const sceneContext = getSceneContext();
 
 	function onPresentButtonTap() {
+		/*
 		sceneContext.push({
 			component: NavigationView,
 			props: {
@@ -30,6 +31,7 @@
 				}),
 			},
 		});
+		*/
 	}
 </script>
 
