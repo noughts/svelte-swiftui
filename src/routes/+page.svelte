@@ -5,8 +5,9 @@
     import { UIViewController } from "$lib/UIViewController.js";
     import "../globals.css";
     import DemoScreen from "./DemoScreen.svelte";
-   
-    const demo_vc = new UIViewController(DemoScreen, { title: "hoge" });
+    import LandmarkList from "./LandmarkList.svelte";
+
+    const demo_vc = new UIViewController(LandmarkList, {});
     const nc = new UINavigationController(demo_vc);
     const tbc = new UITabBarController([nc]);
 </script>

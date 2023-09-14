@@ -1,35 +1,13 @@
 <script lang="ts">
-	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import type { UIViewController } from "../UIViewController.js";
-	import type { NavigationContext } from "../index.js";
 	import UiNavigationBar from "./UINavigationBar.svelte";
 	import { swipe } from "./swipe.js";
-	setContext<NavigationContext>("navigation", {
-		push,
-		pop,
-	});
 
+	export let viewController:UIViewController;
 	export let rootViewController: UIViewController;
 	let viewControllers: UIViewController[] = [rootViewController];
 	let topComponent: any;
-	function push(item: UIViewController) {
-		viewControllers = viewControllers.concat(item);
-	}
-	function pop() {
-		if (viewControllers.length <= 1) {
-			return;
-		}
-		const newAry = [...viewControllers];
-		newAry.pop();
-		viewControllers = newAry;
-	}
-	export function getTopItem(): UIViewController {
-		return viewControllers[viewControllers.length - 1];
-	}
-	export function getTopComponent() {
-		return topComponent;
-	}
 	$: topItem = viewControllers[viewControllers.length - 1];
 </script>
 
@@ -41,7 +19,7 @@
 				class="item"
 				use:swipe={{
 					onSwipeRight() {
-						pop();
+						viewController.navigationController?.pop();
 					},
 				}}
 				class:top
@@ -59,7 +37,7 @@
 	</div>
 	{#if !topItem.hidesNavigationBarWhenPushed}
 		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar items={viewControllers} on:backButtonTap={pop} />
+			<UiNavigationBar items={viewControllers} on:backButtonTap={viewController.navigationController?.pop} />
 		</div>
 	{/if}
 </div>

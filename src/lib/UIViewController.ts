@@ -1,16 +1,18 @@
 import type { SvelteComponent } from "svelte";
 import type { UINavigationItem, UITabBarItem } from "./index.js";
+import type { UINavigationController } from "./UINavigationController.js";
 
 export class UIViewController<Props extends DefaultProps = any>{
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: "" };
+	navigationController?:UINavigationController;
 
 
 	constructor(readonly component: SvelteUIComponent<Props>, readonly props: Omit<Props, "viewController">, readonly options?: {
-		navigationItem: UINavigationItem;
-		tabBarItem: UITabBarItem;
+		navigationItem?: UINavigationItem;
+		tabBarItem?: UITabBarItem;
 		hidesNavigationBarWhenPushed?: boolean;
 	}) {
 		if (options?.hidesNavigationBarWhenPushed) {

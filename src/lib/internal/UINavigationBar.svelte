@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { getSceneContext, type Controller, type NavigationItem } from "$lib/index.js";
 	import { fly } from "svelte/transition";
 	import NavigationBarItemView from "./NavigationBarItemView.svelte";
 	export let items: Controller[];
-	const { dark } = getSceneContext();
+	const dark = false;
 </script>
 
 <div class="UINavigationBar" class:dark>

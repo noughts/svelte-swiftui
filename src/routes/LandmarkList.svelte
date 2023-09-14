@@ -1,13 +1,11 @@
 <script lang="ts">
+	import { UIViewController } from "$lib/UIViewController.js";
 	import VStack from "$lib/VStack.svelte";
-    import { getNavigationContext } from "$lib/index.js";
-    import { onMount } from "svelte";
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
-	const navContext = getNavigationContext();
-	export let item:any;
-	console.log(item)
+	export let viewController: UIViewController;
+	console.log(viewController)
 
 	const landmarks = [
 		{ name: "Turtle Rock" },
@@ -29,11 +27,7 @@
 	];
 
 	function onCellTap(landmark: Landmark) {
-		navContext.push({
-			component: LandmarkDetail,
-			props: { landmark },
-			title: landmark.name,
-		});
+		viewController.navigationController?.push(new UIViewController(LandmarkDetail, { landmark }));
 	}
 
 	let count = 0;
