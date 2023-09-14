@@ -6,7 +6,6 @@ export { default as HStack } from "./HStack.svelte"
 export { default as MaterialSymbol } from "./MaterialSymbol.svelte"
 export { default as Scene } from "./Scene.svelte"
 export { default as Spacer } from "./Spacer.svelte"
-export { default as TabView } from "./internal/TabView.svelte"
 export { default as Text } from "./Text.svelte"
 export { default as VStack } from "./VStack.svelte"
 
@@ -23,16 +22,6 @@ export function createSceneItem<Props extends DefaultProps>(data: SceneItem<Prop
 }
 export function createTabBarItem<Props extends DefaultProps>(data: TabBarItem<Props>): TabBarItem<Props> {
 	return { component: data.component, props: data.props, title: data.title, icon: data.icon };
-}
-export function createNaivationItem<Props extends DefaultProps>(data: NavigationItem<Props>): NavigationItem<Props> {
-	return {
-		component: data.component,
-		props: data.props,
-		title: data.title,
-		hidesNavigationBarWhenPushed: data.hidesNavigationBarWhenPushed,
-		rightButtonItem: data.rightButtonItem,
-		leftButtonItem: data.leftButtonItem,
-	};
 }
 
 type DefaultProps = Record<string, any>;
@@ -82,15 +71,6 @@ export type UIBarButtonItem = {
 }
 
 
-
-export type NavigationItem<Props extends DefaultProps = any> = {
-	title: string;
-	component: SvelteUIComponent<Props>
-	props: Props;
-	hidesNavigationBarWhenPushed?: boolean;
-	rightButtonItem?: UIBarButtonItem;
-	leftButtonItem?: UIBarButtonItem;
-}
 
 type SvelteUIComponent<
 	Props extends Record<string, any> = any,

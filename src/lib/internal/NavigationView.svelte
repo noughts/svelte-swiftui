@@ -3,18 +3,17 @@
 	import type { UIViewController } from "../UIViewController.js";
 	import UiNavigationBar from "./UINavigationBar.svelte";
 	import { swipe } from "./swipe.js";
+	import type { UINavigationController } from "$lib/UINavigationController.js";
 
-	export let viewController:UIViewController;
+	export let viewController: UIViewController;
 	export let rootViewController: UIViewController;
-	let viewControllers: UIViewController[] = [rootViewController];
-	let topComponent: any;
-	$: topItem = viewControllers[viewControllers.length - 1];
+	const nc = viewController as UINavigationController;
 </script>
 
 <div class="root">
 	<div class="items">
-		{#each viewControllers as viewController, index}
-			{@const top = index == viewControllers.length - 1}
+		{#each nc.viewControllers as viewController, index}
+			{@const top = index == nc.viewControllers.length - 1}
 			<div
 				class="item"
 				use:swipe={{
@@ -26,18 +25,16 @@
 				class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
-				<svelte:component
-					this={viewController.component}
-					{...viewController.props}
-					{viewController}
-					bind:this={topComponent}
-				/>
+				<svelte:component this={viewController.component} {...viewController.props} {viewController} />
 			</div>
 		{/each}
 	</div>
-	{#if !topItem.hidesNavigationBarWhenPushed}
+	{#if !nc.topViewController.hidesNavigationBarWhenPushed}
 		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar items={viewControllers} on:backButtonTap={viewController.navigationController?.pop} />
+			<UiNavigationBar
+				items={nc.viewControllers.map((x) => x.navigationItem)}
+				on:backButtonTap={viewController.navigationController?.pop}
+			/>
 		</div>
 	{/if}
 </div>
