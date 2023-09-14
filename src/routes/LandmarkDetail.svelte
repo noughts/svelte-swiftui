@@ -19,7 +19,6 @@
 	};
 
 	function showMap() {
-		console.log(viewController.navigationController)
 		viewController.navigationController?.push(new UIViewController(MapView, { landmark }));
 	}
 </script>

@@ -8,33 +8,32 @@
 
 	const viewControllers = viewController.viewControllers;
 	const topViewController = viewController.topViewController;
+
+	function back() {
+		viewController.pop();
+	}
 </script>
 
 <div class="root">
 	<div class="items">
-		{#each $viewControllers as viewController, index}
+		{#each $viewControllers as vc, index}
 			{@const top = index == $viewControllers.length - 1}
 			<div
 				class="item"
 				use:swipe={{
-					onSwipeRight() {
-						viewController.navigationController?.pop();
-					},
+					onSwipeRight: back,
 				}}
 				class:top
 				class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
-				<svelte:component this={viewController.component} {...viewController.props} {viewController} />
+				<svelte:component this={vc.component} {...vc.props} viewController={vc} />
 			</div>
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
 		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar
-				items={$viewControllers.map((x) => x.navigationItem)}
-				on:backButtonTap={viewController.navigationController?.pop}
-			/>
+			<UiNavigationBar items={$viewControllers.map((x) => x.navigationItem)} on:backButtonTap={back} />
 		</div>
 	{/if}
 </div>
