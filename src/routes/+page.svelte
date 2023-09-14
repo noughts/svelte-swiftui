@@ -2,6 +2,7 @@
     import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
+    import { UINavigationController } from "$lib/UINavigationController.js";
     import { UIViewController } from "$lib/UIViewController.js";
     import { createSceneItem } from "$lib/index.js";
     import "../globals.css";
@@ -54,7 +55,7 @@
     });
    
     const demo_vc = new UIViewController(DemoScreen, { title: "hoge" });
-    const nc = new UIViewController(NavigationView, {rootItem:demo_vc});
+    const nc = new UINavigationController(demo_vc);
 </script>
 
 <div class="root">

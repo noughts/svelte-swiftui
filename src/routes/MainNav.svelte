@@ -15,7 +15,7 @@
 
 <NavigationView
 	bind:this={nav}
-	rootItem={createNaivationItem({
+	rootViewController={createNaivationItem({
 		component: LandmarkList,
 		props: {},
 		title: "List",

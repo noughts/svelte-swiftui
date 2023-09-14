@@ -2,14 +2,14 @@ import type { Property } from "csstype"
 import { getContext, type SvelteComponent } from "svelte"
 import type { UIViewController } from "./UIViewController.js"
 
-export { default as Scene } from "./Scene.svelte"
-export { default as TabView } from "./TabView.svelte"
+export { default as HStack } from "./HStack.svelte"
 export { default as MaterialSymbol } from "./MaterialSymbol.svelte"
 export { default as NavigationView } from "./NavigationView.svelte"
-export { default as VStack } from "./VStack.svelte"
-export { default as HStack } from "./HStack.svelte"
+export { default as Scene } from "./Scene.svelte"
 export { default as Spacer } from "./Spacer.svelte"
+export { default as TabView } from "./TabView.svelte"
 export { default as Text } from "./Text.svelte"
+export { default as VStack } from "./VStack.svelte"
 
 export function getSceneContext() {
 	return getContext<SceneContext>("scene");
@@ -37,14 +37,6 @@ export function createNaivationItem<Props extends DefaultProps>(data: Navigation
 }
 
 type DefaultProps = Record<string, any>;
-
-export type Controller<Props extends DefaultProps = any> = {
-	component: SvelteUIComponent<Props>
-	props: Props;
-	navigationItem: UINavigationItem;
-	tabBarItem: UITabBarItem;
-	hidesNavigationBarWhenPushed?: boolean;
-}
 
 export type UITabBarItem = {
 	title: string
@@ -81,7 +73,6 @@ export type SceneContext = {
 export type NavigationContext = {
 	push: <Props extends DefaultProps>(item: UIViewController<Props>) => void
 	pop: () => void;
-	getTopItem: () => Controller;
 }
 
 export type UIBarButtonItem = {

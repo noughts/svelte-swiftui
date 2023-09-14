@@ -1,18 +1,17 @@
 <script lang="ts">
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
-	import type { Controller, NavigationContext } from "./index.js";
+	import type { UIViewController } from "./UIViewController.js";
+	import type { NavigationContext } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
-	import type { UIViewController } from "./UIViewController.js";
 	setContext<NavigationContext>("navigation", {
 		push,
 		pop,
-		getTopItem,
 	});
 
-	export let rootItem: UIViewController;
-	let viewControllers: UIViewController[] = [rootItem];
+	export let rootViewController: UIViewController;
+	let viewControllers: UIViewController[] = [rootViewController];
 	let topComponent: any;
 	function push(item: UIViewController) {
 		viewControllers = viewControllers.concat(item);
@@ -35,7 +34,6 @@
 </script>
 
 <div class="root">
-
 	<div class="items">
 		{#each viewControllers as viewController, index}
 			{@const top = index == viewControllers.length - 1}
@@ -60,10 +58,10 @@
 		{/each}
 	</div>
 	{#if !topItem.hidesNavigationBarWhenPushed}
-	<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-		<UiNavigationBar items={viewControllers} on:backButtonTap={pop} />
-	</div>
-{/if}
+		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
+			<UiNavigationBar items={viewControllers} on:backButtonTap={pop} />
+		</div>
+	{/if}
 </div>
 
 <style>

@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { UIViewController } from "$lib/UIViewController.js";
-    import { getSceneContext, type Controller } from "$lib/index.js";
+    import { getSceneContext } from "$lib/index.js";
 
 	export let title: string = "dummy";
 	export let viewController:UIViewController;
