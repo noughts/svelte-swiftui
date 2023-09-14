@@ -4,7 +4,7 @@
 
 	export let title: string = "dummy";
 	export let viewController:UIViewController;
-	console.log(viewController)
+	// console.log(viewController)
 	viewController.navigationItem.title = "Hello!!"
 	const context = getSceneContext();
 

@@ -1,4 +1,4 @@
-import type { ComponentType, SvelteComponent } from "svelte";
+import type { SvelteComponent } from "svelte";
 import type { UINavigationItem, UITabBarItem } from "./index.js";
 
 export class UIViewController<Props extends DefaultProps = any>{
