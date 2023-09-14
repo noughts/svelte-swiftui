@@ -4,10 +4,9 @@ import type { UIViewController } from "./UIViewController.js"
 
 export { default as HStack } from "./HStack.svelte"
 export { default as MaterialSymbol } from "./MaterialSymbol.svelte"
-export { default as NavigationView } from "./NavigationView.svelte"
 export { default as Scene } from "./Scene.svelte"
 export { default as Spacer } from "./Spacer.svelte"
-export { default as TabView } from "./TabView.svelte"
+export { default as TabView } from "./internal/TabView.svelte"
 export { default as Text } from "./Text.svelte"
 export { default as VStack } from "./VStack.svelte"
 

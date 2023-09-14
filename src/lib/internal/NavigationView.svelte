@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
-	import type { UIViewController } from "./UIViewController.js";
-	import type { NavigationContext } from "./index.js";
-	import UiNavigationBar from "./internal/UINavigationBar.svelte";
-	import { swipe } from "./internal/swipe.js";
+	import type { UIViewController } from "../UIViewController.js";
+	import type { NavigationContext } from "../index.js";
+	import UiNavigationBar from "./UINavigationBar.svelte";
+	import { swipe } from "./swipe.js";
 	setContext<NavigationContext>("navigation", {
 		push,
 		pop,

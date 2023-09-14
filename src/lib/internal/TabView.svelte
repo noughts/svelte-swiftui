@@ -1,20 +1,21 @@
 <script lang="ts">
-	import type { Controller, TabBarItem } from "./index.js";
-	import UiTabBar from "./internal/UITabBar.svelte";
+    import type { UIViewController } from "../UIViewController.js";
+    import UiTabBar from "./UITabBar.svelte";
+
 	export let selection = 0;
-	export let items: Controller[];
+	export let viewControllers: UIViewController[];
 </script>
 
 <div class="root">
 	<div class="content">
-		{#each items as item, index (item.tabBarItem?.title)}
+		{#each viewControllers as item, index (item.tabBarItem?.title)}
 			<div class="item" class:selected={index === selection}>
 				<svelte:component this={item.component} {...item.props} />
 			</div>
 		{/each}
 	</div>
 	<UiTabBar
-		items={items.map((x) => {
+		items={viewControllers.map((x) => {
 			return x.tabBarItem;
 		})}
 		bind:selection
