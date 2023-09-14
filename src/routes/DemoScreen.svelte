@@ -1,7 +1,10 @@
 <script lang="ts">
-    import { getSceneContext } from "$lib/index.js";
+    import { getSceneContext, type Controller } from "$lib/index.js";
 
-	export let title: string;
+	export let title: string = "dummy";
+	export let controller:Controller;
+	console.log(controller)
+	controller.navigationItem.title = "Hello!!"
 	const context = getSceneContext();
 
 	function onDismissButtonTap(){

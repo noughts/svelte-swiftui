@@ -2,12 +2,9 @@
     import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
-    import { createSceneItem, createTabBarItem } from "$lib/index.js";
+    import { createSceneItem } from "$lib/index.js";
     import "../globals.css";
     import DemoScreen from "./DemoScreen.svelte";
-    import LandmarkList from "./LandmarkList.svelte";
-    import MainNav from "./MainNav.svelte";
-    import Page1 from "./Page1.svelte";
 
     const sceneRootItem = createSceneItem({
         component: TabView,
@@ -34,17 +31,6 @@
                     },
                     navigationItem: {
                         title: "ホーム",
-                    },
-                },
-                {
-                    component: DemoScreen,
-                    props: {},
-                    tabBarItem: {
-                        title: "ホーム2",
-                        icon: "home",
-                    },
-                    navigationItem: {
-                        title: "ホーム2",
                     },
                 },
                 // createTabBarItem({

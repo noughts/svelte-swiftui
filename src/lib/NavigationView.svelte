@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
-	import type { Controller, NavigationContext, NavigationItem, UIBarButtonItem } from "./index.js";
+	import type { Controller, NavigationContext } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
 	setContext<NavigationContext>("navigation", {
@@ -11,37 +11,37 @@
 	});
 
 	export let rootItem: Controller;
-	let items: Controller[] = [rootItem];
+	let controllers: Controller[] = [rootItem];
 	let topComponent: any;
 	function push(item: Controller) {
-		items = items.concat(item);
+		controllers = controllers.concat(item);
 	}
 	function pop() {
-		if (items.length <= 1) {
+		if (controllers.length <= 1) {
 			return;
 		}
-		const newAry = [...items];
+		const newAry = [...controllers];
 		newAry.pop();
-		items = newAry;
+		controllers = newAry;
 	}
 	export function getTopItem(): Controller {
-		return items[items.length - 1];
+		return controllers[controllers.length - 1];
 	}
 	export function getTopComponent() {
 		return topComponent;
 	}
-	$: topItem = items[items.length - 1];
+	$: topItem = controllers[controllers.length - 1];
 </script>
 
 <div class="root">
 	{#if !topItem.hidesNavigationBarWhenPushed}
 		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar {items} on:backButtonTap={pop} />
+			<UiNavigationBar items={controllers} on:backButtonTap={pop} />
 		</div>
 	{/if}
 	<div class="items">
-		{#each items as item, index}
-			{@const top = index == items.length - 1}
+		{#each controllers as controller, index}
+			{@const top = index == controllers.length - 1}
 			<div
 				class="item"
 				use:swipe={{
@@ -50,10 +50,15 @@
 					},
 				}}
 				class:top
-				class:navBarHidden={item.hidesNavigationBarWhenPushed}
+				class:navBarHidden={controller.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
-				<svelte:component this={item.component} {...item.props} item={item} bind:this={topComponent} />
+				<svelte:component
+					this={controller.component}
+					{...controller.props}
+					{controller}
+					bind:this={topComponent}
+				/>
 			</div>
 		{/each}
 	</div>
