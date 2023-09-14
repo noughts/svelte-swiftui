@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext, setContext } from "svelte";
+	import { getContext, onMount, setContext } from "svelte";
 	import { fly } from "svelte/transition";
 	import type { SceneContext, SceneItem } from "./index.js";
 	import "./svelte-swiftui.css";
@@ -9,6 +9,7 @@
 	export let rootItem: SceneItem;
 
 	setContext<SceneContext>("scene", { push, pop, dark: theme == "dark", tintColor });
+
 
 	let items: SceneItem[] = [rootItem];
 	function push(item: SceneItem) {
@@ -32,7 +33,7 @@
 	/>
 </svelte:head>
 
-<div class="SvelteScene">
+<div class="SvelteScene" >
 	{#each items as item, index}
 		<div class="item" class:top={index == items.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
 			<svelte:component this={item.component} {...item.props} />

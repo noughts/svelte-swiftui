@@ -21,7 +21,7 @@
                 createTabBarItem({
                     title: "クーポン",
                     icon: "confirmation_number",
-                    component: LandmarkList,
+                    component: Page1,
                     props: {},
                 }),
                 createTabBarItem({ title: "検索", icon: "search", component: Page1, props: {} }),

@@ -7,10 +7,6 @@
 	import LandmarkRow from "./LandmarkRow.svelte";
 	const navContext = getNavigationContext();
 
-	onMount(()=>{
-		console.log("onMount")
-	})
-
 	const landmarks = [
 		{ name: "Turtle Rock" },
 		{ name: "Silver Salmon Creek" },
