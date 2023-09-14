@@ -10,7 +10,7 @@ export class UINavigationController extends UIViewController {
 	})
 
 	constructor(rootViewController: UIViewController) {
-		super(NavigationView, { rootViewController })
+		super(NavigationView, {})
 		rootViewController.navigationController = this;
 		this.viewControllers.set([rootViewController]);
 	}
