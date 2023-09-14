@@ -40,19 +40,19 @@ export type DefaultProps = Record<string, any>;
 export type Controller<Props extends DefaultProps = any> = {
 	component: SvelteUIComponent<Props>
 	props: Props;
-	navigationItem:UINavigationItem;
-	tabBarItem:UITabBarItem;
+	navigationItem?: UINavigationItem;
+	tabBarItem: UITabBarItem;
 }
 
-type UITabBarItem = {
+export type UITabBarItem = {
 	title: string
 	icon: string
 }
 
-type UINavigationItem = {
-	title:string;
-	leftBarButtonItem:UIBarButtonItem;
-	rightBarButtonItem:UIBarButtonItem;
+export type UINavigationItem = {
+	title: string;
+	leftBarButtonItem: UIBarButtonItem;
+	rightBarButtonItem: UIBarButtonItem;
 }
 
 export type SceneItem<Props extends DefaultProps = any> = {

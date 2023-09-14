@@ -1,19 +1,24 @@
 <script lang="ts">
-	import type { TabBarItem } from "./index.js";
-    import UiTabBar from "./internal/UITabBar.svelte";
+	import type { Controller, TabBarItem } from "./index.js";
+	import UiTabBar from "./internal/UITabBar.svelte";
 	export let selection = 0;
-	export let items: TabBarItem[];
+	export let items: Controller[];
 </script>
 
 <div class="root">
 	<div class="content">
-		{#each items as item, index (item.title)}
+		{#each items as item, index (item.tabBarItem?.title)}
 			<div class="item" class:selected={index === selection}>
 				<svelte:component this={item.component} {...item.props} />
 			</div>
 		{/each}
 	</div>
-	<UiTabBar {items} bind:selection />
+	<UiTabBar
+		items={items.map((x) => {
+			return x.tabBarItem;
+		})}
+		bind:selection
+	/>
 </div>
 
 <style>
@@ -34,7 +39,7 @@
 		opacity: 0;
 		pointer-events: none;
 	}
-	.selected{
+	.selected {
 		opacity: 1;
 		pointer-events: auto;
 	}

@@ -3,6 +3,7 @@
     import TabView from "$lib/TabView.svelte";
     import { createSceneItem, createTabBarItem } from "$lib/index.js";
     import "../globals.css";
+    import DemoScreen from "./DemoScreen.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import MainNav from "./MainNav.svelte";
     import Page1 from "./Page1.svelte";
@@ -11,21 +12,29 @@
         component: TabView,
         props: {
             items: [
-                createTabBarItem({
-                    component: MainNav,
+                {
+                    component: DemoScreen,
                     props: {},
-                    title: "ホーム",
-                    icon: "home",
-                }),
-                createTabBarItem({ title: "天気", icon: "partly_cloudy_day", component: Page1, props: {} }),
-                createTabBarItem({
-                    title: "クーポン",
-                    icon: "confirmation_number",
-                    component: Page1,
-                    props: {},
-                }),
-                createTabBarItem({ title: "検索", icon: "search", component: Page1, props: {} }),
-                createTabBarItem({ title: "プロフィール", icon: "account_circle", component: Page1, props: {} }),
+                    tabBarItem: {
+                        title: "ホーム",
+                        icon: "home",
+                    },
+                },
+                // createTabBarItem({
+                //     component: MainNav,
+                //     props: {},
+                //     title: "ホーム",
+                //     icon: "home",
+                // }),
+                // createTabBarItem({ title: "天気", icon: "partly_cloudy_day", component: Page1, props: {} }),
+                // createTabBarItem({
+                //     title: "クーポン",
+                //     icon: "confirmation_number",
+                //     component: Page1,
+                //     props: {},
+                // }),
+                // createTabBarItem({ title: "検索", icon: "search", component: Page1, props: {} }),
+                // createTabBarItem({ title: "プロフィール", icon: "account_circle", component: Page1, props: {} }),
             ],
         },
     });
