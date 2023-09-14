@@ -1,5 +1,6 @@
 import type { Property } from "csstype"
 import { getContext, type SvelteComponent } from "svelte"
+import type { UIViewController } from "./UIViewController.js"
 
 export { default as Scene } from "./Scene.svelte"
 export { default as TabView } from "./TabView.svelte"
@@ -35,7 +36,7 @@ export function createNaivationItem<Props extends DefaultProps>(data: Navigation
 	};
 }
 
-export type DefaultProps = Record<string, any>;
+type DefaultProps = Record<string, any>;
 
 export type Controller<Props extends DefaultProps = any> = {
 	component: SvelteUIComponent<Props>
@@ -73,7 +74,7 @@ export type TabBarItem<Props extends DefaultProps = any> = {
 export type SceneContext = {
 	dark: boolean;
 	tintColor: Property.Color;
-	push: <Props extends DefaultProps>(item: SceneItem<Props>) => void;
+	push: <Props extends DefaultProps>(item: UIViewController<Props>) => void;
 	pop: () => void;
 }
 
@@ -101,7 +102,7 @@ export type NavigationItem<Props extends DefaultProps = any> = {
 	leftButtonItem?: UIBarButtonItem;
 }
 
-export type SvelteUIComponent<
+type SvelteUIComponent<
 	Props extends Record<string, any> = any,
 	Events extends Record<string, any> = any,
 	Slots extends Record<string, any> = any

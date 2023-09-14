@@ -2,6 +2,7 @@
     import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
+    import { UIViewController } from "$lib/UIViewController.js";
     import { createSceneItem } from "$lib/index.js";
     import "../globals.css";
     import DemoScreen from "./DemoScreen.svelte";
@@ -51,10 +52,12 @@
             ],
         },
     });
+
+    const root = new UIViewController(DemoScreen, { title: "hoge" });
 </script>
 
 <div class="root">
-    <Scene tintColor="#ff00cc" theme="light" rootItem={sceneRootItem} />
+    <Scene tintColor="#ff00cc" theme="light" rootItem={root} />
 </div>
 
 <style>

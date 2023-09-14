@@ -1,18 +1,19 @@
 <script lang="ts">
-	import { getContext, onMount, setContext } from "svelte";
+	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
-	import type { SceneContext, SceneItem } from "./index.js";
+	import type { UIViewController } from "./UIViewController.js";
+	import type { SceneContext } from "./index.js";
 	import "./svelte-swiftui.css";
 
 	export let tintColor = "blue";
 	export let theme: "light" | "dark" | "system" = "system";
-	export let rootItem: SceneItem;
+	export let rootItem: UIViewController;
 
 	setContext<SceneContext>("scene", { push, pop, dark: theme == "dark", tintColor });
 
 
-	let items: SceneItem[] = [rootItem];
-	function push(item: SceneItem) {
+	let items: UIViewController[] = [rootItem];
+	function push(item: UIViewController) {
 		items = items.concat(item);
 	}
 	function pop() {
