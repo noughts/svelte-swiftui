@@ -1,10 +1,10 @@
 <script lang="ts">
-    import NavigationView from "$lib/NavigationView.svelte";
     import Scene from "$lib/Scene.svelte";
     import TabView from "$lib/TabView.svelte";
-    import { createNaivationItem, createSceneItem, createTabBarItem } from "$lib/index.js";
+    import { createSceneItem, createTabBarItem } from "$lib/index.js";
     import "../globals.css";
     import LandmarkList from "./LandmarkList.svelte";
+    import MainNav from "./MainNav.svelte";
     import Page1 from "./Page1.svelte";
 
     const sceneRootItem = createSceneItem({
@@ -12,15 +12,8 @@
         props: {
             items: [
                 createTabBarItem({
-                    component: NavigationView,
-                    props: {
-                        rootItem: createNaivationItem({
-                            title: "ホーム",
-                            component: LandmarkList,
-                            props: {},
-                            hidesNavigationBarWhenPushed: true,
-                        }),
-                    },
+                    component: MainNav,
+                    props: {},
                     title: "ホーム",
                     icon: "home",
                 }),

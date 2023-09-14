@@ -4,6 +4,10 @@
     import MapView from "./MapView.svelte";
 
 	export let landmark: Landmark;
+	export let rnd = Math.random()
+	export function getRnd(){
+		return rnd;
+	}
 
 	const navContext = getNavigationContext();
 	navContext.updateRightButtonItem({
@@ -23,6 +27,7 @@
 <div class="root">
 	<h1>Detail</h1>
 	<h2>{landmark.name}</h2>
+	<div>{rnd}</div>
 	<button on:click={showMap}>show map</button>
 </div>
 
