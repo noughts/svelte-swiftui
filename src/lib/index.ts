@@ -79,7 +79,7 @@ export type SceneContext = {
 }
 
 export type NavigationContext = {
-	push: <Props extends DefaultProps>(item: Controller<Props>) => void
+	push: <Props extends DefaultProps>(item: UIViewController<Props>) => void
 	pop: () => void;
 	getTopItem: () => Controller;
 }

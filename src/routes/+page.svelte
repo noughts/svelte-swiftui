@@ -53,11 +53,11 @@
         },
     });
 
-    const root = new UIViewController(DemoScreen, { title: "hoge" });
+    const rootViewController = new UIViewController(DemoScreen, { title: "hoge" });
 </script>
 
 <div class="root">
-    <Scene tintColor="#ff00cc" theme="light" rootViewController={root} />
+    <Scene tintColor="#ff00cc" theme="light" rootViewController={rootViewController} />
 </div>
 
 <style>

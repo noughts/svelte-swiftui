@@ -4,44 +4,45 @@
 	import type { Controller, NavigationContext } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
+	import type { UIViewController } from "./UIViewController.js";
 	setContext<NavigationContext>("navigation", {
 		push,
 		pop,
 		getTopItem,
 	});
 
-	export let rootItem: Controller;
-	let controllers: Controller[] = [rootItem];
+	export let rootItem: UIViewController;
+	let viewControllers: UIViewController[] = [rootItem];
 	let topComponent: any;
-	function push(item: Controller) {
-		controllers = controllers.concat(item);
+	function push(item: UIViewController) {
+		viewControllers = viewControllers.concat(item);
 	}
 	function pop() {
-		if (controllers.length <= 1) {
+		if (viewControllers.length <= 1) {
 			return;
 		}
-		const newAry = [...controllers];
+		const newAry = [...viewControllers];
 		newAry.pop();
-		controllers = newAry;
+		viewControllers = newAry;
 	}
-	export function getTopItem(): Controller {
-		return controllers[controllers.length - 1];
+	export function getTopItem(): UIViewController {
+		return viewControllers[viewControllers.length - 1];
 	}
 	export function getTopComponent() {
 		return topComponent;
 	}
-	$: topItem = controllers[controllers.length - 1];
+	$: topItem = viewControllers[viewControllers.length - 1];
 </script>
 
 <div class="root">
 	{#if !topItem.hidesNavigationBarWhenPushed}
 		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar items={controllers} on:backButtonTap={pop} />
+			<UiNavigationBar items={viewControllers} on:backButtonTap={pop} />
 		</div>
 	{/if}
 	<div class="items">
-		{#each controllers as controller, index}
-			{@const top = index == controllers.length - 1}
+		{#each viewControllers as viewController, index}
+			{@const top = index == viewControllers.length - 1}
 			<div
 				class="item"
 				use:swipe={{
@@ -50,13 +51,13 @@
 					},
 				}}
 				class:top
-				class:navBarHidden={controller.hidesNavigationBarWhenPushed}
+				class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
 				<svelte:component
-					this={controller.component}
-					{...controller.props}
-					{controller}
+					this={viewController.component}
+					{...viewController.props}
+					{viewController}
 					bind:this={topComponent}
 				/>
 			</div>
