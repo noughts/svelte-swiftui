@@ -7,19 +7,19 @@
 
 	export let tintColor = "blue";
 	export let theme: "light" | "dark" | "system" = "system";
-	export let rootItem: UIViewController;
+	export let rootViewController: UIViewController;
 
 	setContext<SceneContext>("scene", { push, pop, dark: theme == "dark", tintColor });
 
 
-	let items: UIViewController[] = [rootItem];
+	let viewControllers: UIViewController[] = [rootViewController];
 	function push(item: UIViewController) {
-		items = items.concat(item);
+		viewControllers = viewControllers.concat(item);
 	}
 	function pop() {
-		const newAry = [...items];
+		const newAry = [...viewControllers];
 		newAry.pop();
-		items = newAry;
+		viewControllers = newAry;
 	}
 </script>
 
@@ -35,9 +35,9 @@
 </svelte:head>
 
 <div class="SvelteScene" >
-	{#each items as item, index}
-		<div class="item" class:top={index == items.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
-			<svelte:component this={item.component} {...item.props} />
+	{#each viewControllers as viewController, index}
+		<div class="item" class:top={index == viewControllers.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
+			<svelte:component this={viewController.component} {...viewController.props} {viewController} />
 		</div>
 	{/each}
 </div>

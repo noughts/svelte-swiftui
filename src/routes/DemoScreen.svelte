@@ -3,8 +3,8 @@
     import { getSceneContext, type Controller } from "$lib/index.js";
 
 	export let title: string = "dummy";
-	export let presentingViewController:UIViewController;
-	console.log(presentingViewController)
+	export let viewController:UIViewController;
+	console.log(viewController)
 	// controller.navigationItem?.title = "Hello!!"
 	const context = getSceneContext();
 

@@ -57,7 +57,7 @@
 </script>
 
 <div class="root">
-    <Scene tintColor="#ff00cc" theme="light" rootItem={root} />
+    <Scene tintColor="#ff00cc" theme="light" rootViewController={root} />
 </div>
 
 <style>
