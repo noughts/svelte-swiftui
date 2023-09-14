@@ -28,7 +28,7 @@ export class UIViewController<Props extends DefaultProps = any>{
 	}
 
 	get navigationController(): UINavigationController | null {
-		let parent = this.presentingViewController;
+		let parent: UIViewController | undefined = this;
 		while (true) {
 			if (!parent) return null;
 			if (parent.constructor.name == "UINavigationController") return parent as UINavigationController;
@@ -46,13 +46,13 @@ export class UIViewController<Props extends DefaultProps = any>{
 
 	present(viewController: UIViewController) {
 		const sc = this.sceneController;
-		if (!sc) {
-			throw "UISceneControllerが見つかりません";
-		}
+		if (!sc) throw "UISceneControllerが見つかりません";
 		sc.push(viewController);
 	}
 	dismiss() {
-
+		const sc = this.sceneController;
+		if (!sc) throw "UISceneControllerが見つかりません";
+		sc.pop();
 	}
 }
 

@@ -6,7 +6,7 @@
 	viewController.navigationItem.title = "Hello!!"
 
 	function onDismissButtonTap(){
-
+		viewController.dismiss();
 	}
 </script>
 
