@@ -52,12 +52,13 @@
             ],
         },
     });
-
-    const rootViewController = new UIViewController(DemoScreen, { title: "hoge" });
+   
+    const demo_vc = new UIViewController(DemoScreen, { title: "hoge" });
+    const nc = new UIViewController(NavigationView, {rootItem:demo_vc});
 </script>
 
 <div class="root">
-    <Scene tintColor="#ff00cc" theme="light" rootViewController={rootViewController} />
+    <Scene tintColor="#ff00cc" theme="light" rootViewController={nc} />
 </div>
 
 <style>

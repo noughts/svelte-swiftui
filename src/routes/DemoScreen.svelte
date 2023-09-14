@@ -5,7 +5,7 @@
 	export let title: string = "dummy";
 	export let viewController:UIViewController;
 	console.log(viewController)
-	// controller.navigationItem?.title = "Hello!!"
+	viewController.navigationItem.title = "Hello!!"
 	const context = getSceneContext();
 
 	function onDismissButtonTap(){

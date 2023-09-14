@@ -35,11 +35,7 @@
 </script>
 
 <div class="root">
-	{#if !topItem.hidesNavigationBarWhenPushed}
-		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar items={viewControllers} on:backButtonTap={pop} />
-		</div>
-	{/if}
+
 	<div class="items">
 		{#each viewControllers as viewController, index}
 			{@const top = index == viewControllers.length - 1}
@@ -63,6 +59,11 @@
 			</div>
 		{/each}
 	</div>
+	{#if !topItem.hidesNavigationBarWhenPushed}
+	<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
+		<UiNavigationBar items={viewControllers} on:backButtonTap={pop} />
+	</div>
+{/if}
 </div>
 
 <style>
