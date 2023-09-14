@@ -1,15 +1,12 @@
 <script lang="ts">
     import type { UIViewController } from "$lib/UIViewController.js";
-    import { getSceneContext } from "$lib/index.js";
-
 	export let title: string = "dummy";
 	export let viewController:UIViewController;
 	// console.log(viewController)
 	viewController.navigationItem.title = "Hello!!"
-	const context = getSceneContext();
 
 	function onDismissButtonTap(){
-		context.pop();
+
 	}
 </script>
 

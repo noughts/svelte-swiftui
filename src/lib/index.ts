@@ -1,6 +1,6 @@
 import type { Property } from "csstype"
-import { getContext, type SvelteComponent } from "svelte"
 import type { UIViewController } from "./UIViewController.js"
+import type { SvelteComponent } from "svelte"
 
 export { default as HStack } from "./HStack.svelte"
 export { default as MaterialSymbol } from "./MaterialSymbol.svelte"
@@ -9,20 +9,6 @@ export { default as Spacer } from "./Spacer.svelte"
 export { default as Text } from "./Text.svelte"
 export { default as VStack } from "./VStack.svelte"
 
-export function getSceneContext() {
-	return getContext<SceneContext>("scene");
-}
-export function getNavigationContext() {
-	return getContext<NavigationContext>("navigation");
-}
-
-
-export function createSceneItem<Props extends DefaultProps>(data: SceneItem<Props>): SceneItem<Props> {
-	return { component: data.component, props: data.props, transition: data.transition };
-}
-export function createTabBarItem<Props extends DefaultProps>(data: TabBarItem<Props>): TabBarItem<Props> {
-	return { component: data.component, props: data.props, title: data.title, icon: data.icon };
-}
 
 type DefaultProps = Record<string, any>;
 

@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Button from "$lib/Button.svelte";
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
-	import { getSceneContext, type UINavigationItem } from "$lib/index.js";
+    import type { UINavigationItem } from "$lib/index.js";
 	import { createEventDispatcher } from "svelte";
-	const sceneContext = getSceneContext();
-	const dark = sceneContext.dark;
-	const color = sceneContext.tintColor;
+	const dark = true;
+	const color = "red";
 	export let item: UINavigationItem;
 	export let showBackButton: boolean;
 

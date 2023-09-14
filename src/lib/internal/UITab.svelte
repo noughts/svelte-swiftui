@@ -1,20 +1,19 @@
 <script lang="ts">
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
+	import type { UITabBarItem } from "$lib/index.js";
 
 	import type { Property } from "csstype";
-	import { getSceneContext, type UITabBarItem } from "../index.js";
-	const sceneContext = getSceneContext();
 
 	export let item: UITabBarItem;
 	export let selected: boolean = false;
 	let color: Property.Color;
 	$: if (selected) {
-		color = sceneContext.tintColor;
+		color = "red";
 	} else {
-		if( sceneContext.dark){
-			color = "rgba(255 255 255/42%)"
-		}else {
-			color = "rgba(0 0 0/42%)"
+		if (false) {
+			color = "rgba(255 255 255/42%)";
+		} else {
+			color = "rgba(0 0 0/42%)";
 		}
 	}
 </script>

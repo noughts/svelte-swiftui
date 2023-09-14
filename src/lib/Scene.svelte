@@ -1,26 +1,14 @@
 <script lang="ts">
-	import { setContext } from "svelte";
 	import { fly } from "svelte/transition";
-	import type { UIViewController } from "./UIViewController.js";
-	import type { SceneContext } from "./index.js";
+	import type { UISceneController } from "./UISceneController.js";
 	import "./svelte-swiftui.css";
 
+	export let viewController:UISceneController;
 	export let tintColor = "blue";
 	export let theme: "light" | "dark" | "system" = "system";
-	export let rootViewController: UIViewController;
 
-	setContext<SceneContext>("scene", { push, pop, dark: theme == "dark", tintColor });
+	const viewControllers = viewController.viewControllers;
 
-
-	let viewControllers: UIViewController[] = [rootViewController];
-	function push(item: UIViewController) {
-		viewControllers = viewControllers.concat(item);
-	}
-	function pop() {
-		const newAry = [...viewControllers];
-		newAry.pop();
-		viewControllers = newAry;
-	}
 </script>
 
 <svelte:head>
@@ -35,8 +23,8 @@
 </svelte:head>
 
 <div class="SvelteScene" >
-	{#each viewControllers as viewController, index}
-		<div class="item" class:top={index == viewControllers.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
+	{#each $viewControllers as viewController, index}
+		<div class="item" class:top={index == $viewControllers.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
 			<svelte:component this={viewController.component} {...viewController.props} {viewController} />
 		</div>
 	{/each}

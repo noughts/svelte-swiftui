@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { createNaivationItem, getSceneContext } from "$lib/index.js";
-	import NavigationView from "$lib/internal/NavigationView.svelte";
-	import DemoScreen from "./DemoScreen.svelte";
+    import type { UIViewController } from "$lib/UIViewController.js";
 
-	const sceneContext = getSceneContext();
+	export let viewController:UIViewController;
 
 	function onPresentButtonTap() {
 		/*

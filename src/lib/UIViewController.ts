@@ -8,6 +8,7 @@ export class UIViewController<Props extends DefaultProps = any>{
 	navigationItem: UINavigationItem = { title: "placeholder" };
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: "" };
 	navigationController?:UINavigationController;
+	
 
 
 	constructor(readonly component: SvelteUIComponent<Props>, readonly props: Omit<Props, "viewController">, readonly options?: {
@@ -24,6 +25,10 @@ export class UIViewController<Props extends DefaultProps = any>{
 		if (options?.tabBarItem) {
 			this.tabBarItem = options.tabBarItem;
 		}
+	}
+
+	present(viewController:UIViewController){
+
 	}
 }
 
