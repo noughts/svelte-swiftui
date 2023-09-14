@@ -11,12 +11,12 @@ export class UISceneController extends UIViewController {
 
 	constructor(rootViewController: UIViewController) {
 		super(Scene, {})
-		rootViewController.sceneController = this;
+		rootViewController.presentingViewController = this;
 		this.viewControllers.set([rootViewController]);
 	}
 
 	push(viewController: UIViewController) {
-		viewController.sceneController = this;
+		viewController.presentingViewController = this;
 		const current = get(this.viewControllers);
 		this.viewControllers.set(current.concat(viewController));
 	}

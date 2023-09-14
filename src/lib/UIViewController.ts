@@ -8,8 +8,7 @@ export class UIViewController<Props extends DefaultProps = any>{
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: "" };
-	navigationController?:UINavigationController;
-	sceneController?:UISceneController;
+	presentingViewController?: UIViewController;
 
 
 	constructor(readonly component: SvelteUIComponent<Props>, readonly props: Omit<Props, "viewController">, readonly options?: {
@@ -28,7 +27,35 @@ export class UIViewController<Props extends DefaultProps = any>{
 		}
 	}
 
-	present(viewController:UIViewController){
+	get navigationController(): UINavigationController | null {
+		let parent = this.presentingViewController;
+		while (true) {
+			if (!parent) return null;
+			if (parent.constructor.name == "UINavigationController") return parent as UINavigationController;
+			parent = parent.presentingViewController;
+		}
+	}
+	get sceneController(): UISceneController | null {
+		let parent = this.presentingViewController;
+		while (true) {
+			if (!parent) return null;
+			if (parent.constructor.name == "UISceneController") {
+				console.log(parent as UISceneController)
+				return parent as UISceneController;
+			}
+			parent = parent.presentingViewController;
+		}
+	}
+
+	present(viewController: UIViewController) {
+		const sc = this.sceneController;
+		console.log(sc)
+		if (!sc) {
+			throw "UISceneControllerが見つかりません";
+		}
+		sc.push(viewController);
+	}
+	dismiss() {
 
 	}
 }

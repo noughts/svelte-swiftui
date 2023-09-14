@@ -5,9 +5,8 @@ export class UITabBarController extends UIViewController{
 
 	constructor(viewControllers:UIViewController[]){
 		super(TabView, {viewControllers});
-		console.log(this.sceneController)
 		viewControllers.forEach(x=>{
-			x.sceneController = this.sceneController;
+			x.presentingViewController = this;
 		})
 	}
 
