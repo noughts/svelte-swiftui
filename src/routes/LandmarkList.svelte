@@ -5,7 +5,7 @@
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
 	export let viewController: UIViewController;
-	// console.log(viewController)
+	viewController.navigationItem.title ="Landmark List"
 
 	const landmarks = [
 		{ name: "Turtle Rock" },

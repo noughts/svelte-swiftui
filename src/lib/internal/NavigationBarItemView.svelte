@@ -3,7 +3,7 @@
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
     import type { UINavigationItem } from "$lib/index.js";
 	import { createEventDispatcher } from "svelte";
-	const dark = true;
+	const dark = false;
 	const color = "red";
 	export let item: UINavigationItem;
 	export let showBackButton: boolean;
