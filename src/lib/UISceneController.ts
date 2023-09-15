@@ -1,6 +1,6 @@
 import { derived, get, writable } from "svelte/store";
 import { UIViewController } from "./UIViewController.js";
-import SceneView from "./SceneView.svelte";
+import SceneView from "./internal/SceneView.svelte";
 import { UIView } from "./UIView.js";
 
 export class UISceneController extends UIViewController {

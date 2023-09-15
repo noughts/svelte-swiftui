@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { fly } from "svelte/transition";
-	import type { UISceneController } from "./UISceneController.js";
-	import "./svelte-swiftui.css";
-	export let viewController:UISceneController;
+	import type { UISceneController } from "../UISceneController.js";
+	import "../svelte-swiftui.css";
+	import View from "./View.svelte";
+	export let viewController: UISceneController;
 	const viewControllers = viewController.viewControllers;
 </script>
 
@@ -17,10 +18,10 @@
 	/>
 </svelte:head>
 
-<div class="SvelteScene" >
+<div class="SvelteScene">
 	{#each $viewControllers as viewController, index}
 		<div class="item" class:top={index == $viewControllers.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
-			<svelte:component this={viewController.view.component} {...viewController.view.props} {viewController} />
+			<View {viewController} />
 		</div>
 	{/each}
 </div>

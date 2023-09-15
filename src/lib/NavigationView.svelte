@@ -3,6 +3,7 @@
 	import { fly } from "svelte/transition";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
+	import View from "./internal/View.svelte";
 
 	export let viewController: UINavigationController;
 
@@ -28,7 +29,7 @@
 				class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
-				<svelte:component this={vc.view.component} {...vc.view.props} viewController={vc} />
+				<View viewController={vc} />
 			</div>
 		{/each}
 	</div>

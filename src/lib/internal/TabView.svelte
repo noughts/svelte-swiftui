@@ -1,7 +1,8 @@
 <script lang="ts">
-    import type { UIViewController } from "../UIViewController.js";
-    import UiTabBar from "./UITabBar.svelte";
-	export let viewController:UIViewController;
+	import type { UIViewController } from "../UIViewController.js";
+	import UiTabBar from "./UITabBar.svelte";
+	import View from "./View.svelte";
+	export let viewController: UIViewController;
 	export let selection = 0;
 	export let viewControllers: UIViewController[];
 </script>
@@ -10,7 +11,7 @@
 	<div class="content">
 		{#each viewControllers as viewController, index (viewController.tabBarItem?.title)}
 			<div class="item" class:selected={index === selection}>
-				<svelte:component this={viewController.view.component} {...viewController.view.props} {viewController} />
+				<View {viewController} />
 			</div>
 		{/each}
 	</div>
