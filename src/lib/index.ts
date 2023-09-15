@@ -1,11 +1,11 @@
 
 export { default as HStack } from "./HStack.svelte"
 export { default as MaterialSymbol } from "./MaterialSymbol.svelte"
-export { default as Scene } from "./internal/SceneView.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 export { default as Text } from "./Text.svelte"
 export { default as VStack } from "./VStack.svelte"
 export { default as NavigationView } from "./NavigationView.svelte"
+export { default as UIView } from "./UIView.svelte"
 
 export type UITabBarItem = {
 	title: string
