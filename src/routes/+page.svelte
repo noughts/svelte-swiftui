@@ -5,7 +5,7 @@
     import { UIView } from "$lib/UIView.js";
     import { UIViewController } from "$lib/UIViewController.js";
     import View from "$lib/View.svelte";
-    import "../globals.css";// import 順番注意
+    import "../globals.css";
     import HomeNav from "./HomeNav.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
