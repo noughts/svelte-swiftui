@@ -15,8 +15,10 @@
     <View
         viewController={new UISceneController(
             new UITabBarController([
-                new UINavigationController(new UIViewController(new UIView(LandmarkList)), new UIView(HomeNav)),
-                new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: "home" } }),
+                new UINavigationController(new UIViewController(new UIView(LandmarkList)), new UIView(HomeNav), {
+                    tabBarItem: { title: "Home", icon: "home" },
+                }),
+                new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: "star" } }),
             ])
         )}
     />
