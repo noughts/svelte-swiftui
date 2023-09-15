@@ -3,10 +3,9 @@
 	import NavigationBarItemView from "./NavigationBarItemView.svelte";
 	import type { UINavigationItem } from "$lib/index.js";
 	export let items: UINavigationItem[];
-	const dark = false;
 </script>
 
-<div class="UINavigationBar" class:dark>
+<div class="UINavigationBar">
 	{#each items as item, index}
 		<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "50%" }}>
 			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
@@ -20,11 +19,8 @@
 		position: relative;
 		height: 44px;
 		flex-shrink: 0;
-		background-color: var(--ui-chrome-light);
-		border-bottom: solid 0.1px rgba(0 0 0/15%);
-	}
-	.dark {
-		background-color: var(--ui-chrome-dark);
+		background-color: var(--ui-chrome);
+		border-bottom: solid 0.1px var(--ui-separator);
 	}
 	.item {
 		position: absolute;

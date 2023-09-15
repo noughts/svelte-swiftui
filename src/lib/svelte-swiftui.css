@@ -1,6 +1,14 @@
-.SvelteScene{
-	--ui-chrome-light: #f5f5f5;
-	--ui-chrome-dark: #1c1c1c;
-	--ui-text-light:black;
-	--ui-text-dark:white;
+.SvelteScene {
+	--ui-chrome: #f5f5f5;
+	--ui-text: black;
+	--ui-tint-color: blue;
+	--ui-separator: rgba(0 0 0/15%);
+}
+
+@media (prefers-color-scheme: dark) {
+	.SvelteScene {
+		--ui-chrome: #1c1c1c;
+		--ui-text: white;
+		--ui-separator: rgba(255 255 255/15%);
+	}
 }

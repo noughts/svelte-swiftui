@@ -1,7 +1,6 @@
 import { derived, get, writable } from "svelte/store";
 import { UIViewController } from "./UIViewController.js";
 import SceneView from "./SceneView.svelte";
-import type { Property } from "csstype";
 
 export class UISceneController extends UIViewController {
 
@@ -10,10 +9,7 @@ export class UISceneController extends UIViewController {
 		return $a[$a.length - 1];
 	})
 
-	constructor(rootViewController: UIViewController, options?: {
-		theme?: "light" | "dark" | "system";
-		tintColor?: Property.Color;
-	}) {
+	constructor(rootViewController: UIViewController) {
 		super(SceneView, {})
 		rootViewController.presentingViewController = this;
 		this.viewControllers.set([rootViewController]);

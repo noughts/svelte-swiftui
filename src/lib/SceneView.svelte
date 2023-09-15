@@ -2,13 +2,8 @@
 	import { fly } from "svelte/transition";
 	import type { UISceneController } from "./UISceneController.js";
 	import "./svelte-swiftui.css";
-
 	export let viewController:UISceneController;
-	export let tintColor = "blue";
-	export let theme: "light" | "dark" | "system" = "system";
-
 	const viewControllers = viewController.viewControllers;
-
 </script>
 
 <svelte:head>

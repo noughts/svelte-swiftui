@@ -3,25 +3,22 @@
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
     import type { UINavigationItem } from "$lib/index.js";
 	import { createEventDispatcher } from "svelte";
-	const dark = false;
-	const color = "red";
 	export let item: UINavigationItem;
 	export let showBackButton: boolean;
 
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="NavigationBarItemView" class:dark>
+<div class="NavigationBarItemView">
 	{#if item.leftBarButtonItem}
 		<Button
 			on:click={(e) => item.leftBarButtonItem?.action()}
-			{color}
 			bold={item.leftBarButtonItem.bold}
 			title={item.leftBarButtonItem.title}
 			icon={item.leftBarButtonItem.icon}
 		/>
 	{:else if showBackButton}
-		<button class="backButton" on:click={(e) => dispatch("backButtonTap")} style:color>
+		<button class="backButton" on:click={(e) => dispatch("backButtonTap")}>
 			<MaterialSymbol icon="arrow_back_ios" />
 			<div class="backLabel">Back</div>
 		</button>
@@ -32,7 +29,6 @@
 	{#if item.rightBarButtonItem}
 		<Button
 			on:click={(e) => item.rightBarButtonItem?.action()}
-			{color}
 			bold={item.rightBarButtonItem.bold}
 			title={item.rightBarButtonItem.title}
 			icon={item.rightBarButtonItem.icon}
@@ -54,16 +50,14 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 8px;
-		color: var(--ui-text-light);
+		color: var(--ui-text);
 		font-size: 16px;
-	}
-	.dark {
-		color: var(--ui-text-dark);
 	}
 	.backButton {
 		all: unset;
 		display: flex;
 		align-items: center;
+		color:var(--ui-tint-color);
 	}
 	.backLabel {
 		margin-left: -8px;
