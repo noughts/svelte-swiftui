@@ -3,13 +3,14 @@
 <script lang="ts">
 	import NavigationView from "$lib/NavigationView.svelte";
 	import type { UINavigationController } from "$lib/UINavigationController.js";
+    import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import DemoScreen from "./DemoScreen.svelte";
 
 	export let viewController: UINavigationController;
 
 	function onFabClick() {
-		viewController.present(new UIViewController(DemoScreen, {}));
+		viewController.present(new UIViewController(new UIView(DemoScreen), {}));
 	}
 </script>
 

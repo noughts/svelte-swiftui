@@ -2,8 +2,9 @@ import type { SvelteComponent } from "svelte";
 import type { UINavigationItem, UITabBarItem } from "./index.js";
 import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
+import type { UIView } from "./UIView.js";
 
-export class UIViewController<Props extends DefaultProps = any>{
+export class UIViewController{
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
@@ -11,7 +12,7 @@ export class UIViewController<Props extends DefaultProps = any>{
 	presentingViewController?: UIViewController;
 
 
-	constructor(readonly component: SvelteUIComponent<Props>, readonly props?: Omit<Props, "viewController">, readonly options?: {
+	constructor(readonly view:UIView, readonly options?: {
 		navigationItem?: UINavigationItem;
 		tabBarItem?: UITabBarItem;
 		hidesNavigationBarWhenPushed?: boolean;
@@ -56,10 +57,3 @@ export class UIViewController<Props extends DefaultProps = any>{
 	}
 }
 
-
-type DefaultProps = Record<string, any>;
-type SvelteUIComponent<
-	Props extends Record<string, any> = any,
-	Events extends Record<string, any> = any,
-	Slots extends Record<string, any> = any
-> = new (...args: any) => SvelteComponent<Props, Events, Slots>

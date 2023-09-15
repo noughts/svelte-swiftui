@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import type { Landmark } from "./Landmark.js";
 	import MapView from "./MapView.svelte";
@@ -19,7 +20,7 @@
 	};
 
 	function showMap() {
-		viewController.navigationController?.push(new UIViewController(MapView, { landmark }));
+		viewController.navigationController?.push(new UIViewController(new UIView(MapView, { landmark })));
 	}
 </script>
 

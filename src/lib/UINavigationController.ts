@@ -1,6 +1,7 @@
 import { derived, get, writable } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIViewController } from "./UIViewController.js";
+import { UIView } from "./UIView.js";
 
 export class UINavigationController extends UIViewController {
 
@@ -9,11 +10,11 @@ export class UINavigationController extends UIViewController {
 		return $a[$a.length - 1];
 	})
 
-	constructor(rootViewController: UIViewController, component?: any) {
-		if(component){
-			super(component, {})
+	constructor(rootViewController: UIViewController, view?: UIView) {
+		if(view){
+			super(view)
 		} else {
-			super(NavigationView, {})
+			super(new UIView(NavigationView))
 		}
 		rootViewController.presentingViewController = this;
 		this.viewControllers.set([rootViewController]);

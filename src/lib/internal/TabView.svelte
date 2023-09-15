@@ -10,7 +10,7 @@
 	<div class="content">
 		{#each viewControllers as viewController, index (viewController.tabBarItem?.title)}
 			<div class="item" class:selected={index === selection}>
-				<svelte:component this={viewController.component} {...viewController.props} {viewController} />
+				<svelte:component this={viewController.view.component} {...viewController.view.props} {viewController} />
 			</div>
 		{/each}
 	</div>

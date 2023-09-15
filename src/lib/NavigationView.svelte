@@ -28,7 +28,7 @@
 				class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
-				<svelte:component this={vc.component} {...vc.props} viewController={vc} />
+				<svelte:component this={vc.view.component} {...vc.view.props} viewController={vc} />
 			</div>
 		{/each}
 	</div>

@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { UINavigationController } from "$lib/UINavigationController.js";
+	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import DemoScreen from "./DemoScreen.svelte";
 
 	export let viewController: UIViewController;
 
 	function onPresentButtonTap() {
-		viewController.present(new UINavigationController(new UIViewController(DemoScreen, {})));
+		viewController.present(new UINavigationController(new UIViewController(new UIView(DemoScreen))));
 	}
 </script>
 
