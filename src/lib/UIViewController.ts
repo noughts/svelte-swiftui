@@ -35,6 +35,7 @@ export class UIViewController {
 		let parent: UIViewController | undefined = this;
 		while (true) {
 			if (!parent) return null;
+			// 循環参照を避けるために instanceof は使用しません
 			if (parent.className == "UINavigationController") return parent as UINavigationController;
 			parent = parent.presentingViewController;
 		}
@@ -43,6 +44,7 @@ export class UIViewController {
 		let parent: UIViewController | undefined = this;
 		while (true) {
 			if (!parent) return null;
+			// 循環参照を避けるために instanceof は使用しません
 			if (parent.className == "UISceneController") return parent as UISceneController;
 			parent = parent.presentingViewController;
 		}
