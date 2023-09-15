@@ -55,5 +55,6 @@
 		background-color: green;
 		color:white;
 		font-size: 16px;
+		padding:8px;
 	}
 </style>
