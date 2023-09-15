@@ -1,12 +1,20 @@
+<!-- NavigationView 継承サンプル -->
+
 <script lang="ts">
+	import NavigationView from "$lib/NavigationView.svelte";
 	import type { UINavigationController } from "$lib/UINavigationController.js";
-	import NavigationView from "$lib/internal/NavigationView.svelte";
+	import { UIViewController } from "$lib/UIViewController.js";
+	import DemoScreen from "./DemoScreen.svelte";
 
 	export let viewController: UINavigationController;
+
+	function onFabClick() {
+		viewController.present(new UIViewController(DemoScreen, {}));
+	}
 </script>
 
 <NavigationView {viewController}>
-	<button class="fab">FAB</button>
+	<button class="fab" on:click={onFabClick}>FAB</button>
 </NavigationView>
 
 <style>

@@ -5,7 +5,7 @@ export { default as Scene } from "./SceneView.svelte"
 export { default as Spacer } from "./Spacer.svelte"
 export { default as Text } from "./Text.svelte"
 export { default as VStack } from "./VStack.svelte"
-
+export { default as NavigationView } from "./NavigationView.svelte"
 
 export type UITabBarItem = {
 	title: string

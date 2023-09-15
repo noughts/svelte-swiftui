@@ -11,7 +11,7 @@ export class UIViewController<Props extends DefaultProps = any>{
 	presentingViewController?: UIViewController;
 
 
-	constructor(readonly component: SvelteUIComponent<Props>, readonly props: Omit<Props, "viewController">, readonly options?: {
+	constructor(readonly component: SvelteUIComponent<Props>, readonly props?: Omit<Props, "viewController">, readonly options?: {
 		navigationItem?: UINavigationItem;
 		tabBarItem?: UITabBarItem;
 		hidesNavigationBarWhenPushed?: boolean;

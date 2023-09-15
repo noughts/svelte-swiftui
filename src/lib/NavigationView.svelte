@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { UINavigationController } from "$lib/UINavigationController.js";
 	import { fly } from "svelte/transition";
-	import UiNavigationBar from "./UINavigationBar.svelte";
-	import { swipe } from "./swipe.js";
+	import UiNavigationBar from "./internal/UINavigationBar.svelte";
+	import { swipe } from "./internal/swipe.js";
 
 	export let viewController: UINavigationController;
 

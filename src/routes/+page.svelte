@@ -10,7 +10,7 @@
 
     const sceneController = new UISceneController(
         new UITabBarController([
-            new UINavigationController(new UIViewController(LandmarkList, {}), HomeNav),
+            new UINavigationController(new UIViewController(LandmarkList), HomeNav),
             new UIViewController(Page1, {}, { tabBarItem: { title: "Demo", icon: "home" } }),
         ])
     );

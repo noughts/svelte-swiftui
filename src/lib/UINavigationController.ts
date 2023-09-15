@@ -1,5 +1,5 @@
 import { derived, get, writable } from "svelte/store";
-import NavigationView from "./internal/NavigationView.svelte";
+import NavigationView from "./NavigationView.svelte";
 import { UIViewController } from "./UIViewController.js";
 
 export class UINavigationController extends UIViewController {
