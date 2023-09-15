@@ -4,10 +4,9 @@
 	export let title: string | null = null;
 	export let icon: string | null = null;
 	export let bold: boolean = false;
-	export let color: Property.Color;
 </script>
 
-<button class="button" on:click style:color class:bold>
+<button class="button" on:click class:bold>
 	{#if icon}
 		<MaterialSymbol {icon} />
 	{/if}
@@ -22,6 +21,7 @@
 		display: flex;
 		align-items: center;
 		font-feature-settings: "palt";
+		color:var(--ui-tint-color);
 	}
 	.button.bold {
 		font-weight: 600;

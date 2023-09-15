@@ -1,28 +1,24 @@
 <script lang="ts">
 	import Button from "$lib/Button.svelte";
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
-	import { getSceneContext, type NavigationItem } from "$lib/index.js";
+    import type { UINavigationItem } from "$lib/index.js";
 	import { createEventDispatcher } from "svelte";
-	const sceneContext = getSceneContext();
-	const dark = sceneContext.dark;
-	const color = sceneContext.tintColor;
-	export let item: NavigationItem;
+	export let item: UINavigationItem;
 	export let showBackButton: boolean;
 
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="NavigationBarItemView" class:dark>
-	{#if item.leftButtonItem}
+<div class="NavigationBarItemView">
+	{#if item.leftBarButtonItem}
 		<Button
-			on:click={(e) => item.leftButtonItem?.action()}
-			{color}
-			bold={item.leftButtonItem.bold}
-			title={item.leftButtonItem.title}
-			icon={item.leftButtonItem.icon}
+			on:click={(e) => item.leftBarButtonItem?.action()}
+			bold={item.leftBarButtonItem.bold}
+			title={item.leftBarButtonItem.title}
+			icon={item.leftBarButtonItem.icon}
 		/>
 	{:else if showBackButton}
-		<button class="backButton" on:click={(e) => dispatch("backButtonTap")} style:color>
+		<button class="backButton" on:click={(e) => dispatch("backButtonTap")}>
 			<MaterialSymbol icon="arrow_back_ios" />
 			<div class="backLabel">Back</div>
 		</button>
@@ -30,13 +26,12 @@
 		<div />
 	{/if}
 
-	{#if item.rightButtonItem}
+	{#if item.rightBarButtonItem}
 		<Button
-			on:click={(e) => item.rightButtonItem?.action()}
-			{color}
-			bold={item.rightButtonItem.bold}
-			title={item.rightButtonItem.title}
-			icon={item.rightButtonItem.icon}
+			on:click={(e) => item.rightBarButtonItem?.action()}
+			bold={item.rightBarButtonItem.bold}
+			title={item.rightBarButtonItem.title}
+			icon={item.rightBarButtonItem.icon}
 		/>
 	{:else}
 		<div />
@@ -55,16 +50,14 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 8px;
-		color: var(--ui-text-light);
+		color: var(--ui-text);
 		font-size: 16px;
-	}
-	.dark {
-		color: var(--ui-text-dark);
 	}
 	.backButton {
 		all: unset;
 		display: flex;
 		align-items: center;
+		color:var(--ui-tint-color);
 	}
 	.backLabel {
 		margin-left: -8px;

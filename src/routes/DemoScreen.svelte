@@ -1,11 +1,25 @@
 <script lang="ts">
-    import { getSceneContext } from "$lib/index.js";
-
-	export let title: string;
-	const context = getSceneContext();
+    import type { UIViewController } from "$lib/UIViewController.js";
+	export let title: string = "dummy";
+	export let viewController:UIViewController;
+	// console.log(viewController)
+	viewController.navigationItem.title = "Hello!!"
+	viewController.navigationItem.rightBarButtonItem = {
+		title:"Close",
+		action:()=>{
+			viewController.dismiss();
+		}
+	}
+	viewController.navigationItem.leftBarButtonItem = {
+		title:"Change",
+		bold:true,
+		action:()=>{
+			console.log("Change")
+		}
+	}
 
 	function onDismissButtonTap(){
-		context.pop();
+		viewController.dismiss();
 	}
 </script>
 

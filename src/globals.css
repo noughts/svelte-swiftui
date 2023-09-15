@@ -1,3 +1,12 @@
+.SvelteScene{
+	/* exaple: Force Light Mode */
+	--ui-tint-color:blue;
+	--ui-chrome: #f5f5f5;
+	--ui-text:black;
+	--ui-separator: rgba(0 0 0/15%);
+}
+
+
 *{
 	margin:0;
 	padding:0;

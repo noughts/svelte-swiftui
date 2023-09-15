@@ -1,38 +1,28 @@
 <script lang="ts">
-    import Scene from "$lib/Scene.svelte";
-    import TabView from "$lib/TabView.svelte";
-    import { createSceneItem, createTabBarItem } from "$lib/index.js";
+    import { UINavigationController } from "$lib/UINavigationController.js";
+    import { UISceneController } from "$lib/UISceneController.js";
+    import { UITabBarController } from "$lib/UITabBarController.js";
+    import { UIView } from "$lib/UIView.js";
+    import { UIViewController } from "$lib/UIViewController.js";
     import "../globals.css";
+    import HomeNav from "./HomeNav.svelte";
     import LandmarkList from "./LandmarkList.svelte";
-    import MainNav from "./MainNav.svelte";
     import Page1 from "./Page1.svelte";
 
-    const sceneRootItem = createSceneItem({
-        component: TabView,
-        props: {
-            items: [
-                createTabBarItem({
-                    component: MainNav,
-                    props: {},
-                    title: "ホーム",
-                    icon: "home",
-                }),
-                createTabBarItem({ title: "天気", icon: "partly_cloudy_day", component: Page1, props: {} }),
-                createTabBarItem({
-                    title: "クーポン",
-                    icon: "confirmation_number",
-                    component: LandmarkList,
-                    props: {},
-                }),
-                createTabBarItem({ title: "検索", icon: "search", component: Page1, props: {} }),
-                createTabBarItem({ title: "プロフィール", icon: "account_circle", component: Page1, props: {} }),
-            ],
-        },
-    });
+    const sceneController = new UISceneController(
+        new UITabBarController([
+            new UINavigationController(new UIViewController(new UIView(LandmarkList)), new UIView(HomeNav)),
+            new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: "home" } }),
+        ])
+    );
 </script>
 
 <div class="root">
-    <Scene tintColor="#ff00cc" theme="light" rootItem={sceneRootItem} />
+    <svelte:component
+        this={sceneController.view.component}
+        {...sceneController.view.props}
+        viewController={sceneController}
+    />
 </div>
 
 <style>

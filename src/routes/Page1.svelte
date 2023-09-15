@@ -1,35 +1,13 @@
 <script lang="ts">
-	import { createNaivationItem, getSceneContext } from "$lib/index.js";
-	import NavigationView from "$lib/NavigationView.svelte";
+	import { UINavigationController } from "$lib/UINavigationController.js";
+	import { UIView } from "$lib/UIView.js";
+	import { UIViewController } from "$lib/UIViewController.js";
 	import DemoScreen from "./DemoScreen.svelte";
 
-	const sceneContext = getSceneContext();
+	export let viewController: UIViewController;
 
 	function onPresentButtonTap() {
-		sceneContext.push({
-			component: NavigationView,
-			props: {
-				rootItem: createNaivationItem({
-					component: DemoScreen,
-					title: "Demo",
-					props: { title: "from Page 1" },
-					rightButtonItem: {
-						icon: "close",
-						title: "Done",
-						bold: true,
-						action: () => {
-							sceneContext.pop();
-						},
-					},
-					leftButtonItem: {
-						title: "キャラクター変更",
-						action: () => {
-							alert("キャラクター変更");
-						},
-					},
-				}),
-			},
-		});
+		viewController.present(new UINavigationController(new UIViewController(new UIView(DemoScreen))));
 	}
 </script>
 

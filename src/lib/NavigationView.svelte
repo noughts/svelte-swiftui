@@ -1,84 +1,47 @@
 <script lang="ts">
-	import { SvelteComponent, setContext } from "svelte";
+	import type { UINavigationController } from "$lib/UINavigationController.js";
 	import { fly } from "svelte/transition";
-	import type { NavigationContext, NavigationItem, UIBarButtonItem } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
-	setContext<NavigationContext>("navigation", {
-		push,
-		pop,
-		updateTitle,
-		updateRightButtonItem,
-		updateLeftButtonItem,
-		getTopItem,
-	});
+	import View from "./internal/View.svelte";
 
-	export let rootItem: NavigationItem;
-	let items: NavigationItem[] = [rootItem];
-	let topComponent: any;
-	function push(item: NavigationItem) {
-		items = items.concat(item);
+	export let viewController: UINavigationController;
+
+	const viewControllers = viewController.viewControllers;
+	const topViewController = viewController.topViewController;
+
+	function back() {
+		viewController.pop();
 	}
-	function pop() {
-		if (items.length <= 1) {
-			return;
-		}
-		const newAry = [...items];
-		newAry.pop();
-		items = newAry;
-	}
-	function updateTitle(title: string) {
-		const newItem = items[items.length - 1];
-		newItem.title = title;
-		items[items.length - 1] = newItem;
-	}
-	function updateRightButtonItem(item: UIBarButtonItem) {
-		const newItem = items[items.length - 1];
-		newItem.rightButtonItem = item;
-		items[items.length - 1] = newItem;
-	}
-	function updateLeftButtonItem(item: UIBarButtonItem) {
-		const newItem = items[items.length - 1];
-		newItem.leftButtonItem = item;
-		items[items.length - 1] = newItem;
-	}
-	export function getTopItem(): NavigationItem {
-		return items[items.length - 1];
-	}
-	export function getTopComponent() {
-		return topComponent;
-	}
-	$: topItem = items[items.length - 1];
 </script>
 
-<div class="root">
-	{#if !topItem.hidesNavigationBarWhenPushed}
-		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar {items} on:backButtonTap={pop} />
-		</div>
-	{/if}
+<div class="NavigationView">
+	<slot />
 	<div class="items">
-		{#each items as item, index}
-			{@const top = index == items.length - 1}
+		{#each $viewControllers as vc, index}
+			{@const top = index == $viewControllers.length - 1}
 			<div
 				class="item"
 				use:swipe={{
-					onSwipeRight() {
-						pop();
-					},
+					onSwipeRight: back,
 				}}
 				class:top
-				class:navBarHidden={item.hidesNavigationBarWhenPushed}
+				class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
-				<svelte:component this={item.component} {...item.props} bind:this={topComponent} />
+				<View viewController={vc} />
 			</div>
 		{/each}
 	</div>
+	{#if !$topViewController.hidesNavigationBarWhenPushed}
+		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
+			<UiNavigationBar items={$viewControllers.map((x) => x.navigationItem)} on:backButtonTap={back} />
+		</div>
+	{/if}
 </div>
 
 <style>
-	.root {
+	.NavigationView {
 		width: 100%;
 		height: 100%;
 		position: relative;

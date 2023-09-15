@@ -1,16 +1,14 @@
 <script lang="ts">
-	import { getSceneContext, type TabBarItem } from "$lib/index.js";
+    import type { UITabBarItem } from "$lib/index.js";
 	import UiTab from "./UITab.svelte";
 	export let selection = 0;
-	export let items: TabBarItem[];
-	const { dark } = getSceneContext();
-
+	export let items: UITabBarItem[];
 	function onTabClick(index: number) {
 		selection = index;
 	}
 </script>
 
-<div class="root" class:dark>
+<div class="root">
 	<div class="tabs">
 		{#each items as item, index (item.title)}
 			<UiTab
@@ -32,16 +30,12 @@
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: flex-start;
-		background-color: var(--ui-chrome-light);
-		border-top: solid 0.1px rgba(0 0 0/15%);
+		background-color: var(--ui-chrome);
+		border-top: solid 0.1px var(--ui-separator);
 	}
 	.tabs {
 		display: flex;
 		height: 49px;
 		align-items: center;
-	}
-	.dark {
-		border-color: rgba(255 255 255/15%);
-		background-color: var(--ui-chrome-dark);
 	}
 </style>
