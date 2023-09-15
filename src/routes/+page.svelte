@@ -4,12 +4,13 @@
     import { UITabBarController } from "$lib/UITabBarController.js";
     import { UIViewController } from "$lib/UIViewController.js";
     import "../globals.css";
+    import FloatingButton from "./FloatingButton.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
 
     const sceneController = new UISceneController(
         new UITabBarController([
-            new UINavigationController(new UIViewController(LandmarkList, {})),
+            new UINavigationController(new UIViewController(LandmarkList, {}), FloatingButton),
             new UIViewController(Page1, {}, { tabBarItem: { title: "Demo", icon: "home" } }),
         ])
     );

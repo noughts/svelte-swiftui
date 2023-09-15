@@ -5,6 +5,7 @@
 	import { swipe } from "./swipe.js";
 
 	export let viewController: UINavigationController;
+	export let subComponent:any = null;
 
 	const viewControllers = viewController.viewControllers;
 	const topViewController = viewController.topViewController;
@@ -15,6 +16,9 @@
 </script>
 
 <div class="NavigationView">
+	{#if subComponent}
+		<svelte:component this={subComponent} />
+	{/if}
 	<div class="items">
 		{#each $viewControllers as vc, index}
 			{@const top = index == $viewControllers.length - 1}
