@@ -1,8 +1,7 @@
-import type { SvelteComponent } from "svelte";
-import type { UINavigationItem, UITabBarItem } from "./index.js";
 import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
+import type { UINavigationItem, UITabBarItem } from "./index.js";
 
 export class UIViewController{
 

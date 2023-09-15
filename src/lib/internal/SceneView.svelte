@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { fly } from "svelte/transition";
 	import type { UISceneController } from "../UISceneController.js";
-	import "../svelte-swiftui.css";
 	import View from "../View.svelte";
+	import "../svelte-swiftui.css";
 	export let viewController: UISceneController;
 	const viewControllers = viewController.viewControllers;
 </script>
