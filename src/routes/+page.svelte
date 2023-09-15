@@ -7,13 +7,12 @@
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
 
-    const landmarlList_vc = new UIViewController(LandmarkList, {});
-    const nc = new UINavigationController(landmarlList_vc);
-    const tbc = new UITabBarController([
-        nc,
-        new UIViewController(Page1, {}, { tabBarItem: { title: "Demo", icon: "home" } }),
-    ]);
-    const sceneController = new UISceneController(tbc);
+    const sceneController = new UISceneController(
+        new UITabBarController([
+            new UINavigationController(new UIViewController(LandmarkList, {})),
+            new UIViewController(Page1, {}, { tabBarItem: { title: "Demo", icon: "home" } }),
+        ])
+    );
 </script>
 
 <div class="root">
