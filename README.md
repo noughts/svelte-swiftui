@@ -1,3 +1,49 @@
+# Svelte UIKit
+A framework for prototyping mobile apps in Svelte.
+The goal is to reproduce the general navigation of a mobile application.
+
+The system design is equivalent to Apple's UIKit API.
+
+## Extending NavigationView
+
+For example, if you want to place a floating button on a View represented by UINavigationController, you can inherit it as follows.
+
+```
+<script lang="ts">
+	import NavigationView from "$lib/NavigationView.svelte";
+	import type { UINavigationController } from "$lib/UINavigationController.js";
+	import { UIView } from "$lib/UIView.js";
+	import { UIViewController } from "$lib/UIViewController.js";
+	import DemoScreen from "./DemoScreen.svelte";
+
+	export let viewController: UINavigationController;
+
+	function onFabClick() {
+		viewController.present(new UIViewController(new UIView(DemoScreen), {}));
+	}
+</script>
+
+<NavigationView {viewController}>
+	<button class="fab" on:click={onFabClick}>FAB</button>
+</NavigationView>
+
+<style>
+	.fab {
+		position: absolute;
+		width: 88px;
+		height: 88px;
+		left: 22px;
+		bottom: 22px;
+		z-index: 100;
+	}
+</style>
+
+```
+
+
+
+
+
 # create-svelte
 
 Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).

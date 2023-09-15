@@ -3,7 +3,7 @@
 <script lang="ts">
 	import NavigationView from "$lib/NavigationView.svelte";
 	import type { UINavigationController } from "$lib/UINavigationController.js";
-    import { UIView } from "$lib/UIView.js";
+	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import DemoScreen from "./DemoScreen.svelte";
 
