@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { UITabBarController } from "$lib/UITabBarController.js";
 	import UiTabBar from "./UITabBar.svelte";
-	import View from "./View.svelte";
+	import View from "../View.svelte";
 	export let viewController: UITabBarController;
 	export let selection = 0;
 	const viewControllers = viewController.viewControllers;

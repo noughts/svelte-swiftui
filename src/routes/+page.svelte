@@ -1,13 +1,14 @@
 <script lang="ts">
+    import "../globals.css";
     import { UINavigationController } from "$lib/UINavigationController.js";
     import { UISceneController } from "$lib/UISceneController.js";
     import { UITabBarController } from "$lib/UITabBarController.js";
     import { UIView } from "$lib/UIView.js";
     import { UIViewController } from "$lib/UIViewController.js";
-    import "../globals.css";
     import HomeNav from "./HomeNav.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
+    import View from "$lib/View.svelte";
 
     const sceneController = new UISceneController(
         new UITabBarController([
@@ -18,11 +19,7 @@
 </script>
 
 <div class="root">
-    <svelte:component
-        this={sceneController.view.component}
-        {...sceneController.view.props}
-        viewController={sceneController}
-    />
+    <View viewController={sceneController} />
 </div>
 
 <style>

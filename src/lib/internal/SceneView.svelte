@@ -2,7 +2,7 @@
 	import { fly } from "svelte/transition";
 	import type { UISceneController } from "../UISceneController.js";
 	import "../svelte-swiftui.css";
-	import View from "./View.svelte";
+	import View from "../View.svelte";
 	export let viewController: UISceneController;
 	const viewControllers = viewController.viewControllers;
 </script>

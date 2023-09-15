@@ -3,7 +3,7 @@
 	import { fly } from "svelte/transition";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
-	import View from "./internal/View.svelte";
+	import View from "./View.svelte";
 
 	export let viewController: UINavigationController;
 
