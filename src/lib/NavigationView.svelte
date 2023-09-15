@@ -26,7 +26,7 @@
 					onSwipeRight: back,
 				}}
 				class:top
-				class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
+				class:navBarHidden={$topViewController.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
 				<View viewController={vc} />
