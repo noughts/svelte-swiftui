@@ -5,6 +5,8 @@ import { UIView } from "./UIView.js";
 
 export class UISceneController extends UIViewController {
 
+	readonly className:string = "UISceneController";
+
 	readonly viewControllers = writable<UIViewController[]>([]);
 	readonly topViewController = derived(this.viewControllers, $a => {
 		return $a[$a.length - 1];

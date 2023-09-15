@@ -1,20 +1,22 @@
 import { derived, get, writable } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
-import { UIViewController } from "./UIViewController.js";
+import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
 import { UIView } from "./UIView.js";
 
 export class UINavigationController extends UIViewController {
+
+	readonly className:string = "UINavigationController";
 
 	readonly viewControllers = writable<UIViewController[]>([]);
 	readonly topViewController = derived(this.viewControllers, $a => {
 		return $a[$a.length - 1];
 	})
 
-	constructor(rootViewController: UIViewController, view?: UIView) {
+	constructor(rootViewController: UIViewController, view?: UIView, options?:UIViewControllerOptions) {
 		if(view){
-			super(view)
+			super(view, options)
 		} else {
-			super(new UIView(NavigationView))
+			super(new UIView(NavigationView), options)
 		}
 		rootViewController.presentingViewController = this;
 		this.viewControllers.set([rootViewController]);

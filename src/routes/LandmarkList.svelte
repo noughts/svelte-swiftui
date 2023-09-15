@@ -39,7 +39,7 @@
 
 <div class="root">
 	<VStack>
-		<div>{count}</div>
+		<div class="count">{count}</div>
 		{#each landmarks as landmark}
 			<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
 		{/each}
@@ -50,5 +50,11 @@
 	.root {
 		height: 100%;
 		background-color: white;
+	}
+	.count{
+		background-color: green;
+		color:white;
+		font-size: 16px;
+		padding:8px;
 	}
 </style>

@@ -3,7 +3,15 @@ import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
 import type { UINavigationItem, UITabBarItem } from "./index.js";
 
-export class UIViewController{
+export type UIViewControllerOptions = {
+	navigationItem?: UINavigationItem;
+	tabBarItem?: UITabBarItem;
+	hidesNavigationBarWhenPushed?: boolean;
+}
+
+export class UIViewController {
+
+	readonly className:string = "UIViewController";
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
@@ -11,11 +19,7 @@ export class UIViewController{
 	presentingViewController?: UIViewController;
 
 
-	constructor(readonly view:UIView, readonly options?: {
-		navigationItem?: UINavigationItem;
-		tabBarItem?: UITabBarItem;
-		hidesNavigationBarWhenPushed?: boolean;
-	}) {
+	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
 		if (options?.hidesNavigationBarWhenPushed) {
 			this.hidesNavigationBarWhenPushed = options.hidesNavigationBarWhenPushed;
 		}
@@ -31,15 +35,17 @@ export class UIViewController{
 		let parent: UIViewController | undefined = this;
 		while (true) {
 			if (!parent) return null;
-			if (parent.constructor.name == "UINavigationController") return parent as UINavigationController;
+			// 循環参照を避けるために instanceof は使用しません
+			if (parent.className == "UINavigationController") return parent as UINavigationController;
 			parent = parent.presentingViewController;
 		}
 	}
-	get sceneController(): any {
+	get sceneController(): UISceneController | null {
 		let parent: UIViewController | undefined = this;
 		while (true) {
 			if (!parent) return null;
-			if (parent.constructor.name == "UISceneController") return parent as UISceneController;
+			// 循環参照を避けるために instanceof は使用しません
+			if (parent.className == "UISceneController") return parent as UISceneController;
 			parent = parent.presentingViewController;
 		}
 	}
