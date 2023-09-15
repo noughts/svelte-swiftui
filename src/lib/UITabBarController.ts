@@ -4,8 +4,8 @@ import { UIViewController } from "./UIViewController.js";
 
 export class UITabBarController extends UIViewController{
 
-	constructor(viewControllers:UIViewController[]){
-		super(new UIView(TabView, {viewControllers}));
+	constructor(readonly viewControllers:UIViewController[]){
+		super(new UIView(TabView));
 		viewControllers.forEach(x=>{
 			x.presentingViewController = this;
 		})

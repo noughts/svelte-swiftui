@@ -1,17 +1,17 @@
 <script lang="ts">
-	import type { UIViewController } from "../UIViewController.js";
+    import type { UITabBarController } from "$lib/UITabBarController.js";
 	import UiTabBar from "./UITabBar.svelte";
 	import View from "./View.svelte";
-	export let viewController: UIViewController;
+	export let viewController: UITabBarController;
 	export let selection = 0;
-	export let viewControllers: UIViewController[];
+	const viewControllers = viewController.viewControllers;
 </script>
 
 <div class="root">
 	<div class="content">
-		{#each viewControllers as viewController, index (viewController.tabBarItem?.title)}
+		{#each viewControllers as vc, index (vc.tabBarItem?.title)}
 			<div class="item" class:selected={index === selection}>
-				<View {viewController} />
+				<View viewController={vc} />
 			</div>
 		{/each}
 	</div>
