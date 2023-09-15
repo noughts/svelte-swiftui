@@ -3,7 +3,13 @@ import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
 import type { UINavigationItem, UITabBarItem } from "./index.js";
 
-export class UIViewController{
+export type UIViewControllerOptions = {
+	navigationItem?: UINavigationItem;
+	tabBarItem?: UITabBarItem;
+	hidesNavigationBarWhenPushed?: boolean;
+}
+
+export class UIViewController {
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
@@ -11,11 +17,7 @@ export class UIViewController{
 	presentingViewController?: UIViewController;
 
 
-	constructor(readonly view:UIView, readonly options?: {
-		navigationItem?: UINavigationItem;
-		tabBarItem?: UITabBarItem;
-		hidesNavigationBarWhenPushed?: boolean;
-	}) {
+	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
 		if (options?.hidesNavigationBarWhenPushed) {
 			this.hidesNavigationBarWhenPushed = options.hidesNavigationBarWhenPushed;
 		}

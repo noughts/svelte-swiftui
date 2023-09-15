@@ -9,18 +9,17 @@
     import HomeNav from "./HomeNav.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
-
-    const sceneController = new UISceneController(
-        new UITabBarController([
-            new UINavigationController(new UIViewController(new UIView(LandmarkList)), new UIView(HomeNav)),
-            new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: "home" } }),
-        ])
-    );
-   
 </script>
 
 <div class="root">
-    <View viewController={sceneController} />
+    <View
+        viewController={new UISceneController(
+            new UITabBarController([
+                new UINavigationController(new UIViewController(new UIView(LandmarkList)), new UIView(HomeNav)),
+                new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: "home" } }),
+            ])
+        )}
+    />
 </div>
 
 <style>
