@@ -11,6 +11,8 @@ export type UIViewControllerOptions = {
 
 export class UIViewController {
 
+	readonly className:string = "UIViewController";
+
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: "" };
@@ -33,15 +35,15 @@ export class UIViewController {
 		let parent: UIViewController | undefined = this;
 		while (true) {
 			if (!parent) return null;
-			if (parent.constructor.name == "UINavigationController") return parent as UINavigationController;
+			if (parent.className == "UINavigationController") return parent as UINavigationController;
 			parent = parent.presentingViewController;
 		}
 	}
-	get sceneController(): any {
+	get sceneController(): UISceneController | null {
 		let parent: UIViewController | undefined = this;
 		while (true) {
 			if (!parent) return null;
-			if (parent.constructor.name == "UISceneController") return parent as UISceneController;
+			if (parent.className == "UISceneController") return parent as UISceneController;
 			parent = parent.presentingViewController;
 		}
 	}

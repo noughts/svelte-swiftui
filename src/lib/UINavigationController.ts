@@ -5,6 +5,8 @@ import { UIView } from "./UIView.js";
 
 export class UINavigationController extends UIViewController {
 
+	readonly className:string = "UINavigationController";
+
 	readonly viewControllers = writable<UIViewController[]>([]);
 	readonly topViewController = derived(this.viewControllers, $a => {
 		return $a[$a.length - 1];
