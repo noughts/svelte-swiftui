@@ -9,8 +9,12 @@ export class UINavigationController extends UIViewController {
 		return $a[$a.length - 1];
 	})
 
-	constructor(rootViewController: UIViewController, subComponent?: any) {
-		super(NavigationView, { subComponent })
+	constructor(rootViewController: UIViewController, component?: any) {
+		if(component){
+			super(component, {})
+		} else {
+			super(NavigationView, {})
+		}
 		rootViewController.presentingViewController = this;
 		this.viewControllers.set([rootViewController]);
 	}
