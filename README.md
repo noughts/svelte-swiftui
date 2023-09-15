@@ -8,7 +8,7 @@ The system design is equivalent to Apple's UIKit API.
 
 For example, if you want to place a floating button on a View represented by UINavigationController, you can inherit it as follows.
 
-```
+```svelte
 <script lang="ts">
     import NavigationView from "$lib/NavigationView.svelte";
     import type { UINavigationController } from "$lib/UINavigationController.js";
