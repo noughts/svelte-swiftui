@@ -14,7 +14,7 @@
 	}
 </script>
 
-<div class="root">
+<div class="NavigationView">
 	<div class="items">
 		{#each $viewControllers as vc, index}
 			{@const top = index == $viewControllers.length - 1}
@@ -39,7 +39,7 @@
 </div>
 
 <style>
-	.root {
+	.NavigationView {
 		width: 100%;
 		height: 100%;
 		position: relative;
