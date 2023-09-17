@@ -14,7 +14,7 @@ The code to implement [standard tab bar navigation](https://developer.apple.com/
 
 <script lang="ts">
 	import { UISceneController, UITabBarController, UIView, UIViewController, View } from "@noughts/svelte-uikit";
-	import WorldClockView from "./WorldClockView.svelte";
+	// imports some Svelte Components here. e.g.: import WorldClockView from "./WorldClockView.svelte";
 </script>
 
 <div class="root">
@@ -22,10 +22,10 @@ The code to implement [standard tab bar navigation](https://developer.apple.com/
 		viewController={new UISceneController(
 			new UITabBarController([
 				new UIViewController(new UIView(WorldClockView), { tabBarItem: { title: "World Clock", icon: "language" } }),
-				new UIViewController(new UIView(WorldClockView), { tabBarItem: { title: "Alarm", icon: "alarm" } }),
-				new UIViewController(new UIView(WorldClockView), { tabBarItem: { title: "Bedtime", icon: "bed" } }),
-				new UIViewController(new UIView(WorldClockView), { tabBarItem: { title: "Stopwatch", icon: "timer" } }),
-				new UIViewController(new UIView(WorldClockView), { tabBarItem: { title: "Timer", icon: "pace" } }),
+				new UIViewController(new UIView(AlermView), { tabBarItem: { title: "Alarm", icon: "alarm" } }),
+				new UIViewController(new UIView(BedtimeView), { tabBarItem: { title: "Bedtime", icon: "bed" } }),
+				new UIViewController(new UIView(StopwatchView), { tabBarItem: { title: "Stopwatch", icon: "timer" } }),
+				new UIViewController(new UIView(TimerView), { tabBarItem: { title: "Timer", icon: "pace" } }),
 			])
 		)}
 	/>
