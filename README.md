@@ -49,20 +49,17 @@ The code to implement [standard tab bar navigation](https://developer.apple.com/
 
 # Extending NavigationView
 
-For example, if you want to place a floating button on a View represented by UINavigationController, you can inherit it as follows.
+For example, if you want to place a floating button on a View represented by UINavigationController, you can extend it as follows.
 
 ```svelte
 <script lang="ts">
-    import NavigationView from "$lib/NavigationView.svelte";
-    import type { UINavigationController } from "$lib/UINavigationController.js";
-    import { UIView } from "$lib/UIView.js";
-    import { UIViewController } from "$lib/UIViewController.js";
-    import DemoScreen from "./DemoScreen.svelte";
+    import { NavigationView, UINavigationController, UIView, UIViewController } from "@noughts/svelte-uikit";
+    import WorldClockView from "./WorldClockView.svelte";
 
     export let viewController: UINavigationController;
 
     function onFabClick() {
-        viewController.present(new UIViewController(new UIView(DemoScreen), {}));
+        viewController.present(new UIViewController(new UIView(WorldClockView), {}));
     }
 </script>
 
@@ -80,4 +77,5 @@ For example, if you want to place a floating button on a View represented by UIN
         z-index: 100;
     }
 </style>
+
 ```
