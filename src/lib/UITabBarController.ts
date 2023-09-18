@@ -8,6 +8,7 @@ export class UITabBarController extends UIViewController{
 		super(new UIView(TabView));
 		viewControllers.forEach(x=>{
 			x.presentingViewController = this;
+			x.tabBarController = this;
 		})
 	}
 

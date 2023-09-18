@@ -1,7 +1,7 @@
 import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
-import type { UINavigationItem, UITabBarItem } from "./index.js";
+import type { UINavigationItem, UITabBarController, UITabBarItem } from "./index.js";
 
 export type UIViewControllerOptions = {
 	navigationItem?: UINavigationItem;
@@ -17,6 +17,7 @@ export class UIViewController {
 	navigationItem: UINavigationItem = { title: "placeholder" };
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: "" };
 	presentingViewController?: UIViewController;
+	tabBarController?:UITabBarController;
 
 
 	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
