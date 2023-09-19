@@ -22,9 +22,7 @@ export class UINavigationController extends UIViewController {
 	}
 
 	push(viewController: UIViewController) {
-		console.log(this.tabBarController)
 		viewController.presentingViewController = this;
-		viewController.tabBarController = this.tabBarController;
 		const current = get(this.viewControllers);
 		this.viewControllers.set(current.concat(viewController));
 	}

@@ -17,8 +17,6 @@ export class UIViewController {
 	navigationItem: UINavigationItem = { title: "placeholder" };
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: "" };
 	presentingViewController?: UIViewController;
-	tabBarController?:UITabBarController;
-
 
 	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
 		if (options?.hidesNavigationBarWhenPushed) {
@@ -32,6 +30,15 @@ export class UIViewController {
 		}
 	}
 
+	get tabBarController(): UITabBarController | null {
+		let parent: UIViewController | undefined = this;
+		while (true) {
+			if (!parent) return null;
+			// 循環参照を避けるために instanceof は使用しません
+			if (parent.className == "UITabBarController") return parent as UITabBarController;
+			parent = parent.presentingViewController;
+		}
+	}
 	get navigationController(): UINavigationController | null {
 		let parent: UIViewController | undefined = this;
 		while (true) {
