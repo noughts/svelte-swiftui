@@ -2,6 +2,7 @@
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import VStack from "$lib/VStack.svelte";
+    import { onMount } from "svelte";
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
@@ -26,6 +27,10 @@
 		{ name: "Turtle Rock" },
 		{ name: "Silver Salmon Creek" },
 	];
+
+	onMount(()=>{
+		console.log(viewController)
+	});
 
 	function onCellTap(landmark: Landmark) {
 		viewController.navigationController?.push(new UIViewController(new UIView(LandmarkDetail, { landmark })));

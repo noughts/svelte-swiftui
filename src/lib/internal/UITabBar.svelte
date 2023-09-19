@@ -1,11 +1,13 @@
 <script lang="ts">
     import type { UITabBarItem } from "$lib/index.js";
+    import { createEventDispatcher } from "svelte";
 	import UiTab from "./UITab.svelte";
 	export let selection = 0;
 	export let items: UITabBarItem[];
 	function onTabClick(index: number) {
 		selection = index;
 	}
+	const dispatch = createEventDispatcher();
 </script>
 
 <div class="root">
@@ -16,6 +18,7 @@
 				selected={index == selection}
 				on:click={(e) => {
 					onTabClick(index);
+					dispatch("didSelect", item);
 				}}
 			/>
 		{/each}

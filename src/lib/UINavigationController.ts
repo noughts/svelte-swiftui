@@ -1,7 +1,7 @@
 import { derived, get, writable } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
-import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
 import { UIView } from "./UIView.js";
+import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
 
 export class UINavigationController extends UIViewController {
 
@@ -19,6 +19,7 @@ export class UINavigationController extends UIViewController {
 			super(new UIView(NavigationView), options)
 		}
 		rootViewController.presentingViewController = this;
+		rootViewController.tabBarController = this.tabBarController;
 		this.viewControllers.set([rootViewController]);
 	}
 
