@@ -18,13 +18,13 @@ export class UINavigationController extends UIViewController {
 		} else {
 			super(new UIView(NavigationView), options)
 		}
-		rootViewController.presentingViewController = this;
-		rootViewController.tabBarController = this.tabBarController;
-		this.viewControllers.set([rootViewController]);
+		this.push(rootViewController)
 	}
 
 	push(viewController: UIViewController) {
+		console.log(this.tabBarController)
 		viewController.presentingViewController = this;
+		viewController.tabBarController = this.tabBarController;
 		const current = get(this.viewControllers);
 		this.viewControllers.set(current.concat(viewController));
 	}

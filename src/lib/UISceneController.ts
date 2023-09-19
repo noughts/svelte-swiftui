@@ -14,8 +14,7 @@ export class UISceneController extends UIViewController {
 
 	constructor(rootViewController: UIViewController) {
 		super(new UIView(SceneView), {})
-		rootViewController.presentingViewController = this;
-		this.viewControllers.set([rootViewController]);
+		this.push(rootViewController)
 	}
 
 	push(viewController: UIViewController) {

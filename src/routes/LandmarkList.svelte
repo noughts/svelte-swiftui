@@ -29,7 +29,7 @@
 	];
 
 	onMount(()=>{
-		console.log(viewController)
+		// console.log(viewController)
 	});
 
 	function onCellTap(landmark: Landmark) {
