@@ -2,7 +2,7 @@
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import VStack from "$lib/VStack.svelte";
-    import { onMount } from "svelte";
+	import { onMount } from "svelte";
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
@@ -28,8 +28,14 @@
 		{ name: "Silver Salmon Creek" },
 	];
 
-	onMount(()=>{
-		console.log(viewController.tabBarController)
+	onMount(() => {
+		function handler(e: Event) {
+			console.log(e);
+		}
+		viewController.tabBarController?.addEventListener("didSelect", handler);
+		return () => {
+			viewController.tabBarController?.removeEventListener("didSelect", handler);
+		};
 	});
 
 	function onCellTap(landmark: Landmark) {
@@ -56,10 +62,10 @@
 		height: 100%;
 		background-color: white;
 	}
-	.count{
+	.count {
 		background-color: green;
-		color:white;
+		color: white;
 		font-size: 16px;
-		padding:8px;
+		padding: 8px;
 	}
 </style>

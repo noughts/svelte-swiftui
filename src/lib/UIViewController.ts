@@ -9,7 +9,7 @@ export type UIViewControllerOptions = {
 	hidesNavigationBarWhenPushed?: boolean;
 }
 
-export class UIViewController {
+export class UIViewController extends EventTarget{
 
 	readonly className:string = "UIViewController";
 
@@ -19,6 +19,7 @@ export class UIViewController {
 	presentingViewController?: UIViewController;
 
 	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
+		super();
 		if (options?.hidesNavigationBarWhenPushed) {
 			this.hidesNavigationBarWhenPushed = options.hidesNavigationBarWhenPushed;
 		}

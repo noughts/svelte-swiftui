@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { UITabBarController } from "$lib/UITabBarController.js";
-	import UiTabBar from "./UITabBar.svelte";
+	import type { UITabBarController } from "$lib/UITabBarController.js";
 	import View from "../View.svelte";
+	import UiTabBar from "./UITabBar.svelte";
 	export let viewController: UITabBarController;
 	export let selection = 0;
 	const viewControllers = viewController.viewControllers;
@@ -20,6 +20,7 @@
 			return x.tabBarItem;
 		})}
 		bind:selection
+		on:didSelect={(e) => viewController.dispatchEvent(e)}
 	/>
 </div>
 
