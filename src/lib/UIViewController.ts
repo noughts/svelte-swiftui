@@ -9,14 +9,21 @@ export type UIViewControllerOptions = {
 	hidesNavigationBarWhenPushed?: boolean;
 }
 
-export class UIViewController extends EventTarget{
+enum UIModalPresentationStyle {
+	fullScreen = 'fullScreen',
+	pageSheet = 'pageSheet',
+	formSheet = 'formSheet',
+}
 
-	readonly className:string = "UIViewController";
+export class UIViewController extends EventTarget {
+
+	readonly className: string = "UIViewController";
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: "" };
 	presentingViewController?: UIViewController;
+	modalPresentationStyle: UIModalPresentationStyle = UIModalPresentationStyle.pageSheet;
 
 	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
 		super();
