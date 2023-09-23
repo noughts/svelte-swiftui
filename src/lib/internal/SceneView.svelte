@@ -20,7 +20,7 @@
 
 <div class="SvelteScene">
 	{#each $viewControllers as viewController, index}
-		<div class="item" class:top={index == $viewControllers.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
+		<div class="view" class:top={index == $viewControllers.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
 			<View {viewController} />
 		</div>
 	{/each}
@@ -33,13 +33,13 @@
 		background-color: white;
 		position: relative;
 	}
-	.item {
+	.view {
 		position: absolute;
 		inset: 0;
 		transition: filter 0.3s;
-		filter: brightness(80%);
+		/* filter: brightness(80%); */
 	}
 	.top {
-		filter: brightness(100%);
+		/* filter: brightness(100%); */
 	}
 </style>

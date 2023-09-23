@@ -7,15 +7,15 @@
 	const viewControllers = viewController.viewControllers;
 </script>
 
-<div class="root">
-	<div class="content">
+<div class="TabView">
+	<div class="views">
 		{#each viewControllers as vc, index (vc.tabBarItem?.title)}
-			<div class="item" class:selected={index === selection}>
+			<div class="view" class:selected={index === selection}>
 				<View viewController={vc} />
 			</div>
 		{/each}
 	</div>
-	<div class="tabBarPlaceholder" />
+
 	<UiTabBar
 		items={viewControllers.map((x) => {
 			return x.tabBarItem;
@@ -26,29 +26,26 @@
 </div>
 
 <style>
-	.root {
+	.TabView {
 		width: 100%;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 	}
-	.content {
+	.views {
 		flex-grow: 2;
-		overflow: hidden;
 		position: relative;
+		background-color: red;
 	}
-	.item {
+	.view {
 		position: absolute;
 		inset: 0;
 		opacity: 0;
 		pointer-events: none;
+		padding-bottom: 49px;
 	}
 	.selected {
 		opacity: 1;
 		pointer-events: auto;
-	}
-	.tabBarPlaceholder{
-		flex-shrink: 0;
-		height: calc(49px + env(safe-area-inset-bottom));
 	}
 </style>

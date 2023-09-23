@@ -17,7 +17,7 @@
 
 <div class="NavigationView">
 	<slot />
-	<div class="items">
+	<div class="views">
 		{#each $viewControllers as vc, index}
 			{@const top = index == $viewControllers.length - 1}
 			<div
@@ -55,16 +55,15 @@
 		right: 0;
 		z-index: 2;
 	}
-	.items {
+	.views {
 		position: relative;
 		flex-grow: 2;
-		overflow: hidden;
 	}
 	.item {
 		position: absolute;
 		inset: 0;
 		top: 44px;
-		overflow-y: scroll;
+
 		transition-property: transform, filter;
 		transition-duration: 0.3s;
 		transform: translateX(-50%);
