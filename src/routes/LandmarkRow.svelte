@@ -10,6 +10,7 @@
 	.root {
 		all: unset;
 		height: 44px;
-		border-bottom: solid 0.5px gray;
+		color: var(--high-emphasis);
+		border-bottom: solid 0.5px var(--separator);
 	}
 </style>

@@ -1,9 +1,10 @@
 .SvelteScene{
 	/* exaple: Force Light Mode */
-	--ui-tint-color:red !important;
+
+	/* --ui-tint-color:red !important;
 	--ui-chrome: rgba(255 255 255/67%) !important;
 	--ui-text:black !important;
-	--ui-separator: rgba(0 0 0/15%) !important;
+	--ui-separator: rgba(0 0 0/15%) !important; */
 }
 
 
@@ -22,4 +23,18 @@ body {
 	user-select: none;
 	-webkit-touch-callout: none;
 	font-size: 15px;
+}
+
+:root{
+	--bg-color:#ffffff;
+	--high-emphasis: rgba(0 0 0/87%);
+	--separator: rgba(0 0 0/15%);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root{
+		--bg-color:#1c1c1c;
+		--high-emphasis: rgba(255 255 255/87%);
+		--separator: rgba(255 255 255/15%);
+	}
 }

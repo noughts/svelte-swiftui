@@ -68,7 +68,7 @@
 <style>
 	.root {
 		height: 100%;
-		background-color: white;
+		background-color: var(--bg-color);
 	}
 	.count {
 		background-color: green;
