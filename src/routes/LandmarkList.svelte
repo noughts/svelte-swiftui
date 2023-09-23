@@ -6,7 +6,7 @@
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
-    import UiScrollView from "$lib/UIScrollView.svelte";
+    import ScrollView from "$lib/ScrollView.svelte";
 	export let viewController: UIViewController;
 	viewController.navigationItem.title = "Landmark List";
 
@@ -55,14 +55,14 @@
 </script>
 
 <div class="root">
-	<UiScrollView>
+	<ScrollView>
 		<VStack>
 			<div class="count">{count}</div>
 			{#each landmarks as landmark}
 				<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
 			{/each}
 		</VStack>
-	</UiScrollView>
+	</ScrollView>
 </div>
 
 <style>

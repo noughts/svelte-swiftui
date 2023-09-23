@@ -45,24 +45,21 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
-		display: flex;
-		flex-direction: column;
 	}
 	.navBar {
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: 2;
 	}
 	.views {
+		height: 100%;
 		position: relative;
-		flex-grow: 2;
 	}
 	.item {
 		position: absolute;
 		inset: 0;
-		top: 44px;
 
 		transition-property: transform, filter;
 		transition-duration: 0.3s;
