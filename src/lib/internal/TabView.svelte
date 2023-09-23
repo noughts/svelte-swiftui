@@ -15,6 +15,7 @@
 			</div>
 		{/each}
 	</div>
+	<div class="tabBarPlaceholder" />
 	<UiTabBar
 		items={viewControllers.map((x) => {
 			return x.tabBarItem;
@@ -45,5 +46,9 @@
 	.selected {
 		opacity: 1;
 		pointer-events: auto;
+	}
+	.tabBarPlaceholder{
+		flex-shrink: 0;
+		height: calc(49px + env(safe-area-inset-bottom));
 	}
 </style>
