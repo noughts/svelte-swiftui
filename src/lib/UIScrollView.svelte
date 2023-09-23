@@ -11,7 +11,7 @@
 </script>
 
 <div class="UIScrollView" class:snap>
-	<div class="inner"
+	<div
 		style="padding-top: {contentInset.top}px; padding-bottom: calc({contentInset.bottom}px + env(safe-area-inset-bottom));"
 	>
 		<slot />
@@ -22,9 +22,6 @@
 	.UIScrollView {
 		height: 100%;
 		overflow-y: scroll;
-	}
-	.inner{
-		height: 100%;
 	}
 	.snap {
 		scroll-snap-type: y mandatory;
