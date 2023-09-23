@@ -11,6 +11,12 @@
 	--ui-separator: rgba(0 0 0/15%);
 }
 
+.uiChrome{
+	background-color: var(--ui-chrome);
+	backdrop-filter: blur(32px);
+	-webkit-backdrop-filter: blur(32px);
+}
+
 @media (prefers-color-scheme: dark) {
 	.SvelteScene {
 		--ui-chrome: #1c1c1c;

@@ -10,7 +10,7 @@
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="UITabBar">
+<div class="UITabBar uiChrome">
 	<div class="tabs">
 		{#each items as item, index (item.title)}
 			<UiTab
@@ -37,7 +37,6 @@
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: flex-start;
-		background-color: var(--ui-chrome);
 		border-top: solid 0.1px var(--ui-separator);
 	}
 	.tabs {
