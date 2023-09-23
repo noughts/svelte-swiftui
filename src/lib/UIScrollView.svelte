@@ -6,7 +6,7 @@
 </script>
 
 <script lang="ts">
-	export let contentInset: UIEdgeInsets = { top: 0, bottom: 0 };
+	export let contentInset: UIEdgeInsets = { top: 44, bottom: 49 };
 </script>
 
 <div class="UIScrollView">

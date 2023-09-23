@@ -6,6 +6,7 @@
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
+    import UiScrollView from "$lib/UIScrollView.svelte";
 	export let viewController: UIViewController;
 	viewController.navigationItem.title = "Landmark List";
 
@@ -31,7 +32,6 @@
 		{ name: "Turtle Rock" },
 		{ name: "Silver Salmon Creek" },
 		{ name: "End" },
-
 	];
 
 	onMount(() => {
@@ -55,19 +55,20 @@
 </script>
 
 <div class="root">
-	<VStack>
-		<div class="count">{count}</div>
-		{#each landmarks as landmark}
-			<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
-		{/each}
-	</VStack>
+	<UiScrollView>
+		<VStack>
+			<div class="count">{count}</div>
+			{#each landmarks as landmark}
+				<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
+			{/each}
+		</VStack>
+	</UiScrollView>
 </div>
 
 <style>
 	.root {
 		height: 100%;
 		background-color: white;
-		overflow-y: scroll;
 	}
 	.count {
 		background-color: green;
