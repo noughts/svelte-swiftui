@@ -1,7 +1,7 @@
 {
 	"name": "@noughts/svelte-uikit",
 	"license": "MIT",
-	"version": "0.1.0",
+	"version": "0.1.15",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "npm version patch && vite build && npm run package",
@@ -10,6 +10,10 @@
 		"prepublishOnly": "npm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/noughts/svelte-uikit"
 	},
 	"exports": {
 		".": {

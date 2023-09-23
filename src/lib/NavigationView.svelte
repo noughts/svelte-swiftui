@@ -3,7 +3,7 @@
 	import { fly } from "svelte/transition";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
-	import View from "./internal/View.svelte";
+	import View from "./View.svelte";
 
 	export let viewController: UINavigationController;
 
@@ -26,7 +26,7 @@
 					onSwipeRight: back,
 				}}
 				class:top
-				class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
+				class:navBarHidden={vc.hidesNavigationBarWhenPushed}
 				transition:fly={{ x: "100%", opacity: 1 }}
 			>
 				<View viewController={vc} />

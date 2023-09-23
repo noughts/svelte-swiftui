@@ -2,6 +2,7 @@
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import VStack from "$lib/VStack.svelte";
+	import { onMount } from "svelte";
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
@@ -27,6 +28,16 @@
 		{ name: "Silver Salmon Creek" },
 	];
 
+	onMount(() => {
+		function handler(e: Event) {
+			console.log(e);
+		}
+		viewController.tabBarController?.addEventListener("didSelect", handler);
+		return () => {
+			viewController.tabBarController?.removeEventListener("didSelect", handler);
+		};
+	});
+
 	function onCellTap(landmark: Landmark) {
 		viewController.navigationController?.push(new UIViewController(new UIView(LandmarkDetail, { landmark })));
 	}
@@ -39,7 +50,7 @@
 
 <div class="root">
 	<VStack>
-		<div>{count}</div>
+		<div class="count">{count}</div>
 		{#each landmarks as landmark}
 			<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
 		{/each}
@@ -50,5 +61,11 @@
 	.root {
 		height: 100%;
 		background-color: white;
+	}
+	.count {
+		background-color: green;
+		color: white;
+		font-size: 16px;
+		padding: 8px;
 	}
 </style>

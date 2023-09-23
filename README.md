@@ -1,58 +1,81 @@
-# create-svelte
+# Svelte UIKit
+A framework for prototyping mobile apps in Svelte.
+The goal is to reproduce the general navigation of a mobile application.
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+The system design is equivalent to Apple's UIKit API.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+# Basics
 
-## Creating a project
+The code to implement [standard tab bar navigation](https://developer.apple.com/documentation/uikit/uitabbarcontroller) in iOS is as follows
 
-If you're seeing this, you've probably already done this step. Congrats!
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+```svelte
+<!-- src/routes/+page.svelte -->
 
-# create a new project in my-app
-npm create svelte@latest my-app
+<script lang="ts">
+    import { UISceneController, UITabBarController, UIView, UIViewController, View } from "@noughts/svelte-uikit";
+    // imports some Svelte Components here. e.g.: import WorldClockView from "./WorldClockView.svelte";
+</script>
+
+<div class="root">
+    <View
+        viewController={new UISceneController(
+            new UITabBarController([
+                new UIViewController(new UIView(WorldClockView), { tabBarItem: { title: "World Clock", icon: "language" } }),
+                new UIViewController(new UIView(AlermView), { tabBarItem: { title: "Alarm", icon: "alarm" } }),
+                new UIViewController(new UIView(BedtimeView), { tabBarItem: { title: "Bedtime", icon: "bed" } }),
+                new UIViewController(new UIView(StopwatchView), { tabBarItem: { title: "Stopwatch", icon: "timer" } }),
+                new UIViewController(new UIView(TimerView), { tabBarItem: { title: "Timer", icon: "pace" } }),
+            ])
+        )}
+    />
+</div>
+
+<style>
+    :global(*) {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        --ui-tint-color:orange !important;
+    }
+    .root {
+        width: 100dvw;
+        max-width: 480px;
+        height: 100dvh;
+        overflow: hidden;
+    }
+</style>
 ```
 
-## Developing
+# Extending NavigationView
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+For example, if you want to place a floating button on a View represented by UINavigationController, you can extend it as follows.
 
-```bash
-npm run dev
+```svelte
+<script lang="ts">
+    import { NavigationView, UINavigationController, UIView, UIViewController } from "@noughts/svelte-uikit";
+    import WorldClockView from "./WorldClockView.svelte";
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+    export let viewController: UINavigationController;
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+    function onFabClick() {
+        viewController.present(new UIViewController(new UIView(WorldClockView), {}));
+    }
+</script>
 
-## Building
+<NavigationView {viewController}>
+    <button class="fab" on:click={onFabClick}>FAB</button>
+</NavigationView>
 
-To build your library:
+<style>
+    .fab {
+        position: absolute;
+        width: 88px;
+        height: 88px;
+        left: 22px;
+        bottom: 22px;
+        z-index: 100;
+    }
+</style>
 
-```bash
-npm run package
-```
-
-To create a production version of your showcase app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
 ```

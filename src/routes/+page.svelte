@@ -4,24 +4,27 @@
     import { UITabBarController } from "$lib/UITabBarController.js";
     import { UIView } from "$lib/UIView.js";
     import { UIViewController } from "$lib/UIViewController.js";
+    import View from "$lib/View.svelte";
     import "../globals.css";
     import HomeNav from "./HomeNav.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
-
-    const sceneController = new UISceneController(
-        new UITabBarController([
-            new UINavigationController(new UIViewController(new UIView(LandmarkList)), new UIView(HomeNav)),
-            new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: "home" } }),
-        ])
-    );
 </script>
 
 <div class="root">
-    <svelte:component
-        this={sceneController.view.component}
-        {...sceneController.view.props}
-        viewController={sceneController}
+    <View
+        viewController={new UISceneController(
+            new UITabBarController([
+                new UINavigationController(
+                    new UIViewController(new UIView(LandmarkList), { hidesNavigationBarWhenPushed: true }),
+                    new UIView(HomeNav),
+                    {
+                        tabBarItem: { title: "Home", icon: "home" },
+                    }
+                ),
+                new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: "star" } }),
+            ])
+        )}
     />
 </div>
 

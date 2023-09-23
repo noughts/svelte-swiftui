@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { fly } from "svelte/transition";
 	import type { UISceneController } from "../UISceneController.js";
+	import View from "../View.svelte";
 	import "../svelte-swiftui.css";
-	import View from "./View.svelte";
 	export let viewController: UISceneController;
 	const viewControllers = viewController.viewControllers;
 </script>
@@ -14,7 +14,7 @@
 	/>
 	<link
 		rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 	/>
 </svelte:head>
 

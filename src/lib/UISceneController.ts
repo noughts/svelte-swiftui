@@ -5,6 +5,8 @@ import { UIView } from "./UIView.js";
 
 export class UISceneController extends UIViewController {
 
+	readonly className:string = "UISceneController";
+
 	readonly viewControllers = writable<UIViewController[]>([]);
 	readonly topViewController = derived(this.viewControllers, $a => {
 		return $a[$a.length - 1];
@@ -12,8 +14,7 @@ export class UISceneController extends UIViewController {
 
 	constructor(rootViewController: UIViewController) {
 		super(new UIView(SceneView), {})
-		rootViewController.presentingViewController = this;
-		this.viewControllers.set([rootViewController]);
+		this.push(rootViewController)
 	}
 
 	push(viewController: UIViewController) {
