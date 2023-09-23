@@ -15,13 +15,9 @@
     <View
         viewController={new UISceneController(
             new UITabBarController([
-                new UINavigationController(
-                    new UIViewController(new UIView(LandmarkList)),
-                    new UIView(HomeNav),
-                    {
-                        tabBarItem: { title: "w/NavBar", icon: "home" },
-                    }
-                ),
+                new UINavigationController(new UIViewController(new UIView(LandmarkList)), null, {
+                    tabBarItem: { title: "w/NavBar", icon: "home" },
+                }),
                 new UINavigationController(
                     new UIViewController(new UIView(LandmarkList), { hidesNavigationBarWhenPushed: true }),
                     new UIView(HomeNav),

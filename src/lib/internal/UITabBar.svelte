@@ -37,8 +37,7 @@
 		flex-direction: column;
 		align-items: stretch;
 		justify-content: flex-start;
-		/* background-color: var(--ui-chrome); */
-		background-color: rgba(255 255 255/50%);
+		background-color: var(--ui-chrome);
 		border-top: solid 0.1px var(--ui-separator);
 	}
 	.tabs {

@@ -5,15 +5,15 @@ import { UIViewController, type UIViewControllerOptions } from "./UIViewControll
 
 export class UINavigationController extends UIViewController {
 
-	readonly className:string = "UINavigationController";
+	readonly className: string = "UINavigationController";
 
 	readonly viewControllers = writable<UIViewController[]>([]);
 	readonly topViewController = derived(this.viewControllers, $a => {
 		return $a[$a.length - 1];
 	})
 
-	constructor(rootViewController: UIViewController, view?: UIView, options?:UIViewControllerOptions) {
-		if(view){
+	constructor(rootViewController: UIViewController, view?: UIView | null, options?: UIViewControllerOptions) {
+		if (view) {
 			super(view, options)
 		} else {
 			super(new UIView(NavigationView), options)
