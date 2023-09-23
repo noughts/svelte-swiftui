@@ -9,6 +9,7 @@
     import HomeNav from "./HomeNav.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
+    import TikTokScreen from "./TikTokScreen.svelte";
 </script>
 
 <div class="root">
@@ -18,6 +19,7 @@
                 new UINavigationController(new UIViewController(new UIView(LandmarkList)), null, {
                     tabBarItem: { title: "w/NavBar", icon: "home" },
                 }),
+                new UIViewController(new UIView(TikTokScreen), { tabBarItem: { title: "TikTok", icon: "star" } }),
                 new UINavigationController(
                     new UIViewController(new UIView(LandmarkList), { hidesNavigationBarWhenPushed: true }),
                     new UIView(HomeNav),
