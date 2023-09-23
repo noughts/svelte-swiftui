@@ -10,7 +10,7 @@
 </script>
 
 <div class="UIScrollView">
-	<div style="padding-top: {contentInset.top}px; padding-bottom: {contentInset.bottom}px;">
+	<div style="padding-top: {contentInset.top}px; padding-bottom: calc({contentInset.bottom}px + env(safe-area-inset-bottom));">
 		<slot />
 	</div>
 </div>
