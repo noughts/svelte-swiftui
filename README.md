@@ -4,6 +4,23 @@ The goal is to reproduce the general navigation of a mobile application.
 
 The system design is equivalent to Apple's UIKit API.
 
+# Motivation
+[TBD]
+
+# Setup
+
+In Safari on the iPhone, Pull To Refresh is triggered when flicking down at the top of the screen, and the flick event does not work as expected.
+
+This can be avoided by specifying `overflow:hidden;` in the `body` style.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>...</head>
+<body style="overflow: hidden;">%sveltekit.body%</body>
+</html>
+```
+
 # Basics
 
 The code to implement [standard tab bar navigation](https://developer.apple.com/documentation/uikit/uitabbarcontroller) in iOS is as follows
