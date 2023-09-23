@@ -32,14 +32,15 @@
 		height: 100%;
 		background-color: white;
 		position: relative;
+		overflow: hidden;
 	}
 	.view {
 		position: absolute;
 		inset: 0;
 		transition: filter 0.3s;
-		/* filter: brightness(80%); */
+		filter: brightness(80%);
 	}
 	.top {
-		/* filter: brightness(100%); */
+		filter: brightness(100%);
 	}
 </style>

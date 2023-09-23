@@ -67,6 +67,7 @@
 	.root {
 		height: 100%;
 		background-color: white;
+		overflow-y: scroll;
 	}
 	.count {
 		background-color: green;

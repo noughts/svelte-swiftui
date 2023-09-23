@@ -29,11 +29,10 @@
 	.TabView {
 		width: 100%;
 		height: 100%;
-		display: flex;
-		flex-direction: column;
 	}
 	.views {
-		flex-grow: 2;
+		width: 100%;
+		height: 100%;
 		position: relative;
 		background-color: red;
 	}
@@ -42,7 +41,6 @@
 		inset: 0;
 		opacity: 0;
 		pointer-events: none;
-		padding-bottom: 49px;
 	}
 	.selected {
 		opacity: 1;
