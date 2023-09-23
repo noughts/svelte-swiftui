@@ -15,8 +15,10 @@
 
 <style>
 	.UINavigationBar {
-		width: 100%;
-		position: relative;
+		position: fixed;
+		left:0;
+		top:0;
+		right:0;
 		height: 44px;
 		flex-shrink: 0;
 		background-color: var(--ui-chrome);
