@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { UIViewController } from "$lib/UIViewController.js";
+    import { UIScrollView } from "$lib/index.js";
 	export let title: string = "dummy";
 	export let viewController:UIViewController;
 	// console.log(viewController)
@@ -24,9 +25,12 @@
 </script>
 
 <div class="root">
-	<h1>{title}</h1>
-	<div>page2</div>
-	<button on:click={onDismissButtonTap}>Dismiss</button>
+	<UIScrollView>
+		<h1>{title}</h1>
+		<div>page2</div>
+		<button on:click={onDismissButtonTap}>Dismiss</button>
+	</UIScrollView>
+
 </div>
 
 <style>

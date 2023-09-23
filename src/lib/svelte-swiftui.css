@@ -5,16 +5,23 @@
 }
 
 .SvelteScene {
-	--ui-chrome: #f5f5f5;
+	--ui-chrome: rgba(200 200 200/50%);
 	--ui-text: black;
-	--ui-tint-color: blue;
+	--ui-tint-color: #007aff;
 	--ui-separator: rgba(0 0 0/15%);
 }
 
+
 @media (prefers-color-scheme: dark) {
 	.SvelteScene {
-		--ui-chrome: #1c1c1c;
+		--ui-chrome: rgba(32 32 32/50%);
 		--ui-text: white;
 		--ui-separator: rgba(255 255 255/15%);
 	}
+}
+
+.uiChrome{
+	background-color: var(--ui-chrome);
+	backdrop-filter: blur(32px);
+	-webkit-backdrop-filter: blur(32px);
 }

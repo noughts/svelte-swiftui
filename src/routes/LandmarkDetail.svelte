@@ -1,4 +1,5 @@
 <script lang="ts">
+	import UiScrollView from "$lib/UIScrollView.svelte";
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import type { Landmark } from "./Landmark.js";
@@ -25,10 +26,12 @@
 </script>
 
 <div class="root">
-	<h1>Detail</h1>
-	<h2>{landmark.name}</h2>
-	<div>{rnd}</div>
-	<button on:click={showMap}>show map</button>
+	<UiScrollView>
+		<h1>Detail</h1>
+		<h2>{landmark.name}</h2>
+		<div>{rnd}</div>
+		<button on:click={showMap}>show map</button>
+	</UiScrollView>
 </div>
 
 <style>

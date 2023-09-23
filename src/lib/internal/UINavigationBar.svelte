@@ -5,7 +5,7 @@
 	export let items: UINavigationItem[];
 </script>
 
-<div class="UINavigationBar">
+<div class="UINavigationBar uiChrome">
 	{#each items as item, index}
 		<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "50%" }}>
 			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
@@ -15,11 +15,12 @@
 
 <style>
 	.UINavigationBar {
-		width: 100%;
-		position: relative;
+		position: fixed;
+		left:0;
+		top:0;
+		right:0;
 		height: 44px;
 		flex-shrink: 0;
-		background-color: var(--ui-chrome);
 		border-bottom: solid 0.1px var(--ui-separator);
 	}
 	.item {
