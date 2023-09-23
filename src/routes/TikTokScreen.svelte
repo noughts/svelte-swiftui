@@ -6,7 +6,7 @@
 </script>
 
 <div class="root">
-	<UIScrollView snap={true}>
+	<UIScrollView snap={true} contentInset={{top:0, bottom:49}}>
 		<div class="cells">
 			{#each colors as color}
 				<TikTokCell {color} />
