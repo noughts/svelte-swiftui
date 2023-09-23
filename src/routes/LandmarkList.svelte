@@ -26,6 +26,12 @@
 		{ name: "Silver Salmon Creek" },
 		{ name: "Turtle Rock" },
 		{ name: "Silver Salmon Creek" },
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+		{ name: "Turtle Rock" },
+		{ name: "Silver Salmon Creek" },
+		{ name: "End" },
+
 	];
 
 	onMount(() => {
