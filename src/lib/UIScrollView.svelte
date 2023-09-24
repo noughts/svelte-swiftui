@@ -11,9 +11,15 @@
 	export let style: Properties = {};
 	export let contentInset: UIEdgeInsets = { top: 44, bottom: 49 };
 	export let isPagingEnabled = false;
+	export let showsScrollIndicator = true;
 </script>
 
-<div class="UIScrollView" class:isPagingEnabled style={styleToString(style)}>
+<div
+	class="UIScrollView"
+	class:noScrollIndicator={showsScrollIndicator == false}
+	class:isPagingEnabled
+	style={styleToString(style)}
+>
 	<div
 		style="padding-top: {contentInset.top}px; padding-bottom: calc({contentInset.bottom}px + env(safe-area-inset-bottom));"
 	>
@@ -29,5 +35,9 @@
 	}
 	.isPagingEnabled {
 		scroll-snap-type: y mandatory;
+	}
+	.noScrollIndicator::-webkit-scrollbar {
+		display: none;
+		-webkit-appearance: none;
 	}
 </style>

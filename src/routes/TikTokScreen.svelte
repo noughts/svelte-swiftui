@@ -6,7 +6,7 @@
 </script>
 
 <div class="root">
-	<UIScrollView isPagingEnabled={true} contentInset={{top:0, bottom:49}}>
+	<UIScrollView isPagingEnabled={true} showsScrollIndicator={false} contentInset={{ top: 0, bottom: 49 }}>
 		<div class="cells">
 			{#each colors as color}
 				<TikTokCell {color} />
@@ -20,7 +20,7 @@
 		height: 100%;
 		background-color: white;
 	}
-	.cells{
+	.cells {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
