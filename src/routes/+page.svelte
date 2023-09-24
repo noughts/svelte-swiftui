@@ -9,6 +9,7 @@
     import HomeNav from "./HomeNav.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import Page1 from "./Page1.svelte";
+    import ShortContentScreen from "./ShortContentScreen.svelte";
     import TikTokScreen from "./TikTokScreen.svelte";
 </script>
 
@@ -16,6 +17,9 @@
     <View
         viewController={new UISceneController(
             new UITabBarController([
+                new UINavigationController(new UIViewController(new UIView(ShortContentScreen)), null, {
+                    tabBarItem: { title: "short", icon: "home" },
+                }),
                 new UINavigationController(new UIViewController(new UIView(LandmarkList)), null, {
                     tabBarItem: { title: "w/NavBar", icon: "home" },
                 }),

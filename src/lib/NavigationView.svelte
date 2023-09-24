@@ -21,7 +21,7 @@
 		{#each $viewControllers as vc, index}
 			{@const top = index == $viewControllers.length - 1}
 			<div
-				class="item"
+				class="view"
 				use:swipe={{
 					onSwipeRight: back,
 				}}
@@ -57,7 +57,7 @@
 		height: 100%;
 		position: relative;
 	}
-	.item {
+	.view {
 		position: absolute;
 		inset: 0;
 
