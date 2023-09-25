@@ -17,11 +17,11 @@
     <View
         viewController={new UISceneController(
             new UITabBarController([
-                new UINavigationController(new UIViewController(new UIView(ShortContentScreen)), null, {
-                    tabBarItem: { title: "short", icon: "home" },
-                }),
                 new UINavigationController(new UIViewController(new UIView(LandmarkList)), null, {
                     tabBarItem: { title: "w/NavBar", icon: "home" },
+                }),
+                new UINavigationController(new UIViewController(new UIView(ShortContentScreen)), null, {
+                    tabBarItem: { title: "short", icon: "home" },
                 }),
                 new UIViewController(new UIView(TikTokScreen), { tabBarItem: { title: "TikTok", icon: "star" } }),
                 new UINavigationController(

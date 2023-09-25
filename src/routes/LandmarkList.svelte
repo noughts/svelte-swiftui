@@ -8,7 +8,14 @@
 	import LandmarkRow from "./LandmarkRow.svelte";
     import UIScrollView from "$lib/UIScrollView.svelte";
 	export let viewController: UIViewController;
+	let scrollView:UIScrollView;
 	viewController.navigationItem.title = "Landmark List";
+	viewController.navigationItem.leftBarButtonItem = {
+		title:"Scroll2Bottom",
+		action:()=>{
+			scrollView.scrollToBottom();
+		}
+	}
 
 	const landmarks = [
 		{ name: "Turtle Rock" },
@@ -55,7 +62,7 @@
 </script>
 
 <div class="root">
-	<UIScrollView>
+	<UIScrollView bind:this={scrollView}>
 		<VStack>
 			<div class="count">{count}</div>
 			{#each landmarks as landmark}
