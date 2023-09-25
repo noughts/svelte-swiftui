@@ -8,14 +8,22 @@
 <script lang="ts">
 	import type { Properties } from "csstype";
 	import { styleToString } from "./internal/Util.js";
+	let root_ref: HTMLDivElement;
 	export let style: Properties = {};
 	export let contentInset: UIEdgeInsets = { top: 44, bottom: 49 };
 	export let isPagingEnabled = false;
 	export let showsScrollIndicator = true;
+	export function scrollToTop(){
+		root_ref.scrollTop = 0;
+	}
+	export function scrollToBottom(){
+		root_ref.scrollTop = root_ref.scrollHeight;
+	}
 </script>
 
 <div
 	class="UIScrollView"
+	bind:this={root_ref}
 	class:noScrollIndicator={showsScrollIndicator == false}
 	class:isPagingEnabled
 	style={styleToString(style)}
