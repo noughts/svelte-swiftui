@@ -44,7 +44,7 @@
 		inset: 0;
 		top: 22px;
 		overflow: hidden;
-		border-radius: 16px 16px 0px 0px;
+		border-radius: 10px 10px 0px 0px;
 		transition-property: filter transform;
 		transition-duration: 0.3s;
 		filter: brightness(80%);
