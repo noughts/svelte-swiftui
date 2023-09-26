@@ -20,7 +20,7 @@
 	<slot />
 	<div class="views">
 		{#each $viewControllers as vc, index}
-			<NavigationViewNode viewController={vc} isTop={index == $viewControllers.length - 1} />
+			<NavigationViewNode viewController={vc} isRoot={index == 0} isTop={index == $viewControllers.length - 1} />
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
