@@ -1,3 +1,27 @@
+
+:root {
+	--ui-chrome: rgba(200 200 200/50%);
+	--ui-text: black;
+	--ui-tint-color: #007aff;
+	--ui-separator: rgba(0 0 0/15%);
+	--ui-bg-color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--ui-chrome: rgba(32 32 32/50%);
+		--ui-text: white;
+		--ui-separator: rgba(255 255 255/15%);
+		--ui-bg-color: #1c1c1c;
+	}
+}
+
+.uiChrome {
+	background-color: var(--ui-chrome);
+	backdrop-filter: blur(32px);
+	-webkit-backdrop-filter: blur(32px);
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -6,24 +30,6 @@
 	-webkit-user-select: none;
 }
 
-.SvelteScene {
-	--ui-chrome: rgba(200 200 200/50%);
-	--ui-text: black;
-	--ui-tint-color: #007aff;
-	--ui-separator: rgba(0 0 0/15%);
-}
-
-
-@media (prefers-color-scheme: dark) {
-	.SvelteScene {
-		--ui-chrome: rgba(32 32 32/50%);
-		--ui-text: white;
-		--ui-separator: rgba(255 255 255/15%);
-	}
-}
-
-.uiChrome{
-	background-color: var(--ui-chrome);
-	backdrop-filter: blur(32px);
-	-webkit-backdrop-filter: blur(32px);
+body {
+	color: var(--ui-text);
 }
