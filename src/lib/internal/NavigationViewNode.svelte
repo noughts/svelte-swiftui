@@ -16,9 +16,9 @@
 >
 	<div class="contents" class:isRoot>
 		{#if isRoot == false}
-			<div class="spacer" />
+			<div class="page spacer" />
 		{/if}
-		<div class="viewContainer" class:isRoot>
+		<div class="page viewContainer" class:isRoot>
 			<View {viewController} />
 		</div>
 	</div>
@@ -30,6 +30,7 @@
 		inset: 0;
 		overflow-x: scroll;
 		scroll-snap-type: x mandatory;
+		overscroll-behavior: none;
 		transition-property: transform, filter;
 		transition-duration: 0.3s;
 		transform: translateX(-50%);
@@ -43,8 +44,9 @@
 	.contents.isRoot {
 		width: 100%;
 	}
-	.viewContainer {
+	.page{
 		width: 50%;
+		height: 100%;
 		scroll-snap-align: center;
 		scroll-snap-stop: always;
 	}
