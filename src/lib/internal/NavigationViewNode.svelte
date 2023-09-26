@@ -1,15 +1,23 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
 	import View from "$lib/View.svelte";
+	import { onMount } from "svelte";
 	import { fly } from "svelte/transition";
 
 	export let viewController: UIViewController;
 	export let isTop: boolean = false;
 	export let isRoot: boolean = false;
+
+	let scrollView_ref: HTMLDivElement;
+
+	onMount(() => {
+		scrollView_ref.scrollLeft = scrollView_ref.scrollWidth / 2;
+	});
 </script>
 
 <div
 	class="NavigationViewNode"
+	bind:this={scrollView_ref}
 	class:isTop
 	transition:fly={{ x: "100%", opacity: 1 }}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
@@ -44,7 +52,7 @@
 	.contents.isRoot {
 		width: 100%;
 	}
-	.page{
+	.page {
 		width: 50%;
 		height: 100%;
 		scroll-snap-align: center;
@@ -56,7 +64,6 @@
 	.spacer {
 		width: 50%;
 		height: 100%;
-		background-color: rgba(255 0 0/50%);
 	}
 	.navBarHidden {
 		top: 0;
