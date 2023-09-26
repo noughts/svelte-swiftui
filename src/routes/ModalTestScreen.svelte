@@ -18,7 +18,7 @@
 
 <style>
 	.root {
-		background-color: white;
+		background-color: black;
 		height: 100%;
 	}
 </style>

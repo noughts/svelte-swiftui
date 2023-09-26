@@ -6,7 +6,7 @@
 </script>
 
 <button on:click class="root" class:selected>
-	<MaterialSymbol icon={item.icon.name} fill={item.icon.fill} opticalSize={28} />
+	<MaterialSymbol icon={item.icon.name} fill={item.icon.fill} opticalSize={28} weight={item.icon.weight} />
 	<div class="name">{item.title}</div>
 </button>
 
@@ -20,8 +20,8 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		padding-bottom:3px;
-		padding-top:4px;
+		padding-bottom: 3px;
+		padding-top: 4px;
 		color: gray;
 	}
 	.name {
