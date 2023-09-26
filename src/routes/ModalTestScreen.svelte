@@ -2,7 +2,7 @@
 	import { UINavigationController } from "$lib/UINavigationController.js";
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
-	import DemoScreen from "./DemoScreen.svelte";
+    import DemoScreen from "./DemoScreen.svelte";
 
 	export let viewController: UIViewController;
 
@@ -18,7 +18,7 @@
 
 <style>
 	.root {
-		background-color: white;
+		background-color: black;
 		height: 100%;
 	}
 </style>

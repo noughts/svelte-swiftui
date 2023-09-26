@@ -15,7 +15,11 @@ export { UINavigationController } from "./UINavigationController.js"
 
 export type UITabBarItem = {
 	title: string
-	icon: string
+	icon: {
+		name: string;
+		fill?: boolean;
+		weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700;
+	}
 }
 
 export type UINavigationItem = {

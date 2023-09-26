@@ -23,6 +23,7 @@
 			/>
 		{/each}
 	</div>
+	<div class="safeArea" />
 </div>
 
 <style>
@@ -31,7 +32,6 @@
 		left:0;
 		right:0;
 		bottom:0;
-		height: calc(49px + env(safe-area-inset-bottom));
 		flex-shrink: 0;
 		display: flex;
 		flex-direction: column;
@@ -40,8 +40,14 @@
 		border-top: solid 0.1px var(--ui-separator);
 	}
 	.tabs {
+		flex-shrink: 0;
 		display: flex;
 		height: 49px;
+		max-height: 49px;
 		align-items: center;
+	}
+	.safeArea{
+		flex-shrink: 0;
+		height: env(safe-area-inset-bottom);
 	}
 </style>

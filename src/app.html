@@ -12,6 +12,11 @@
 </head>
 
 <!-- body に overflow: hidden; を指定すると、最上端で上スクロールした時の挙動が理想的になります -->
-<body style="background-color: white; overflow: hidden;">%sveltekit.body%</body>
+
+<body style="background-color: white; overflow: hidden;">
+	<div style="display: contents">
+		%sveltekit.body%
+	</div>
+</body>
 
 </html>
