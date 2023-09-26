@@ -15,7 +15,10 @@ export { UINavigationController } from "./UINavigationController.js"
 
 export type UITabBarItem = {
 	title: string
-	icon: string
+	icon: {
+		name: string;
+		fill?: boolean;
+	}
 }
 
 export type UINavigationItem = {

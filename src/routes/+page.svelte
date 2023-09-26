@@ -18,20 +18,22 @@
         viewController={new UISceneController(
             new UITabBarController([
                 new UINavigationController(new UIViewController(new UIView(LandmarkList)), null, {
-                    tabBarItem: { title: "w/NavBar", icon: "home" },
+                    tabBarItem: { title: "よく使う項目", icon: { name: "star", fill:true } },
                 }),
                 new UINavigationController(new UIViewController(new UIView(ShortContentScreen)), null, {
-                    tabBarItem: { title: "short", icon: "home" },
+                    tabBarItem: { title: "履歴", icon: { name: "schedule", fill:true } },
                 }),
-                new UIViewController(new UIView(TikTokScreen), { tabBarItem: { title: "TikTok", icon: "star" } }),
+                new UIViewController(new UIView(TikTokScreen), {
+                    tabBarItem: { title: "TikTok", icon: { name: "star", fill:true } },
+                }),
                 new UINavigationController(
                     new UIViewController(new UIView(LandmarkList), { hidesNavigationBarWhenPushed: true }),
                     new UIView(HomeNav),
                     {
-                        tabBarItem: { title: "wo/NavBar", icon: "home" },
+                        tabBarItem: { title: "wo/NavBar", icon: { name: "home" } },
                     }
                 ),
-                new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: "star" } }),
+                new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: { name: "star" } } }),
             ])
         )}
     />
