@@ -26,7 +26,7 @@
 	}
 </script>
 
-<div class="root">
+<div class="LandmarkDetail">
 	<UiScrollView>
 		<VStack spacing={16} style={{padding:"16px"}}>
 			<h1>Detail</h1>
@@ -63,7 +63,7 @@
 </div>
 
 <style>
-	.root {
+	.LandmarkDetail {
 		width: 100%;
 		height: 100%;
 		background-color: var(--ui-bg-color);
