@@ -8,7 +8,7 @@
     import "../globals.css";
     import HomeNav from "./HomeNav.svelte";
     import LandmarkList from "./LandmarkList.svelte";
-    import Page1 from "./Page1.svelte";
+    import ModalTestScreen from "./ModalTestScreen.svelte";
     import ShortContentScreen from "./ShortContentScreen.svelte";
     import TikTokScreen from "./TikTokScreen.svelte";
 </script>
@@ -17,6 +17,7 @@
     <View
         viewController={new UISceneController(
             new UITabBarController([
+                new UIViewController(new UIView(ModalTestScreen), { tabBarItem: { title: "Demo", icon: "star" } }),
                 new UINavigationController(new UIViewController(new UIView(LandmarkList)), null, {
                     tabBarItem: { title: "よく使う項目", icon: { name: "star", fill:true } },
                 }),
@@ -33,7 +34,6 @@
                         tabBarItem: { title: "wo/NavBar", icon: { name: "home" } },
                     }
                 ),
-                new UIViewController(new UIView(Page1), { tabBarItem: { title: "Demo", icon: { name: "star" } } }),
             ])
         )}
     />
