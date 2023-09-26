@@ -21,7 +21,6 @@
 		<div class="viewContainer" class:isRoot>
 			<View {viewController} />
 		</div>
-		
 	</div>
 </div>
 
@@ -30,12 +29,13 @@
 		position: absolute;
 		inset: 0;
 		overflow-x: scroll;
+		scroll-snap-type: x mandatory;
 		transition-property: transform, filter;
 		transition-duration: 0.3s;
 		transform: translateX(-50%);
 		filter: brightness(80%);
 	}
-	.contents{
+	.contents {
 		display: flex;
 		width: 200%;
 		height: 100%;
@@ -43,11 +43,13 @@
 	.contents.isRoot {
 		width: 100%;
 	}
-	.viewContainer{
-		width:50%;
+	.viewContainer {
+		width: 50%;
+		scroll-snap-align: center;
+		scroll-snap-stop: always;
 	}
-	.viewContainer.isRoot{
-		width:100%;
+	.viewContainer.isRoot {
+		width: 100%;
 	}
 	.spacer {
 		width: 50%;
