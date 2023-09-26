@@ -4,6 +4,7 @@
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
 	import View from "./View.svelte";
+	import NavigationViewNode from "./internal/NavigationViewNode.svelte";
 
 	export let viewController: UINavigationController;
 
@@ -19,18 +20,7 @@
 	<slot />
 	<div class="views">
 		{#each $viewControllers as vc, index}
-			{@const top = index == $viewControllers.length - 1}
-			<div
-				class="view"
-				use:swipe={{
-					onSwipeRight: back,
-				}}
-				class:top
-				class:navBarHidden={vc.hidesNavigationBarWhenPushed}
-				transition:fly={{ x: "100%", opacity: 1 }}
-			>
-				<View viewController={vc} />
-			</div>
+			<NavigationViewNode viewController={vc} isTop={index == $viewControllers.length - 1} />
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
@@ -56,21 +46,5 @@
 	.views {
 		height: 100%;
 		position: relative;
-	}
-	.view {
-		position: absolute;
-		inset: 0;
-
-		transition-property: transform, filter;
-		transition-duration: 0.3s;
-		transform: translateX(-50%);
-		filter: brightness(80%);
-	}
-	.navBarHidden {
-		top: 0;
-	}
-	.top {
-		transform: translateX(0);
-		filter: brightness(100%);
 	}
 </style>
