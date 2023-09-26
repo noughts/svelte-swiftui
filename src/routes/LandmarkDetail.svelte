@@ -2,6 +2,7 @@
 	import UiScrollView from "$lib/UIScrollView.svelte";
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
+    import { VStack } from "$lib/index.js";
 	import type { Landmark } from "./Landmark.js";
 	import MapView from "./MapView.svelte";
 
@@ -27,10 +28,37 @@
 
 <div class="root">
 	<UiScrollView>
-		<h1>Detail</h1>
-		<h2>{landmark.name}</h2>
-		<div>{rnd}</div>
-		<button on:click={showMap}>show map</button>
+		<VStack spacing={16} style={{padding:"16px"}}>
+			<h1>Detail</h1>
+			<h2>{landmark.name}</h2>
+			<div>{rnd}</div>
+			<button on:click={showMap}>show map</button>
+			<h1>Detail</h1>
+			<h2>{landmark.name}</h2>
+			<div>{rnd}</div>
+			<button on:click={showMap}>show map</button>
+			<h1>Detail</h1>
+			<h2>{landmark.name}</h2>
+			<div>{rnd}</div>
+			<button on:click={showMap}>show map</button>
+			<h1>Detail</h1>
+			<h2>{landmark.name}</h2>
+			<div>{rnd}</div>
+			<button on:click={showMap}>show map</button>
+			<h1>Detail</h1>
+			<h2>{landmark.name}</h2>
+			<div>{rnd}</div>
+			<button on:click={showMap}>show map</button>
+			<h1>Detail</h1>
+			<h2>{landmark.name}</h2>
+			<div>{rnd}</div>
+			<button on:click={showMap}>show map</button>
+			<h1>Detail</h1>
+			<h2>{landmark.name}</h2>
+			<div>{rnd}</div>
+			<button on:click={showMap}>show map</button>
+		</VStack>
+
 	</UiScrollView>
 </div>
 
