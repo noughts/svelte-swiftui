@@ -14,7 +14,7 @@
 		scrollView_ref.scrollLeft = scrollView_ref.scrollWidth / 2;
 	});
 
-	function onScroll(e:UIEvent&{currentTarget:HTMLDivElement}){
+	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		console.log(e.currentTarget.scrollLeft);
 	}
 </script>

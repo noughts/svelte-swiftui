@@ -2,6 +2,7 @@ import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
 import type { UINavigationItem, UITabBarController, UITabBarItem } from "./index.js";
+import type { UIViewCOntrollerTransitioningDelegate } from "./internal/UIViewControllerTransitioningDelegate.js";
 
 export type UIViewControllerOptions = {
 	navigationItem?: UINavigationItem;
@@ -21,9 +22,10 @@ export class UIViewController extends EventTarget {
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
-	tabBarItem: UITabBarItem = { title: "placeholder", icon: "" };
+	tabBarItem: UITabBarItem = { title: "placeholder", icon: { name: "" } };
 	presentingViewController?: UIViewController;
 	modalPresentationStyle: UIModalPresentationStyle = UIModalPresentationStyle.pageSheet;
+	transitioningDelegate?:UIViewCOntrollerTransitioningDelegate;
 
 	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
 		super();
