@@ -40,7 +40,7 @@
 		overflow: hidden;
 	}
 	.view {
-		position: absolute;
+		position: fixed;
 		inset: 0;
 		top: 22px;
 		overflow: hidden;

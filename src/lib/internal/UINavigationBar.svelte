@@ -15,9 +15,9 @@
 
 <style>
 	.UINavigationBar {
-		position: fixed;
+		position: absolute;
 		left:0;
-		top:0;
+		top:0px;
 		right:0;
 		height: 44px;
 		flex-shrink: 0;

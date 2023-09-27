@@ -42,8 +42,8 @@
 		position: relative;
 	}
 	.navBar {
-		position: fixed;
-		top: 0;
+		position: absolute;
+		top: 0px;
 		left: 0;
 		right: 0;
 		z-index: 2;
