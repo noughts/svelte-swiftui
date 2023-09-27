@@ -2,6 +2,7 @@ import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
 import type { UINavigationItem, UITabBarController, UITabBarItem } from "./index.js";
+import { UIPercentDrivenInteractiveTransition } from "./internal/UIPercentDrivenInteractiveTransition.js";
 import type { UIViewCOntrollerTransitioningDelegate } from "./internal/UIViewControllerTransitioningDelegate.js";
 
 export type UIViewControllerOptions = {
@@ -26,6 +27,7 @@ export class UIViewController extends EventTarget {
 	presentingViewController?: UIViewController;
 	modalPresentationStyle: UIModalPresentationStyle = UIModalPresentationStyle.pageSheet;
 	transitioningDelegate?:UIViewCOntrollerTransitioningDelegate;
+	interactionController = new UIPercentDrivenInteractiveTransition();
 
 	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
 		super();

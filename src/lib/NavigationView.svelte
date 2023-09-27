@@ -18,12 +18,19 @@
 	<slot />
 	<div class="views">
 		{#each $viewControllers as vc, index}
-			<NavigationViewNode viewController={vc} isRoot={index == 0} isTop={index == $viewControllers.length - 1} />
+			<NavigationViewNode
+				viewController={vc}
+				isRoot={index == 0}
+				isTop={index == $viewControllers.length - 1}
+			/>
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
 		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar items={$viewControllers.map((x) => x.navigationItem)} on:backButtonTap={back} />
+			<UiNavigationBar
+				items={$viewControllers.map((x) => x.navigationItem)}
+				on:backButtonTap={back}
+			/>
 		</div>
 	{/if}
 </div>
