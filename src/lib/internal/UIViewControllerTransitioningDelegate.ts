@@ -21,7 +21,7 @@ export interface UIViewCOntrollerTransitioningDelegate {
 	// ViewControllerを終了する際に使用するインタラクティブアニメータオブジェクトをデリゲートに問い合わせます。
 	interactionControllerForDismissal?:(animator:UIViewControllerAnimatedTransitioning) => UIPercentDrivenInteractiveTransition;
 
-	// --- Getting the custom presentation controller
+	// --- カスタム・プレゼンテーション・コントローラの取得
 
 	// ViewControllerを表示する際のビュー階層の管理に使用するカスタムプレゼンテーションコントローラをデリゲートに問い合わせます。
 	presentationController?: (presented: UIViewController, presenting: UIViewController, source: UIViewController) => UIPresentationController;
