@@ -13,11 +13,16 @@
 	onMount(() => {
 		scrollView_ref.scrollLeft = scrollView_ref.scrollWidth / 2;
 	});
+
+	function onScroll(e:UIEvent&{currentTarget:HTMLDivElement}){
+		console.log(e.currentTarget.scrollLeft);
+	}
 </script>
 
 <div
 	class="NavigationViewNode"
 	bind:this={scrollView_ref}
+	on:scroll={onScroll}
 	class:isTop
 	transition:fly={{ x: "100%", opacity: 1 }}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
