@@ -1,7 +1,7 @@
 {
 	"name": "@noughts/svelte-uikit",
 	"license": "MIT",
-	"version": "0.4.3",
+	"version": "0.4.4",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "npm version patch && vite build && npm run package",
