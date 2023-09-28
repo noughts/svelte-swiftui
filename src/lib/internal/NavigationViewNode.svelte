@@ -43,8 +43,8 @@
 	.NavigationViewNode {
 		position: absolute;
 		inset: 0;
-		/* overflow-x: scroll; */
-		overflow: hidden;
+		overflow-x: scroll;
+		/* overflow: hidden; */
 		scroll-snap-type: x mandatory;
 		overscroll-behavior: none;
 		transition-property: transform, filter;
