@@ -8,8 +8,6 @@
 	export let isTop: boolean = false;
 	export let isRoot: boolean = false;
 
-	
-
 	let scrollView_ref: HTMLDivElement;
 
 	onMount(() => {
@@ -17,10 +15,9 @@
 	});
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
-		const pos = e.currentTarget.clientWidth - e.currentTarget.scrollLeft
+		const pos = e.currentTarget.clientWidth - e.currentTarget.scrollLeft;
 		const pct = pos / e.currentTarget.clientWidth;
 		viewController.interactionController.update(pct);
-		console.log(pct);
 	}
 </script>
 
@@ -46,7 +43,8 @@
 	.NavigationViewNode {
 		position: absolute;
 		inset: 0;
-		overflow-x: scroll;
+		/* overflow-x: scroll; */
+		overflow: hidden;
 		scroll-snap-type: x mandatory;
 		overscroll-behavior: none;
 		transition-property: transform, filter;
