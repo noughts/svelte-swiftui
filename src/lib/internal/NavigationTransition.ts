@@ -1,8 +1,17 @@
 import { cubicOut } from "svelte/easing";
 
-export function NavigationTransition(
+interface TransitionOptions {
+	delay?: number;
+	duration?: number;
+	easing?: (t: number) => number; // easing関数は数値を引数にとり、数値を返す関数とします。
+	x?: any;
+	y?: any;
+	opacity?: number;
+}
+
+export function pushTransition(
 	node: HTMLElement,
-	{ delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0 } = {}
+	{ delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0 }: TransitionOptions = {}
 ) {
 	const style = getComputedStyle(node);
 	const target_opacity = +style.opacity;
@@ -10,14 +19,21 @@ export function NavigationTransition(
 	const od = target_opacity * (1 - opacity);
 	const [xValue, xUnit] = split_css_unit(x);
 	const [yValue, yUnit] = split_css_unit(y);
-	return {
+	const result = {
 		delay,
 		duration,
 		easing,
-		css: (t: number, u: number) => `
-			transform: ${transform} translate(${(1 - t) * xValue}${xUnit}, ${(1 - t) * yValue}${yUnit});
-			opacity: ${target_opacity - od * u}`
+		css: (t: number, u: number) => {
+			const out = `
+transform: ${transform} translate(${(1 - t) * xValue}${xUnit}, ${(1 - t) * yValue}${yUnit});
+opacity: ${target_opacity - od * u}
+`.trim();
+			console.log(out)
+			return out;
+		}
 	};
+	console.log(result)
+	return result;
 }
 
 function split_css_unit(value: any) {

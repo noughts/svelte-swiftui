@@ -3,6 +3,7 @@
 	import View from "$lib/View.svelte";
 	import { onMount } from "svelte";
 	import { fly } from "svelte/transition";
+    import { pushTransition } from "./NavigationTransition.js";
 
 	export let viewController: UIViewController;
 	export let isTop: boolean = false;
@@ -26,7 +27,7 @@
 	bind:this={scrollView_ref}
 	on:scroll={onScroll}
 	class:isTop
-	transition:fly={{ x: "100%", opacity: 1 }}
+	transition:pushTransition={{ x: "100%", opacity: 1 }}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 >
 	<div class="contents" class:isRoot>
@@ -43,8 +44,8 @@
 	.NavigationViewNode {
 		position: absolute;
 		inset: 0;
-		overflow-x: scroll;
-		/* overflow: hidden; */
+		/* overflow-x: scroll; */
+		overflow: hidden;
 		scroll-snap-type: x mandatory;
 		overscroll-behavior: none;
 		transition-property: transform, filter;
