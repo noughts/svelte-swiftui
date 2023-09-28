@@ -18,7 +18,7 @@
 	/>
 </svelte:head>
 
-<div class="SvelteScene">
+<div class="SceneView">
 	{#each $viewControllers as viewController, index}
 		<div
 			class="view"
@@ -32,7 +32,7 @@
 </div>
 
 <style>
-	.SvelteScene {
+	.SceneView {
 		width: 100%;
 		height: 100%;
 		background-color: white;
@@ -40,7 +40,7 @@
 		overflow: hidden;
 	}
 	.view {
-		position: fixed;
+		position: absolute;
 		inset: 0;
 		top: 22px;
 		overflow: hidden;
@@ -50,9 +50,9 @@
 		filter: brightness(80%);
 		/* transform: scale(0.95); */
 	}
-	.rootView{
-		top:0;
-		border-radius:0;
+	.rootView {
+		top: 0;
+		border-radius: 0;
 	}
 	.topView {
 		filter: brightness(100%);
