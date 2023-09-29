@@ -11,7 +11,6 @@ export class PresentTransitionDelegate implements UIViewControllerTransitioningD
 
 class PresentTransitioning implements UIViewControllerAnimatedTransitioning {
 	animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
 		return 0.3

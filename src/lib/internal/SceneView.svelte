@@ -24,7 +24,6 @@
 			class="view"
 			class:topView={index == $viewControllers.length - 1}
 			class:rootView={index == 0}
-			transition:fly={{ y: "100%", opacity: 1 }}
 		>
 			<View {viewController} />
 		</div>

@@ -18,6 +18,9 @@
     <View
         viewController={new UISceneController(
             new UITabBarController([
+                new UIViewController(new UIView(ModalTestScreen), {
+                    tabBarItem: { title: "Demo", icon: { name: "star", weight: 400 } },
+                }),
                 new UINavigationController(new UIViewController(new UIView(LandmarkList)), null, {
                     tabBarItem: {
                         title: "よく使う項目",
@@ -26,9 +29,6 @@
                 }),
                 new UIViewController(new UIView(TestActionScreen), {
                     tabBarItem: { title: "Actions", icon: { name: "star", weight: 400 } },
-                }),
-                new UIViewController(new UIView(ModalTestScreen), {
-                    tabBarItem: { title: "Demo", icon: { name: "star", weight: 400 } },
                 }),
 
 
