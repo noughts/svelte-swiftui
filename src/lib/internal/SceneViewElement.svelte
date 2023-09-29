@@ -8,7 +8,7 @@
 	export let viewController: UIViewController;
 	export let root: boolean = false;
 	export let otherTransitionProgress: number;
-	export let transitionFrom: boolean;
+	export let from: boolean;
 	let ref: HTMLDivElement;
 	let brightness = 100;
 
@@ -34,7 +34,7 @@
 		dispatch("transitioning", pct);
 	}
 
-	$: if (transitionFrom) {
+	$: if (from) {
 		brightness = 100 - otherTransitionProgress * 50;
 	}
 </script>

@@ -31,7 +31,7 @@
 		<SceneViewElement
 			{viewController}
 			otherTransitionProgress={transitionProgress}
-			transitionFrom={index == $viewControllers.length - 2}
+			from={index == $viewControllers.length - 2}
 			root={index == 0}
 			on:transitioning={onTransitioning}
 		/>
