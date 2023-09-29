@@ -19,5 +19,11 @@ export class UIPercentDrivenInteractiveTransition{
 	update(percentComplete:number){
 		this.percentComplete.set(percentComplete);
 	}
+	finish(){
+
+	}
+	cancel(){
+		
+	}
 
 }

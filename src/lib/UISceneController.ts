@@ -44,15 +44,19 @@ export class UISceneController extends UIViewController {
 		}
 		const toVC = newAry[newAry.length - 1];
 
-		if (fromVC.transitioningDelegate?.animationControllerForDismissed) {
-			const animator = fromVC.transitioningDelegate.animationControllerForDismissed(fromVC);
-			const context = new UIViewControllerContextTransitioning(fromVC, toVC)
-			await animator.animateTransition(context);
-			if (fromVC.transitioningDelegate.interactionControllerForDismissal) {
-				const interactor = fromVC.transitioningDelegate.interactionControllerForDismissal(animator)
-			}
+		if( !fromVC.transitioningDelegate?.animationControllerForDismissed ){
+			this.viewControllers.set(newAry);
+			return;
 		}
 
-		this.viewControllers.set(newAry);
+		const animator = fromVC.transitioningDelegate.animationControllerForDismissed(fromVC);
+		const context = new UIViewControllerContextTransitioning(fromVC, toVC)
+		if( !fromVC.transitioningDelegate.interactionControllerForDismissal ){
+			await animator.animateTransition(context);
+			this.viewControllers.set(newAry);
+			return;
+		}
+		
+		const interactor = fromVC.transitioningDelegate.interactionControllerForDismissal(animator)
 	}
 }
