@@ -1,20 +1,30 @@
 <script lang="ts">
 	import View from "$lib/View.svelte";
 	import type { UIViewController } from "$lib/index.js";
-	import { onMount } from "svelte";
+	import { createEventDispatcher, onMount } from "svelte";
 
 	export let viewController: UIViewController;
 	export let root: boolean = false;
 	let ref: HTMLDivElement;
+
+	const dispatch = createEventDispatcher();
 
 	onMount(async () => {
 		if (root == false) {
 			ref.scrollTo({ behavior: "smooth", top: ref.clientHeight });
 		}
 	});
+
+	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
+		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
+		const pct = pos / e.currentTarget.clientHeight;
+		console.log(pct)
+		dispatch("transitioning", pct);
+		// viewController.interactionController.percentComplete.set(pct);
+	}
 </script>
 
-<div class="SceneViewNode" bind:this={ref}>
+<div class="SceneViewNode" bind:this={ref} on:scroll={onScroll}>
 	{#if root == false}
 		<div class="spacer" />
 	{/if}
@@ -49,6 +59,7 @@
 		margin-top: 22px;
 		scroll-snap-align: center;
 		scroll-snap-stop: always;
+		overflow: hidden;
 		border-radius: 10px 10px 0px 0px;
 	}
 	.view.root {

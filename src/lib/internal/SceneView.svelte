@@ -1,10 +1,16 @@
 <script lang="ts">
 	import type { UISceneController } from "../UISceneController.js";
-	import View from "../View.svelte";
 	import "../svelte-swiftui.css";
-	import SceneViewNode from "./SceneViewNode.svelte";
+	import SceneViewElement from "./SceneViewElement.svelte";
 	export let viewController: UISceneController;
 	const viewControllers = viewController.viewControllers;
+
+	function onTransitioning(e:CustomEvent<number>){
+		console.log(e.detail)
+		if( e.detail >= 1 ){
+			viewController.pop();
+		}
+	}
 </script>
 
 <svelte:head>
@@ -20,14 +26,7 @@
 
 <div class="SceneView">
 	{#each $viewControllers as viewController, index}
-		<SceneViewNode {viewController} root={index == 0} />
-		<!-- <div
-			class="view"
-			class:topView={index == $viewControllers.length - 1}
-			class:rootView={index == 0}
-		>
-			<View {viewController} />
-		</div> -->
+		<SceneViewElement {viewController} root={index == 0} on:transitioning={onTransitioning} />
 	{/each}
 </div>
 
@@ -38,16 +37,5 @@
 		background-color: white;
 		position: relative;
 		overflow: hidden;
-	}
-	.view {
-		position: absolute;
-		inset: 0;
-		top: 22px;
-		overflow: hidden;
-		border-radius: 10px 10px 0px 0px;
-	}
-	.rootView {
-		top: 0;
-		border-radius: 0;
 	}
 </style>
