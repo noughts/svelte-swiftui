@@ -1,20 +1,27 @@
 import type { UIViewController, UIViewControllerAnimatedTransitioning, UIViewControllerContextTransitioning, UIViewControllerTransitioningDelegate } from "$lib/UIViewController.js";
 import { tick } from "svelte";
 import { sleep } from "./Util.js";
+import { UIPercentDrivenInteractiveTransition } from "./UIPercentDrivenInteractiveTransition.js";
 
 export class PresentTransitionDelegate implements UIViewControllerTransitioningDelegate {
+
+	readonly interactionController = new UIPercentDrivenInteractiveTransition();
+
 	animationControllerForPresented(
 		presented: UIViewController,
 		presenting: UIViewController,
 		source?: UIViewController): UIViewControllerAnimatedTransitioning {
-		return new PresentTransitioning();
+		return new PresentAnimator();
 	}
 	animationControllerForDismissed(dismissed: UIViewController): UIViewControllerAnimatedTransitioning {
-		return new DismissTransitioning();
+		return new DismissAnimator();
+	}
+	interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning):UIPercentDrivenInteractiveTransition{
+		return this.interactionController;
 	}
 }
 
-class PresentTransitioning implements UIViewControllerAnimatedTransitioning {
+class PresentAnimator implements UIViewControllerAnimatedTransitioning {
 	async animateTransition(transitionContext: UIViewControllerContextTransitioning) {
 		const duration = this.transitionDuration(transitionContext);
 		transitionContext.toVC.transitionDuration.set(duration)
@@ -31,7 +38,7 @@ class PresentTransitioning implements UIViewControllerAnimatedTransitioning {
 	}
 }
 
-class DismissTransitioning implements UIViewControllerAnimatedTransitioning {
+class DismissAnimator implements UIViewControllerAnimatedTransitioning {
 	async animateTransition(transitionContext: UIViewControllerContextTransitioning) {
 		const duration = this.transitionDuration(transitionContext);
 		transitionContext.fromVC.transitionDuration.set(duration)
