@@ -9,7 +9,7 @@
 
 	onMount(async () => {
 		if (root == false) {
-			ref.scrollTo({ behavior: "smooth", top:ref.clientHeight });
+			ref.scrollTo({ behavior: "smooth", top: ref.clientHeight });
 		}
 	});
 </script>
@@ -39,21 +39,21 @@
 	.spacer {
 		width: 100%;
 		height: 100%;
-		background-color: rgba(255 0 0/20%);
+		background-color: rgba(255 0 0/10%);
 		scroll-snap-align: center;
 		scroll-snap-stop: always;
 	}
 	.view {
 		width: 100%;
 		height: calc(100% - 22px);
-		margin-top:22px;
+		margin-top: 22px;
 		scroll-snap-align: center;
 		scroll-snap-stop: always;
 		border-radius: 10px 10px 0px 0px;
 	}
-	.view.root{
+	.view.root {
 		border-radius: 0;
 		height: 100%;
-		margin-top:0;
+		margin-top: 0;
 	}
 </style>
