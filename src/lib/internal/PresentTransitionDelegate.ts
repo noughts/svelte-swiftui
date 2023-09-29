@@ -9,7 +9,7 @@ export class PresentTransitionDelegate implements UIViewControllerTransitioningD
 		source?: UIViewController): UIViewControllerAnimatedTransitioning {
 		return new PresentTransitioning();
 	}
-	animationControllerForDismissed(dismissed: UIViewController):UIViewControllerAnimatedTransitioning{
+	animationControllerForDismissed(dismissed: UIViewController): UIViewControllerAnimatedTransitioning {
 		return new DismissTransitioning();
 	}
 }
@@ -19,14 +19,15 @@ class PresentTransitioning implements UIViewControllerAnimatedTransitioning {
 		const duration = this.transitionDuration(transitionContext);
 		transitionContext.toVC.transitionDuration.set(duration)
 		transitionContext.fromVC.transitionDuration.set(duration)
-		
+
 		transitionContext.toVC.translateY.set("100%")
 		await tick();
 		transitionContext.toVC.translateY.set("0")
 		transitionContext.fromVC.brightness.set("50%");
+		await sleep(duration * 1000)
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
-		return 1.333
+		return 0.333
 	}
 }
 
@@ -38,7 +39,7 @@ class DismissTransitioning implements UIViewControllerAnimatedTransitioning {
 
 		transitionContext.fromVC.translateY.set("100%")
 		transitionContext.toVC.brightness.set("100%");
-		await sleep(duration*1000);
+		await sleep(duration * 1000);
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
 		return 0.333
