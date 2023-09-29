@@ -26,7 +26,12 @@ export class UINavigationController extends UIViewController {
 	push(viewController: UIViewController) {
 		viewController.presentingViewController = this;
 		const current = get(this.viewControllers);
+		const prevTop_vc = current[current.length - 1];
 		this.viewControllers.set(current.concat(viewController));
+		if( this.delegate.animationControllerForOperation ){
+			const transitioning = this.delegate.animationControllerForOperation("push", prevTop_vc, viewController);
+		}
+		
 	}
 	pop() {
 		if (get(this.viewControllers).length <= 1) {

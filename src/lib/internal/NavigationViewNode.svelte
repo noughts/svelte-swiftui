@@ -17,7 +17,7 @@
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientWidth - e.currentTarget.scrollLeft;
 		const pct = pos / e.currentTarget.clientWidth;
-		viewController.interactionController.percentComplete.set(pct);
+		// viewController.interactionController.percentComplete.set(pct);
 	}
 </script>
 
