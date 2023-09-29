@@ -22,7 +22,8 @@ enum UIModalPresentationStyle {
 export class UIViewController extends EventTarget {
 
 	readonly className: string = "UIViewController";
-	readonly translateX = writable(0);
+	readonly transitionDuration = writable(0);
+	readonly translateX = writable("0");
 	readonly translateY = writable("0");
 
 	hidesNavigationBarWhenPushed = false;

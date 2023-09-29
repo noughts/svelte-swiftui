@@ -16,23 +16,25 @@ export class PresentTransitionDelegate implements UIViewControllerTransitioningD
 
 class PresentTransitioning implements UIViewControllerAnimatedTransitioning {
 	async animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-		
+		const duration = this.transitionDuration(transitionContext);
+		transitionContext.toVC.transitionDuration.set(duration)
 		transitionContext.toVC.translateY.set("100%")
 		await tick();
 		transitionContext.toVC.translateY.set("0")
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
-		return 0.3
+		return 1.333
 	}
 }
 
 class DismissTransitioning implements UIViewControllerAnimatedTransitioning {
 	async animateTransition(transitionContext: UIViewControllerContextTransitioning) {
 		const duration = this.transitionDuration(transitionContext);
+		transitionContext.fromVC.transitionDuration.set(duration)
 		transitionContext.fromVC.translateY.set("100%")
 		await sleep(duration*1000);
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
-		return 0.3
+		return 0.333
 	}
 }
