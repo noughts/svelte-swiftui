@@ -14,7 +14,7 @@
 
 	const dispatch = createEventDispatcher();
 	const tween = tweened(0, { duration: 333, easing: cubicOut });
-	let scrollSnapType = "none";// スナップが有効だとintroのtransitionが反映されないので初期値は無効にする。
+	let scrollSnapType = "none"; // スナップが有効だとintroのtransitionが反映されないので初期値は無効にする。
 
 	onMount(async () => {
 		if (root == false) {
@@ -31,11 +31,24 @@
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
 		const pct = 1 - pos / e.currentTarget.clientHeight;
+		console.log(pct);
 		dispatch("transitioning", pct);
 	}
 
 	$: if (from) {
 		brightness = 100 - otherTransitionProgress * 50;
+	}
+
+	function typewriter(node: HTMLDivElement) {
+		scrollSnapType = "none";
+		return {
+			duration: 333,
+			easing: cubicOut,
+			tick: (t: number) => {
+				const y = ref.clientHeight * t;
+				ref.scrollTo(0, y);
+			},
+		};
 	}
 </script>
 
@@ -43,6 +56,7 @@
 	class="SceneViewNode"
 	bind:this={ref}
 	on:scroll={onScroll}
+	out:typewriter
 	style:scroll-snap-type={scrollSnapType}
 	style:filter="brightness({brightness}%)"
 >

@@ -1,7 +1,7 @@
 import { derived, get, writable } from "svelte/store";
-import { UIViewController, UIViewControllerContextTransitioning } from "./UIViewController.js";
-import SceneView from "./internal/SceneView.svelte";
 import { UIView } from "./UIView.js";
+import { UIViewController } from "./UIViewController.js";
+import SceneView from "./internal/SceneView.svelte";
 
 export class UISceneController extends UIViewController {
 
