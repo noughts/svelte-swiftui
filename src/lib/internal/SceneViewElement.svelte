@@ -6,7 +6,8 @@
 	import { tweened } from "svelte/motion";
 
 	export let viewController: UIViewController;
-	export let root: boolean = false;
+	export let isRoot: boolean;
+	export let isTop:boolean;
 	export let otherTransitionProgress: number;
 	export let from: boolean;
 	let ref: HTMLDivElement;
@@ -17,7 +18,7 @@
 	let scrollSnapType = "none"; // スナップが有効だとintroのtransitionが反映されないので初期値は無効にする。
 
 	onMount(async () => {
-		if (root == false) {
+		if (isRoot == false) {
 			await tween.set(ref.clientHeight);
 			scrollSnapType = "y mandatory";
 		}
@@ -50,6 +51,7 @@
 			},
 		};
 	}
+	$: console.log(isTop, viewController)
 </script>
 
 <div
@@ -58,12 +60,12 @@
 	on:scroll={onScroll}
 	out:typewriter
 	style:scroll-snap-type={scrollSnapType}
-	style:filter="brightness({brightness}%)"
+	
 >
-	{#if root == false}
+	{#if isRoot == false}
 		<div class="spacer" />
 	{/if}
-	<div class="view" class:root>
+	<div class="view" class:isRoot style:filter="brightness({brightness}%)" class:isTop >
 		<View {viewController} />
 	</div>
 </div>
@@ -94,9 +96,12 @@
 		overflow: hidden;
 		border-radius: 10px 10px 0px 0px;
 	}
-	.view.root {
+	.view.isRoot {
 		border-radius: 0;
 		height: 100%;
 		margin-top: 0;
+	}
+	.view.isTop{
+		filter:brightness(100%) !important;
 	}
 </style>

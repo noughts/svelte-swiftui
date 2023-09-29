@@ -31,7 +31,8 @@
 			{viewController}
 			otherTransitionProgress={transitionProgress}
 			from={index == $viewControllers.length - 2}
-			root={index == 0}
+			isRoot={index == 0}
+			isTop={index == $viewControllers.length - 1}
 			on:transitioning={onTransitioning}
 		/>
 	{/each}
