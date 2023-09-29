@@ -4,22 +4,21 @@
 	import { onMount } from "svelte";
 
 	export let viewController: UIViewController;
-	export let isRoot: boolean = false;
+	export let root: boolean = false;
 	let ref: HTMLDivElement;
 
 	onMount(async () => {
-		if (isRoot == false) {
-			console.log(ref)
+		if (root == false) {
 			ref.scrollTo({ behavior: "smooth", top:ref.clientHeight });
 		}
 	});
 </script>
 
 <div class="SceneViewNode" bind:this={ref}>
-	{#if isRoot == false}
+	{#if root == false}
 		<div class="spacer" />
 	{/if}
-	<div class="view">
+	<div class="view" class:root>
 		<View {viewController} />
 	</div>
 </div>
@@ -46,8 +45,15 @@
 	}
 	.view {
 		width: 100%;
-		height: 100%;
+		height: calc(100% - 22px);
+		margin-top:22px;
 		scroll-snap-align: center;
 		scroll-snap-stop: always;
+		border-radius: 10px 10px 0px 0px;
+	}
+	.view.root{
+		border-radius: 0;
+		height: 100%;
+		margin-top:0;
 	}
 </style>

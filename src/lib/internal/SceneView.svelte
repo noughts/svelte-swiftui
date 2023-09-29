@@ -20,7 +20,7 @@
 
 <div class="SceneView">
 	{#each $viewControllers as viewController, index}
-		<SceneViewNode {viewController} isRoot={index == 0} />
+		<SceneViewNode {viewController} root={index == 0} />
 		<!-- <div
 			class="view"
 			class:topView={index == $viewControllers.length - 1}
