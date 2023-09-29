@@ -2,10 +2,11 @@
 	let val = 0;
 
 	function testAction(node: HTMLDivElement, prop: any) {
-		console.log(prop);
+		console.log({ prop });
 		return {
 			update(newProp: any) {
-				console.log({newProp})
+				console.log({ newProp });
+				node.style.transform = `translateX(${newProp*100}px)`;
 			},
 			destroy() {},
 		};
@@ -22,5 +23,10 @@
 	.root {
 		height: 100%;
 		background-color: var(--bg-color);
+	}
+	.box {
+		width: 100px;
+		height: 100px;
+		background-color: green;
 	}
 </style>
