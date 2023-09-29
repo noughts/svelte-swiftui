@@ -1,7 +1,6 @@
 import type { UINavigationControllerDelegate } from "$lib/UINavigationController.js";
+import type { UIViewControllerAnimatedTransitioning, UIViewControllerContextTransitioning } from "$lib/UIViewController.js";
 import type { UIViewController } from "$lib/index.js";
-import type { UIViewControllerAnimatedTransitioning } from "./UIViewControllerAnimatedTransitioning.js";
-import type { UIViewControllerContextTransitioning } from "./UIViewControllerContextTransitioning.js";
 
 export class DefaultNavigationControllerDelegate implements UINavigationControllerDelegate {
 	animationControllerForOperation(

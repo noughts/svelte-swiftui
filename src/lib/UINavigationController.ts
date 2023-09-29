@@ -1,11 +1,8 @@
 import { derived, get, writable } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
-import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
+import { UIViewController, type UIViewControllerAnimatedTransitioning, type UIViewControllerInteractiveTransitioning, type UIViewControllerOptions } from "./UIViewController.js";
 import { DefaultNavigationControllerDelegate } from "./internal/DefaultNavigationControllerDelegate.js";
-import { MyTransitionDelegate } from "./internal/MyTransitionDelegate.js";
-import type { UIViewControllerAnimatedTransitioning } from "./internal/UIViewControllerAnimatedTransitioning.js";
-import type { UIViewControllerInteractiveTransitioning } from "./internal/UIViewControllerInteractiveTransitioning.js";
 
 export class UINavigationController extends UIViewController {
 
@@ -28,10 +25,6 @@ export class UINavigationController extends UIViewController {
 
 	push(viewController: UIViewController) {
 		viewController.presentingViewController = this;
-		if (!viewController.transitioningDelegate) {
-			viewController.transitioningDelegate = new MyTransitionDelegate();
-			// const animeController = viewController.transitioningDelegate.animationControllerForPresented(viewController)
-		}
 		const current = get(this.viewControllers);
 		this.viewControllers.set(current.concat(viewController));
 	}
