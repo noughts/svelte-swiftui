@@ -10,6 +10,7 @@
     import LandmarkList from "./LandmarkList.svelte";
     import ModalTestScreen from "./ModalTestScreen.svelte";
     import ShortContentScreen from "./ShortContentScreen.svelte";
+    import TestActionScreen from "./TestActionScreen.svelte";
     import TikTokScreen from "./TikTokScreen.svelte";
 </script>
 
@@ -17,6 +18,9 @@
     <View
         viewController={new UISceneController(
             new UITabBarController([
+                new UIViewController(new UIView(TestActionScreen), {
+                    tabBarItem: { title: "Actions", icon: { name: "star", weight: 400 } },
+                }),
                 new UIViewController(new UIView(ModalTestScreen), {
                     tabBarItem: { title: "Demo", icon: { name: "star", weight: 400 } },
                 }),
