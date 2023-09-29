@@ -2,6 +2,7 @@ import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
 import type { UINavigationItem, UITabBarController, UITabBarItem } from "./index.js";
+import { PresentTransitionDelegate } from "./internal/PresentTransitionDelegate.js";
 import type { UIPercentDrivenInteractiveTransition } from "./internal/UIPercentDrivenInteractiveTransition.js";
 import type { UIPresentationController } from "./internal/UIPresentationController.js";
 
@@ -26,7 +27,7 @@ export class UIViewController extends EventTarget {
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: { name: "" } };
 	presentingViewController?: UIViewController;
 	modalPresentationStyle: UIModalPresentationStyle = UIModalPresentationStyle.pageSheet;
-	transitioningDelegate?: UIViewControllerTransitioningDelegate;
+	transitioningDelegate?: UIViewControllerTransitioningDelegate = new PresentTransitionDelegate();
 
 	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
 		super();
@@ -124,4 +125,7 @@ export interface UIViewControllerTransitioningDelegate {
 export interface UIViewControllerAnimatedTransitioning {
 	// アニメーターオブジェクトにトランジションアニメーションを実行させる。
 	animateTransition: (transitionContext: UIViewControllerContextTransitioning) => void;
+
+	// アニメーターオブジェクトにトランジションアニメーションの継続時間（秒）を尋ねます。
+	transitionDuration:(transitionContext: UIViewControllerContextTransitioning) => number;
 }

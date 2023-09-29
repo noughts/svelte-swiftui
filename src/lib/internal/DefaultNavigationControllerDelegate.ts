@@ -16,4 +16,7 @@ class MyAnimatedTransitioning implements UIViewControllerAnimatedTransitioning {
 	animateTransition(transitionContext: UIViewControllerContextTransitioning) {
 
 	};
+	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
+		return 0.3
+	}
 }
