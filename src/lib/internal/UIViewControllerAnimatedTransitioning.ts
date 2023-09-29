@@ -19,6 +19,10 @@ UIViewControllerTransitioningDelegate プロトコルに準拠したオブジェ
 
 */
 
-export interface UIViewControllerAnimatedTransitioning{
-	
+import type { UIViewControllerContextTransitioning } from "./UIViewControllerContextTransitioning.js";
+
+export interface UIViewControllerAnimatedTransitioning {
+
+	// アニメーターオブジェクトにトランジションアニメーションを実行させる。
+	animateTransition: (transitionContext: UIViewControllerContextTransitioning) => void;
 }
