@@ -3,7 +3,7 @@ import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
 import type { UINavigationItem, UITabBarController, UITabBarItem } from "./index.js";
 import { UIPercentDrivenInteractiveTransition } from "./internal/UIPercentDrivenInteractiveTransition.js";
-import type { UIViewCOntrollerTransitioningDelegate } from "./internal/UIViewControllerTransitioningDelegate.js";
+import type { UIViewControllerTransitioningDelegate } from "./internal/UIViewControllerTransitioningDelegate.js";
 
 export type UIViewControllerOptions = {
 	navigationItem?: UINavigationItem;
@@ -26,7 +26,7 @@ export class UIViewController extends EventTarget {
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: { name: "" } };
 	presentingViewController?: UIViewController;
 	modalPresentationStyle: UIModalPresentationStyle = UIModalPresentationStyle.pageSheet;
-	transitioningDelegate?:UIViewCOntrollerTransitioningDelegate;
+	transitioningDelegate?:UIViewControllerTransitioningDelegate;
 	interactionController = new UIPercentDrivenInteractiveTransition();
 
 	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {

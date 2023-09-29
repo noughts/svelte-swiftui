@@ -3,7 +3,7 @@ import type { UIPercentDrivenInteractiveTransition } from "./UIPercentDrivenInte
 import type { UIPresentationController } from "./UIPresentationController.js";
 import type { UIViewControllerAnimatedTransitioning } from "./UIViewControllerAnimatedTransitioning.js";
 
-export interface UIViewCOntrollerTransitioningDelegate {
+export interface UIViewControllerTransitioningDelegate {
 
 	// --- トランジション・アニメーター・オブジェクトの取得
 

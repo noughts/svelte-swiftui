@@ -14,10 +14,4 @@ UIPercentDrivenInteractiveTransition をサブクラス化することもでき�
 
 export class UIPercentDrivenInteractiveTransition{
 	readonly percentComplete = writable(0);
-
-	// トランジションの完了率を更新する。
-	update(percentComplete:number){
-		this.percentComplete.set(percentComplete);
-	}
-
 }
