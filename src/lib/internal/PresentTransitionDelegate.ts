@@ -4,7 +4,7 @@ export class PresentTransitionDelegate implements UIViewControllerTransitioningD
 	animationControllerForPresented(
 		presented: UIViewController,
 		presenting: UIViewController,
-		source: UIViewController): UIViewControllerAnimatedTransitioning {
+		source?: UIViewController): UIViewControllerAnimatedTransitioning {
 		return new PresentTransitioning();
 	}
 }

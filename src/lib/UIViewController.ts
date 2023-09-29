@@ -84,8 +84,8 @@ export class UIViewController extends EventTarget {
 
 
 
-export interface UIViewControllerContextTransitioning {
-	viewControllerForKey: (key: "from" | "to") => UIViewController;
+export class UIViewControllerContextTransitioning {
+	constructor(readonly fromVC:UIViewController, toVC:UIViewController){}
 }
 
 export interface UIViewControllerInteractiveTransitioning {
@@ -100,7 +100,7 @@ export interface UIViewControllerTransitioningDelegate {
 	animationControllerForPresented?: (
 		presented: UIViewController,
 		presenting: UIViewController,
-		source: UIViewController) => UIViewControllerAnimatedTransitioning;
+		source?: UIViewController) => UIViewControllerAnimatedTransitioning;
 
 	// ViewControllerを終了する際に使用する遷移アニメータオブジェクトをデリゲートに問い合わせます。
 	animationControllerForDismissed?: (dismissed: UIViewController) => UIViewControllerAnimatedTransitioning;
