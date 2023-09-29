@@ -8,7 +8,7 @@
 
 	function onTransitioning(e: CustomEvent<number>) {
 		transitionProgress = e.detail;
-		// console.log(transitionProgress)
+		console.log(transitionProgress)
 		if (transitionProgress <= 0) {
 			viewController.pop();
 		}

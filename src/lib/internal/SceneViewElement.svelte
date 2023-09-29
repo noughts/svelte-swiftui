@@ -29,7 +29,6 @@
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
 		const pct = 1 - pos / e.currentTarget.clientHeight;
-		// console.log(pct);
 		dispatch("transitioning", pct);
 	}
 
@@ -70,14 +69,12 @@
 		height: 100%;
 		background-color: rgba(255 0 0/10%);
 		scroll-snap-align: center;
-		scroll-snap-stop: always;
 	}
 	.view {
 		width: 100%;
 		height: calc(100% - 22px);
 		margin-top: 22px;
 		scroll-snap-align: center;
-		scroll-snap-stop: always;
 		overflow: hidden;
 		border-radius: 10px 10px 0px 0px;
 	}
