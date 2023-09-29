@@ -14,14 +14,18 @@ export class UISceneController extends UIViewController {
 
 	constructor(rootViewController: UIViewController) {
 		super(new UIView(SceneView), {})
-		this.push(rootViewController)
+		this.push(rootViewController, false)
 	}
 
-	push(viewController: UIViewController) {
+	push(viewController: UIViewController, animated: boolean = true) {
 		viewController.presentingViewController = this;
 		const viewControllers = get(this.viewControllers);
 		const fromVC = viewControllers[viewControllers.length - 1];
 		this.viewControllers.set(viewControllers.concat(viewController));
+
+		if( !animated){
+			return;
+		}
 
 		if (viewController.transitioningDelegate?.animationControllerForPresented) {
 			const animator = viewController.transitioningDelegate.animationControllerForPresented(viewController, this);
@@ -35,16 +39,16 @@ export class UISceneController extends UIViewController {
 		}
 		const newAry = [...get(this.viewControllers)];
 		const fromVC = newAry.pop();
-		if( !fromVC ){
+		if (!fromVC) {
 			return;
 		}
-		const toVC = newAry[newAry.length- 1];
-		
+		const toVC = newAry[newAry.length - 1];
+
 		if (fromVC.transitioningDelegate?.animationControllerForDismissed) {
 			const animator = fromVC.transitioningDelegate.animationControllerForDismissed(fromVC);
 			const context = new UIViewControllerContextTransitioning(fromVC, toVC)
 			await animator.animateTransition(context);
-			if( fromVC.transitioningDelegate.interactionControllerForDismissal){
+			if (fromVC.transitioningDelegate.interactionControllerForDismissal) {
 				const interactor = fromVC.transitioningDelegate.interactionControllerForDismissal(animator)
 			}
 		}
