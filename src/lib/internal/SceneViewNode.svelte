@@ -30,14 +30,24 @@
 		width: 100%;
 		height: 100%;
 		overflow-y: scroll;
+		scroll-snap-type: y mandatory;
+		overscroll-behavior: none;
+	}
+	.SceneViewNode::-webkit-scrollbar {
+		display: none;
+		-webkit-appearance: none;
 	}
 	.spacer {
 		width: 100%;
 		height: 100%;
 		background-color: rgba(255 0 0/20%);
+		scroll-snap-align: center;
+		scroll-snap-stop: always;
 	}
 	.view {
 		width: 100%;
 		height: 100%;
+		scroll-snap-align: center;
+		scroll-snap-stop: always;
 	}
 </style>
