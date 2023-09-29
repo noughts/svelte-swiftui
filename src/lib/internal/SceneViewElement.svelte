@@ -7,7 +7,10 @@
 
 	export let viewController: UIViewController;
 	export let root: boolean = false;
+	export let otherTransitionProgress: number;
+	export let transitionFrom: boolean;
 	let ref: HTMLDivElement;
+	let brightness = 100;
 
 	const dispatch = createEventDispatcher();
 	const tween = tweened(0, { duration: 333, easing: cubicOut });
@@ -25,8 +28,13 @@
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
-		const pct = pos / e.currentTarget.clientHeight;
+		const pct = 1 - pos / e.currentTarget.clientHeight;
+		// console.log(pct);
 		dispatch("transitioning", pct);
+	}
+
+	$: if (transitionFrom) {
+		brightness = 100 - otherTransitionProgress * 50;
 	}
 </script>
 
@@ -35,6 +43,7 @@
 	bind:this={ref}
 	on:scroll={onScroll}
 	style:scroll-snap-type={scrollSnapType}
+	style:filter="brightness({brightness}%)"
 >
 	{#if root == false}
 		<div class="spacer" />
@@ -50,7 +59,6 @@
 		width: 100%;
 		height: 100%;
 		overflow-y: scroll;
-		/* scroll-snap-type: y mandatory; */
 		overscroll-behavior: none;
 	}
 	.SceneViewNode::-webkit-scrollbar {

@@ -4,10 +4,12 @@
 	import SceneViewElement from "./SceneViewElement.svelte";
 	export let viewController: UISceneController;
 	const viewControllers = viewController.viewControllers;
+	let transitionProgress = 0;
 
-	function onTransitioning(e:CustomEvent<number>){
-		console.log(e.detail)
-		if( e.detail >= 1 ){
+	function onTransitioning(e: CustomEvent<number>) {
+		transitionProgress = e.detail;
+		// console.log(transitionProgress)
+		if (transitionProgress <= 0) {
 			viewController.pop();
 		}
 	}
@@ -26,7 +28,13 @@
 
 <div class="SceneView">
 	{#each $viewControllers as viewController, index}
-		<SceneViewElement {viewController} root={index == 0} on:transitioning={onTransitioning} />
+		<SceneViewElement
+			{viewController}
+			otherTransitionProgress={transitionProgress}
+			transitionFrom={index == $viewControllers.length - 2}
+			root={index == 0}
+			on:transitioning={onTransitioning}
+		/>
 	{/each}
 </div>
 
