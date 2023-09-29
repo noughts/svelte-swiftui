@@ -1,11 +1,10 @@
 <script lang="ts">
 	let val = 0;
 
-	function testAction(node: HTMLDivElement, prop: any) {
+	function testAction(node: HTMLDivElement, prop: number) {
 		console.log({ prop });
 		return {
-			update(newProp: any) {
-				console.log({ newProp });
+			update(newProp: number) {
 				node.style.transform = `translateX(${newProp*100}px)`;
 			},
 			destroy() {},
