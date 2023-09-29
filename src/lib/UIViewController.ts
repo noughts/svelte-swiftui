@@ -25,6 +25,7 @@ export class UIViewController extends EventTarget {
 	readonly transitionDuration = writable(0);
 	readonly translateX = writable("0");
 	readonly translateY = writable("0");
+	readonly brightness = writable("100%")
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };

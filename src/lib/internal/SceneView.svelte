@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { fly } from "svelte/transition";
 	import type { UISceneController } from "../UISceneController.js";
 	import View from "../View.svelte";
 	import "../svelte-swiftui.css";
@@ -44,17 +43,9 @@
 		top: 22px;
 		overflow: hidden;
 		border-radius: 10px 10px 0px 0px;
-		transition-property: filter transform;
-		transition-duration: 0.3s;
-		filter: brightness(80%);
-		/* transform: scale(0.95); */
 	}
 	.rootView {
 		top: 0;
 		border-radius: 0;
-	}
-	.topView {
-		filter: brightness(100%);
-		/* transform: scale(1); */
 	}
 </style>

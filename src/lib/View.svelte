@@ -4,9 +4,11 @@
 	const tx = viewController.translateX;
 	const ty = viewController.translateY;
 	const duration = viewController.transitionDuration;
+	const brightness = viewController.brightness;
 	$: style = `
 	transform: translate(${$tx}, ${$ty});
 	transition-duration: ${$duration}s;
+	filter: brightness(${$brightness});
 	`;
 </script>
 
