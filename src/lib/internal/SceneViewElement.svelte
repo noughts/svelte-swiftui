@@ -11,28 +11,31 @@
 
 	const dispatch = createEventDispatcher();
 	const tween = tweened(0, { duration: 333, easing: cubicOut });
+	let scrollSnapType = "none";
 
 	onMount(async () => {
 		if (root == false) {
-			tween.set(ref.clientHeight);
+			await tween.set(ref.clientHeight);
+			scrollSnapType = "y mandatory";
 		}
 	});
-	$: {
-		if (ref) {
-			ref.scrollTo(0, $tween);
-		}
+	$: if (ref) {
+		ref.scrollTo(0, $tween);
 	}
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
 		const pct = pos / e.currentTarget.clientHeight;
-		// console.log(pct);
 		dispatch("transitioning", pct);
-		// viewController.interactionController.percentComplete.set(pct);
 	}
 </script>
 
-<div class="SceneViewNode" bind:this={ref} on:scroll={onScroll}>
+<div
+	class="SceneViewNode"
+	bind:this={ref}
+	on:scroll={onScroll}
+	style:scroll-snap-type={scrollSnapType}
+>
 	{#if root == false}
 		<div class="spacer" />
 	{/if}
