@@ -29,7 +29,7 @@ export class UISceneController extends UIViewController {
 			animator.animateTransition(context);
 		}
 	}
-	pop() {
+	async pop() {
 		if (get(this.viewControllers).length <= 1) {
 			return;
 		}
@@ -39,16 +39,16 @@ export class UISceneController extends UIViewController {
 			return;
 		}
 		const toVC = newAry[newAry.length- 1];
-		this.viewControllers.set(newAry);
-		console.log(fromVC)
-
+		
 		if (fromVC.transitioningDelegate?.animationControllerForDismissed) {
 			const animator = fromVC.transitioningDelegate.animationControllerForDismissed(fromVC);
 			const context = new UIViewControllerContextTransitioning(fromVC, toVC)
-			animator.animateTransition(context);
+			await animator.animateTransition(context);
 			if( fromVC.transitioningDelegate.interactionControllerForDismissal){
 				const interactor = fromVC.transitioningDelegate.interactionControllerForDismissal(animator)
 			}
 		}
+
+		this.viewControllers.set(newAry);
 	}
 }

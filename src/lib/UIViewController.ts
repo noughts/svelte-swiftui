@@ -127,7 +127,7 @@ export interface UIViewControllerTransitioningDelegate {
 
 export interface UIViewControllerAnimatedTransitioning {
 	// アニメーターオブジェクトにトランジションアニメーションを実行させる。
-	animateTransition: (transitionContext: UIViewControllerContextTransitioning) => void;
+	animateTransition: (transitionContext: UIViewControllerContextTransitioning) => Promise<void>;
 
 	// アニメーターオブジェクトにトランジションアニメーションの継続時間（秒）を尋ねます。
 	transitionDuration:(transitionContext: UIViewControllerContextTransitioning) => number;

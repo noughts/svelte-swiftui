@@ -28,9 +28,9 @@ class PresentTransitioning implements UIViewControllerAnimatedTransitioning {
 
 class DismissTransitioning implements UIViewControllerAnimatedTransitioning {
 	async animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-		console.log(transitionContext)
-		await tick();
-		transitionContext.fromVC.translateY.set("100px")
+		const duration = this.transitionDuration(transitionContext);
+		transitionContext.fromVC.translateY.set("100%")
+		await sleep(duration*1000);
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
 		return 0.3
