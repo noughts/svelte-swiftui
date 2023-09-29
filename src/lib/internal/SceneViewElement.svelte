@@ -2,23 +2,31 @@
 	import View from "$lib/View.svelte";
 	import type { UIViewController } from "$lib/index.js";
 	import { createEventDispatcher, onMount } from "svelte";
+	import { cubicOut } from "svelte/easing";
+	import { tweened } from "svelte/motion";
 
 	export let viewController: UIViewController;
 	export let root: boolean = false;
 	let ref: HTMLDivElement;
 
 	const dispatch = createEventDispatcher();
+	const tween = tweened(0, { duration: 333, easing: cubicOut });
 
 	onMount(async () => {
 		if (root == false) {
-			ref.scrollTo({ behavior: "smooth", top: ref.clientHeight });
+			tween.set(ref.clientHeight);
 		}
 	});
+	$: {
+		if (ref) {
+			ref.scrollTo(0, $tween);
+		}
+	}
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
 		const pct = pos / e.currentTarget.clientHeight;
-		console.log(pct)
+		// console.log(pct);
 		dispatch("transitioning", pct);
 		// viewController.interactionController.percentComplete.set(pct);
 	}
@@ -39,7 +47,7 @@
 		width: 100%;
 		height: 100%;
 		overflow-y: scroll;
-		scroll-snap-type: y mandatory;
+		/* scroll-snap-type: y mandatory; */
 		overscroll-behavior: none;
 	}
 	.SceneViewNode::-webkit-scrollbar {
