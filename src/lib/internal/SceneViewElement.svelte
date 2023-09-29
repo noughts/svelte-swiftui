@@ -22,6 +22,8 @@
 			scrollSnapType = "y mandatory";
 		}
 	});
+
+	// tweenに合わせてスクロール
 	$: if (ref) {
 		ref.scrollTo(0, $tween);
 	}
