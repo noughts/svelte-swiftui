@@ -2,6 +2,7 @@
 	import type { UISceneController } from "../UISceneController.js";
 	import View from "../View.svelte";
 	import "../svelte-swiftui.css";
+	import SceneViewNode from "./SceneViewNode.svelte";
 	export let viewController: UISceneController;
 	const viewControllers = viewController.viewControllers;
 </script>
@@ -19,13 +20,14 @@
 
 <div class="SceneView">
 	{#each $viewControllers as viewController, index}
-		<div
+		<SceneViewNode {viewController} isRoot={index == 0} />
+		<!-- <div
 			class="view"
 			class:topView={index == $viewControllers.length - 1}
 			class:rootView={index == 0}
 		>
 			<View {viewController} />
-		</div>
+		</div> -->
 	{/each}
 </div>
 
