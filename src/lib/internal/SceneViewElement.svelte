@@ -31,7 +31,6 @@
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
 		const pct = 1 - pos / e.currentTarget.clientHeight;
-		console.log(pct);
 		dispatch("transitioning", pct);
 	}
 
@@ -41,6 +40,7 @@
 
 	function typewriter(node: HTMLDivElement) {
 		scrollSnapType = "none";
+		// return {};
 		return {
 			duration: 333,
 			easing: cubicOut,
