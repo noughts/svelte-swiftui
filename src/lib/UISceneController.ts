@@ -40,6 +40,7 @@ export class UISceneController extends UIViewController {
 		}
 		const toVC = newAry[newAry.length- 1];
 		this.viewControllers.set(newAry);
+		console.log(fromVC)
 
 		if (fromVC.transitioningDelegate?.animationControllerForDismissed) {
 			const animator = fromVC.transitioningDelegate.animationControllerForDismissed(fromVC);

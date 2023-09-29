@@ -1,3 +1,4 @@
+import { writable } from "svelte/store";
 import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
@@ -21,6 +22,8 @@ enum UIModalPresentationStyle {
 export class UIViewController extends EventTarget {
 
 	readonly className: string = "UIViewController";
+	readonly translateX = writable(0);
+	readonly translateY = writable("0");
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
@@ -85,7 +88,7 @@ export class UIViewController extends EventTarget {
 
 
 export class UIViewControllerContextTransitioning {
-	constructor(readonly fromVC:UIViewController, toVC:UIViewController){}
+	constructor(readonly fromVC:UIViewController, readonly toVC:UIViewController){}
 }
 
 export interface UIViewControllerInteractiveTransitioning {
