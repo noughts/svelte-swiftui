@@ -14,7 +14,7 @@
 
 	const dispatch = createEventDispatcher();
 	const tween = tweened(0, { duration: 333, easing: cubicOut });
-	let scrollSnapType = "none";
+	let scrollSnapType = "none";// スナップが有効だとintroのtransitionが反映されないので初期値は無効にする。
 
 	onMount(async () => {
 		if (root == false) {
