@@ -19,18 +19,16 @@ export class PresentTransitionDelegate implements UIViewControllerTransitioningD
 	interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning):UIPercentDrivenInteractiveTransition{
 		return this.interactionController;
 	}
-}
+}	
 
 class PresentAnimator implements UIViewControllerAnimatedTransitioning {
 	async animateTransition(transitionContext: UIViewControllerContextTransitioning) {
 		const duration = this.transitionDuration(transitionContext);
-		transitionContext.toVC.transitionDuration.set(duration)
-		transitionContext.fromVC.transitionDuration.set(duration)
 
-		transitionContext.toVC.translateY.set("100%")
+		transitionContext.toVC.containerScrollTop.set(0)
 		await tick();
-		transitionContext.toVC.translateY.set("0")
-		transitionContext.fromVC.brightness.set("50%");
+		transitionContext.toVC.containerScrollTop.set(500)
+		transitionContext.fromVC.brightness.set(50);
 		await sleep(duration * 1000)
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
@@ -41,11 +39,9 @@ class PresentAnimator implements UIViewControllerAnimatedTransitioning {
 class DismissAnimator implements UIViewControllerAnimatedTransitioning {
 	async animateTransition(transitionContext: UIViewControllerContextTransitioning) {
 		const duration = this.transitionDuration(transitionContext);
-		transitionContext.fromVC.transitionDuration.set(duration)
-		transitionContext.toVC.transitionDuration.set(duration)
 
-		transitionContext.fromVC.translateY.set("100%")
-		transitionContext.toVC.brightness.set("100%");
+		transitionContext.fromVC.containerScrollTop.set(0)
+		transitionContext.toVC.brightness.set(100);
 		await sleep(duration * 1000);
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {

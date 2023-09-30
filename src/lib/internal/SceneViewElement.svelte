@@ -2,31 +2,25 @@
 	import View from "$lib/View.svelte";
 	import type { UIViewController } from "$lib/index.js";
 	import { createEventDispatcher, onMount } from "svelte";
-	import { cubicOut } from "svelte/easing";
-	import { tweened } from "svelte/motion";
+    import type { PresentTransitionDelegate } from "./PresentTransitionDelegate.js";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean;
 	export let isTop:boolean;
-	export let otherTransitionProgress: number;
-	export let from: boolean;
 	let ref: HTMLDivElement;
-	let brightness = 100;
+
+	const transitionDelegate = viewController.transitioningDelegate as PresentTransitionDelegate;
+	const percentComplete = transitionDelegate.interactionController.percentComplete
+	const brightness = viewController.brightness;
+
 
 	const dispatch = createEventDispatcher();
-	const tween = tweened(0, { duration: 333, easing: cubicOut });
+	
 	let scrollSnapType = "none"; // スナップが有効だとintroのtransitionが反映されないので初期値は無効にする。
-
-	onMount(async () => {
-		if (isRoot == false) {
-			await tween.set(ref.clientHeight);
-			scrollSnapType = "y mandatory";
-		}
-	});
 
 	// tweenに合わせてスクロール
 	$: if (ref) {
-		ref.scrollTo(0, $tween);
+		ref.scrollTo(0, $percentComplete);
 	}
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
@@ -34,17 +28,6 @@
 		const pct = 1 - pos / e.currentTarget.clientHeight;
 		dispatch("transitioning", pct);
 	}
-
-	export async function dismiss(){
-		scrollSnapType = "none";
-		await tween.set(ref.clientHeight*2);
-	}
-
-	$: if (from) {
-		brightness = 100 - otherTransitionProgress * 50;
-	}
-
-	$: console.log(isTop, viewController)
 </script>
 
 <div

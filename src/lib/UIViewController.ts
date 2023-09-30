@@ -6,6 +6,8 @@ import type { UINavigationItem, UITabBarController, UITabBarItem } from "./index
 import { PresentTransitionDelegate } from "./internal/PresentTransitionDelegate.js";
 import type { UIPercentDrivenInteractiveTransition } from "./internal/UIPercentDrivenInteractiveTransition.js";
 import type { UIPresentationController } from "./internal/UIPresentationController.js";
+import { tweened } from "svelte/motion";
+import { cubicOut } from "svelte/easing";
 
 export type UIViewControllerOptions = {
 	navigationItem?: UINavigationItem;
@@ -22,10 +24,8 @@ enum UIModalPresentationStyle {
 export class UIViewController extends EventTarget {
 
 	readonly className: string = "UIViewController";
-	readonly transitionDuration = writable(0);
-	readonly translateX = writable("0");
-	readonly translateY = writable("0");
-	readonly brightness = writable("100%")
+	readonly brightness = tweened(100, {duration:333, easing:cubicOut});
+	readonly containerScrollTop = tweened(0, {duration:333, easing:cubicOut});
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
