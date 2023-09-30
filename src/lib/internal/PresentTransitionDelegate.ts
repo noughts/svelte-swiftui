@@ -23,13 +23,10 @@ export class PresentTransitionDelegate implements UIViewControllerTransitioningD
 
 class PresentAnimator implements UIViewControllerAnimatedTransitioning {
 	async animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-		const duration = this.transitionDuration(transitionContext);
-
-		transitionContext.toVC.containerScrollTop.set(0)
-		await tick();
-		transitionContext.toVC.containerScrollTop.set(500)
-		transitionContext.fromVC.brightness.set(50);
-		await sleep(duration * 1000)
+		const duration = this.transitionDuration(transitionContext) * 1000;
+		
+		transitionContext.fromVC.brightness.set(50, {duration});
+		await transitionContext.toVC.containerScrollTop.set(500, {duration})
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
 		return 0.333
@@ -38,11 +35,10 @@ class PresentAnimator implements UIViewControllerAnimatedTransitioning {
 
 class DismissAnimator implements UIViewControllerAnimatedTransitioning {
 	async animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-		const duration = this.transitionDuration(transitionContext);
+		const duration = this.transitionDuration(transitionContext) * 1000;
 
-		transitionContext.fromVC.containerScrollTop.set(0)
-		transitionContext.toVC.brightness.set(100);
-		await sleep(duration * 1000);
+		transitionContext.toVC.brightness.set(100, {duration});
+		await transitionContext.fromVC.containerScrollTop.set(0, {duration})
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
 		return 0.333
