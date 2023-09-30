@@ -16,9 +16,9 @@ export class PresentTransitionDelegate implements UIViewControllerTransitioningD
 	animationControllerForDismissed(dismissed: UIViewController): UIViewControllerAnimatedTransitioning {
 		return new DismissAnimator();
 	}
-	interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning):UIPercentDrivenInteractiveTransition{
-		return this.interactionController;
-	}
+	// interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning):UIPercentDrivenInteractiveTransition{
+	// 	return this.interactionController;
+	// }
 }	
 
 class PresentAnimator implements UIViewControllerAnimatedTransitioning {

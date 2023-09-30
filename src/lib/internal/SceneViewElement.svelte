@@ -12,8 +12,6 @@
 	const containerScrollTop =  viewController.containerScrollTop;
 	const transitionDelegate = viewController.transitioningDelegate as PresentTransitionDelegate;
 	const percentComplete = transitionDelegate.interactionController.percentComplete
-	const brightness = viewController.brightness;
-
 
 	const dispatch = createEventDispatcher();
 	
