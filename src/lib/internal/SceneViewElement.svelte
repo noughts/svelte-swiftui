@@ -9,6 +9,7 @@
 	export let isTop:boolean;
 	let ref: HTMLDivElement;
 
+	const containerScrollTop =  viewController.containerScrollTop;
 	const transitionDelegate = viewController.transitioningDelegate as PresentTransitionDelegate;
 	const percentComplete = transitionDelegate.interactionController.percentComplete
 	const brightness = viewController.brightness;
@@ -20,7 +21,7 @@
 
 	// tweenに合わせてスクロール
 	$: if (ref) {
-		ref.scrollTo(0, $percentComplete);
+		ref.scrollTo(0, $containerScrollTop);
 	}
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
@@ -39,7 +40,7 @@
 	{#if isRoot == false}
 		<div class="spacer" />
 	{/if}
-	<div class="view" class:isRoot style:filter="brightness({brightness}%)" class:isTop >
+	<div class="view" class:isRoot  class:isTop >
 		<View {viewController} />
 	</div>
 </div>

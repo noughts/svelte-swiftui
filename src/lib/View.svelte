@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
 	export let viewController: UIViewController;
+	const brightness = viewController.brightness;
 </script>
 
-<div class="View">
+<div class="View" style:filter="brightness({$brightness}%)">
 	<svelte:component
 		this={viewController.view.component}
 		{...viewController.view.props}
