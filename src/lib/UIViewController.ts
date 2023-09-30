@@ -24,8 +24,8 @@ enum UIModalPresentationStyle {
 export class UIViewController extends EventTarget {
 
 	readonly className: string = "UIViewController";
-	readonly brightness = tweened(100, {duration:333, easing:cubicOut});
-	readonly containerScrollTop = tweened(0, {duration:333, easing:cubicOut});
+	readonly brightness = tweened(100, { duration: 333, easing: cubicOut });
+	readonly containerScrollTop = tweened(0, { duration: 333, easing: cubicOut });
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
@@ -90,7 +90,11 @@ export class UIViewController extends EventTarget {
 
 
 export class UIViewControllerContextTransitioning {
-	constructor(readonly fromVC:UIViewController, readonly toVC:UIViewController){}
+	constructor(readonly fromVC: UIViewController,
+		readonly toVC: UIViewController,
+		readonly isAnimated: boolean, // トランジションをアニメーションさせるかどうかを示すブール値。
+		readonly isInteractive: boolean,// トランジションが現在インタラクティブかどうかを示すブール値。
+	) { }
 }
 
 export interface UIViewControllerInteractiveTransitioning {
@@ -132,5 +136,5 @@ export interface UIViewControllerAnimatedTransitioning {
 	animateTransition: (transitionContext: UIViewControllerContextTransitioning) => Promise<void>;
 
 	// アニメーターオブジェクトにトランジションアニメーションの継続時間（秒）を尋ねます。
-	transitionDuration:(transitionContext: UIViewControllerContextTransitioning) => number;
+	transitionDuration: (transitionContext: UIViewControllerContextTransitioning) => number;
 }

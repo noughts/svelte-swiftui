@@ -23,17 +23,17 @@ export class UISceneController extends UIViewController {
 		const fromVC = viewControllers[viewControllers.length - 1];
 		this.viewControllers.set(viewControllers.concat(viewController));
 
-		if( !animated){
+		if (!animated) {
 			return;
 		}
 
 		if (viewController.transitioningDelegate?.animationControllerForPresented) {
 			const animator = viewController.transitioningDelegate.animationControllerForPresented(viewController, this);
-			const context = new UIViewControllerContextTransitioning(fromVC, viewController)
+			const context = new UIViewControllerContextTransitioning(fromVC, viewController, animated, false);
 			animator.animateTransition(context);
 		}
 	}
-	async pop() {
+	async pop(animated: boolean = false) {
 		if (get(this.viewControllers).length <= 1) {
 			throw "もうSceneControllerにスタックがありません"
 		}
@@ -42,21 +42,27 @@ export class UISceneController extends UIViewController {
 		if (!fromVC) {
 			throw "popできませんでした"
 		}
+
+		if (!animated) {
+			this.viewControllers.set(newAry);
+			return;
+		}
+
 		const toVC = newAry[newAry.length - 1];
 
-		if( !fromVC.transitioningDelegate?.animationControllerForDismissed ){
+		if (!fromVC.transitioningDelegate?.animationControllerForDismissed) {
 			this.viewControllers.set(newAry);
 			return;
 		}
 
 		const animator = fromVC.transitioningDelegate.animationControllerForDismissed(fromVC);
-		const context = new UIViewControllerContextTransitioning(fromVC, toVC)
-		if( !fromVC.transitioningDelegate.interactionControllerForDismissal ){
+		const context = new UIViewControllerContextTransitioning(fromVC, toVC, animated, !fromVC.transitioningDelegate.interactionControllerForDismissal)
+		if (!fromVC.transitioningDelegate.interactionControllerForDismissal) {
 			await animator.animateTransition(context);
 			this.viewControllers.set(newAry);
 			return;
 		}
-		
+
 		const interactor = fromVC.transitioningDelegate.interactionControllerForDismissal(animator)
 	}
 }
