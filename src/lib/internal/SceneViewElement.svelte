@@ -35,22 +35,15 @@
 		dispatch("transitioning", pct);
 	}
 
+	export async function dismiss(){
+		scrollSnapType = "none";
+		await tween.set(ref.clientHeight*2);
+	}
+
 	$: if (from) {
 		brightness = 100 - otherTransitionProgress * 50;
 	}
 
-	function typewriter(node: HTMLDivElement) {
-		scrollSnapType = "none";
-		// return {};
-		return {
-			duration: 333,
-			easing: cubicOut,
-			tick: (t: number) => {
-				const y = ref.clientHeight * t;
-				ref.scrollTo(0, y);
-			},
-		};
-	}
 	$: console.log(isTop, viewController)
 </script>
 
@@ -58,9 +51,7 @@
 	class="SceneViewNode"
 	bind:this={ref}
 	on:scroll={onScroll}
-	out:typewriter
 	style:scroll-snap-type={scrollSnapType}
-	
 >
 	{#if isRoot == false}
 		<div class="spacer" />
