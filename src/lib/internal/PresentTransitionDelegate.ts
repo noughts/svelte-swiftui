@@ -26,7 +26,7 @@ class PresentAnimator implements UIViewControllerAnimatedTransitioning {
 		const duration = this.transitionDuration(transitionContext) * 1000;
 		
 		transitionContext.fromVC.brightness.set(50, {duration});
-		await transitionContext.toVC.containerScrollTop.set(500, {duration})
+		await transitionContext.toVC.containerScrollTop.set(window.innerHeight, {duration})
 	}
 	transitionDuration(transitionContext: UIViewControllerContextTransitioning) {
 		return 0.333
