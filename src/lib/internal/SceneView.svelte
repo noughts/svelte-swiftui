@@ -31,7 +31,6 @@
 			{viewController}
 			isRoot={index == 0}
 			isTop={index == $viewControllers.length - 1}
-			on:transitioning={onTransitioning}
 		/>
 	{/each}
 </div>

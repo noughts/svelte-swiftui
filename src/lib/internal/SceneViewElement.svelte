@@ -1,7 +1,6 @@
 <script lang="ts">
 	import View from "$lib/View.svelte";
 	import type { UIViewController } from "$lib/index.js";
-	import { createEventDispatcher, onMount } from "svelte";
     import type { PresentTransitionDelegate } from "./PresentTransitionDelegate.js";
 
 	export let viewController: UIViewController;
@@ -12,8 +11,6 @@
 	const containerScrollTop =  viewController.containerScrollTop;
 	const transitionDelegate = viewController.transitioningDelegate as PresentTransitionDelegate;
 	const percentComplete = transitionDelegate.interactionController.percentComplete
-
-	const dispatch = createEventDispatcher();
 	
 	let scrollSnapType = "none"; // スナップが有効だとintroのtransitionが反映されないので初期値は無効にする。
 
@@ -25,7 +22,7 @@
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
 		const pct = 1 - pos / e.currentTarget.clientHeight;
-		dispatch("transitioning", pct);
+		transitionDelegate.interactionController.update(pct)
 	}
 </script>
 

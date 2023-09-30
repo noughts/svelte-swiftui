@@ -1,6 +1,4 @@
 import type { UIViewController, UIViewControllerAnimatedTransitioning, UIViewControllerContextTransitioning, UIViewControllerTransitioningDelegate } from "$lib/UIViewController.js";
-import { tick } from "svelte";
-import { sleep } from "./Util.js";
 import { UIPercentDrivenInteractiveTransition } from "./UIPercentDrivenInteractiveTransition.js";
 
 export class PresentTransitionDelegate implements UIViewControllerTransitioningDelegate {
@@ -16,9 +14,9 @@ export class PresentTransitionDelegate implements UIViewControllerTransitioningD
 	animationControllerForDismissed(dismissed: UIViewController): UIViewControllerAnimatedTransitioning {
 		return new DismissAnimator();
 	}
-	// interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning):UIPercentDrivenInteractiveTransition{
-	// 	return this.interactionController;
-	// }
+	interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning):UIPercentDrivenInteractiveTransition{
+		return this.interactionController;
+	}
 }	
 
 class PresentAnimator implements UIViewControllerAnimatedTransitioning {

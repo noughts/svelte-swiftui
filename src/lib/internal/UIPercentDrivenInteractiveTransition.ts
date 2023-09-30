@@ -14,16 +14,18 @@ UIPercentDrivenInteractiveTransition をサブクラス化することもでき�
 
 export class UIPercentDrivenInteractiveTransition{
 	readonly percentComplete = writable(0);
+	readonly finished = writable(false);
+	readonly cancelled = writable(false);
 
 	// トランジションの完了率を更新する。
 	update(percentComplete:number){
 		this.percentComplete.set(percentComplete);
 	}
 	finish(){
-
+		this.finished.set(true);
 	}
 	cancel(){
-		
+		this.cancelled.set(true);
 	}
 
 }
