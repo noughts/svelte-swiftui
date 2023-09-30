@@ -35,12 +35,12 @@ export class UISceneController extends UIViewController {
 	}
 	async pop() {
 		if (get(this.viewControllers).length <= 1) {
-			return;
+			throw "もうSceneControllerにスタックがありません"
 		}
 		const newAry = [...get(this.viewControllers)];
 		const fromVC = newAry.pop();
 		if (!fromVC) {
-			return;
+			throw "popできませんでした"
 		}
 		const toVC = newAry[newAry.length - 1];
 
