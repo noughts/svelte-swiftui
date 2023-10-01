@@ -6,17 +6,17 @@
 	export let isRoot: boolean = false;
 
 	let ref: HTMLDivElement;
-	const containerScrollTop = viewController.containerScrollTop;
+	const containerScrollLeft = viewController.containerScrollLeft;
 	const isTransitioning = viewController.isTransitioning;
 
 	// tweenに合わせてスクロール
 	$: if (ref && $isTransitioning) {
-		ref.scrollTop = $containerScrollTop;
+		ref.scrollLeft = $containerScrollLeft;
 	}
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		if ($isTransitioning) return;
-		viewController.containerScrollTop.set(e.currentTarget.scrollTop);
+		viewController.containerScrollLeft.set(e.currentTarget.scrollLeft);
 	}
 </script>
 
@@ -43,8 +43,6 @@
 		inset: 0;
 		overflow-x: scroll;
 		overscroll-behavior: none;
-		transition-property: transform, filter;
-		transition-duration: 0.3s;
 	}
 	.contents {
 		display: flex;
@@ -66,6 +64,7 @@
 	.spacer {
 		width: 50%;
 		height: 100%;
+		background-color: rgba(255 0 0/10%);
 	}
 	.navBarHidden {
 		top: 0;

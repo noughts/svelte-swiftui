@@ -25,6 +25,9 @@ export class UINavigationController extends UIViewController {
 		const current = get(this.viewControllers);
 		const prevTop_vc = current[current.length - 1];
 		this.viewControllers.set(current.concat(viewController));
+
+		// アニメーション
+		
 	}
 	pop() {
 		if (get(this.viewControllers).length <= 1) {

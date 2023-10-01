@@ -25,6 +25,7 @@ export class UIViewController extends EventTarget {
 	readonly className: string = "UIViewController";
 	readonly brightness = writable(100);
 	readonly containerScrollTop = tweened(0, { duration: 333, easing: cubicOut });
+	readonly containerScrollLeft = tweened(0, { duration: 333, easing: cubicOut });
 	readonly scale = writable(1);
 	readonly isTransitioning = writable(false);
 
