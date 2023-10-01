@@ -37,6 +37,7 @@ export class UINavigationController extends UIViewController {
 		this.unsubscribe = viewController.containerScrollLeft.subscribe(x => {
 			const pct = x / targetLeft;
 			fromVC.brightness.set(100 - (pct * 50));
+			fromVC.translateX.set(`-${(pct * 100) * 0.25}%`);
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0.05) {
 					this.pop(false);
