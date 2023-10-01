@@ -1,7 +1,7 @@
 import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
-import { UIViewController, type UIViewControllerAnimatedTransitioning, type UIViewControllerInteractiveTransitioning, type UIViewControllerOptions } from "./UIViewController.js";
+import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
 
 export class UINavigationController extends UIViewController {
 
