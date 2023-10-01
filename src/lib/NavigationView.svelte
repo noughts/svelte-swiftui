@@ -6,7 +6,6 @@
 
 	export let viewController: UINavigationController;
 
-
 	const viewControllers = viewController.viewControllers;
 	const topViewController = viewController.topViewController;
 
@@ -18,19 +17,13 @@
 <div class="NavigationView">
 	<slot />
 	<div class="views">
-		{#each $viewControllers as vc, index}
-			<NavigationViewElement
-				viewController={vc}
-				isRoot={index == 0}
-			/>
+		{#each $viewControllers as viewController, index}
+			<NavigationViewElement {viewController} isRoot={index == 0} />
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
 		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar
-				items={$viewControllers.map((x) => x.navigationItem)}
-				on:backButtonTap={back}
-			/>
+			<UiNavigationBar viewControllers={$viewControllers} on:backButtonTap={back} />
 		</div>
 	{/if}
 </div>
