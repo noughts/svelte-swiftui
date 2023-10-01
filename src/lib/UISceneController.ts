@@ -55,6 +55,7 @@ export class UISceneController extends UIViewController {
 			return;
 		}
 
+		// アニメーション
 		fromVC.isTransitioning.set(true)
 		await fromVC.containerScrollTop.set(0, { duration: 333 })
 		fromVC.isTransitioning.set(false)

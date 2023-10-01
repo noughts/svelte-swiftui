@@ -1,5 +1,8 @@
 <script lang="ts">
+    import type { UIViewController } from "$lib/index.js";
+
 	let val = 0;
+	export let viewController:UIViewController;
 
 	function testAction(node: HTMLDivElement, prop: number) {
 		return {
