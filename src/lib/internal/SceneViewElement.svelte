@@ -4,17 +4,14 @@
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean;
-	export let isTop:boolean;
+	export let isTop: boolean;
 	let ref: HTMLDivElement;
 
-	const containerScrollTop =  viewController.containerScrollTop;
-	
-	let scrollSnapType = "none"; // スナップが有効だとintroのtransitionが反映されないので初期値は無効にする。
+	const containerScrollTop = viewController.containerScrollTop;
+	const scrollSnapType = viewController.scrollSnapType; // スナップが有効だとintroのtransitionが反映されないので動的に変更する
 
 	// tweenに合わせてスクロール
-	$: if (ref) {
-		ref.scrollTo(0, $containerScrollTop);
-	}
+	$: ref && ref.scrollTo(0, $containerScrollTop);
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
@@ -27,12 +24,12 @@
 	class="SceneViewNode"
 	bind:this={ref}
 	on:scroll={onScroll}
-	style:scroll-snap-type={scrollSnapType}
+	style:scroll-snap-type={$scrollSnapType}
 >
 	{#if isRoot == false}
 		<div class="spacer" />
 	{/if}
-	<div class="view" class:isRoot  class:isTop >
+	<div class="view" class:isRoot class:isTop>
 		<View {viewController} />
 	</div>
 </div>
@@ -68,7 +65,7 @@
 		height: 100%;
 		margin-top: 0;
 	}
-	.view.isTop{
-		filter:brightness(100%) !important;
+	.view.isTop {
+		filter: brightness(100%) !important;
 	}
 </style>

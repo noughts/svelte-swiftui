@@ -6,6 +6,7 @@ import type { UIView } from "./UIView.js";
 import type { UINavigationItem, UITabBarController, UITabBarItem } from "./index.js";
 import type { UIPercentDrivenInteractiveTransition } from "./internal/UIPercentDrivenInteractiveTransition.js";
 import type { UIPresentationController } from "./internal/UIPresentationController.js";
+import { writable } from "svelte/store";
 
 export type UIViewControllerOptions = {
 	navigationItem?: UINavigationItem;
@@ -24,6 +25,7 @@ export class UIViewController extends EventTarget {
 	readonly className: string = "UIViewController";
 	readonly brightness = tweened(100, { duration: 333, easing: cubicOut });
 	readonly containerScrollTop = tweened(0, { duration: 333, easing: cubicOut });
+	readonly scrollSnapType = writable<"none" | "x mandatory" | "y mandatory">("none");
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };

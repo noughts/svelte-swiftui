@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { UINavigationController } from "$lib/UINavigationController.js";
 	import { fly } from "svelte/transition";
-	import NavigationViewNode from "./internal/NavigationViewNode.svelte";
+	import NavigationViewElement from "./internal/NavigationViewElement.svelte";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 
 	export let viewController: UINavigationController;
@@ -18,7 +18,7 @@
 	<slot />
 	<div class="views">
 		{#each $viewControllers as vc, index}
-			<NavigationViewNode
+			<NavigationViewElement
 				viewController={vc}
 				isRoot={index == 0}
 				isTop={index == $viewControllers.length - 1}

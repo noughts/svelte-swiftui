@@ -17,7 +17,7 @@ export class UISceneController extends UIViewController {
 		this.push(rootViewController, false)
 	}
 
-	push(viewController: UIViewController, animated: boolean = true) {
+	async push(viewController: UIViewController, animated: boolean = true) {
 		viewController.presentingViewController = this;
 		const viewControllers = get(this.viewControllers);
 		const fromVC = viewControllers[viewControllers.length - 1];
@@ -29,7 +29,9 @@ export class UISceneController extends UIViewController {
 
 		const duration = 333;
 		fromVC.brightness.set(50, { duration });
-		viewController.containerScrollTop.set(window.innerHeight, { duration })
+		viewController.scrollSnapType.set("none")
+		await viewController.containerScrollTop.set(window.innerHeight, { duration })
+		viewController.scrollSnapType.set("y mandatory");
 
 	}
 	async pop(animated: boolean = true) {
