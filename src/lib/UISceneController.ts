@@ -2,6 +2,8 @@ import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import { UIView } from "./UIView.js";
 import { UIViewController } from "./UIViewController.js";
 import SceneView from "./internal/SceneView.svelte";
+import { tween } from "./internal/Util.js";
+import { cubicOut } from "svelte/easing";
 
 export class UISceneController extends UIViewController {
 
@@ -42,8 +44,9 @@ export class UISceneController extends UIViewController {
 				}
 			}
 		});
-
-		await viewController.containerScrollTop.set(targetTop, { duration: 333 })
+		await tween(0, targetTop, { duration: 333, easing: cubicOut }, x => {
+			viewController.containerScrollTop.set(x);
+		})
 		viewController.isTransitioning.set(false);
 	}
 	async pop(animated: boolean = true) {
@@ -51,7 +54,7 @@ export class UISceneController extends UIViewController {
 		const newAry = [...get(this.viewControllers)];
 		const fromVC = newAry.pop();
 		if (!fromVC) throw "popできませんでした"
-		
+
 		if (!animated) {
 			this.unsubscribe && this.unsubscribe();
 			this.viewControllers.set(newAry);
@@ -60,7 +63,9 @@ export class UISceneController extends UIViewController {
 
 		// アニメーション
 		fromVC.isTransitioning.set(true)
-		await fromVC.containerScrollTop.set(0, { duration: 333 })
+		await tween(get(fromVC.containerScrollTop), 0, { duration: 333, easing: cubicOut }, x => {
+			fromVC.containerScrollTop.set(x)
+		})
 		fromVC.isTransitioning.set(false)
 		this.viewControllers.set(newAry);
 		this.unsubscribe && this.unsubscribe();
