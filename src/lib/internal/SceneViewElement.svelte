@@ -9,8 +9,6 @@
 	let ref: HTMLDivElement;
 
 	const containerScrollTop =  viewController.containerScrollTop;
-	const transitionDelegate = viewController.transitioningDelegate as PresentTransitionDelegate;
-	const percentComplete = transitionDelegate.interactionController.percentComplete
 	
 	let scrollSnapType = "none"; // スナップが有効だとintroのtransitionが反映されないので初期値は無効にする。
 
@@ -22,7 +20,7 @@
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
 		const pct = 1 - pos / e.currentTarget.clientHeight;
-		transitionDelegate.interactionController.update(pct)
+		// transitionDelegate.interactionController.update(pct)
 	}
 </script>
 
