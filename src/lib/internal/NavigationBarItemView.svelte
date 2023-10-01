@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from "$lib/Button.svelte";
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
-    import type { UINavigationItem, UIViewController } from "$lib/index.js";
+	import type { UIViewController } from "$lib/index.js";
 	import { createEventDispatcher } from "svelte";
 	export let viewController:UIViewController;
 	export let showBackButton: boolean;
