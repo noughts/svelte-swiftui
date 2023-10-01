@@ -39,7 +39,7 @@
 	.SceneView {
 		width: 100%;
 		height: 100%;
-		background-color: white;
+		background-color: black;
 		position: relative;
 		overflow: hidden;
 	}

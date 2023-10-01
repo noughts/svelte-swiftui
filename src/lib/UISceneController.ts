@@ -49,8 +49,6 @@ export class UISceneController extends UIViewController {
 			return;
 		}
 
-		const toVC = newAry[newAry.length - 1];
-		toVC.brightness.set(100);
 		fromVC.isTransitioning.set(true)
 		await fromVC.containerScrollTop.set(0, { duration: 333 })
 		fromVC.isTransitioning.set(false)
