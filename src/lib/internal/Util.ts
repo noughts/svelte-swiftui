@@ -26,6 +26,6 @@ export function sleep(ms: number): Promise<void> {
 export async function tween<T>(from: T, to: T, options: TweenedOptions<T>, run:Subscriber<T>) {
 	const t = tweened<T>(from, options);
 	const unsubscribe = t.subscribe(run);
-	t.set(to);
+	await t.set(to);
 	unsubscribe();
 }
