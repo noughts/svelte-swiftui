@@ -32,7 +32,7 @@ export class UISceneController extends UIViewController {
 		viewController.containerScrollTop.set(window.innerHeight, { duration })
 
 	}
-	async pop(animated: boolean = false) {
+	async pop(animated: boolean = true) {
 		if (get(this.viewControllers).length <= 1) throw "もうSceneControllerにスタックがありません"
 		const newAry = [...get(this.viewControllers)];
 		const fromVC = newAry.pop();
@@ -43,5 +43,8 @@ export class UISceneController extends UIViewController {
 		}
 
 		const toVC = newAry[newAry.length - 1];
+		toVC.brightness.set(100);
+		await fromVC.containerScrollTop.set(0)
+		this.viewControllers.set(newAry);
 	}
 }
