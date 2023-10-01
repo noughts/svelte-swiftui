@@ -22,7 +22,7 @@
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
-		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
+		<div class="navBar">
 			<UiNavigationBar viewControllers={$viewControllers} on:backButtonTap={back} />
 		</div>
 	{/if}
