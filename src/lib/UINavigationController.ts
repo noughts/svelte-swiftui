@@ -2,6 +2,8 @@ import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
+import { tweened } from "svelte/motion";
+import { cubicOut } from "svelte/easing";
 
 export class UINavigationController extends UIViewController {
 
@@ -49,7 +51,12 @@ export class UINavigationController extends UIViewController {
 				}
 			}
 		});
-		await viewController.containerScrollLeft.set(targetLeft, { duration: 333 })
+		const tween = tweened(0, { duration: 333, easing: cubicOut });
+		const tweenUnsubscribe = tween.subscribe(x => {
+			viewController.containerScrollLeft.set(x)
+		})
+		await tween.set(targetLeft);
+		tweenUnsubscribe();
 		viewController.isTransitioning.set(false);
 	}
 	async pop(animated: boolean = true) {
@@ -68,9 +75,14 @@ export class UINavigationController extends UIViewController {
 
 		// アニメーション
 		fromVC.isTransitioning.set(true)
-		await fromVC.containerScrollLeft.set(0, { duration: 333 })
+		const tween = tweened<number>(get(fromVC.containerScrollLeft), {duration:333, easing:cubicOut});
+		const tweenUnsubscribe = tween.subscribe(x=>{
+			fromVC.containerScrollLeft.set(x)
+		})
+		await tween.set(0);
 		fromVC.isTransitioning.set(false)
 		this.viewControllers.set(newAry);
 		this.unsubscribe && this.unsubscribe();
+		tweenUnsubscribe();
 	}
 }
