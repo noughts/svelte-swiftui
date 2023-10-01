@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { UINavigationController } from "$lib/UINavigationController.js";
-	import { fly } from "svelte/transition";
 	import NavigationViewElement from "./internal/NavigationViewElement.svelte";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 
