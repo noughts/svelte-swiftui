@@ -1,7 +1,7 @@
-import { derived, get, writable } from "svelte/store";
-import { UIViewController, UIViewControllerContextTransitioning } from "./UIViewController.js";
-import SceneView from "./internal/SceneView.svelte";
+import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import { UIView } from "./UIView.js";
+import { UIViewController } from "./UIViewController.js";
+import SceneView from "./internal/SceneView.svelte";
 
 export class UISceneController extends UIViewController {
 
@@ -17,6 +17,7 @@ export class UISceneController extends UIViewController {
 		this.push(rootViewController, false)
 	}
 
+	unsubscribe?:Unsubscriber;
 	async push(viewController: UIViewController, animated: boolean = true) {
 		viewController.presentingViewController = this;
 		const viewControllers = get(this.viewControllers);
@@ -27,9 +28,8 @@ export class UISceneController extends UIViewController {
 			return;
 		}
 
-
 		const targetTop = window.innerHeight;
-		viewController.containerScrollTop.subscribe(x => {
+		this.unsubscribe = viewController.containerScrollTop.subscribe(x => {
 			const pct = x / targetTop;
 			fromVC.brightness.set(100 - (pct * 50));
 			fromVC.scale.set(1 - (pct / 50));
@@ -55,5 +55,6 @@ export class UISceneController extends UIViewController {
 		await fromVC.containerScrollTop.set(0, { duration: 333 })
 		fromVC.isTransitioning.set(false)
 		this.viewControllers.set(newAry);
+		this.unsubscribe && this.unsubscribe();
 	}
 }
