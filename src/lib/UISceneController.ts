@@ -17,7 +17,7 @@ export class UISceneController extends UIViewController {
 		this.push(rootViewController, false)
 	}
 
-	unsubscribe?:Unsubscriber;
+	unsubscribe?: Unsubscriber;
 	async push(viewController: UIViewController, animated: boolean = true) {
 		viewController.presentingViewController = this;
 		const viewControllers = get(this.viewControllers);
@@ -27,15 +27,20 @@ export class UISceneController extends UIViewController {
 		if (!animated) {
 			return;
 		}
+		viewController.isTransitioning.set(true)// containerScrollTop.subscribeの前に行ってください
 
 		const targetTop = window.innerHeight;
 		this.unsubscribe = viewController.containerScrollTop.subscribe(x => {
 			const pct = x / targetTop;
 			fromVC.brightness.set(100 - (pct * 50));
 			fromVC.scale.set(1 - (pct / 50));
+			if (get(viewController.isTransitioning) == false) {
+				if (pct <= 0.05) {
+					this.pop(false);
+				}
+			}
 		});
 
-		viewController.isTransitioning.set(true)
 		await viewController.containerScrollTop.set(targetTop, { duration: 333 })
 		viewController.isTransitioning.set(false);
 	}
@@ -45,6 +50,7 @@ export class UISceneController extends UIViewController {
 		const fromVC = newAry.pop();
 		if (!fromVC) throw "popできませんでした"
 		if (!animated) {
+			this.unsubscribe && this.unsubscribe();
 			this.viewControllers.set(newAry);
 			return;
 		}
