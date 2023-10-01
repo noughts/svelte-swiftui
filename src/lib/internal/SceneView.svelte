@@ -4,14 +4,6 @@
 	import SceneViewElement from "./SceneViewElement.svelte";
 	export let viewController: UISceneController;
 	const viewControllers = viewController.viewControllers;
-	let transitionProgress = 0;
-
-	function onTransitioning(e: CustomEvent<number>) {
-		transitionProgress = e.detail;
-		if (transitionProgress <= 0) {
-			viewController.pop();
-		}
-	}
 </script>
 
 <svelte:head>

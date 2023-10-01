@@ -8,19 +8,18 @@
 	let ref: HTMLDivElement;
 
 	const containerScrollTop = viewController.containerScrollTop;
-	const isBeingPresented = viewController.isTransitioning;
+	const isTransitioning = viewController.isTransitioning;
 
 	// tweenに合わせてスクロール
-	$: if (ref && $isBeingPresented) {
-		ref.scrollTo(0, $containerScrollTop);
+	$: if (ref && $isTransitioning) {
+		ref.scrollTop = $containerScrollTop;
 	}
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
-		if ($isBeingPresented) return;
+		if ($isTransitioning) return;
 		viewController.containerScrollTop.set(e.currentTarget.scrollTop);
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
 		const pct = 1 - pos / e.currentTarget.clientHeight;
-		// transitionDelegate.interactionController.update(pct)
 	}
 </script>
 
@@ -29,7 +28,7 @@
 	class="SceneViewNode"
 	bind:this={ref}
 	on:scroll={onScroll}
-	style:scroll-snap-type={$isBeingPresented ? "none" : "y mandatory"} 
+	style:scroll-snap-type={$isTransitioning ? "none" : "y mandatory"} 
 >
 	{#if isRoot == false}
 		<div class="spacer" />
