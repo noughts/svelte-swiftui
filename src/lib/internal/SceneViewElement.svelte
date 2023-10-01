@@ -18,8 +18,6 @@
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		if ($isTransitioning) return;
 		viewController.containerScrollTop.set(e.currentTarget.scrollTop);
-		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
-		const pct = 1 - pos / e.currentTarget.clientHeight;
 	}
 </script>
 
