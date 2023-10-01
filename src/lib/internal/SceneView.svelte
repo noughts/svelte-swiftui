@@ -22,7 +22,6 @@
 		<SceneViewElement
 			{viewController}
 			isRoot={index == 0}
-			isTop={index == $viewControllers.length - 1}
 		/>
 	{/each}
 </div>

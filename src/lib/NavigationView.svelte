@@ -6,6 +6,7 @@
 
 	export let viewController: UINavigationController;
 
+
 	const viewControllers = viewController.viewControllers;
 	const topViewController = viewController.topViewController;
 
@@ -21,7 +22,6 @@
 			<NavigationViewElement
 				viewController={vc}
 				isRoot={index == 0}
-				isTop={index == $viewControllers.length - 1}
 			/>
 		{/each}
 	</div>

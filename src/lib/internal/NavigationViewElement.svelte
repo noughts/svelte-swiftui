@@ -1,32 +1,30 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
 	import View from "$lib/View.svelte";
-	import { onMount } from "svelte";
-	import { fly } from "svelte/transition";
 
 	export let viewController: UIViewController;
-	export let isTop: boolean = false;
 	export let isRoot: boolean = false;
 
-	let scrollView_ref: HTMLDivElement;
+	let ref: HTMLDivElement;
+	const containerScrollTop = viewController.containerScrollTop;
+	const isTransitioning = viewController.isTransitioning;
 
-	onMount(() => {
-		scrollView_ref.scrollLeft = scrollView_ref.scrollWidth / 2;
-	});
+	// tweenに合わせてスクロール
+	$: if (ref && $isTransitioning) {
+		ref.scrollTop = $containerScrollTop;
+	}
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
-		const pos = e.currentTarget.clientWidth - e.currentTarget.scrollLeft;
-		const pct = pos / e.currentTarget.clientWidth;
-		// viewController.interactionController.percentComplete.set(pct);
+		if ($isTransitioning) return;
+		viewController.containerScrollTop.set(e.currentTarget.scrollTop);
 	}
 </script>
 
 <div
 	class="NavigationViewNode"
-	bind:this={scrollView_ref}
+	bind:this={ref}
 	on:scroll={onScroll}
-	class:isTop
-	transition:fly={{ x: "100%", opacity: 1 }}
+	style:scroll-snap-type={$isTransitioning ? "none" : "x mandatory"} 
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 >
 	<div class="contents" class:isRoot>
@@ -44,13 +42,9 @@
 		position: absolute;
 		inset: 0;
 		overflow-x: scroll;
-		/* overflow: hidden; */
-		scroll-snap-type: x mandatory;
 		overscroll-behavior: none;
 		transition-property: transform, filter;
 		transition-duration: 0.3s;
-		transform: translateX(-50%);
-		filter: brightness(80%);
 	}
 	.contents {
 		display: flex;
@@ -75,9 +69,5 @@
 	}
 	.navBarHidden {
 		top: 0;
-	}
-	.isTop {
-		transform: translateX(0);
-		filter: brightness(100%);
 	}
 </style>

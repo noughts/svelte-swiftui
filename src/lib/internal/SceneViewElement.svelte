@@ -4,7 +4,6 @@
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean;
-	export let isTop: boolean;
 	let ref: HTMLDivElement;
 
 	const containerScrollTop = viewController.containerScrollTop;
@@ -31,7 +30,7 @@
 	{#if isRoot == false}
 		<div class="spacer" />
 	{/if}
-	<div class="view" class:isRoot class:isTop>
+	<div class="view" class:isRoot>
 		<View {viewController} />
 	</div>
 </div>
@@ -66,8 +65,5 @@
 		border-radius: 0;
 		height: 100%;
 		margin-top: 0;
-	}
-	.view.isTop {
-		filter: brightness(100%) !important;
 	}
 </style>
