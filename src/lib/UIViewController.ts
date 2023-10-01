@@ -4,8 +4,6 @@ import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
 import type { UINavigationItem, UITabBarController, UITabBarItem } from "./index.js";
-import type { UIPercentDrivenInteractiveTransition } from "./internal/UIPercentDrivenInteractiveTransition.js";
-import type { UIPresentationController } from "./internal/UIPresentationController.js";
 import { writable } from "svelte/store";
 
 export type UIViewControllerOptions = {
@@ -87,56 +85,4 @@ export class UIViewController extends EventTarget {
 		if (!sc) throw "UISceneControllerが見つかりません";
 		sc.pop();
 	}
-}
-
-
-
-export class UIViewControllerContextTransitioning {
-	constructor(readonly fromVC: UIViewController,
-		readonly toVC: UIViewController,
-		readonly isAnimated: boolean, // トランジションをアニメーションさせるかどうかを示すブール値。
-		readonly isInteractive: boolean,// トランジションが現在インタラクティブかどうかを示すブール値。
-	) { }
-}
-
-export interface UIViewControllerInteractiveTransitioning {
-	startInteractiveTransition: (transitionContext: UIViewControllerContextTransitioning) => void;
-}
-
-export interface UIViewControllerTransitioningDelegate {
-
-	// --- トランジション・アニメーター・オブジェクトの取得
-
-	// ViewControllerを表示する際に使用する遷移アニメータオブジェクトをデリゲートに問い合わせます。
-	animationControllerForPresented?: (
-		presented: UIViewController,
-		presenting: UIViewController,
-		source?: UIViewController) => UIViewControllerAnimatedTransitioning;
-
-	// ViewControllerを終了する際に使用する遷移アニメータオブジェクトをデリゲートに問い合わせます。
-	animationControllerForDismissed?: (dismissed: UIViewController) => UIViewControllerAnimatedTransitioning;
-
-	// --- インタラクティブ・アニメーター・オブジェクトの取得
-
-	// ViewControllerを表示する際に使用するインタラクティブアニメータオブジェクトをデリゲートに問い合わせます。
-	interactionControllerForPresentation?: (animator: UIViewControllerAnimatedTransitioning)
-		=> UIPercentDrivenInteractiveTransition;
-
-	// ViewControllerを終了する際に使用するインタラクティブアニメータオブジェクトをデリゲートに問い合わせます。
-	interactionControllerForDismissal?: (animator: UIViewControllerAnimatedTransitioning)
-		=> UIPercentDrivenInteractiveTransition;
-
-	// --- カスタム・プレゼンテーション・コントローラの取得
-
-	// ViewControllerを表示する際のビュー階層の管理に使用するカスタムプレゼンテーションコントローラをデリゲートに問い合わせます。
-	presentationController?: (presented: UIViewController, presenting: UIViewController, source: UIViewController)
-		=> UIPresentationController;
-}
-
-export interface UIViewControllerAnimatedTransitioning {
-	// アニメーターオブジェクトにトランジションアニメーションを実行させる。
-	animateTransition: (transitionContext: UIViewControllerContextTransitioning) => Promise<void>;
-
-	// アニメーターオブジェクトにトランジションアニメーションの継続時間（秒）を尋ねます。
-	transitionDuration: (transitionContext: UIViewControllerContextTransitioning) => number;
 }
