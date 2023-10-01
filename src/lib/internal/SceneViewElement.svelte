@@ -1,7 +1,6 @@
 <script lang="ts">
 	import View from "$lib/View.svelte";
 	import type { UIViewController } from "$lib/index.js";
-    import type { PresentTransitionDelegate } from "./PresentTransitionDelegate.js";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean;

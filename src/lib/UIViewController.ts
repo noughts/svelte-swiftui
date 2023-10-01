@@ -1,13 +1,11 @@
-import { writable } from "svelte/store";
+import { cubicOut } from "svelte/easing";
+import { tweened } from "svelte/motion";
 import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
 import type { UINavigationItem, UITabBarController, UITabBarItem } from "./index.js";
-import { PresentTransitionDelegate } from "./internal/PresentTransitionDelegate.js";
 import type { UIPercentDrivenInteractiveTransition } from "./internal/UIPercentDrivenInteractiveTransition.js";
 import type { UIPresentationController } from "./internal/UIPresentationController.js";
-import { tweened } from "svelte/motion";
-import { cubicOut } from "svelte/easing";
 
 export type UIViewControllerOptions = {
 	navigationItem?: UINavigationItem;
