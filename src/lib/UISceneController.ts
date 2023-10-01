@@ -57,12 +57,12 @@ export class UISceneController extends UIViewController {
 
 		const animator = fromVC.transitioningDelegate.animationControllerForDismissed(fromVC);
 		const context = new UIViewControllerContextTransitioning(fromVC, toVC, animated, !fromVC.transitioningDelegate.interactionControllerForDismissal)
-		if (!fromVC.transitioningDelegate.interactionControllerForDismissal) {
+		if (context.isInteractive == false) {
 			await animator.animateTransition(context);
 			this.viewControllers.set(newAry);
 			return;
 		}
 
-		const interactor = fromVC.transitioningDelegate.interactionControllerForDismissal(animator)
+		const interactor = fromVC.transitioningDelegate.interactionControllerForDismissal && fromVC.transitioningDelegate.interactionControllerForDismissal(animator)
 	}
 }
