@@ -29,10 +29,9 @@ export class UISceneController extends UIViewController {
 
 		const duration = 333;
 		fromVC.brightness.set(50, { duration });
-		viewController.scrollSnapType.set("none")
+		viewController.scrollSnapType.set("none")// scrollSnapType が指定されていると scrollTop の指定が効かないので一旦 none にする
 		await viewController.containerScrollTop.set(window.innerHeight, { duration })
 		viewController.scrollSnapType.set("y mandatory");
-
 	}
 	async pop(animated: boolean = true) {
 		if (get(this.viewControllers).length <= 1) throw "もうSceneControllerにスタックがありません"
