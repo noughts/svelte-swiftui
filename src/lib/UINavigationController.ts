@@ -24,21 +24,19 @@ export class UINavigationController extends UIViewController {
 	async push(viewController: UIViewController, animated: boolean = true) {
 		viewController.presentingViewController = this;
 		const vcs = get(this.viewControllers);
-		const fromVC = vcs[vcs.length - 1];
 		this.viewControllers.set(vcs.concat(viewController));
-
 		if (animated == false) {
 			return;
 		}
 
 		// アニメーション
+		const fromVC = vcs[vcs.length - 1];
 		viewController.isTransitioning.set(true)// containerScrollTop.subscribeの前に行ってください
 
 		const targetLeft = window.innerWidth;
 		this.unsubscribe = viewController.containerScrollLeft.subscribe(x => {
 			const pct = x / targetLeft;
 			fromVC.brightness.set(100 - (pct * 50));
-			fromVC.scale.set(1 - (pct / 50));
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0.05) {
 					this.pop(false);
@@ -53,21 +51,21 @@ export class UINavigationController extends UIViewController {
 			return;
 		}
 		const newAry = [...get(this.viewControllers)];
-		newAry.pop();
+		const fromVC = newAry.pop();
+		if (!fromVC) throw "popできませんでした"
+
+
+		if (!animated) {
+			this.unsubscribe && this.unsubscribe();
+			this.viewControllers.set(newAry);
+			return;
+		}
+
+		// アニメーション
+		fromVC.isTransitioning.set(true)
+		await fromVC.containerScrollLeft.set(0, { duration: 333 })
+		fromVC.isTransitioning.set(false)
 		this.viewControllers.set(newAry);
+		this.unsubscribe && this.unsubscribe();
 	}
 }
-
-export interface UINavigationControllerDelegate {
-	// デリゲートが、ビューコントローラの遷移時に使用する 非インタラクティブなアニメーターオブジェクトを返せるようにします。
-	animationControllerForOperation?: (
-		operation: "push" | "pop",
-		fromVC: UIViewController,
-		toVC: UIViewController)
-		=> UIViewControllerAnimatedTransitioning
-
-	// ビューコントローラの遷移時に使用するインタラクティブなアニメータオブジェクトをデリゲートが返せるようにします。
-	interactionControllerFor?: (animationController: UIViewControllerAnimatedTransitioning)
-		=> UIViewControllerInteractiveTransitioning;
-}
-

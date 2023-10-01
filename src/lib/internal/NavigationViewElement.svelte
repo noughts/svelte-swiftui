@@ -64,7 +64,7 @@
 	.spacer {
 		width: 50%;
 		height: 100%;
-		background-color: rgba(255 0 0/10%);
+		/* background-color: rgba(255 0 0/10%); */
 	}
 	.navBarHidden {
 		top: 0;
