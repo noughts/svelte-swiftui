@@ -38,6 +38,7 @@ export class UINavigationController extends UIViewController {
 			const pct = x / targetLeft;
 			fromVC.brightness.set(100 - (pct * 50));
 			fromVC.translateX.set(`-${(pct * 100) * 0.25}%`);
+			fromVC.navigationItem.opacity?.set(0.1);
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0) {
 					fromVC.brightness.set(100);

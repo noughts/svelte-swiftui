@@ -6,11 +6,13 @@
 	export let viewController:UIViewController;
 	export let showBackButton: boolean;
 	const item = viewController.navigationItem;
+	const opacity = item.opacity;
+	console.log(item)
 
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="NavigationBarItemView">
+<div class="NavigationBarItemView" style:opacity={$opacity}>
 	{#if item.leftBarButtonItem}
 		<Button
 			on:click={(e) => item.leftBarButtonItem?.action()}
