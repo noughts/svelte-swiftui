@@ -1,4 +1,5 @@
 import type { Properties } from 'csstype';
+import { tweened, type Subscriber, type TweenedOptions } from 'svelte/motion';
 
 export function styleToString(style: Properties) {
 	const ary: string[] = [];
@@ -20,4 +21,11 @@ function addMinus(input: string): string {
 
 export function sleep(ms: number): Promise<void> {
 	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export async function tween<T>(from: T, to: T, options: TweenedOptions<T>, run:Subscriber<T>) {
+	const t = tweened<T>(from, options);
+	const unsubscribe = t.subscribe(run);
+	t.set(to);
+	unsubscribe();
 }
