@@ -39,7 +39,9 @@ export class UINavigationController extends UIViewController {
 			fromVC.brightness.set(100 - (pct * 50));
 			fromVC.translateX.set(`-${(pct * 100) * 0.25}%`);
 			if (get(viewController.isTransitioning) == false) {
-				if (pct <= 0.05) {
+				if (pct <= 0) {
+					fromVC.brightness.set(100);
+					fromVC.translateX.set("0");
 					this.pop(false);
 				}
 			}
@@ -54,7 +56,6 @@ export class UINavigationController extends UIViewController {
 		const newAry = [...get(this.viewControllers)];
 		const fromVC = newAry.pop();
 		if (!fromVC) throw "popできませんでした"
-
 
 		if (!animated) {
 			this.unsubscribe && this.unsubscribe();

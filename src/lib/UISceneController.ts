@@ -35,7 +35,9 @@ export class UISceneController extends UIViewController {
 			fromVC.brightness.set(100 - (pct * 50));
 			fromVC.scale.set(1 - (pct / 50));
 			if (get(viewController.isTransitioning) == false) {
-				if (pct <= 0.05) {
+				if (pct <= 0) {
+					fromVC.brightness.set(100);
+					fromVC.scale.set(1);
 					this.pop(false);
 				}
 			}
@@ -49,6 +51,7 @@ export class UISceneController extends UIViewController {
 		const newAry = [...get(this.viewControllers)];
 		const fromVC = newAry.pop();
 		if (!fromVC) throw "popできませんでした"
+		
 		if (!animated) {
 			this.unsubscribe && this.unsubscribe();
 			this.viewControllers.set(newAry);
