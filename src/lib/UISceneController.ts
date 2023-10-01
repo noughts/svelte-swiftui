@@ -27,11 +27,17 @@ export class UISceneController extends UIViewController {
 			return;
 		}
 
-		const duration = 333;
-		fromVC.brightness.set(50, { duration });
-		viewController.scrollSnapType.set("none")// scrollSnapType が指定されていると scrollTop の指定が効かないので一旦 none にする
-		await viewController.containerScrollTop.set(window.innerHeight, { duration })
-		viewController.scrollSnapType.set("y mandatory");
+
+		const targetTop = window.innerHeight;
+		viewController.containerScrollTop.subscribe(x => {
+			const pct = x / targetTop;
+			fromVC.brightness.set(100 - (pct * 50));
+			fromVC.scale.set(1 - (pct / 50));
+		});
+
+		viewController.isTransitioning.set(true)
+		await viewController.containerScrollTop.set(targetTop, { duration: 333 })
+		viewController.isTransitioning.set(false);
 	}
 	async pop(animated: boolean = true) {
 		if (get(this.viewControllers).length <= 1) throw "もうSceneControllerにスタックがありません"
@@ -45,7 +51,9 @@ export class UISceneController extends UIViewController {
 
 		const toVC = newAry[newAry.length - 1];
 		toVC.brightness.set(100);
-		await fromVC.containerScrollTop.set(0)
+		fromVC.isTransitioning.set(true)
+		await fromVC.containerScrollTop.set(0, { duration: 333 })
+		fromVC.isTransitioning.set(false)
 		this.viewControllers.set(newAry);
 	}
 }

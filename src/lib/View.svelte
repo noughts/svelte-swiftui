@@ -2,9 +2,11 @@
 	import type { UIViewController } from "$lib/UIViewController.js";
 	export let viewController: UIViewController;
 	const brightness = viewController.brightness;
+	const scale = viewController.scale;
 </script>
 
-<div class="View" style:filter="brightness({$brightness}%)">
+<div class="View" style:filter="brightness({$brightness}%)"
+style:transform="scale({$scale})">
 	<svelte:component
 		this={viewController.view.component}
 		{...viewController.view.props}

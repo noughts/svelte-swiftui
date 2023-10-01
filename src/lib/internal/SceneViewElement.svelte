@@ -8,23 +8,28 @@
 	let ref: HTMLDivElement;
 
 	const containerScrollTop = viewController.containerScrollTop;
-	const scrollSnapType = viewController.scrollSnapType; // スナップが有効だとintroのtransitionが反映されないので動的に変更する
+	const isBeingPresented = viewController.isTransitioning;
 
 	// tweenに合わせてスクロール
-	$: ref && ref.scrollTo(0, $containerScrollTop);
+	$: if (ref && $isBeingPresented) {
+		ref.scrollTo(0, $containerScrollTop);
+	}
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
+		if ($isBeingPresented) return;
+		viewController.containerScrollTop.set(e.currentTarget.scrollTop);
 		const pos = e.currentTarget.clientHeight - e.currentTarget.scrollTop;
 		const pct = 1 - pos / e.currentTarget.clientHeight;
 		// transitionDelegate.interactionController.update(pct)
 	}
 </script>
 
+<!--  scroll-snap-type が設定されているとシステム起点のスクロールが正常に動作しないので切り替えてます -->
 <div
 	class="SceneViewNode"
 	bind:this={ref}
 	on:scroll={onScroll}
-	style:scroll-snap-type={$scrollSnapType}
+	style:scroll-snap-type={$isBeingPresented ? "none" : "y mandatory"} 
 >
 	{#if isRoot == false}
 		<div class="spacer" />

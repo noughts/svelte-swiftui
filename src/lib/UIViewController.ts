@@ -23,9 +23,10 @@ enum UIModalPresentationStyle {
 export class UIViewController extends EventTarget {
 
 	readonly className: string = "UIViewController";
-	readonly brightness = tweened(100, { duration: 333, easing: cubicOut });
+	readonly brightness = writable(100);
 	readonly containerScrollTop = tweened(0, { duration: 333, easing: cubicOut });
-	readonly scrollSnapType = writable<"none" | "x mandatory" | "y mandatory">("none");
+	readonly scale = writable(1);
+	readonly isTransitioning = writable(false);
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = { title: "placeholder" };
