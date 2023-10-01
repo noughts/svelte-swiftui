@@ -1,13 +1,14 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/index.js";
 	import NavigationBarItemView from "./NavigationBarItemView.svelte";
-	export let viewControllers:UIViewController[];
+    import type { UINavigationItem } from "./UINavigationItem.js";
+	export let items:UINavigationItem[];
 </script>
 
 <div class="UINavigationBar uiChrome">
-	{#each viewControllers as viewController, index}
+	{#each items as item, index}
 		<div class="item">
-			<NavigationBarItemView {viewController} showBackButton={index >= 1} on:backButtonTap />
+			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
 		</div>
 	{/each}
 </div>

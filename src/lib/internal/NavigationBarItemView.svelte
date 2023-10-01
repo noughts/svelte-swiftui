@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Button from "$lib/Button.svelte";
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
-	import type { UIViewController } from "$lib/index.js";
 	import { createEventDispatcher } from "svelte";
-	export let viewController: UIViewController;
+    import type { UINavigationItem } from "./UINavigationItem.js";
 	export let showBackButton: boolean;
-	const item = viewController.navigationItem;
+	export let item:UINavigationItem
 	const opacity = item.opacity;
 	const translateX = item.translateX;
 

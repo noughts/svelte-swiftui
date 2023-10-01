@@ -22,7 +22,10 @@
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
 		<div class="navBar">
-			<UiNavigationBar viewControllers={$viewControllers} on:backButtonTap={back} />
+			<UiNavigationBar
+				items={$viewControllers.map((x) => x.navigationItem)}
+				on:backButtonTap={back}
+			/>
 		</div>
 	{/if}
 </div>
