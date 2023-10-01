@@ -3,16 +3,20 @@
 	import MaterialSymbol from "$lib/MaterialSymbol.svelte";
 	import type { UIViewController } from "$lib/index.js";
 	import { createEventDispatcher } from "svelte";
-	export let viewController:UIViewController;
+	export let viewController: UIViewController;
 	export let showBackButton: boolean;
 	const item = viewController.navigationItem;
 	const opacity = item.opacity;
-	console.log(item)
+	const translateX = item.translateX;
 
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="NavigationBarItemView" style:opacity={$opacity}>
+<div
+	class="NavigationBarItemView"
+	style:opacity={$opacity}
+	style:transform="translate({$translateX}, 0)"
+>
 	{#if item.leftBarButtonItem}
 		<Button
 			on:click={(e) => item.leftBarButtonItem?.action()}
@@ -60,7 +64,7 @@
 		all: unset;
 		display: flex;
 		align-items: center;
-		color:var(--ui-tint-color);
+		color: var(--ui-tint-color);
 	}
 	.backLabel {
 		margin-left: -8px;
