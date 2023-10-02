@@ -36,9 +36,10 @@ export class UINavigationController extends UIViewController {
 		const fromVC = vcs[vcs.length - 1];
 		viewController.isTransitioning.set(true)// containerScrollTop.subscribeの前に行ってください
 
-		const targetLeft = window.innerWidth;
+		const screenWidth = window.innerWidth;
+		const targetLeft = screenWidth * 2;
 		this.unsubscribe = viewController.containerScrollLeft.subscribe(x => {
-			const pct = x / targetLeft;
+			const pct = (x - screenWidth) / (targetLeft - screenWidth);
 			fromVC.brightness.set(100 - (pct * 50));
 			fromVC.translateX.set(`-${(pct * 100) * 0.25}%`);
 			if (fromVC.hidesNavigationBarWhenPushed) {
@@ -49,7 +50,7 @@ export class UINavigationController extends UIViewController {
 				fromVC.navigationItem.opacity?.set(1 - pct);
 				fromVC.navigationItem.translateX.set(`-${(pct * 100) * 0.25}%`);
 			}
-			
+
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0) {
 					fromVC.brightness.set(100);
@@ -58,7 +59,7 @@ export class UINavigationController extends UIViewController {
 				}
 			}
 		});
-		await tween(0, targetLeft, { duration: 333, easing: cubicOut }, x => {
+		await tween(screenWidth, targetLeft, { duration: 333, easing: cubicOut }, x => {
 			viewController.containerScrollLeft.set(x)
 		})
 		viewController.isTransitioning.set(false);

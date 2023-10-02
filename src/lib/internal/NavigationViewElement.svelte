@@ -24,16 +24,20 @@
 	class="NavigationViewNode"
 	bind:this={ref}
 	on:scroll={onScroll}
-	style:scroll-snap-type={$isTransitioning ? "none" : "x mandatory"} 
+	style:scroll-snap-type={$isTransitioning ? "none" : "x mandatory"}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 >
 	<div class="contents" class:isRoot>
+		{#if isRoot == false}
+		<div class="page spacer" />
+	{/if}
 		{#if isRoot == false}
 			<div class="page spacer" />
 		{/if}
 		<div class="page viewContainer" class:isRoot>
 			<View {viewController} />
 		</div>
+
 	</div>
 </div>
 
@@ -46,23 +50,23 @@
 	}
 	.contents {
 		display: flex;
-		width: 200%;
+		width: 300%;
 		height: 100%;
 	}
 	.contents.isRoot {
 		width: 100%;
 	}
 	.page {
-		width: 50%;
+		width: 100%;
 		height: 100%;
 		scroll-snap-align: center;
-		scroll-snap-stop: always;
+		scroll-snap-stop: normal;
 	}
 	.viewContainer.isRoot {
 		width: 100%;
 	}
 	.spacer {
-		width: 50%;
+		width: 100%;
 		height: 100%;
 		/* background-color: rgba(255 0 0/10%); */
 	}
