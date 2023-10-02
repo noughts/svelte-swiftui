@@ -18,6 +18,15 @@
     <View
         viewController={new UISceneController(
             new UITabBarController([
+                new UINavigationController(
+                    new UIViewController(new UIView(LandmarkList), {
+                        hidesNavigationBarWhenPushed: true,
+                    }),
+                    new UIView(HomeNav),
+                    {
+                        tabBarItem: { title: "wo/NavBar", icon: { name: "home" } },
+                    }
+                ),
                 new UINavigationController(new UIViewController(new UIView(LandmarkList)), null, {
                     tabBarItem: {
                         title: "よく使う項目",
@@ -42,15 +51,7 @@
                 new UIViewController(new UIView(TikTokScreen), {
                     tabBarItem: { title: "TikTok", icon: { name: "star", fill: true } },
                 }),
-                new UINavigationController(
-                    new UIViewController(new UIView(LandmarkList), {
-                        hidesNavigationBarWhenPushed: true,
-                    }),
-                    new UIView(HomeNav),
-                    {
-                        tabBarItem: { title: "wo/NavBar", icon: { name: "home" } },
-                    }
-                ),
+
             ])
         )}
     />
