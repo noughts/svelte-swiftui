@@ -1,9 +1,8 @@
+import { cubicOut } from "svelte/easing";
 import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
-import { tweened } from "svelte/motion";
-import { cubicOut } from "svelte/easing";
 import { tween } from "./internal/Util.js";
 
 export class UINavigationController extends UIViewController {
@@ -13,6 +12,7 @@ export class UINavigationController extends UIViewController {
 	readonly topViewController = derived(this.viewControllers, $a => {
 		return $a[$a.length - 1];
 	})
+	readonly navigationBarTranslateX = writable("0");
 
 	constructor(rootViewController: UIViewController, view?: UIView | null, options?: UIViewControllerOptions) {
 		if (view) {
@@ -44,6 +44,9 @@ export class UINavigationController extends UIViewController {
 			fromVC.navigationItem.opacity?.set(1 - pct);
 			fromVC.navigationItem.translateX.set(`-${(pct * 100) * 0.25}%`);
 			viewController.navigationItem.opacity.set(pct);
+			if( fromVC.hidesNavigationBarWhenPushed ){
+				this.navigationBarTranslateX.set(`${100 - pct*100}%`)
+			}
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0) {
 					fromVC.brightness.set(100);
