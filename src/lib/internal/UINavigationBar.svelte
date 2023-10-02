@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { UIViewController } from "$lib/index.js";
 	import NavigationBarItemView from "./NavigationBarItemView.svelte";
-    import type { UINavigationItem } from "./UINavigationItem.js";
+	import type { UINavigationItem } from "./UINavigationItem.js";
 	export let items:UINavigationItem[];
 </script>
 

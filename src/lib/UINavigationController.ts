@@ -41,12 +41,15 @@ export class UINavigationController extends UIViewController {
 			const pct = x / targetLeft;
 			fromVC.brightness.set(100 - (pct * 50));
 			fromVC.translateX.set(`-${(pct * 100) * 0.25}%`);
-			fromVC.navigationItem.opacity?.set(1 - pct);
-			fromVC.navigationItem.translateX.set(`-${(pct * 100) * 0.25}%`);
-			viewController.navigationItem.opacity.set(pct);
-			if( fromVC.hidesNavigationBarWhenPushed ){
-				this.navigationBarTranslateX.set(`${100 - pct*100}%`)
+			if (fromVC.hidesNavigationBarWhenPushed) {
+				this.navigationBarTranslateX.set(`${100 - pct * 100}%`)
+				fromVC.navigationItem.opacity.set(0);
+			} else {
+				viewController.navigationItem.opacity.set(pct);
+				fromVC.navigationItem.opacity?.set(1 - pct);
+				fromVC.navigationItem.translateX.set(`-${(pct * 100) * 0.25}%`);
 			}
+			
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0) {
 					fromVC.brightness.set(100);
