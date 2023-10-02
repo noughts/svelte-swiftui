@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { UIScrollView } from "$lib/index.js";
+	import { UIScrollView, UIViewController } from "$lib/index.js";
 	import TikTokCell from "./TikTokCell.svelte";
-
+	export let viewController:UIViewController;
 	const colors: string[] = ["red", "blue", "green", "yellow", "purple"];
 </script>
 

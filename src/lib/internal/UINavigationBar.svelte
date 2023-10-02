@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { fly } from "svelte/transition";
+	import type { UIViewController } from "$lib/index.js";
 	import NavigationBarItemView from "./NavigationBarItemView.svelte";
-	import type { UINavigationItem } from "$lib/index.js";
-	export let items: UINavigationItem[];
+    import type { UINavigationItem } from "./UINavigationItem.js";
+	export let items:UINavigationItem[];
 </script>
 
 <div class="UINavigationBar uiChrome">
 	{#each items as item, index}
-		<div class="item" class:top={index == items.length - 1} transition:fly={{ x: "50%" }}>
+		<div class="item">
 			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
 		</div>
 	{/each}
@@ -15,9 +15,9 @@
 
 <style>
 	.UINavigationBar {
-		position: fixed;
+		position: absolute;
 		left:0;
-		top:0;
+		top:0px;
 		right:0;
 		height: 44px;
 		flex-shrink: 0;
@@ -26,13 +26,5 @@
 	.item {
 		position: absolute;
 		inset: 0;
-		transition-property: transform, opacity;
-		transition-duration: 0.3s;
-		transform: translateX(-50%);
-		opacity: 0;
-	}
-	.top {
-		transform: translateX(0);
-		opacity: 1;
 	}
 </style>

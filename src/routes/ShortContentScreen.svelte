@@ -1,5 +1,7 @@
 <script lang="ts">
 	import UIScrollView from "$lib/UIScrollView.svelte";
+    import type { UIViewController } from "$lib/index.js";
+	export let viewController:UIViewController;
 </script>
 
 <div class="ShortContentScreen">

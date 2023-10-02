@@ -61,7 +61,7 @@
 	}, 100);
 </script>
 
-<div class="root">
+<div class="LandmarkList">
 	<UIScrollView bind:this={scrollView}>
 		<VStack>
 			<div class="count">{count}</div>
@@ -73,8 +73,9 @@
 </div>
 
 <style>
-	.root {
+	.LandmarkList {
 		height: 100%;
+		width: 100%;
 		background-color: var(--bg-color);
 	}
 	.count {

@@ -1,9 +1,7 @@
 <script lang="ts">
 	import type { UINavigationController } from "$lib/UINavigationController.js";
-	import { fly } from "svelte/transition";
+	import NavigationViewElement from "./internal/NavigationViewElement.svelte";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
-	import { swipe } from "./internal/swipe.js";
-	import View from "./View.svelte";
 
 	export let viewController: UINavigationController;
 
@@ -18,24 +16,16 @@
 <div class="NavigationView">
 	<slot />
 	<div class="views">
-		{#each $viewControllers as vc, index}
-			{@const top = index == $viewControllers.length - 1}
-			<div
-				class="view"
-				use:swipe={{
-					onSwipeRight: back,
-				}}
-				class:top
-				class:navBarHidden={vc.hidesNavigationBarWhenPushed}
-				transition:fly={{ x: "100%", opacity: 1 }}
-			>
-				<View viewController={vc} />
-			</div>
+		{#each $viewControllers as viewController, index}
+			<NavigationViewElement {viewController} isRoot={index == 0} />
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
-		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
-			<UiNavigationBar items={$viewControllers.map((x) => x.navigationItem)} on:backButtonTap={back} />
+		<div class="navBar">
+			<UiNavigationBar
+				items={$viewControllers.map((x) => x.navigationItem)}
+				on:backButtonTap={back}
+			/>
 		</div>
 	{/if}
 </div>
@@ -47,8 +37,8 @@
 		position: relative;
 	}
 	.navBar {
-		position: fixed;
-		top: 0;
+		position: absolute;
+		top: 0px;
 		left: 0;
 		right: 0;
 		z-index: 2;
@@ -56,21 +46,5 @@
 	.views {
 		height: 100%;
 		position: relative;
-	}
-	.view {
-		position: absolute;
-		inset: 0;
-
-		transition-property: transform, filter;
-		transition-duration: 0.3s;
-		transform: translateX(-50%);
-		filter: brightness(80%);
-	}
-	.navBarHidden {
-		top: 0;
-	}
-	.top {
-		transform: translateX(0);
-		filter: brightness(100%);
 	}
 </style>

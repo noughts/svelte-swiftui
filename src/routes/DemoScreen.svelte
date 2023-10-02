@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { UIViewController } from "$lib/UIViewController.js";
+    import VStack from "$lib/VStack.svelte";
     import { UIScrollView } from "$lib/index.js";
 	export let title: string = "dummy";
 	export let viewController:UIViewController;
@@ -26,9 +27,24 @@
 
 <div class="root">
 	<UIScrollView>
-		<h1>{title}</h1>
-		<div>page2</div>
-		<button on:click={onDismissButtonTap}>Dismiss</button>
+		<VStack spacing={32} style={{padding:"16px"}}>
+			<h1>{title}</h1>
+			<div>page2</div>
+			<button on:click={onDismissButtonTap}>Dismiss</button>
+			<h1>{title}</h1>
+			<div>page2</div>
+			<button on:click={onDismissButtonTap}>Dismiss</button>
+			<h1>{title}</h1>
+			<div>page2</div>
+			<button on:click={onDismissButtonTap}>Dismiss</button>
+			<h1>{title}</h1>
+			<div>page2</div>
+			<button on:click={onDismissButtonTap}>Dismiss</button>
+			<h1>{title}</h1>
+			<div>page2</div>
+			<button on:click={onDismissButtonTap}>Dismiss</button>
+		</VStack>
+
 	</UIScrollView>
 
 </div>
@@ -37,6 +53,6 @@
 	.root {
 		width: 100%;
 		height: 100%;
-		background-color: white;
+		background-color: black;
 	}
 </style>

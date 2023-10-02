@@ -1,11 +1,13 @@
-import { derived, get, writable } from "svelte/store";
+import { derived, get, writable, type Unsubscriber } from "svelte/store";
+import { UIView } from "./UIView.js";
 import { UIViewController } from "./UIViewController.js";
 import SceneView from "./internal/SceneView.svelte";
-import { UIView } from "./UIView.js";
+import { tween } from "./internal/Util.js";
+import { cubicOut } from "svelte/easing";
 
 export class UISceneController extends UIViewController {
 
-	readonly className:string = "UISceneController";
+	readonly className: string = "UISceneController";
 
 	readonly viewControllers = writable<UIViewController[]>([]);
 	readonly topViewController = derived(this.viewControllers, $a => {
@@ -14,20 +16,58 @@ export class UISceneController extends UIViewController {
 
 	constructor(rootViewController: UIViewController) {
 		super(new UIView(SceneView), {})
-		this.push(rootViewController)
+		this.push(rootViewController, false)
 	}
 
-	push(viewController: UIViewController) {
+	unsubscribe?: Unsubscriber;
+	async push(viewController: UIViewController, animated: boolean = true) {
 		viewController.presentingViewController = this;
-		const current = get(this.viewControllers);
-		this.viewControllers.set(current.concat(viewController));
-	}
-	pop() {
-		if (get(this.viewControllers).length <= 1) {
+		const viewControllers = get(this.viewControllers);
+		const fromVC = viewControllers[viewControllers.length - 1];
+		this.viewControllers.set(viewControllers.concat(viewController));
+
+		if (!animated) {
 			return;
 		}
+		viewController.isTransitioning.set(true)// containerScrollTop.subscribeの前に行ってください
+
+		const targetTop = window.innerHeight;
+		this.unsubscribe = viewController.containerScrollTop.subscribe(x => {
+			const pct = x / targetTop;
+			fromVC.brightness.set(100 - (pct * 50));
+			fromVC.scale.set(1 - (pct / 50));
+			if (get(viewController.isTransitioning) == false) {
+				if (pct <= 0) {
+					fromVC.brightness.set(100);
+					fromVC.scale.set(1);
+					this.pop(false);
+				}
+			}
+		});
+		await tween(0, targetTop, { duration: 333, easing: cubicOut }, x => {
+			viewController.containerScrollTop.set(x);
+		})
+		viewController.isTransitioning.set(false);
+	}
+	async pop(animated: boolean = true) {
+		if (get(this.viewControllers).length <= 1) throw "もうSceneControllerにスタックがありません"
 		const newAry = [...get(this.viewControllers)];
-		newAry.pop();
+		const fromVC = newAry.pop();
+		if (!fromVC) throw "popできませんでした"
+
+		if (!animated) {
+			this.unsubscribe && this.unsubscribe();
+			this.viewControllers.set(newAry);
+			return;
+		}
+
+		// アニメーション
+		fromVC.isTransitioning.set(true)
+		await tween(get(fromVC.containerScrollTop), 0, { duration: 333, easing: cubicOut }, x => {
+			fromVC.containerScrollTop.set(x)
+		})
+		fromVC.isTransitioning.set(false)
 		this.viewControllers.set(newAry);
+		this.unsubscribe && this.unsubscribe();
 	}
 }
