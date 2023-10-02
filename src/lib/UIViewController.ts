@@ -1,10 +1,8 @@
-import { cubicOut } from "svelte/easing";
-import { tweened } from "svelte/motion";
+import { writable } from "svelte/store";
 import type { UINavigationController } from "./UINavigationController.js";
 import type { UISceneController } from "./UISceneController.js";
 import type { UIView } from "./UIView.js";
 import type { UITabBarController, UITabBarItem } from "./index.js";
-import { writable } from "svelte/store";
 import { UINavigationItem } from "./internal/UINavigationItem.js";
 
 export type UIViewControllerOptions = {
