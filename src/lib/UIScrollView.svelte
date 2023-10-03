@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Properties } from "csstype";
 	import { styleToString } from "./internal/Util.js";
-	import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher, onMount } from "svelte";
 	import type { CGPoint, UIEdgeInsets } from "./index.js";
 	let root_ref: HTMLDivElement;
 	export let style: Properties = {};
@@ -24,8 +24,10 @@
 	const dispatch = createEventDispatcher();
 
 	function onScroll(e: any) {
-		// console.log(e.target.scroll);
 		dispatch("didScroll", { x: e.target.scrollLeft, y: e.target.scrollTop } as CGPoint);
+	}
+	function onTouchEnd(e:any){
+		console.log(e)
 	}
 
 	const contentStyle =
@@ -40,7 +42,8 @@
 <div
 	class="UIScrollView"
 	bind:this={root_ref}
-	on:scroll|passive={onScroll}
+	on:scroll={onScroll}
+	on:touchend={onTouchEnd}
 	class:noScrollIndicator={showsScrollIndicator == false}
 	class:isPagingEnabled
 	style={styleToString(style)}
