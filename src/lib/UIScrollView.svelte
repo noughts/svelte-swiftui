@@ -1,20 +1,14 @@
-<script lang="ts" context="module">
-	export type UIEdgeInsets = {
-		top: number;
-		bottom: number;
-	};
-</script>
-
 <script lang="ts">
 	import type { Properties } from "csstype";
 	import { styleToString } from "./internal/Util.js";
 	import { createEventDispatcher } from "svelte";
-	import type { CGPoint } from "./index.js";
+	import type { CGPoint, UIEdgeInsets } from "./index.js";
 	let root_ref: HTMLDivElement;
 	export let style: Properties = {};
 	export let contentInset: UIEdgeInsets = { top: 44, bottom: 49 };
 	export let isPagingEnabled = false;
 	export let showsScrollIndicator = true;
+	export let bounces = true;
 	export function scrollToTop() {
 		root_ref.scrollTop = 0;
 	}
@@ -36,6 +30,7 @@
 	class:noScrollIndicator={showsScrollIndicator == false}
 	class:isPagingEnabled
 	style={styleToString(style)}
+	style:overscroll-behavior={bounces ? "unset" : "none"}
 >
 	<div
 		style="padding-top: {contentInset.top}px; padding-bottom: calc({contentInset.bottom}px + env(safe-area-inset-bottom));"
@@ -49,7 +44,6 @@
 		position: relative;
 		height: 100%;
 		overflow: scroll;
-		/* overscroll-behavior: none; */
 	}
 	.isPagingEnabled {
 		scroll-snap-type: both mandatory;

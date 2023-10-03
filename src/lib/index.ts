@@ -23,7 +23,10 @@ export type UITabBarItem = {
 }
 
 
-
+export type UIEdgeInsets = {
+	top: number;
+	bottom: number;
+};
 export type UIBarButtonItem = {
 	title?: string;
 	icon?: string;
