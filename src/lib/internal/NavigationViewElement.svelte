@@ -20,7 +20,8 @@
 
 	function onScroll(e: any) {
 		if ($isTransitioning) return;
-		viewController.containerScrollLeft.set(e.currentTarget.scrollLeft);
+		console.log(e.target.scrollLeft)
+		viewController.containerScrollLeft.set(e.target.scrollLeft);
 	}
 	function onTouchEnd(e: any) {
 		// pointerEvents = "none"
@@ -40,6 +41,7 @@
 		{contentOffset}
 		showsScrollIndicator={false}
 		on:scroll={onScroll}
+		scrollDirection="horizontal"
 	>
 		<div class="contents" class:isRoot>
 			{#if isRoot == false}
@@ -73,6 +75,9 @@
 		height: 100%;
 		scroll-snap-align: center;
 		scroll-snap-stop: normal;
+	}
+	.viewContainer{
+		height:100%;
 	}
 	.viewContainer.isRoot {
 		width: 100%;

@@ -9,6 +9,7 @@
 	export let isPagingEnabled = false;
 	export let showsScrollIndicator = true;
 	export let bounces = true;
+	export let scrollDirection: "vertical" | "horizontal" = "vertical";
 	export function scrollToTop() {
 		root_ref.scrollTop = 0;
 	}
@@ -31,9 +32,16 @@
 	class:isPagingEnabled
 	style={styleToString(style)}
 	style:overscroll-behavior={bounces ? "unset" : "none"}
+	style:overflow-y={scrollDirection == "vertical" ? "scroll" : "hidden"}
+	style:overflow-x={scrollDirection == "horizontal" ? "scroll" : "hidden"}
 >
 	<div
-		style="padding-top: {contentInset.top}px; padding-bottom: calc({contentInset.bottom}px + env(safe-area-inset-bottom));"
+		class="content"
+		style={`
+			padding-top: ${contentInset.top}px;
+			padding-bottom: calc(${contentInset.bottom}px + env(safe-area-inset-bottom));
+			height: calc(100% - ${contentInset.top}px - ${contentInset.bottom}px - env(safe-area-inset-bottom));
+		`}
 	>
 		<slot />
 	</div>
@@ -43,7 +51,9 @@
 	.UIScrollView {
 		position: relative;
 		height: 100%;
-		overflow: scroll;
+	}
+	.content{
+		width: 100%;
 	}
 	.isPagingEnabled {
 		scroll-snap-type: both mandatory;
