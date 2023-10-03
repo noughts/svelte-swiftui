@@ -29,7 +29,7 @@
 </script>
 
 <div
-	class="NavigationViewNode"
+	class="NavigationViewElement"
 	on:touchend={onTouchEnd}
 	style:pointer-events={pointerEvents}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
@@ -58,7 +58,7 @@
 </div>
 
 <style>
-	.NavigationViewNode {
+	.NavigationViewElement {
 		position: absolute;
 		inset: 0;
 	}

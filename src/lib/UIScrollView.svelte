@@ -22,6 +22,14 @@
 		root_ref.scrollTop = contentOffset.y;
 	}
 	const dispatch = createEventDispatcher();
+
+	const contentStyle =
+		contentInset.top == 0 && contentInset.bottom == 0
+			? "height: 100%;"
+			: `
+				padding-top: ${contentInset.top}px;
+				padding-bottom: calc(${contentInset.bottom}px + env(safe-area-inset-bottom));
+	 `;
 </script>
 
 <div
@@ -35,13 +43,7 @@
 	style:overflow-y={scrollDirection == "vertical" ? "scroll" : "hidden"}
 	style:overflow-x={scrollDirection == "horizontal" ? "scroll" : "hidden"}
 >
-	<div
-		class="content"
-		style={`
-			padding-top: ${contentInset.top}px;
-			padding-bottom: calc(${contentInset.bottom}px + env(safe-area-inset-bottom));
-		`}
-	>
+	<div style={contentStyle}>
 		<slot />
 	</div>
 </div>
@@ -50,9 +52,6 @@
 	.UIScrollView {
 		position: relative;
 		height: 100%;
-	}
-	.content{
-		width: 100%;
 	}
 	.isPagingEnabled {
 		scroll-snap-type: both mandatory;

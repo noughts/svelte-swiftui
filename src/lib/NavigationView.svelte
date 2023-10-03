@@ -16,7 +16,7 @@
 
 <div class="NavigationView">
 	<slot />
-	<div class="views">
+	<div class="elements">
 		{#each $viewControllers as viewController, index}
 			<NavigationViewElement {viewController} isRoot={index == 0} />
 		{/each}
@@ -44,7 +44,7 @@
 		right: 0;
 		z-index: 2;
 	}
-	.views {
+	.elements {
 		height: 100%;
 		position: relative;
 	}
