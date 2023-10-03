@@ -12,9 +12,11 @@
 	const isTransitioning = viewController.isTransitioning;
 	let pointerEvents: Property.PointerEvents = "unset";
 	let contentOffset: CGPoint = { x: 0, y: 0 };
+	let isPagingEnabled = true;
 
 	// tweenに合わせてスクロール
 	$: if ($isTransitioning) {
+		isPagingEnabled = false;
 		contentOffset = { x: $containerScrollLeft, y: 0 };
 	}
 
@@ -37,6 +39,7 @@
 	<UIScrollView
 		bind:this={scrollView}
 		contentInset={{ top: 0, bottom: 0 }}
+		{isPagingEnabled}
 		{contentOffset}
 		showsScrollIndicator={false}
 		on:scroll={onScroll}
@@ -59,8 +62,6 @@
 	.NavigationViewNode {
 		position: absolute;
 		inset: 0;
-		overflow-x: scroll;
-		overscroll-behavior: none;
 	}
 	.contents {
 		display: flex;

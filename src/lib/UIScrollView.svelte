@@ -49,6 +49,7 @@
 		position: relative;
 		height: 100%;
 		overflow: scroll;
+		/* overscroll-behavior: none; */
 	}
 	.isPagingEnabled {
 		scroll-snap-type: both mandatory;

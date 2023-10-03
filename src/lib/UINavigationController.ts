@@ -62,6 +62,7 @@ export class UINavigationController extends UIViewController {
 			}
 		});
 		await tween(screenWidth, targetLeft, { duration: 333, easing: cubicOut }, x => {
+			console.log(x)
 			viewController.containerScrollLeft.set(x)
 		})
 		viewController.isTransitioning.set(false);
