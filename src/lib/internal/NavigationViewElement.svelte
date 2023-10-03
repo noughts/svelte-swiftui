@@ -8,7 +8,7 @@
 	export let isRoot: boolean = false;
 
 	let scrollView: UIScrollView;
-	const containerScrollLeft = viewController.containerScrollLeft;
+	const containerScrollLeft = viewController.view.containerScrollLeft;
 	const isTransitioning = viewController.isTransitioning;
 	let pointerEvents: Property.PointerEvents = "unset";
 	let contentOffset: CGPoint = { x: 0, y: 0 };
@@ -20,7 +20,7 @@
 
 	function onScroll(e: CustomEvent<CGPoint>) {
 		if ($isTransitioning) return;
-		viewController.containerScrollLeft.set(e.detail.x);
+		viewController.view.containerScrollLeft.set(e.detail.x);
 	}
 	function onTouchEnd(e: any) {
 		// pointerEvents = "none"
@@ -46,9 +46,6 @@
 			{#if isRoot == false}
 				<div class="page spacer" />
 			{/if}
-			{#if isRoot == false}
-				<div class="page spacer" />
-			{/if}
 			<div class="page viewContainer" class:isRoot>
 				<View {viewController} />
 			</div>
@@ -63,7 +60,7 @@
 	}
 	.contents {
 		display: flex;
-		width: 300%;
+		width: 200%;
 		height: 100%;
 	}
 	.contents.isRoot {

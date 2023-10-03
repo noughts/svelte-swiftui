@@ -36,12 +36,11 @@ export class UINavigationController extends UIViewController {
 		const fromVC = vcs[vcs.length - 1];
 		viewController.isTransitioning.set(true)// containerScrollTop.subscribeの前に行ってください
 
-		const screenWidth = window.innerWidth;
-		const targetLeft = screenWidth * 2;
-		this.unsubscribe = viewController.containerScrollLeft.subscribe(x => {
-			const pct = (x - screenWidth) / (targetLeft - screenWidth);
-			fromVC.brightness.set(100 - (pct * 50));
-			fromVC.translateX.set(`-${(pct * 100) * 0.25}%`);
+		const screenWidth = get(this.view.width);
+		this.unsubscribe = viewController.view.containerScrollLeft.subscribe(x => {
+			const pct = x / screenWidth;
+			fromVC.view.brightness.set(100 - (pct * 50));
+			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
 			if (fromVC.hidesNavigationBarWhenPushed) {
 				this.navigationBarTranslateX.set(`${100 - pct * 100}%`)
 				fromVC.navigationItem.opacity.set(0);
@@ -53,19 +52,21 @@ export class UINavigationController extends UIViewController {
 
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0) {
-					fromVC.brightness.set(100);
-					fromVC.translateX.set("0");
+					fromVC.view.brightness.set(100);
+					fromVC.view.translateX.set("0");
 					fromVC.navigationItem.opacity?.set(1);
 					fromVC.navigationItem.translateX.set(`0`);
 					this.pop(false);
 				}
 			}
 		});
-		await tween(screenWidth, targetLeft, { duration: 333, easing: cubicOut }, x => {
-			viewController.containerScrollLeft.set(x)
+		await tween(0, screenWidth, { duration: 333, easing: cubicOut }, x => {
+			viewController.view.containerScrollLeft.set(x)
 		})
 		viewController.isTransitioning.set(false);
 	}
+
+
 	async pop(animated: boolean = true) {
 		if (get(this.viewControllers).length <= 1) {
 			return;
@@ -82,8 +83,8 @@ export class UINavigationController extends UIViewController {
 
 		// アニメーション
 		fromVC.isTransitioning.set(true)
-		await tween(get(fromVC.containerScrollLeft), window.innerWidth, { duration: 333, easing: cubicOut }, x => {
-			fromVC.containerScrollLeft.set(x)
+		await tween(get(fromVC.view.containerScrollLeft), 0, { duration: 333, easing: cubicOut }, x => {
+			fromVC.view.containerScrollLeft.set(x)
 		})
 		fromVC.isTransitioning.set(false)
 		this.viewControllers.set(newAry);
