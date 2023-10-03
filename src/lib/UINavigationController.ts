@@ -82,7 +82,7 @@ export class UINavigationController extends UIViewController {
 
 		// アニメーション
 		fromVC.isTransitioning.set(true)
-		await tween(get(fromVC.containerScrollLeft), 0, { duration: 333, easing: cubicOut }, x => {
+		await tween(get(fromVC.containerScrollLeft), window.innerWidth, { duration: 333, easing: cubicOut }, x => {
 			fromVC.containerScrollLeft.set(x)
 		})
 		fromVC.isTransitioning.set(false)
