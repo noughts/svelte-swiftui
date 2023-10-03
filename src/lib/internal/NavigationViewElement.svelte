@@ -18,10 +18,9 @@
 		contentOffset = { x: $containerScrollLeft, y: 0 };
 	}
 
-	function onScroll(e: any) {
+	function onScroll(e: CustomEvent<CGPoint>) {
 		if ($isTransitioning) return;
-		console.log(e.target.scrollLeft)
-		viewController.containerScrollLeft.set(e.target.scrollLeft);
+		viewController.containerScrollLeft.set(e.detail.x);
 	}
 	function onTouchEnd(e: any) {
 		// pointerEvents = "none"
@@ -40,7 +39,7 @@
 		isPagingEnabled={$isTransitioning == false}
 		{contentOffset}
 		showsScrollIndicator={false}
-		on:scroll={onScroll}
+		on:didScroll={onScroll}
 		scrollDirection="horizontal"
 	>
 		<div class="contents" class:isRoot>

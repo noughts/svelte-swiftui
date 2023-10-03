@@ -23,6 +23,11 @@
 	}
 	const dispatch = createEventDispatcher();
 
+	function onScroll(e: any) {
+		// console.log(e.target.scroll);
+		dispatch("didScroll", { x: e.target.scrollLeft, y: e.target.scrollTop } as CGPoint);
+	}
+
 	const contentStyle =
 		contentInset.top == 0 && contentInset.bottom == 0
 			? "height: 100%;"
@@ -35,7 +40,7 @@
 <div
 	class="UIScrollView"
 	bind:this={root_ref}
-	on:scroll
+	on:scroll|passive={onScroll}
 	class:noScrollIndicator={showsScrollIndicator == false}
 	class:isPagingEnabled
 	style={styleToString(style)}
