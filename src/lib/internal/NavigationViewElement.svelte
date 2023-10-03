@@ -9,7 +9,7 @@
 	let ref: HTMLDivElement;
 	const containerScrollLeft = viewController.containerScrollLeft;
 	const isTransitioning = viewController.isTransitioning;
-	let pointerEvents: Property.PointerEvents = "auto";
+	let pointerEvents: Property.PointerEvents = "unset";
 
 	// tweenに合わせてスクロール
 	$: if (ref && $isTransitioning) {
