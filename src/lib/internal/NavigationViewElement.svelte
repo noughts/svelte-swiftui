@@ -12,11 +12,9 @@
 	const isTransitioning = viewController.isTransitioning;
 	let pointerEvents: Property.PointerEvents = "unset";
 	let contentOffset: CGPoint = { x: 0, y: 0 };
-	let isPagingEnabled = true;
 
 	// tweenに合わせてスクロール
 	$: if ($isTransitioning) {
-		isPagingEnabled = false;
 		contentOffset = { x: $containerScrollLeft, y: 0 };
 	}
 
@@ -33,13 +31,12 @@
 	class="NavigationViewNode"
 	on:touchend={onTouchEnd}
 	style:pointer-events={pointerEvents}
-	style:scroll-snap-type={$isTransitioning ? "none" : "x mandatory"}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 >
 	<UIScrollView
 		bind:this={scrollView}
 		contentInset={{ top: 0, bottom: 0 }}
-		{isPagingEnabled}
+		isPagingEnabled={$isTransitioning == false}
 		{contentOffset}
 		showsScrollIndicator={false}
 		on:scroll={onScroll}
