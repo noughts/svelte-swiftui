@@ -40,7 +40,6 @@
 		style={`
 			padding-top: ${contentInset.top}px;
 			padding-bottom: calc(${contentInset.bottom}px + env(safe-area-inset-bottom));
-			height: calc(100% - ${contentInset.top}px - ${contentInset.bottom}px - env(safe-area-inset-bottom));
 		`}
 	>
 		<slot />
