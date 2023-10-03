@@ -14,7 +14,7 @@
 	let contentOffset: CGPoint = { x: 0, y: 0 };
 
 	// tweenに合わせてスクロール
-	$: if (scrollView && $isTransitioning) {
+	$: if ($isTransitioning) {
 		contentOffset = { x: $containerScrollLeft, y: 0 };
 	}
 
