@@ -1,22 +1,24 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
 	import View from "$lib/View.svelte";
+	import { UIScrollView, type CGPoint } from "$lib/index.js";
 	import type { Property } from "csstype";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
 
-	let ref: HTMLDivElement;
+	let scrollView: UIScrollView;
 	const containerScrollLeft = viewController.containerScrollLeft;
 	const isTransitioning = viewController.isTransitioning;
 	let pointerEvents: Property.PointerEvents = "unset";
+	let contentOffset: CGPoint = { x: 0, y: 0 };
 
 	// tweenに合わせてスクロール
-	$: if (ref && $isTransitioning) {
-		ref.scrollLeft = $containerScrollLeft;
+	$: if (scrollView && $isTransitioning) {
+		contentOffset = { x: $containerScrollLeft, y: 0 };
 	}
 
-	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
+	function onScroll(e: any) {
 		if ($isTransitioning) return;
 		viewController.containerScrollLeft.set(e.currentTarget.scrollLeft);
 	}
@@ -27,24 +29,30 @@
 
 <div
 	class="NavigationViewNode"
-	bind:this={ref}
-	on:scroll={onScroll}
 	on:touchend={onTouchEnd}
 	style:pointer-events={pointerEvents}
 	style:scroll-snap-type={$isTransitioning ? "none" : "x mandatory"}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 >
-	<div class="contents" class:isRoot>
-		{#if isRoot == false}
-			<div class="page spacer" />
-		{/if}
-		{#if isRoot == false}
-			<div class="page spacer" />
-		{/if}
-		<div class="page viewContainer" class:isRoot>
-			<View {viewController} />
+	<UIScrollView
+		bind:this={scrollView}
+		contentInset={{ top: 0, bottom: 0 }}
+		{contentOffset}
+		showsScrollIndicator={false}
+		on:scroll={onScroll}
+	>
+		<div class="contents" class:isRoot>
+			{#if isRoot == false}
+				<div class="page spacer" />
+			{/if}
+			{#if isRoot == false}
+				<div class="page spacer" />
+			{/if}
+			<div class="page viewContainer" class:isRoot>
+				<View {viewController} />
+			</div>
 		</div>
-	</div>
+	</UIScrollView>
 </div>
 
 <style>

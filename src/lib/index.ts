@@ -31,4 +31,8 @@ export type UIBarButtonItem = {
 	action: Function;
 }
 
+export type CGPoint = {
+	x:number;
+	y:number;
+}
 
