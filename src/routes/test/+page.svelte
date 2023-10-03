@@ -5,14 +5,13 @@
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import View from "$lib/View.svelte";
-    import LandmarkList from "../LandmarkList.svelte";
+	import LandmarkList from "../LandmarkList.svelte";
 	import "../../globals.css";
 </script>
 
 <div class="root">
 	<View
-		viewController={new UIViewController(new UIView(LandmarkList), {
-		})}
+		viewController={new UINavigationController(new UIViewController(new UIView(LandmarkList)))}
 	/>
 </div>
 
