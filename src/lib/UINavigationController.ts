@@ -55,6 +55,8 @@ export class UINavigationController extends UIViewController {
 				if (pct <= 0) {
 					fromVC.brightness.set(100);
 					fromVC.translateX.set("0");
+					fromVC.navigationItem.opacity?.set(1);
+					fromVC.navigationItem.translateX.set(`0`);
 					this.pop(false);
 				}
 			}
