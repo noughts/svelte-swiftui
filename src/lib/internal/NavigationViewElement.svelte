@@ -3,7 +3,9 @@
 	import View from "$lib/View.svelte";
 	import { UIScrollView, type CGPoint } from "$lib/index.js";
 	import type { Property } from "csstype";
-    import { onMount } from "svelte";
+	import { onMount } from "svelte";
+	import { tween } from "./Util.js";
+	import { cubicInOut, linear } from "svelte/easing";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
@@ -22,11 +24,21 @@
 		if ($isTransitioning) return;
 		viewController.view.containerScrollLeft.set(e.detail.x);
 	}
-	function willEndDragging(e:CustomEvent<CGPoint>){
+	async function willEndDragging(e: CustomEvent<CGPoint>) {
 		const velocity = e.detail;
-		console.log("end", velocity)
-		if( velocity.x > 5){
-
+		console.log("end", velocity);
+		if (velocity.x > 5) {
+			viewController.navigationController?.pop();
+		} else {
+			await tween(
+				scrollView.contentOffset?.x,
+				390,
+				{ duration: 100, easing: cubicInOut },
+				(x) => {
+					if (!x) return;
+					scrollView.contentOffset = { x, y:0  };
+				}
+			);
 		}
 	}
 </script>
@@ -74,8 +86,8 @@
 		scroll-snap-align: center;
 		scroll-snap-stop: normal;
 	}
-	.viewContainer{
-		height:100%;
+	.viewContainer {
+		height: 100%;
 	}
 	.viewContainer.isRoot {
 		width: 100%;
