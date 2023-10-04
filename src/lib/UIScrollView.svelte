@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
 	import type { Properties } from "csstype";
 	import { styleToString } from "./internal/Util.js";

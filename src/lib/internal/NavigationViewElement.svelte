@@ -3,6 +3,7 @@
 	import View from "$lib/View.svelte";
 	import { UIScrollView, type CGPoint } from "$lib/index.js";
 	import type { Property } from "csstype";
+    import { onMount } from "svelte";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
@@ -11,11 +12,10 @@
 	const containerScrollLeft = viewController.view.containerScrollLeft;
 	const isTransitioning = viewController.isTransitioning;
 	let pointerEvents: Property.PointerEvents = "unset";
-	let contentOffset: CGPoint;
 
 	// tweenに合わせてスクロール
-	$: if ($isTransitioning) {
-		contentOffset = { x: $containerScrollLeft, y: 0 };
+	$: if ($isTransitioning && scrollView) {
+		scrollView.contentOffset = { x: $containerScrollLeft, y: 0 };
 	}
 
 	function onScroll(e: CustomEvent<CGPoint>) {
@@ -26,7 +26,7 @@
 		const velocity = e.detail;
 		console.log("end", velocity)
 		if( velocity.x > 5){
-			
+
 		}
 	}
 </script>
@@ -38,7 +38,6 @@
 >
 	<UIScrollView
 		bind:this={scrollView}
-		bind:contentOffset={contentOffset}
 		contentInset={{ top: 0, bottom: 0 }}
 		showsScrollIndicator={false}
 		on:willEndDragging={willEndDragging}
