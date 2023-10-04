@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { UINavigationController } from "$lib/UINavigationController.js";
-	import { UISceneController } from "$lib/UISceneController.js";
-	import { UITabBarController } from "$lib/UITabBarController.js";
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import View from "$lib/View.svelte";
-	import LandmarkList from "../LandmarkList.svelte";
 	import "../../globals.css";
+	import LandmarkList from "../LandmarkList.svelte";
 </script>
 
 <div class="root">

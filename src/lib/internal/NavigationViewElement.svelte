@@ -11,7 +11,7 @@
 	const containerScrollLeft = viewController.view.containerScrollLeft;
 	const isTransitioning = viewController.isTransitioning;
 	let pointerEvents: Property.PointerEvents = "unset";
-	let contentOffset: CGPoint = { x: 0, y: 0 };
+	let contentOffset: CGPoint;
 
 	// tweenに合わせてスクロール
 	$: if ($isTransitioning) {
@@ -22,23 +22,26 @@
 		if ($isTransitioning) return;
 		viewController.view.containerScrollLeft.set(e.detail.x);
 	}
-	function onTouchEnd(e: any) {
-		// pointerEvents = "none"
+	function willEndDragging(e:CustomEvent<CGPoint>){
+		const velocity = e.detail;
+		console.log("end", velocity)
+		if( velocity.x > 5){
+			
+		}
 	}
 </script>
 
 <div
 	class="NavigationViewElement"
-	on:touchend={onTouchEnd}
 	style:pointer-events={pointerEvents}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 >
 	<UIScrollView
 		bind:this={scrollView}
+		bind:contentOffset={contentOffset}
 		contentInset={{ top: 0, bottom: 0 }}
-		isPagingEnabled={$isTransitioning == false}
-		{contentOffset}
 		showsScrollIndicator={false}
+		on:willEndDragging={willEndDragging}
 		on:didScroll={onScroll}
 		scrollDirection="horizontal"
 	>
