@@ -56,8 +56,7 @@
 	const contentStyle =
 		contentInset.top == 0 && contentInset.bottom == 0
 			? "height: 100%;"
-			: `
-				padding-top: ${contentInset.top}px;
+			: `padding-top: ${contentInset.top}px;
 				padding-bottom: calc(${contentInset.bottom}px + env(safe-area-inset-bottom));
 	 `;
 </script>
