@@ -1,9 +1,7 @@
-import { cubicOut } from "svelte/easing";
 import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
-import { tween } from "./internal/Util.js";
 
 export class UINavigationController extends UIViewController {
 
@@ -12,7 +10,6 @@ export class UINavigationController extends UIViewController {
 	readonly topViewController = derived(this.viewControllers, $a => {
 		return $a[$a.length - 1];
 	})
-	readonly navigationBarTranslateX = writable("0");
 
 	constructor(rootViewController: UIViewController, view?: UIView | null, options?: UIViewControllerOptions) {
 		if (view) {
@@ -24,12 +21,19 @@ export class UINavigationController extends UIViewController {
 	}
 
 	unsubscribe?: Unsubscriber;
+	transitioning = false;
 	async push(viewController: UIViewController, animated: boolean = true) {
+		if( this.transitioning ){
+			console.warn("トランジション中です")
+			return;
+		}
+		this.transitioning = true;
 		this.unsubscribe && this.unsubscribe();
 		viewController.presentingViewController = this;
 		const vcs = get(this.viewControllers);
 		this.viewControllers.set(vcs.concat(viewController));
 		if (animated == false) {
+			this.transitioning = false;
 			return;
 		}
 
@@ -42,18 +46,10 @@ export class UINavigationController extends UIViewController {
 			const pct = x / screenWidth;
 			fromVC.view.brightness.set(100 - (pct * 50));
 			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
-			if (fromVC.hidesNavigationBarWhenPushed) {
-				this.navigationBarTranslateX.set(`${100 - pct * 100}%`)
-				fromVC.navigationItem.opacity.set(0);
-			} else {
-				viewController.navigationItem.opacity.set(pct);
-				fromVC.navigationItem.opacity?.set(1 - pct);
-				fromVC.navigationItem.translateX.set(`-${(pct * 100) * 0.25}%`);
-			}
-
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0) {
-					// this.pop(false);
+					this.pop(false);
+					this.transitioning = false;
 				}
 			}
 		});
@@ -76,19 +72,13 @@ export class UINavigationController extends UIViewController {
 		if (!animated) {
 			toVC.view.brightness.set(100);
 			toVC.view.translateX.set("0");
-			toVC.navigationItem.opacity?.set(1);
-			toVC.navigationItem.translateX.set(`0`);
 			this.unsubscribe && this.unsubscribe();
 			this.viewControllers.set(newAry);
 			return;
 		}
 
 		// アニメーション
-		fromVC.isTransitioning.set(true)
-		await tween(get(fromVC.view.containerScrollLeft), 0, { duration: 333, easing: cubicOut }, x => {
-			fromVC.view.containerScrollLeft.set(x)
-		})
-		fromVC.isTransitioning.set(false)
+		this.transitioning = true;
 		this.viewControllers.set(newAry);
 		this.unsubscribe && this.unsubscribe();
 	}
