@@ -2,7 +2,6 @@
 	import { UINavigationController } from "$lib/UINavigationController.js";
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
-	import ViewRenderer from "$lib/ViewControllerRenderer.svelte";
 	import { App } from "$lib/index.js";
 	import "../../globals.css";
 	import LandmarkList from "../LandmarkList.svelte";

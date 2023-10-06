@@ -54,11 +54,17 @@
 		);
 	}
 
-	let count = 0;
-	setInterval(() => {
-		count++;
-	}, 100);
+
+	let lastFrameTimestamp = 0;
+	let diff = 0;
+	setInterval(()=>{
+		const current = new Date().getTime();
+		diff = current - lastFrameTimestamp;
+		lastFrameTimestamp = current;
+	},1)
 </script>
+
+<div class="timer" />
 
 <div class="LandmarkList">
 	<ScrollView
@@ -66,7 +72,7 @@
 		contentInset={{ top: viewController.hidesNavigationBarWhenPushed ? 0 : 44, bottom: 49 }}
 	>
 		<VStack>
-			<div class="count">{count}</div>
+			<div class="count">{diff}</div>
 			{#each landmarks as landmark}
 				<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
 			{/each}
@@ -86,4 +92,13 @@
 		font-size: 16px;
 		padding: 8px;
 	}
+	@keyframes timer {
+}
+
+
+	.timer {
+	animation: timer 1ms infinite;
+	}
+
+
 </style>
