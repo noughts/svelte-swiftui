@@ -12,6 +12,7 @@ export { UIView } from "./UIView.js"
 export { UIViewController } from "./UIViewController.js"
 export { default as VStack } from "./VStack.svelte"
 export { default as ViewControllerRenderer } from "./ViewControllerRenderer.svelte"
+export { default as App } from "./App.svelte"
 
 export type UITabBarItem = {
 	title: string

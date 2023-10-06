@@ -1,12 +1,11 @@
 <script lang="ts">
-	import ViewRenderer from "$lib/ViewControllerRenderer.svelte";
-	import type { UIViewController } from "$lib/index.js";
+	import { ViewControllerRenderer, type UIViewController } from "$lib/index.js";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean;
 	let ref: HTMLDivElement;
 
-	const containerScrollTop = viewController.containerScrollTop;
+	const containerScrollTop = viewController.view.containerScrollTop;
 	const isTransitioning = viewController.isTransitioning;
 
 	// tweenに合わせてスクロール
@@ -16,7 +15,7 @@
 
 	function onScroll(e: UIEvent & { currentTarget: HTMLDivElement }) {
 		if ($isTransitioning) return;
-		viewController.containerScrollTop.set(e.currentTarget.scrollTop);
+		viewController.view.containerScrollTop.set(e.currentTarget.scrollTop);
 	}
 </script>
 
@@ -31,7 +30,7 @@
 		<div class="spacer" />
 	{/if}
 	<div class="view" class:isRoot>
-		<View {viewController} />
+		<ViewControllerRenderer {viewController} />
 	</div>
 </div>
 
