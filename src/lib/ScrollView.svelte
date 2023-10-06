@@ -34,8 +34,7 @@
 	}
 	export function scrollToBottom(animated: boolean = true) {
 		if (animated) {
-			// scrollTo({ top: root_ref.scrollHeight, behavior: "smooth" });
-			scrollTo({ top: 1000, behavior: "smooth" });
+			scrollTo({ top: root_ref.scrollHeight, behavior: "smooth" });
 		} else {
 			root_ref.scrollTop = root_ref.scrollHeight;
 		}
