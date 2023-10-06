@@ -7,6 +7,7 @@
     import "../globals.css";
     import HomeNav from "./HomeNav.svelte";
     import LandmarkList from "./LandmarkList.svelte";
+    import ModalTestScreen from "./ModalTestScreen.svelte";
 </script>
 
 <App
@@ -26,9 +27,9 @@
         //         icon: { name: "partly_cloudy_day", fill: false },
         //     },
         // }),
-        // new UIViewController(new UIView(ModalTestScreen), {
-        //     tabBarItem: { title: "Demo", icon: { name: "star", weight: 400 } },
-        // }),
+        new UIViewController(new UIView(ModalTestScreen), {
+            tabBarItem: { title: "Modal", icon: { name: "star", weight: 400 } },
+        }),
         // new UIViewController(new UIView(TestActionScreen), {
         //     tabBarItem: { title: "Actions", icon: { name: "star", weight: 400 } },
         // }),
