@@ -3,7 +3,7 @@
 	import ViewControllerRenderer from "$lib/ViewControllerRenderer.svelte";
 	import { ScrollView, type CGPoint } from "$lib/index.js";
 	import type { Property } from "csstype";
-	import { cubicInOut } from "svelte/easing";
+	import { cubicInOut, linear } from "svelte/easing";
 	import { tween } from "./Util.js";
 
 	export let viewController: UIViewController;
@@ -27,7 +27,17 @@
 		const velocity = e.detail;
 		console.log("end", velocity);
 		if (velocity.x > 5) {
-			viewController.navigationController?.pop();
+			await tween(
+				scrollView.contentOffset?.x,
+				0,
+				{ duration: 100, easing: linear },
+				(x) => {
+					if (!x) return;
+					scrollView.contentOffset = { x, y: 0 };
+				}
+			);
+			scrollView.contentOffset = { x:0, y: 0 };
+			viewController.navigationController?.pop(false);
 		} else {
 			await tween(
 				scrollView.contentOffset?.x,

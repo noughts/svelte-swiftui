@@ -12,7 +12,6 @@
 	export let showsScrollIndicator = true;
 	export let bounces = true;
 	export let scrollDirection: "vertical" | "horizontal" = "vertical";
-	export let contentOffset: CGPoint = { x: 0, y: 0 };
 	export function scrollToTop() {
 		root_ref.scrollTop = 0;
 	}
@@ -20,19 +19,26 @@
 		root_ref.scrollTop = root_ref.scrollHeight;
 	}
 
-	$: if (root_ref) {
-		root_ref.scrollLeft = contentOffset.x;
-		root_ref.scrollTop = contentOffset.y;
+	export function setContentOffset(offset: CGPoint) {
+		root_ref.scrollLeft = offset.x;
+		root_ref.scrollTop = offset.y;
 	}
+	export function getContentOffset(): CGPoint {
+		return { x: root_ref.scrollLeft, y: root_ref.scrollTop };
+	}
+
 	const dispatch = createEventDispatcher();
 
 	let prevContentOffset: CGPoint = { x: 0, y: 0 };
 	let velocity: CGPoint = { x: 0, y: 0 };
 	function onScroll(e: any) {
-		contentOffset = { x: e.target.scrollLeft, y: e.target.scrollTop };
-		velocity = { x: prevContentOffset.x - contentOffset.x, y: prevContentOffset.y - contentOffset.y };
-		prevContentOffset = contentOffset;
-		dispatch("didScroll", contentOffset);
+		const currentOffset = getContentOffset();
+		velocity = {
+			x: prevContentOffset.x - currentOffset.x,
+			y: prevContentOffset.y - currentOffset.y,
+		};
+		prevContentOffset = currentOffset;
+		dispatch("didScroll", currentOffset);
 	}
 	function onTouchEnd(e: any) {
 		dispatch("willEndDragging", velocity);
