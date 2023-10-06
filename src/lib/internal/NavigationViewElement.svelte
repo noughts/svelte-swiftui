@@ -24,7 +24,10 @@
 	}
 	async function willEndDragging(e: CustomEvent<CGPoint>) {
 		const velocity = e.detail;
-		scrollView.isUserInteractionEnabled = false
+		if (velocity.x <= 0.1 && velocity.y <= 0.1) {
+			return;
+		}
+		scrollView.isUserInteractionEnabled = false;
 		console.log("end", velocity);
 		if (velocity.x > 5) {
 			// await tween(
@@ -47,16 +50,13 @@
 					scrollView.setContentOffset({ x, y: 0 });
 				}
 			);
+			console.log("hoge");
+			scrollView.isUserInteractionEnabled = true;
 		}
-		console.log("hoge")
-		scrollView.isUserInteractionEnabled = true
 	}
 </script>
 
-<div
-	class="NavigationViewElement"
-	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
->
+<div class="NavigationViewElement" class:navBarHidden={viewController.hidesNavigationBarWhenPushed}>
 	<ScrollView
 		bind:this={scrollView}
 		contentInset={{ top: 0, bottom: 0 }}
