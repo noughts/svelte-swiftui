@@ -3,9 +3,8 @@
 	import ViewControllerRenderer from "$lib/ViewControllerRenderer.svelte";
 	import { UIScrollView, type CGPoint } from "$lib/index.js";
 	import type { Property } from "csstype";
-	import { onMount } from "svelte";
+	import { cubicInOut } from "svelte/easing";
 	import { tween } from "./Util.js";
-	import { cubicInOut, linear } from "svelte/easing";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
@@ -33,10 +32,10 @@
 			await tween(
 				scrollView.contentOffset?.x,
 				390,
-				{ duration: 100, easing: cubicInOut },
+				{ duration: 200, easing: cubicInOut },
 				(x) => {
 					if (!x) return;
-					scrollView.contentOffset = { x, y:0  };
+					scrollView.contentOffset = { x, y: 0 };
 				}
 			);
 		}
