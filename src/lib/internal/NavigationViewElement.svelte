@@ -16,7 +16,7 @@
 
 	// tweenに合わせてスクロール
 	$: if ($isTransitioning && scrollView) {
-		scrollView.contentOffset = { x: $containerScrollLeft, y: 0 };
+		scrollView.setContentOffset({ x: $containerScrollLeft, y: 0 });
 	}
 
 	function onScroll(e: CustomEvent<CGPoint>) {
@@ -28,24 +28,24 @@
 		console.log("end", velocity);
 		if (velocity.x > 5) {
 			await tween(
-				scrollView.contentOffset?.x,
+				scrollView.getContentOffset()?.x,
 				0,
 				{ duration: 100, easing: linear },
 				(x) => {
 					if (!x) return;
-					scrollView.contentOffset = { x, y: 0 };
+					scrollView.setContentOffset({ x, y: 0 });
 				}
 			);
-			scrollView.contentOffset = { x:0, y: 0 };
+			scrollView.setContentOffset({ x:0, y: 0 });
 			viewController.navigationController?.pop(false);
 		} else {
 			await tween(
-				scrollView.contentOffset?.x,
+				scrollView.getContentOffset()?.x,
 				390,
 				{ duration: 200, easing: cubicInOut },
 				(x) => {
 					if (!x) return;
-					scrollView.contentOffset = { x, y: 0 };
+					scrollView.setContentOffset({ x, y: 0 });
 				}
 			);
 		}

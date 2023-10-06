@@ -52,10 +52,6 @@ export class UINavigationController extends UIViewController {
 
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0) {
-					fromVC.view.brightness.set(100);
-					fromVC.view.translateX.set("0");
-					fromVC.navigationItem.opacity?.set(1);
-					fromVC.navigationItem.translateX.set(`0`);
 					this.pop(false);
 				}
 			}
@@ -73,9 +69,14 @@ export class UINavigationController extends UIViewController {
 		}
 		const newAry = [...get(this.viewControllers)];
 		const fromVC = newAry.pop();
+		const toVC = newAry[newAry.length-1];
 		if (!fromVC) throw "popできませんでした"
 
 		if (!animated) {
+			toVC.view.brightness.set(100);
+			toVC.view.translateX.set("0");
+			toVC.navigationItem.opacity?.set(1);
+			toVC.navigationItem.translateX.set(`0`);
 			this.unsubscribe && this.unsubscribe();
 			this.viewControllers.set(newAry);
 			return;
