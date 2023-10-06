@@ -32,6 +32,7 @@
 
 	let prevContentOffset: CGPoint = { x: 0, y: 0 };
 	let velocity: CGPoint = { x: 0, y: 0 };
+	// 120hz端末でも60hzで呼ばれます。
 	function onScroll(e: any) {
 		const currentOffset = getContentOffset();
 		velocity = {
