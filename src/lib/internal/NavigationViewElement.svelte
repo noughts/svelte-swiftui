@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
 	import ViewControllerRenderer from "$lib/ViewControllerRenderer.svelte";
-	import { UIScrollView, type CGPoint } from "$lib/index.js";
+	import { ScrollView, type CGPoint } from "$lib/index.js";
 	import type { Property } from "csstype";
 	import { cubicInOut } from "svelte/easing";
 	import { tween } from "./Util.js";
@@ -9,7 +9,7 @@
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
 
-	let scrollView: UIScrollView;
+	let scrollView: ScrollView;
 	const containerScrollLeft = viewController.view.containerScrollLeft;
 	const isTransitioning = viewController.isTransitioning;
 	let pointerEvents: Property.PointerEvents = "unset";
@@ -47,7 +47,7 @@
 	style:pointer-events={pointerEvents}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 >
-	<UIScrollView
+	<ScrollView
 		bind:this={scrollView}
 		contentInset={{ top: 0, bottom: 0 }}
 		showsScrollIndicator={false}
@@ -63,7 +63,7 @@
 				<ViewControllerRenderer {viewController} />
 			</div>
 		</div>
-	</UIScrollView>
+	</ScrollView>
 </div>
 
 <style>

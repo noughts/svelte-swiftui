@@ -1,5 +1,5 @@
 <script lang="ts">
-	import UiScrollView from "$lib/UIScrollView.svelte";
+	import UiScrollView from "$lib/ScrollView.svelte";
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
     import { VStack } from "$lib/index.js";

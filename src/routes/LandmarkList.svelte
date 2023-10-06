@@ -1,14 +1,11 @@
 <script lang="ts">
-	import { UIView } from "$lib/UIView.js";
-	import { UIViewController } from "$lib/UIViewController.js";
-	import VStack from "$lib/VStack.svelte";
+	import { ScrollView, UIView, UIViewController, VStack } from "$lib/index.js";
 	import { onMount } from "svelte";
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
-	import UIScrollView from "$lib/UIScrollView.svelte";
 	export let viewController: UIViewController;
-	let scrollView: UIScrollView;
+	let scrollView: ScrollView;
 	viewController.navigationItem.title = "Landmark List";
 	viewController.navigationItem.leftBarButtonItem = {
 		title: "Scroll2Bottom",
@@ -64,7 +61,7 @@
 </script>
 
 <div class="LandmarkList">
-	<UIScrollView
+	<ScrollView
 		bind:this={scrollView}
 		contentInset={{ top: viewController.hidesNavigationBarWhenPushed ? 0 : 44, bottom: 49 }}
 	>
@@ -74,7 +71,7 @@
 				<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
 			{/each}
 		</VStack>
-	</UIScrollView>
+	</ScrollView>
 </div>
 
 <style>
