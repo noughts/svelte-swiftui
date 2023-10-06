@@ -2,29 +2,26 @@
 	import type { UIViewController } from "$lib/UIViewController.js";
 	import ViewControllerRenderer from "$lib/ViewControllerRenderer.svelte";
 	import { ScrollView, type CGPoint } from "$lib/index.js";
-	import { cubicInOut, linear } from "svelte/easing";
-	import { tween } from "./Util.js";
 	import { onMount } from "svelte";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
 
 	let scrollView: ScrollView;
-	const containerScrollLeft = viewController.view.containerScrollLeft;
-	const isTransitioning = viewController.isTransitioning;
+	let isUserInteractionEnabled: boolean = true;
 
 	onMount(() => {
 		scrollView.scrollTo({ left: 390, behavior: "smooth" });
 	});
 
 	function onScroll(e: CustomEvent<CGPoint>) {
-		if ($isTransitioning) return;
 		viewController.view.containerScrollLeft.set(e.detail.x);
 	}
 	async function willEndDragging(e: CustomEvent<CGPoint>) {
+		isUserInteractionEnabled = false;
 		return;
 		const velocity = e.detail;
-		scrollView.isUserInteractionEnabled = false;
+
 		if (velocity.x > 5) {
 			await scrollView.scrollTo({ left: 0, behavior: "smooth" });
 			viewController.navigationController?.pop(false);
@@ -35,7 +32,11 @@
 	}
 </script>
 
-<div class="NavigationViewElement" class:navBarHidden={viewController.hidesNavigationBarWhenPushed}>
+<div
+	class="NavigationViewElement"
+	style:pointer-events={isUserInteractionEnabled ? "unset" : "none"}
+	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
+>
 	<ScrollView
 		bind:this={scrollView}
 		bounces={false}
@@ -61,6 +62,7 @@
 	.NavigationViewElement {
 		position: absolute;
 		inset: 0;
+		background-color: rgba(255 0 0/20%);
 	}
 	.contents {
 		display: flex;
@@ -85,7 +87,6 @@
 	.spacer {
 		width: 100%;
 		height: 100%;
-
 	}
 	.navBarHidden {
 		top: 0;

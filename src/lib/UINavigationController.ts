@@ -52,7 +52,7 @@ export class UINavigationController extends UIViewController {
 
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0) {
-					this.pop(false);
+					// this.pop(false);
 				}
 			}
 		});

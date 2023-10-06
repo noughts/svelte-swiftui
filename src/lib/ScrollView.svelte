@@ -12,7 +12,6 @@
 	export let showsScrollIndicator = true;
 	export let bounces = true;
 	export let scrollDirection: "vertical" | "horizontal" = "vertical";
-	export let isUserInteractionEnabled = true;
 	export function scrollToTop() {
 		root_ref.scrollTop = 0;
 	}
@@ -94,7 +93,6 @@
 	style:overscroll-behavior={bounces ? "unset" : "none"}
 	style:overflow-y={scrollDirection == "vertical" ? "scroll" : "hidden"}
 	style:overflow-x={scrollDirection == "horizontal" ? "scroll" : "hidden"}
-	style:pointer-events={isUserInteractionEnabled ? "unset" : "none"}
 >
 	<div style={contentStyle}>
 		<slot />
