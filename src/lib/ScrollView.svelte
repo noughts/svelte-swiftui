@@ -21,21 +21,21 @@
 		if (options.behavior != "smooth") {
 			return;
 		}
+		let lastOffset = { x: -1, y: -1 };
 		while (true) {
-			await sleep(100);
-			console.log(root_ref.scrollTop, root_ref.scrollLeft, options);
-			if (options.top && root_ref.scrollTop == options.top) {
-				break;
+			await sleep(20);
+			const currentOffset = getContentOffset();
+			const distance = calculateDistance(currentOffset, lastOffset);
+			if (distance == 0) {
+				return;
 			}
-			if (options.left && root_ref.scrollTop == options.left) {
-				break;
-			}
+			lastOffset = currentOffset;
 		}
 	}
 	export function scrollToBottom(animated: boolean = true) {
 		if (animated) {
 			// scrollTo({ top: root_ref.scrollHeight, behavior: "smooth" });
-			scrollTo({top:1000, behavior:"smooth"})
+			scrollTo({ top: 1000, behavior: "smooth" });
 		} else {
 			root_ref.scrollTop = root_ref.scrollHeight;
 		}
