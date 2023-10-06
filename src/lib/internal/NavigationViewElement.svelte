@@ -31,6 +31,7 @@
 				{ duration: 100, easing: linear },
 				(x) => {
 					if (!x) return;
+					if( !scrollView )return;
 					scrollView.setContentOffset({ x, y: 0 });
 				}
 			);
