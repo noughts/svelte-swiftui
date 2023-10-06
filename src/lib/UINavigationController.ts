@@ -25,6 +25,7 @@ export class UINavigationController extends UIViewController {
 
 	unsubscribe?: Unsubscriber;
 	async push(viewController: UIViewController, animated: boolean = true) {
+		this.unsubscribe && this.unsubscribe();
 		viewController.presentingViewController = this;
 		const vcs = get(this.viewControllers);
 		this.viewControllers.set(vcs.concat(viewController));

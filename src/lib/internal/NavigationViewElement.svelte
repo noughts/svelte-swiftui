@@ -3,6 +3,7 @@
 	import ViewControllerRenderer from "$lib/ViewControllerRenderer.svelte";
 	import { ScrollView, type CGPoint } from "$lib/index.js";
 	import { onMount } from "svelte";
+	import UiNavigationBar from "./UINavigationBar.svelte";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
@@ -30,6 +31,10 @@
 			scrollView.isUserInteractionEnabled = true;
 		}
 	}
+
+	function back() {
+		viewController.navigationController?.pop();
+	}
 </script>
 
 <div
@@ -52,6 +57,9 @@
 				<div class="page spacer" />
 			{/if}
 			<div class="page viewContainer" class:isRoot>
+				{#if !viewController.hidesNavigationBarWhenPushed}
+					<UiNavigationBar item={viewController.navigationItem} on:backButtonTap={back} />
+				{/if}
 				<ViewControllerRenderer {viewController} />
 			</div>
 		</div>
@@ -62,7 +70,7 @@
 	.NavigationViewElement {
 		position: absolute;
 		inset: 0;
-		background-color: rgba(255 0 0/20%);
+		background-color: rgba(255 0 0/10%);
 	}
 	.contents {
 		display: flex;
@@ -73,6 +81,7 @@
 		width: 100%;
 	}
 	.page {
+		position:relative;
 		width: 100%;
 		height: 100%;
 		scroll-snap-align: center;
