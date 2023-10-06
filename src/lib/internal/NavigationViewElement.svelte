@@ -12,7 +12,6 @@
 	let scrollView: ScrollView;
 	const containerScrollLeft = viewController.view.containerScrollLeft;
 	const isTransitioning = viewController.isTransitioning;
-	let pointerEvents: Property.PointerEvents = "unset";
 
 	// tweenに合わせてスクロール
 	$: if ($isTransitioning && scrollView) {
@@ -25,18 +24,19 @@
 	}
 	async function willEndDragging(e: CustomEvent<CGPoint>) {
 		const velocity = e.detail;
+		scrollView.isUserInteractionEnabled = false
 		console.log("end", velocity);
 		if (velocity.x > 5) {
-			await tween(
-				scrollView.getContentOffset()?.x,
-				0,
-				{ duration: 100, easing: linear },
-				(x) => {
-					if (!x) return;
-					scrollView.setContentOffset({ x, y: 0 });
-				}
-			);
-			viewController.navigationController?.pop(false);
+			// await tween(
+			// 	scrollView.getContentOffset()?.x,
+			// 	0,
+			// 	{ duration: 100, easing: linear },
+			// 	(x) => {
+			// 		if (!x) return;
+			// 		scrollView.setContentOffset({ x, y: 0 });
+			// 	}
+			// );
+			// viewController.navigationController?.pop(false);
 		} else {
 			await tween(
 				scrollView.getContentOffset()?.x,
@@ -48,12 +48,13 @@
 				}
 			);
 		}
+		console.log("hoge")
+		scrollView.isUserInteractionEnabled = true
 	}
 </script>
 
 <div
 	class="NavigationViewElement"
-	style:pointer-events={pointerEvents}
 	class:navBarHidden={viewController.hidesNavigationBarWhenPushed}
 >
 	<ScrollView

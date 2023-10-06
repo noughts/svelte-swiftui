@@ -10,6 +10,7 @@ export class UIView<Props extends DefaultProps = any>{
 	readonly containerScrollTop = writable(0)
 	readonly containerScrollLeft = writable(0);
 	readonly scale = writable(1);
+	readonly isUserInteractionEnabled = writable(true);
 
 	constructor(readonly component: SvelteUIComponent<Props>, readonly props?: Omit<Props, "viewController">) {
 
