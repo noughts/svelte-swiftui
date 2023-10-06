@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { UITabBarController } from "$lib/UITabBarController.js";
-	import View from "../View.svelte";
+	import ViewControllerRenderer from "../ViewControllerRenderer.svelte";
 	import UiTabBar from "./UITabBar.svelte";
 	export let viewController: UITabBarController;
 	export let selection = 0;
@@ -11,7 +11,7 @@
 	<div class="views">
 		{#each viewControllers as vc, index (vc.tabBarItem?.title)}
 			<div class="view" class:selected={index === selection}>
-				<View viewController={vc} />
+				<ViewControllerRenderer viewController={vc} />
 			</div>
 		{/each}
 	</div>

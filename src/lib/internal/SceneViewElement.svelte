@@ -1,5 +1,5 @@
 <script lang="ts">
-	import View from "$lib/View.svelte";
+	import ViewRenderer from "$lib/ViewControllerRenderer.svelte";
 	import type { UIViewController } from "$lib/index.js";
 
 	export let viewController: UIViewController;

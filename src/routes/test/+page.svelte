@@ -2,13 +2,13 @@
 	import { UINavigationController } from "$lib/UINavigationController.js";
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
-	import View from "$lib/View.svelte";
+	import ViewRenderer from "$lib/ViewControllerRenderer.svelte";
 	import "../../globals.css";
 	import LandmarkList from "../LandmarkList.svelte";
 </script>
 
 <div class="root">
-	<View
+	<ViewRenderer
 		viewController={new UINavigationController(new UIViewController(new UIView(LandmarkList)))}
 	/>
 </div>

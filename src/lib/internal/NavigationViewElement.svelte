@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
-	import View from "$lib/View.svelte";
+	import ViewControllerRenderer from "$lib/ViewControllerRenderer.svelte";
 	import { UIScrollView, type CGPoint } from "$lib/index.js";
 	import type { Property } from "csstype";
 	import { onMount } from "svelte";
@@ -61,7 +61,7 @@
 				<div class="page spacer" />
 			{/if}
 			<div class="page viewContainer" class:isRoot>
-				<View {viewController} />
+				<ViewControllerRenderer {viewController} />
 			</div>
 		</div>
 	</UIScrollView>

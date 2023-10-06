@@ -11,7 +11,7 @@ export { UITabBarController } from "./UITabBarController.js"
 export { UIView } from "./UIView.js"
 export { UIViewController } from "./UIViewController.js"
 export { default as VStack } from "./VStack.svelte"
-export { default as View } from "./View.svelte"
+export { default as ViewControllerRenderer } from "./ViewControllerRenderer.svelte"
 
 export type UITabBarItem = {
 	title: string
