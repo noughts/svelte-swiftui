@@ -2,8 +2,8 @@
 
 <script lang="ts">
 	import type { Properties } from "csstype";
-	import { styleToString } from "./internal/Util.js";
-	import { createEventDispatcher, onMount } from "svelte";
+	import { sleep, styleToString } from "./internal/Util.js";
+	import { createEventDispatcher, onMount, tick } from "svelte";
 	import { calculateDistance, type CGPoint, type UIEdgeInsets } from "./index.js";
 	let root_ref: HTMLDivElement;
 	export let style: Properties = {};
@@ -16,12 +16,26 @@
 	export function scrollToTop() {
 		root_ref.scrollTop = 0;
 	}
-	export function scrollTo(options: ScrollToOptions) {
+	export async function scrollTo(options: ScrollToOptions) {
 		root_ref.scrollTo(options);
+		if (options.behavior != "smooth") {
+			return;
+		}
+		while (true) {
+			await sleep(100);
+			console.log(root_ref.scrollTop, root_ref.scrollLeft, options);
+			if (options.top && root_ref.scrollTop == options.top) {
+				break;
+			}
+			if (options.left && root_ref.scrollTop == options.left) {
+				break;
+			}
+		}
 	}
 	export function scrollToBottom(animated: boolean = true) {
 		if (animated) {
-			root_ref.scrollTo({ top: root_ref.scrollHeight, behavior: "smooth" });
+			// scrollTo({ top: root_ref.scrollHeight, behavior: "smooth" });
+			scrollTo({top:1000, behavior:"smooth"})
 		} else {
 			root_ref.scrollTop = root_ref.scrollHeight;
 		}
