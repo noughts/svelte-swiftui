@@ -4,7 +4,7 @@
 	import type { Properties } from "csstype";
 	import { styleToString } from "./internal/Util.js";
 	import { createEventDispatcher, onMount } from "svelte";
-	import type { CGPoint, UIEdgeInsets } from "./index.js";
+	import { calculateDistance, type CGPoint, type UIEdgeInsets } from "./index.js";
 	let root_ref: HTMLDivElement;
 	export let style: Properties = {};
 	export let contentInset: UIEdgeInsets = { top: 44, bottom: 49 };
@@ -42,8 +42,16 @@
 		prevContentOffset = currentOffset;
 		dispatch("didScroll", currentOffset);
 	}
+	let touchStartOffset: CGPoint = { x: 0, y: 0 };
+	function onTouchStart() {
+		touchStartOffset = getContentOffset();
+	}
 	function onTouchEnd(e: any) {
-		dispatch("willEndDragging", velocity);
+		const distance = calculateDistance(getContentOffset(), touchStartOffset);
+		console.log(distance)
+		if( distance > 10){
+			dispatch("willEndDragging", velocity);
+		}
 	}
 
 	const contentStyle =
@@ -59,6 +67,7 @@
 	class="UIScrollView"
 	bind:this={root_ref}
 	on:scroll={onScroll}
+	on:touchstart={onTouchStart}
 	on:touchend={onTouchEnd}
 	class:noScrollIndicator={showsScrollIndicator == false}
 	class:isPagingEnabled

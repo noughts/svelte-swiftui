@@ -24,22 +24,19 @@
 	}
 	async function willEndDragging(e: CustomEvent<CGPoint>) {
 		const velocity = e.detail;
-		if (velocity.x <= 0.1 && velocity.y <= 0.1) {
-			return;
-		}
 		scrollView.isUserInteractionEnabled = false;
 		console.log("end", velocity);
 		if (velocity.x > 5) {
-			// await tween(
-			// 	scrollView.getContentOffset()?.x,
-			// 	0,
-			// 	{ duration: 100, easing: linear },
-			// 	(x) => {
-			// 		if (!x) return;
-			// 		scrollView.setContentOffset({ x, y: 0 });
-			// 	}
-			// );
-			// viewController.navigationController?.pop(false);
+			await tween(
+				scrollView.getContentOffset()?.x,
+				0,
+				{ duration: 100, easing: linear },
+				(x) => {
+					if (!x) return;
+					scrollView.setContentOffset({ x, y: 0 });
+				}
+			);
+			viewController.navigationController?.pop(false);
 		} else {
 			await tween(
 				scrollView.getContentOffset()?.x,
@@ -50,7 +47,6 @@
 					scrollView.setContentOffset({ x, y: 0 });
 				}
 			);
-			console.log("hoge");
 			scrollView.isUserInteractionEnabled = true;
 		}
 	}

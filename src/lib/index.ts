@@ -40,3 +40,6 @@ export type CGPoint = {
 	y:number;
 }
 
+export function calculateDistance(point1: CGPoint, point2: CGPoint): number {
+    return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
+}
