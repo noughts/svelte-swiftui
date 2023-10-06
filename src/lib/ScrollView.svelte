@@ -16,8 +16,15 @@
 	export function scrollToTop() {
 		root_ref.scrollTop = 0;
 	}
-	export function scrollToBottom() {
-		root_ref.scrollTop = root_ref.scrollHeight;
+	export function scrollTo(options: ScrollToOptions) {
+		root_ref.scrollTo(options);
+	}
+	export function scrollToBottom(animated: boolean = true) {
+		if (animated) {
+			root_ref.scrollTo({ top: root_ref.scrollHeight, behavior: "smooth" });
+		} else {
+			root_ref.scrollTop = root_ref.scrollHeight;
+		}
 	}
 
 	export function setContentOffset(offset: CGPoint) {
@@ -48,7 +55,7 @@
 	}
 	function onTouchEnd(e: any) {
 		const distance = calculateDistance(getContentOffset(), touchStartOffset);
-		if( distance > 1){
+		if (distance > 1) {
 			dispatch("willEndDragging", velocity);
 		}
 	}
