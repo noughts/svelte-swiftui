@@ -4,6 +4,7 @@
 	import { ScrollView, type CGPoint } from "$lib/index.js";
 	import { cubicInOut, linear } from "svelte/easing";
 	import { tween } from "./Util.js";
+	import { onMount } from "svelte";
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
@@ -12,40 +13,23 @@
 	const containerScrollLeft = viewController.view.containerScrollLeft;
 	const isTransitioning = viewController.isTransitioning;
 
-	// tweenに合わせてスクロール
-	$: if ($isTransitioning && scrollView) {
-		scrollView.setContentOffset({ x: $containerScrollLeft, y: 0 });
-	}
+	onMount(() => {
+		scrollView.scrollTo({ left: 390, behavior: "smooth" });
+	});
 
 	function onScroll(e: CustomEvent<CGPoint>) {
 		if ($isTransitioning) return;
 		viewController.view.containerScrollLeft.set(e.detail.x);
 	}
 	async function willEndDragging(e: CustomEvent<CGPoint>) {
+		return;
 		const velocity = e.detail;
 		scrollView.isUserInteractionEnabled = false;
 		if (velocity.x > 5) {
-			await tween(
-				scrollView.getContentOffset()?.x,
-				0,
-				{ duration: 100, easing: linear },
-				(x) => {
-					if (!x) return;
-					if( !scrollView )return;
-					scrollView.setContentOffset({ x, y: 0 });
-				}
-			);
+			await scrollView.scrollTo({ left: 0, behavior: "smooth" });
 			viewController.navigationController?.pop(false);
 		} else {
-			await tween(
-				scrollView.getContentOffset()?.x,
-				390,
-				{ duration: 200, easing: cubicInOut },
-				(x) => {
-					if (!x) return;
-					scrollView.setContentOffset({ x, y: 0 });
-				}
-			);
+			await scrollView.scrollTo({ left: 390, behavior: "smooth" });
 			scrollView.isUserInteractionEnabled = true;
 		}
 	}
@@ -55,6 +39,7 @@
 	<ScrollView
 		bind:this={scrollView}
 		bounces={false}
+		isPagingEnabled={true}
 		contentInset={{ top: 0, bottom: 0 }}
 		showsScrollIndicator={false}
 		on:willEndDragging={willEndDragging}
@@ -100,7 +85,7 @@
 	.spacer {
 		width: 100%;
 		height: 100%;
-		/* background-color: rgba(255 0 0/10%); */
+
 	}
 	.navBarHidden {
 		top: 0;

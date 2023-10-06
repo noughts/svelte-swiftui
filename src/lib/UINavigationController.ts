@@ -56,9 +56,9 @@ export class UINavigationController extends UIViewController {
 				}
 			}
 		});
-		await tween(0, screenWidth, { duration: 333, easing: cubicOut }, x => {
-			viewController.view.containerScrollLeft.set(x)
-		})
+		// await tween(0, screenWidth, { duration: 333, easing: cubicOut }, x => {
+		// 	viewController.view.containerScrollLeft.set(x)
+		// })
 		viewController.isTransitioning.set(false);
 	}
 
