@@ -1,12 +1,14 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
 	export let viewController: UIViewController;
-	const brightness = viewController.brightness;
-	const scale = viewController.scale;
-	const translateX = viewController.translateX;
+	const brightness = viewController.view.brightness;
+	const scale = viewController.view.scale;
+	const translateX = viewController.view.translateX;
+	const width = viewController.view.width;
 </script>
 
 <div
+	bind:clientWidth={$width}
 	class="View"
 	style:filter="brightness({$brightness}%)"
 	style:transform="scale({$scale}) translate({$translateX}, 0)"

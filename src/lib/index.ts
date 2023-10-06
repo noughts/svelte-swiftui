@@ -6,12 +6,13 @@ export { default as Spacer } from "./Spacer.svelte"
 export { default as Text } from "./Text.svelte"
 export { UINavigationController } from "./UINavigationController.js"
 export { UISceneController } from "./UISceneController.js"
-export { default as UIScrollView } from "./UIScrollView.svelte"
+export { default as ScrollView } from "./ScrollView.svelte"
 export { UITabBarController } from "./UITabBarController.js"
 export { UIView } from "./UIView.js"
 export { UIViewController } from "./UIViewController.js"
 export { default as VStack } from "./VStack.svelte"
-export { default as View } from "./View.svelte"
+export { default as ViewControllerRenderer } from "./ViewControllerRenderer.svelte"
+export { default as App } from "./App.svelte"
 
 export type UITabBarItem = {
 	title: string
@@ -23,7 +24,10 @@ export type UITabBarItem = {
 }
 
 
-
+export type UIEdgeInsets = {
+	top: number;
+	bottom: number;
+};
 export type UIBarButtonItem = {
 	title?: string;
 	icon?: string;
@@ -31,4 +35,11 @@ export type UIBarButtonItem = {
 	action: Function;
 }
 
+export type CGPoint = {
+	x:number;
+	y:number;
+}
 
+export function calculateDistance(point1: CGPoint, point2: CGPoint): number {
+    return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
+}

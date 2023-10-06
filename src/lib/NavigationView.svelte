@@ -7,6 +7,7 @@
 
 	const viewControllers = viewController.viewControllers;
 	const topViewController = viewController.topViewController;
+	const navigatioBarTranslateX = viewController.navigationBarTranslateX;
 
 	function back() {
 		viewController.pop();
@@ -15,13 +16,13 @@
 
 <div class="NavigationView">
 	<slot />
-	<div class="views">
+	<div class="elements">
 		{#each $viewControllers as viewController, index}
 			<NavigationViewElement {viewController} isRoot={index == 0} />
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
-		<div class="navBar">
+		<div class="navBar" style="transform: translateX({$navigatioBarTranslateX});">
 			<UiNavigationBar
 				items={$viewControllers.map((x) => x.navigationItem)}
 				on:backButtonTap={back}
@@ -43,7 +44,7 @@
 		right: 0;
 		z-index: 2;
 	}
-	.views {
+	.elements {
 		height: 100%;
 		position: relative;
 	}

@@ -1,7 +1,18 @@
 import type { SvelteComponent } from "svelte";
+import { writable } from "svelte/store";
 
 export class UIView<Props extends DefaultProps = any>{
-	constructor(readonly component: SvelteUIComponent<Props>, readonly props?: Omit<Props, "viewController">){
+
+	readonly width = writable(0);
+	readonly height = writable(0);
+	readonly brightness = writable(100);
+	readonly translateX = writable("0");
+	readonly containerScrollTop = writable(0)
+	readonly containerScrollLeft = writable(0);
+	readonly scale = writable(1);
+	readonly isUserInteractionEnabled = writable(true);
+
+	constructor(readonly component: SvelteUIComponent<Props>, readonly props?: Omit<Props, "viewController">) {
 
 	}
 }

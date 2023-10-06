@@ -32,20 +32,20 @@ export class UISceneController extends UIViewController {
 		viewController.isTransitioning.set(true)// containerScrollTop.subscribeの前に行ってください
 
 		const targetTop = window.innerHeight;
-		this.unsubscribe = viewController.containerScrollTop.subscribe(x => {
+		this.unsubscribe = viewController.view.containerScrollTop.subscribe(x => {
 			const pct = x / targetTop;
-			fromVC.brightness.set(100 - (pct * 50));
-			fromVC.scale.set(1 - (pct / 50));
+			fromVC.view.brightness.set(100 - (pct * 50));
+			fromVC.view.scale.set(1 - (pct / 50));
 			if (get(viewController.isTransitioning) == false) {
 				if (pct <= 0) {
-					fromVC.brightness.set(100);
-					fromVC.scale.set(1);
+					fromVC.view.brightness.set(100);
+					fromVC.view.scale.set(1);
 					this.pop(false);
 				}
 			}
 		});
 		await tween(0, targetTop, { duration: 333, easing: cubicOut }, x => {
-			viewController.containerScrollTop.set(x);
+			viewController.view.containerScrollTop.set(x);
 		})
 		viewController.isTransitioning.set(false);
 	}
@@ -63,8 +63,8 @@ export class UISceneController extends UIViewController {
 
 		// アニメーション
 		fromVC.isTransitioning.set(true)
-		await tween(get(fromVC.containerScrollTop), 0, { duration: 333, easing: cubicOut }, x => {
-			fromVC.containerScrollTop.set(x)
+		await tween(get(fromVC.view.containerScrollTop), 0, { duration: 333, easing: cubicOut }, x => {
+			fromVC.view.containerScrollTop.set(x)
 		})
 		fromVC.isTransitioning.set(false)
 		this.viewControllers.set(newAry);

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import UIScrollView from "$lib/UIScrollView.svelte";
+	import UIScrollView from "$lib/ScrollView.svelte";
     import type { UIViewController } from "$lib/index.js";
 	export let viewController:UIViewController;
 </script>

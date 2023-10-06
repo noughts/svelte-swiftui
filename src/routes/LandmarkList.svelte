@@ -1,21 +1,18 @@
 <script lang="ts">
-	import { UIView } from "$lib/UIView.js";
-	import { UIViewController } from "$lib/UIViewController.js";
-	import VStack from "$lib/VStack.svelte";
+	import { ScrollView, UIView, UIViewController, VStack } from "$lib/index.js";
 	import { onMount } from "svelte";
 	import type { Landmark } from "./Landmark.js";
 	import LandmarkDetail from "./LandmarkDetail.svelte";
 	import LandmarkRow from "./LandmarkRow.svelte";
-    import UIScrollView from "$lib/UIScrollView.svelte";
 	export let viewController: UIViewController;
-	let scrollView:UIScrollView;
+	let scrollView: ScrollView;
 	viewController.navigationItem.title = "Landmark List";
 	viewController.navigationItem.leftBarButtonItem = {
-		title:"Scroll2Bottom",
-		action:()=>{
+		title: "Scroll2Bottom",
+		action: () => {
 			scrollView.scrollToBottom();
-		}
-	}
+		},
+	};
 
 	const landmarks = [
 		{ name: "Turtle Rock" },
@@ -52,24 +49,32 @@
 	});
 
 	function onCellTap(landmark: Landmark) {
-		viewController.navigationController?.push(new UIViewController(new UIView(LandmarkDetail, { landmark })));
+		viewController.navigationController?.push(
+			new UIViewController(new UIView(LandmarkDetail, { landmark }))
+		);
 	}
 
-	let count = 0;
+	let lastFrameTimestamp = 0;
+	let diff = 0;
 	setInterval(() => {
-		count++;
-	}, 100);
+		const current = new Date().getTime();
+		diff = current - lastFrameTimestamp;
+		lastFrameTimestamp = current;
+	}, 1000);
 </script>
 
 <div class="LandmarkList">
-	<UIScrollView bind:this={scrollView}>
+	<ScrollView
+		bind:this={scrollView}
+		contentInset={{ top: viewController.hidesNavigationBarWhenPushed ? 0 : 44, bottom: 49 }}
+	>
 		<VStack>
-			<div class="count">{count}</div>
+			<div class="count">{diff}</div>
 			{#each landmarks as landmark}
 				<LandmarkRow {landmark} on:click={(e) => onCellTap(landmark)} />
 			{/each}
 		</VStack>
-	</UIScrollView>
+	</ScrollView>
 </div>
 
 <style>
