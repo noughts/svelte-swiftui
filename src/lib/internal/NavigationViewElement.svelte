@@ -25,7 +25,6 @@
 	async function willEndDragging(e: CustomEvent<CGPoint>) {
 		const velocity = e.detail;
 		scrollView.isUserInteractionEnabled = false;
-		console.log("end", velocity);
 		if (velocity.x > 5) {
 			await tween(
 				scrollView.getContentOffset()?.x,
@@ -55,6 +54,7 @@
 <div class="NavigationViewElement" class:navBarHidden={viewController.hidesNavigationBarWhenPushed}>
 	<ScrollView
 		bind:this={scrollView}
+		bounces={false}
 		contentInset={{ top: 0, bottom: 0 }}
 		showsScrollIndicator={false}
 		on:willEndDragging={willEndDragging}

@@ -48,8 +48,7 @@
 	}
 	function onTouchEnd(e: any) {
 		const distance = calculateDistance(getContentOffset(), touchStartOffset);
-		console.log(distance)
-		if( distance > 10){
+		if( distance > 1){
 			dispatch("willEndDragging", velocity);
 		}
 	}
