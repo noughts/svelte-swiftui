@@ -2,7 +2,6 @@
 	import type { UIViewController } from "$lib/UIViewController.js";
 	import ViewControllerRenderer from "$lib/ViewControllerRenderer.svelte";
 	import { ScrollView, type CGPoint } from "$lib/index.js";
-	import type { Property } from "csstype";
 	import { cubicInOut, linear } from "svelte/easing";
 	import { tween } from "./Util.js";
 

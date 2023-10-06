@@ -9,7 +9,6 @@
     import LandmarkList from "./LandmarkList.svelte";
     import ModalTestScreen from "./ModalTestScreen.svelte";
     import ShortContentScreen from "./ShortContentScreen.svelte";
-    import TestActionScreen from "./TestActionScreen.svelte";
     import TikTokScreen from "./TikTokScreen.svelte";
 </script>
 
