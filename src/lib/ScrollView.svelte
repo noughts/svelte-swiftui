@@ -26,6 +26,7 @@
 			await sleep(20);
 			const currentOffset = getContentOffset();
 			const distance = calculateDistance(currentOffset, lastOffset);
+			// console.log(distance)
 			if (distance == 0) {
 				return;
 			}
