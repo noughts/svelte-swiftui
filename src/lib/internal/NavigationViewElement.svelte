@@ -36,7 +36,6 @@
 					scrollView.setContentOffset({ x, y: 0 });
 				}
 			);
-			scrollView.setContentOffset({ x:0, y: 0 });
 			viewController.navigationController?.pop(false);
 		} else {
 			await tween(
