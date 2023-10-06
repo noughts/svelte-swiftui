@@ -61,7 +61,7 @@
 		const current = new Date().getTime();
 		diff = current - lastFrameTimestamp;
 		lastFrameTimestamp = current;
-	},1)
+	},1000)
 </script>
 
 <div class="timer" />
