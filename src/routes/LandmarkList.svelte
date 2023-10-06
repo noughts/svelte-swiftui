@@ -54,17 +54,14 @@
 		);
 	}
 
-
 	let lastFrameTimestamp = 0;
 	let diff = 0;
-	setInterval(()=>{
+	setInterval(() => {
 		const current = new Date().getTime();
 		diff = current - lastFrameTimestamp;
 		lastFrameTimestamp = current;
-	},1000)
+	}, 1000);
 </script>
-
-<div class="timer" />
 
 <div class="LandmarkList">
 	<ScrollView
@@ -92,13 +89,4 @@
 		font-size: 16px;
 		padding: 8px;
 	}
-	@keyframes timer {
-}
-
-
-	.timer {
-	animation: timer 1ms infinite;
-	}
-
-
 </style>
