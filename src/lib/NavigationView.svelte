@@ -3,6 +3,9 @@
 	import NavigationViewElement from "./internal/NavigationViewElement.svelte";
 
 	export let viewController: UINavigationController;
+	export function getTopElement(){
+		console.log("getTopElement")
+	}
 	const viewControllers = viewController.viewControllers;
 </script>
 
@@ -20,13 +23,6 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
-	}
-	.navBar {
-		position: absolute;
-		top: 0px;
-		left: 0;
-		right: 0;
-		z-index: 2;
 	}
 	.elements {
 		height: 100%;

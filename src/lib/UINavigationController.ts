@@ -37,9 +37,10 @@ export class UINavigationController extends UIViewController {
 			return;
 		}
 
+		console.log(this.view);
+
 		// アニメーション
 		const fromVC = vcs[vcs.length - 1];
-		viewController.isTransitioning.set(true)// containerScrollTop.subscribeの前に行ってください
 
 		const screenWidth = get(this.view.width);
 		this.unsubscribe = viewController.view.containerScrollLeft.subscribe(x => {
@@ -56,7 +57,6 @@ export class UINavigationController extends UIViewController {
 		// await tween(0, screenWidth, { duration: 333, easing: cubicOut }, x => {
 		// 	viewController.view.containerScrollLeft.set(x)
 		// })
-		viewController.isTransitioning.set(false);
 	}
 
 
