@@ -4,6 +4,7 @@ import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
 import { sleep } from "./internal/Util.js";
 import { tick } from "svelte";
+import { cubicOut } from "svelte/easing";
 
 export class UINavigationController extends UIViewController {
 
@@ -15,22 +16,20 @@ export class UINavigationController extends UIViewController {
 
 	constructor(rootViewController: UIViewController, subview?: UIView | null, options?: UIViewControllerOptions) {
 		const view = new UIView(NavigationView);
-		if( subview ){
+		if (subview) {
 			view.addSubView(subview);
 		}
 		super(view, options)
 		this.push(rootViewController, false)
 	}
 
-	unsubscribe?: Unsubscriber;
 	transitioning = false;
 	async push(viewController: UIViewController, animated: boolean = true) {
-		if( this.transitioning ){
+		if (this.transitioning) {
 			console.warn("トランジション中です")
 			return;
 		}
 		this.transitioning = true;
-		this.unsubscribe && this.unsubscribe();
 		viewController.presentingViewController = this;
 		const vcs = get(this.viewControllers);
 		this.viewControllers.set(vcs.concat(viewController));
@@ -40,30 +39,22 @@ export class UINavigationController extends UIViewController {
 		}
 
 		await tick();// viewControllersが反映されるのを待つ
+		const screenWidth = get(this.view.width);
+
+		// アニメーション
+		const fromVC = vcs[vcs.length - 1];
+		const unsubscribe = viewController.view.containerScrollLeft.subscribe(x => {
+			const pct = x / screenWidth;
+			fromVC.view.brightness.set(100 - (pct * 50));
+			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
+		});
 
 		const renderedViewInstance = this.view.renderedInstance as NavigationView;
 		const topElement = renderedViewInstance.getTopElement()
-		await topElement.getScrollView().scrollTo({ left: 375, behavior: "smooth" });
-		this.transitioning = false;
-
-		
-		// アニメーション
-		// const fromVC = vcs[vcs.length - 1];
-		// const screenWidth = get(this.view.width);
-		// this.unsubscribe = viewController.view.containerScrollLeft.subscribe(x => {
-		// 	const pct = x / screenWidth;
-		// 	fromVC.view.brightness.set(100 - (pct * 50));
-		// 	fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
-		// 	if (get(viewController.isTransitioning) == false) {
-		// 		if (pct <= 0) {
-		// 			this.pop(false);
-		// 			this.transitioning = false;
-		// 		}
-		// 	}
-		// });
-		// await tween(0, screenWidth, { duration: 333, easing: cubicOut }, x => {
-		// 	viewController.view.containerScrollLeft.set(x)
-		// })
+		topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" }).then(x => {
+			this.transitioning = false;
+			unsubscribe();
+		})
 	}
 
 
@@ -73,13 +64,12 @@ export class UINavigationController extends UIViewController {
 		}
 		const newAry = [...get(this.viewControllers)];
 		const fromVC = newAry.pop();
-		const toVC = newAry[newAry.length-1];
+		const toVC = newAry[newAry.length - 1];
 		if (!fromVC) throw "popできませんでした"
 
 		if (!animated) {
 			toVC.view.brightness.set(100);
 			toVC.view.translateX.set("0");
-			this.unsubscribe && this.unsubscribe();
 			this.viewControllers.set(newAry);
 			return;
 		}
@@ -87,6 +77,5 @@ export class UINavigationController extends UIViewController {
 		// アニメーション
 		this.transitioning = true;
 		this.viewControllers.set(newAry);
-		this.unsubscribe && this.unsubscribe();
 	}
 }
