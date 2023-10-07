@@ -14,6 +14,8 @@ export class UIView<Props extends DefaultProps = any>{
 
 	readonly subviews:UIView[] = [];
 
+	renderedInstance:any;
+
 	constructor(readonly component: SvelteUIComponent<Props>, readonly props?: Omit<Props, "viewController">) {
 
 	}

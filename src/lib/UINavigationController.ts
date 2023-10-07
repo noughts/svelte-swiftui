@@ -37,7 +37,7 @@ export class UINavigationController extends UIViewController {
 			return;
 		}
 
-		const renderedViewInstance = this.renderedViewInstance as NavigationView;
+		const renderedViewInstance = this.view.renderedInstance as NavigationView;
 		renderedViewInstance.getTopElement()
 
 		// アニメーション
