@@ -7,13 +7,13 @@
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
+	export function getScrollView(){
+		return scrollView;
+	}
 
 	let scrollView: ScrollView;
 	let isUserInteractionEnabled: boolean = true;
 
-	onMount(() => {
-		scrollView.scrollTo({ left: 390, behavior: "smooth" });
-	});
 
 	function onScroll(e: CustomEvent<CGPoint>) {
 		viewController.view.containerScrollLeft.set(e.detail.x);

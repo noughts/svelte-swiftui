@@ -3,9 +3,10 @@
 	import NavigationViewElement from "./internal/NavigationViewElement.svelte";
 
 	export let viewController: UINavigationController;
-	export function getTopElement(){
-		console.log("getTopElement")
+	export function getTopElement():NavigationViewElement{
+		return topElement;
 	}
+	let topElement:any;
 	const viewControllers = viewController.viewControllers;
 </script>
 
@@ -13,7 +14,7 @@
 	<slot />
 	<div class="elements">
 		{#each $viewControllers as viewController, index}
-			<NavigationViewElement {viewController} isRoot={index == 0} />
+			<NavigationViewElement bind:this={topElement} {viewController} isRoot={index == 0} />
 		{/each}
 	</div>
 </div>
