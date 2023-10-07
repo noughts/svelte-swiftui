@@ -5,7 +5,7 @@
     import { UIViewController } from "$lib/UIViewController.js";
     import { App } from "$lib/index.js";
     import "../globals.css";
-    import HomeNav from "./HomeNav.svelte";
+    import Fab from "./Fab.svelte";
     import LandmarkList from "./LandmarkList.svelte";
     import ModalTestScreen from "./ModalTestScreen.svelte";
     import ShortContentScreen from "./ShortContentScreen.svelte";
@@ -18,7 +18,7 @@
             new UIViewController(new UIView(LandmarkList), {
                 hidesNavigationBarWhenPushed: true,
             }),
-            new UIView(HomeNav),
+            new UIView(Fab),
             {
                 tabBarItem: { title: "wo/NavBar", icon: { name: "home" } },
             }

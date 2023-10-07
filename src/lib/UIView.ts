@@ -12,8 +12,14 @@ export class UIView<Props extends DefaultProps = any>{
 	readonly scale = writable(1);
 	readonly isUserInteractionEnabled = writable(true);
 
+	readonly subviews:UIView[] = [];
+
 	constructor(readonly component: SvelteUIComponent<Props>, readonly props?: Omit<Props, "viewController">) {
 
+	}
+
+	addSubView(view:UIView){
+		this.subviews.push(view);
 	}
 }
 

@@ -11,12 +11,12 @@ export class UINavigationController extends UIViewController {
 		return $a[$a.length - 1];
 	})
 
-	constructor(rootViewController: UIViewController, view?: UIView | null, options?: UIViewControllerOptions) {
-		if (view) {
-			super(view, options)
-		} else {
-			super(new UIView(NavigationView), options)
+	constructor(rootViewController: UIViewController, subview?: UIView | null, options?: UIViewControllerOptions) {
+		const view = new UIView(NavigationView);
+		if( subview ){
+			view.addSubView(subview);
 		}
+		super(view, options)
 		this.push(rootViewController, false)
 	}
 
@@ -37,7 +37,8 @@ export class UINavigationController extends UIViewController {
 			return;
 		}
 
-		console.log(this.view);
+		const renderedViewInstance = this.renderedViewInstance as NavigationView;
+		renderedViewInstance.getTopElement()
 
 		// アニメーション
 		const fromVC = vcs[vcs.length - 1];

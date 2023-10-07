@@ -21,6 +21,7 @@ export class UIViewController extends EventTarget {
 
 	readonly className: string = "UIViewController";
 	readonly isTransitioning = writable(false);
+	renderedViewInstance:any;
 
 	hidesNavigationBarWhenPushed = false;
 	navigationItem: UINavigationItem = new UINavigationItem;
