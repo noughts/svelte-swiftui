@@ -52,8 +52,9 @@ export class UINavigationController extends UIViewController {
 			fromVC.view.brightness.set(100 - (pct * 50));
 			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
 		});
-
+		this.topElement.setUserInteractionEnabled(false);
 		await this.topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" })
+		this.topElement.setUserInteractionEnabled(true);
 		this.transitioning = false;
 	}
 
@@ -79,6 +80,7 @@ export class UINavigationController extends UIViewController {
 
 		// アニメーション
 		this.transitioning = true;
+		this.topElement.setUserInteractionEnabled(false);
 		await this.topElement.getScrollView().scrollTo({ left: 0, behavior: "smooth" })
 		this.transitioning = false;
 		this.viewControllers.set(newAry);

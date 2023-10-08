@@ -9,10 +9,12 @@
 	export function getScrollView(){
 		return scrollView;
 	}
+	export function setUserInteractionEnabled(value:boolean){
+		isUserInteractionEnabled = value;
+	}
 
 	let scrollView: ScrollView;
 	let isUserInteractionEnabled: boolean = true;
-
 
 	function onScroll(e: CustomEvent<CGPoint>) {
 		viewController.view.containerScrollLeft.set(e.detail.x);
