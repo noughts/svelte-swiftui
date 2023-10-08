@@ -1,10 +1,8 @@
-import { derived, get, writable, type Unsubscriber } from "svelte/store";
+import { tick } from "svelte";
+import { derived, get, writable } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
-import { sleep } from "./internal/Util.js";
-import { tick } from "svelte";
-import { cubicOut } from "svelte/easing";
 
 export class UINavigationController extends UIViewController {
 
@@ -56,7 +54,6 @@ export class UINavigationController extends UIViewController {
 			unsubscribe();
 		})
 	}
-
 
 	async pop(animated: boolean = true) {
 		if (get(this.viewControllers).length <= 1) {
