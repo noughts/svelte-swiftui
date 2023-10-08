@@ -21,7 +21,7 @@ export class UINavigationController extends UIViewController {
 		this.push(rootViewController, false)
 	}
 
-	private get topElement(){
+	private get topElement() {
 		const componentInstance = this.view.componentInstance as NavigationView;
 		return componentInstance.getTopElement()
 	}
@@ -52,10 +52,9 @@ export class UINavigationController extends UIViewController {
 			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
 		});
 
-		this.topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" }).then(x => {
-			this.transitioning = false;
-			unsubscribe();
-		})
+		await this.topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" })
+		this.transitioning = false;
+		unsubscribe();
 	}
 
 	async pop(animated: boolean = true) {
@@ -86,11 +85,10 @@ export class UINavigationController extends UIViewController {
 			toVC.view.brightness.set(100 - (pct * 50));
 			toVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
 		});
-		this.topElement.getScrollView().scrollTo({ left: 0, behavior: "smooth" }).then(x => {
-			this.transitioning = false;
-			this.viewControllers.set(newAry);
-			unsubscribe();
-		})
-		
+		await this.topElement.getScrollView().scrollTo({ left: 0, behavior: "smooth" })
+		this.transitioning = false;
+		this.viewControllers.set(newAry);
+		unsubscribe();
+
 	}
 }
