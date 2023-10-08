@@ -47,8 +47,8 @@ export class UINavigationController extends UIViewController {
 			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
 		});
 
-		const renderedViewInstance = this.view.renderedInstance as NavigationView;
-		const topElement = renderedViewInstance.getTopElement()
+		const componentInstance = this.view.componentInstance as NavigationView;
+		const topElement = componentInstance.getTopElement()
 		topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" }).then(x => {
 			this.transitioning = false;
 			unsubscribe();
