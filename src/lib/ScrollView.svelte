@@ -66,33 +66,40 @@
 	}
 
 	onMount(() => {
-		addEventListener("onEnterFrame", onEnterFrame);
+		addEventListener("onEnterFrame", _scrollDetection);
+		addEventListener("onEnterFrame", _deceleratingDetection);
 		return () => {
-			removeEventListener("onEnterFrame", onEnterFrame);
+			removeEventListener("onEnterFrame", _scrollDetection);
+			removeEventListener("onEnterFrame", _deceleratingDetection);
 		};
 	});
 
 	// onScroll だと発行タイミングの関係上 velocity が 0 になるのを検出できないので onEnterFrame で処理します。
 	// なお、onScroll でも 120hz は対応してないので onEnterFrame を使う弊害はありません。
 	let _scrolling = false;
-	function onEnterFrame() {
+	function _scrollDetection() {
 		const currentOffset = getContentOffset();
 		velocity = {
 			x: prevContentOffset.x - currentOffset.x,
 			y: prevContentOffset.y - currentOffset.y,
 		};
 		prevContentOffset = currentOffset;
-		if( velocity.x != 0 || velocity.y != 0){
+		if (velocity.x != 0 || velocity.y != 0) {
 			_scrolling = true;
-			console.log(velocity)
+			// console.log(velocity);
 			dispatch("didScroll", currentOffset);
 		}
+	}
 
-		if( _scrolling && velocity.x == 0 && velocity.y == 0){
-			_scrolling = false;
-			console.log("スクロール停止", velocity)
-			dispatch("didEndDecelerating");
-		}
+	// 減衰関連
+	function _deceleratingDetection() {
+		if (isDragging) return;
+		if (_scrolling == false) return;
+		if (velocity.x != 0 || velocity.y != 0) return;
+
+		_scrolling = false;
+		console.log("スクロール停止", velocity);
+		dispatch("didEndDecelerating");
 	}
 
 	const contentStyle =
