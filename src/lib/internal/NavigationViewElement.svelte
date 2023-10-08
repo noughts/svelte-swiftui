@@ -21,16 +21,6 @@
 	}
 	async function willEndDragging(e: CustomEvent<CGPoint>) {
 		isUserInteractionEnabled = false;
-		return;
-		const velocity = e.detail;
-
-		if (velocity.x > 5) {
-			await scrollView.scrollTo({ left: 0, behavior: "smooth" });
-			viewController.navigationController?.pop(false);
-		} else {
-			await scrollView.scrollTo({ left: 390, behavior: "smooth" });
-			scrollView.isUserInteractionEnabled = true;
-		}
 	}
 
 	function onBackButtonTap() {
