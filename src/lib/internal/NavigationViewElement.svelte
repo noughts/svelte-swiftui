@@ -2,7 +2,6 @@
 	import type { UIViewController } from "$lib/UIViewController.js";
 	import ViewControllerRenderer from "$lib/ViewControllerRenderer.svelte";
 	import { ScrollView, type CGPoint } from "$lib/index.js";
-	import { onMount } from "svelte";
 	import UiNavigationBar from "./UINavigationBar.svelte";
 
 	export let viewController: UIViewController;
@@ -10,6 +9,8 @@
 	export function getScrollView(){
 		return scrollView;
 	}
+
+	console.log(viewController.navigationItem)
 
 	let scrollView: ScrollView;
 	let isUserInteractionEnabled: boolean = true;
