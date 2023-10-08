@@ -16,22 +16,19 @@
 		root_ref.scrollTop = 0;
 	}
 	export async function scrollTo(options: ScrollToOptions) {
-		console.log("scrollTo")
+		console.log("scrollTo");
 		root_ref.scrollTo(options);
 		if (options.behavior != "smooth") {
 			return;
 		}
-		let lastOffset = { x: 0, y: 0 };
 		while (true) {
-			await sleep(50);// 1フレーム以下待つだけだと移動を検出できないので多めに。
-			const currentOffset = getContentOffset();
-			const distance = calculateDistance(currentOffset, lastOffset);
-			if (distance == 0) {
+			await sleep(50); // 1フレーム以下待つだけだと移動を検出できないので多めに。
+			// console.log(velocity)
+			if (velocity.x == 0 && velocity.y == 0) {
 				break;
 			}
-			lastOffset = currentOffset;
 		}
-		console.log("完了")
+		console.log("完了");
 	}
 	export function scrollToBottom(animated: boolean = true) {
 		if (animated) {
@@ -57,12 +54,15 @@
 	// 120hz端末でも60hzで呼ばれるので注意
 	function onScroll(e: any) {
 		const currentOffset = getContentOffset();
+		console.log(currentOffset, prevContentOffset);
 		velocity = {
 			x: prevContentOffset.x - currentOffset.x,
 			y: prevContentOffset.y - currentOffset.y,
 		};
 		prevContentOffset = currentOffset;
 		dispatch("didScroll", currentOffset);
+
+		// スクロール完了検知処理
 	}
 	let touchStartOffset: CGPoint = { x: 0, y: 0 };
 	function onTouchStart() {
@@ -73,6 +73,17 @@
 		if (distance > 1) {
 			dispatch("willEndDragging", velocity);
 		}
+	}
+
+	onMount(() => {
+		addEventListener("onEnterFrame", onEnterFrame);
+		return () => {
+			removeEventListener("onEnterFrame", onEnterFrame);
+		};
+	});
+
+	function onEnterFrame() {
+		console.log(getContentOffset())
 	}
 
 	const contentStyle =
