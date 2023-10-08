@@ -21,6 +21,11 @@ export class UINavigationController extends UIViewController {
 		this.push(rootViewController, false)
 	}
 
+	private get topElement(){
+		const componentInstance = this.view.componentInstance as NavigationView;
+		return componentInstance.getTopElement()
+	}
+
 	transitioning = false;
 	async push(viewController: UIViewController, animated: boolean = true) {
 		if (this.transitioning) {
@@ -47,15 +52,17 @@ export class UINavigationController extends UIViewController {
 			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
 		});
 
-		const componentInstance = this.view.componentInstance as NavigationView;
-		const topElement = componentInstance.getTopElement()
-		topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" }).then(x => {
+		this.topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" }).then(x => {
 			this.transitioning = false;
 			unsubscribe();
 		})
 	}
 
 	async pop(animated: boolean = true) {
+		if (this.transitioning) {
+			console.warn("トランジション中です")
+			return;
+		}
 		if (get(this.viewControllers).length <= 1) {
 			return;
 		}
@@ -73,6 +80,17 @@ export class UINavigationController extends UIViewController {
 
 		// アニメーション
 		this.transitioning = true;
-		this.viewControllers.set(newAry);
+		const screenWidth = get(this.view.width);
+		const unsubscribe = fromVC.view.containerScrollLeft.subscribe(x => {
+			const pct = x / screenWidth;
+			toVC.view.brightness.set(100 - (pct * 50));
+			toVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
+		});
+		this.topElement.getScrollView().scrollTo({ left: 0, behavior: "smooth" }).then(x => {
+			this.transitioning = false;
+			this.viewControllers.set(newAry);
+			unsubscribe();
+		})
+		
 	}
 }
