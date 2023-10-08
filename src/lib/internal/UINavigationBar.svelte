@@ -2,7 +2,7 @@
 	import NavigationBarItemView from "./NavigationBarItemView.svelte";
 	import type { UINavigationItem } from "./UINavigationItem.js";
 	export let item: UINavigationItem;
-	export let showBackButton = false;
+	export let showBackButton = true;
 </script>
 
 <div class="UINavigationBar uiChrome">

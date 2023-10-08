@@ -10,8 +10,6 @@
 		return scrollView;
 	}
 
-	console.log(viewController.navigationItem)
-
 	let scrollView: ScrollView;
 	let isUserInteractionEnabled: boolean = true;
 
@@ -58,10 +56,12 @@
 				<div class="page spacer" />
 			{/if}
 			<div class="page viewContainer" class:isRoot>
+				<!-- 先に ViewControllerをrenderしないと、viewController.navigationItemがセットされません -->
+				<ViewControllerRenderer {viewController} />
+
 				{#if !viewController.hidesNavigationBarWhenPushed}
 					<UiNavigationBar item={viewController.navigationItem} on:backButtonTap={back} />
 				{/if}
-				<ViewControllerRenderer {viewController} />
 			</div>
 		</div>
 	</ScrollView>
