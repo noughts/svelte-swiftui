@@ -1,5 +1,5 @@
 import { tick } from "svelte";
-import { derived, get, writable } from "svelte/store";
+import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
@@ -27,6 +27,7 @@ export class UINavigationController extends UIViewController {
 	}
 
 	transitioning = false;
+	unsubscribe?:Unsubscriber;
 	async push(viewController: UIViewController, animated: boolean = true) {
 		if (this.transitioning) {
 			console.warn("トランジション中です")
@@ -46,7 +47,7 @@ export class UINavigationController extends UIViewController {
 
 		// アニメーション
 		const fromVC = vcs[vcs.length - 1];
-		const unsubscribe = viewController.view.containerScrollLeft.subscribe(x => {
+		this.unsubscribe = viewController.view.containerScrollLeft.subscribe(x => {
 			const pct = x / screenWidth;
 			fromVC.view.brightness.set(100 - (pct * 50));
 			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
@@ -54,7 +55,6 @@ export class UINavigationController extends UIViewController {
 
 		await this.topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" })
 		this.transitioning = false;
-		unsubscribe();
 	}
 
 	async pop(animated: boolean = true) {
@@ -79,16 +79,10 @@ export class UINavigationController extends UIViewController {
 
 		// アニメーション
 		this.transitioning = true;
-		const screenWidth = get(this.view.width);
-		const unsubscribe = fromVC.view.containerScrollLeft.subscribe(x => {
-			const pct = x / screenWidth;
-			toVC.view.brightness.set(100 - (pct * 50));
-			toVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
-		});
 		await this.topElement.getScrollView().scrollTo({ left: 0, behavior: "smooth" })
 		this.transitioning = false;
 		this.viewControllers.set(newAry);
-		unsubscribe();
+		this.unsubscribe && this.unsubscribe();
 
 	}
 }
