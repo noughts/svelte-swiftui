@@ -2,7 +2,7 @@
 
 <script lang="ts">
 	import type { Properties } from "csstype";
-	import { sleep, styleToString } from "./internal/Util.js";
+	import { sleep, styleToString, waitOneframe } from "./internal/Util.js";
 	import { createEventDispatcher, onMount, tick } from "svelte";
 	import { calculateDistance, type CGPoint, type UIEdgeInsets } from "./index.js";
 	let root_ref: HTMLDivElement;
@@ -16,21 +16,22 @@
 		root_ref.scrollTop = 0;
 	}
 	export async function scrollTo(options: ScrollToOptions) {
+		console.log("scrollTo")
 		root_ref.scrollTo(options);
 		if (options.behavior != "smooth") {
 			return;
 		}
-		let lastOffset = { x: -1, y: -1 };
+		let lastOffset = { x: 0, y: 0 };
 		while (true) {
-			await sleep(20);
+			await sleep(50);// 1フレーム以下待つだけだと移動を検出できないので多めに。
 			const currentOffset = getContentOffset();
 			const distance = calculateDistance(currentOffset, lastOffset);
-			// console.log(distance)
 			if (distance == 0) {
-				return;
+				break;
 			}
 			lastOffset = currentOffset;
 		}
+		console.log("完了")
 	}
 	export function scrollToBottom(animated: boolean = true) {
 		if (animated) {
@@ -52,7 +53,7 @@
 
 	let prevContentOffset: CGPoint = { x: 0, y: 0 };
 	let velocity: CGPoint = { x: 0, y: 0 };
-	
+
 	// 120hz端末でも60hzで呼ばれるので注意
 	function onScroll(e: any) {
 		const currentOffset = getContentOffset();

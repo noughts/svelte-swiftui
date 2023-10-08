@@ -23,7 +23,15 @@ export function sleep(ms: number): Promise<void> {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export async function tween<T>(from: T, to: T, options: TweenedOptions<T>, run:Subscriber<T>) {
+export function waitOneframe() {
+	return new Promise(resolve => {
+		requestAnimationFrame(() => {
+			resolve(null);
+		});
+	});
+}
+
+export async function tween<T>(from: T, to: T, options: TweenedOptions<T>, run: Subscriber<T>) {
 	const t = tweened<T>(from, options);
 	const unsubscribe = t.subscribe(run);
 	await t.set(to);
