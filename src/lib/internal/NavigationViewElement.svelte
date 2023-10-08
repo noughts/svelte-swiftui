@@ -31,7 +31,7 @@
 		}
 	}
 
-	function back() {
+	function onBackButtonTap() {
 		viewController.navigationController?.pop();
 	}
 </script>
@@ -60,7 +60,7 @@
 				<ViewControllerRenderer {viewController} />
 
 				{#if !viewController.hidesNavigationBarWhenPushed}
-					<UiNavigationBar item={viewController.navigationItem} on:backButtonTap={back} />
+					<UiNavigationBar item={viewController.navigationItem} on:backButtonTap={onBackButtonTap} />
 				{/if}
 			</div>
 		</div>
