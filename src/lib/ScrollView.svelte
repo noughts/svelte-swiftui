@@ -2,7 +2,7 @@
 
 <script lang="ts">
 	import type { Properties } from "csstype";
-	import { sleep, styleToString, waitOneframe } from "./internal/Util.js";
+	import { sleep, styleToString, waitForNextFrame } from "./internal/Util.js";
 	import { createEventDispatcher, onMount, tick } from "svelte";
 	import { calculateDistance, type CGPoint, type UIEdgeInsets } from "./index.js";
 	let root_ref: HTMLDivElement;
@@ -16,14 +16,14 @@
 		root_ref.scrollTop = 0;
 	}
 	export async function scrollTo(options: ScrollToOptions) {
-		console.log("scrollTo");
 		root_ref.scrollTo(options);
 		if (options.behavior != "smooth") {
 			return;
 		}
 		while (true) {
-			await sleep(50); // 1フレーム以下待つだけだと移動を検出できないので多めに。
-			// console.log(velocity)
+			// await sleep(50); // 1フレーム以下待つだけだと移動を検出できないので多めに。
+			await waitForNextFrame();
+			console.log(velocity);
 			if (velocity.x == 0 && velocity.y == 0) {
 				break;
 			}

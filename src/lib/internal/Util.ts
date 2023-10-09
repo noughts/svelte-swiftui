@@ -23,17 +23,24 @@ export function sleep(ms: number): Promise<void> {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function waitOneframe() {
-	return new Promise(resolve => {
-		requestAnimationFrame(() => {
-			resolve(null);
-		});
-	});
-}
 
 export async function tween<T>(from: T, to: T, options: TweenedOptions<T>, run: Subscriber<T>) {
 	const t = tweened<T>(from, options);
 	const unsubscribe = t.subscribe(run);
 	await t.set(to);
 	unsubscribe();
+}
+
+export function waitForNextFrame() {
+	return new Promise((resolve) => {
+		let count = 0;
+		function handleEvent(event: Event) {
+			count++;
+			if (count > 1) {
+				removeEventListener("onEnterFrame", handleEvent); // 一度のみ発火させるためイベントリスナーを削除
+				resolve(event);
+			}
+		}
+		addEventListener("onEnterFrame", handleEvent);
+	});
 }
