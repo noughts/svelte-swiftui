@@ -15,7 +15,7 @@
 	export function scrollToTop() {
 		root_ref.scrollTop = 0;
 	}
-
+	let isDragging = false;
 	let _scrollingByScrollTo = false;
 	export async function scrollTo(options: ScrollToOptions) {
 		root_ref.scrollTo(options);
@@ -25,7 +25,6 @@
 		_scrollingByScrollTo = true;
 		while (true) {
 			await waitForNextFrame();
-			// console.log(velocity);
 			if (velocity.x == 0 && velocity.y == 0) {
 				break;
 			}
@@ -55,7 +54,7 @@
 	let velocity: CGPoint = { x: 0, y: 0 };
 
 	let touchStartOffset: CGPoint = { x: 0, y: 0 };
-	let isDragging = false;
+	
 	function onTouchStart() {
 		isDragging = true;
 		touchStartOffset = getContentOffset();
@@ -89,7 +88,7 @@
 		prevContentOffset = currentOffset;
 		if (velocity.x != 0 || velocity.y != 0) {
 			_scrolling = true;
-			// console.log(velocity);
+			console.log(velocity);
 			dispatch("didScroll", currentOffset);
 		}
 	}
