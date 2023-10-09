@@ -24,12 +24,13 @@
 		}
 		_scrollingByScrollTo = true;
 		while (true) {
-			await waitForNextFrame();
+			// await waitForNextFrame();
+			await sleep(50)
 			if (velocity.x == 0 && velocity.y == 0) {
 				break;
 			}
 		}
-		console.log("完了");
+		console.log("ScrollTo完了");
 		_scrollingByScrollTo = false;
 	}
 	export function scrollToBottom(animated: boolean = true) {
@@ -105,15 +106,16 @@
 	}
 
 	// 減衰関連
+	let timer = 0;
 	function _deceleratingDetection() {
 		if (isDragging) return;
 		if (_isScrolling == false) return;
-		console.log(velocity);
-		if (velocity.x == 0 && velocity.y == 0) {
+		clearTimeout(timer); // 既存のタイマーをクリア
+        timer = setTimeout(function() {
+			console.log("hoge")
 			_isScrolling = false;
-			console.log("スクロール停止");
-			dispatch("didEndDecelerating", getContentOffset());
-		}
+            dispatch("didEndDecelerating", getContentOffset());
+        }, 100);  // 150ミリ秒の間スクロールがない場合に scrollend と見なす
 	}
 
 	const contentStyle =
