@@ -16,22 +16,18 @@
 		root_ref.scrollTop = 0;
 	}
 	let isDragging = false;
-	let _scrollingByScrollTo = false;
 	export async function scrollTo(options: ScrollToOptions) {
 		root_ref.scrollTo(options);
 		if (options.behavior != "smooth") {
 			return;
 		}
-		_scrollingByScrollTo = true;
 		while (true) {
-			// await waitForNextFrame();
-			await sleep(50)
-			if (velocity.x == 0 && velocity.y == 0) {
+			await sleep(50);
+			if (_isScrolling == false) {
 				break;
 			}
 		}
 		console.log("ScrollTo完了");
-		_scrollingByScrollTo = false;
 	}
 	export function scrollToBottom(animated: boolean = true) {
 		if (animated) {
@@ -69,19 +65,11 @@
 
 	// onScroll だと発行タイミングの関係上 velocity が 0 になるのを検出できないので onEnterFrame で処理します。
 	// なお、onScroll でも 120hz は対応してないので onEnterFrame を使う弊害はありません。
-	onMount(() => {
-		addEventListener("onEnterFrame", _observeScroll);
-		addEventListener("onEnterFrame", _observeStartScroll);
-		addEventListener("onEnterFrame", _deceleratingDetection);
-		return () => {
-			removeEventListener("onEnterFrame", _observeScroll);
-			removeEventListener("onEnterFrame", _observeStartScroll);
-			removeEventListener("onEnterFrame", _deceleratingDetection);
-		};
-	});
 
 	let _isScrolling = false;
-	function _observeScroll() {
+	let timer = 0;
+	function onScroll() {
+		_isScrolling = true;
 		const currentOffset = getContentOffset();
 		velocity = {
 			x: prevContentOffset.x - currentOffset.x,
@@ -91,31 +79,14 @@
 		if (velocity.x != 0 || velocity.y != 0) {
 			dispatch("didScroll", currentOffset);
 		}
-	}
 
-	function _observeStartScroll() {
-		if (isDragging) return;
-		if (_isScrolling) return;
-		if (velocity.x != 0 || velocity.y != 0) {
-			isDragging = true;
-			_isScrolling = true;
-			console.log("ドラッグスタート", velocity);
-			dispatch("willBeginDragging");
-			return;
-		}
-	}
-
-	// 減衰関連
-	let timer = 0;
-	function _deceleratingDetection() {
-		if (isDragging) return;
-		if (_isScrolling == false) return;
 		clearTimeout(timer); // 既存のタイマーをクリア
-        timer = setTimeout(function() {
-			console.log("hoge")
+		timer = setTimeout(function () {
 			_isScrolling = false;
-            dispatch("didEndDecelerating", getContentOffset());
-        }, 100);  // 150ミリ秒の間スクロールがない場合に scrollend と見なす
+			velocity.x = 0;
+			velocity.y = 0;
+			dispatch("didEndDecelerating", getContentOffset());
+		}, 100); // 150ミリ秒の間スクロールがない場合に scrollend と見なす
 	}
 
 	const contentStyle =
@@ -129,6 +100,7 @@
 <div
 	class="UIScrollView"
 	bind:this={root_ref}
+	on:scroll={onScroll}
 	on:touchstart={onTouchStart}
 	on:touchend={onTouchEnd}
 	class:noScrollIndicator={showsScrollIndicator == false}
