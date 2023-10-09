@@ -56,7 +56,6 @@
 	let touchStartOffset: CGPoint = { x: 0, y: 0 };
 
 	function onTouchStart() {
-		isDragging = true;
 		touchStartOffset = getContentOffset();
 	}
 	function onTouchEnd(e: any) {
@@ -70,39 +69,38 @@
 	// onScroll だと発行タイミングの関係上 velocity が 0 になるのを検出できないので onEnterFrame で処理します。
 	// なお、onScroll でも 120hz は対応してないので onEnterFrame を使う弊害はありません。
 	onMount(() => {
+		addEventListener("onEnterFrame", _observeScroll);
 		addEventListener("onEnterFrame", _observeStartScroll);
-		// addEventListener("onEnterFrame", _deceleratingDetection);
+		addEventListener("onEnterFrame", _deceleratingDetection);
 		return () => {
+			removeEventListener("onEnterFrame", _observeScroll);
 			removeEventListener("onEnterFrame", _observeStartScroll);
-			// removeEventListener("onEnterFrame", _deceleratingDetection);
+			removeEventListener("onEnterFrame", _deceleratingDetection);
 		};
 	});
 
 	let _isScrolling = false;
-	function onScroll() {
+	function _observeScroll() {
 		const currentOffset = getContentOffset();
 		velocity = {
 			x: prevContentOffset.x - currentOffset.x,
 			y: prevContentOffset.y - currentOffset.y,
 		};
 		prevContentOffset = currentOffset;
-		dispatch("didScroll", currentOffset);
+		if (velocity.x != 0 || velocity.y != 0) {
+			dispatch("didScroll", currentOffset);
+		}
 	}
 
 	function _observeStartScroll() {
 		if (isDragging) return;
+		if (_isScrolling) return;
 		if (velocity.x != 0 || velocity.y != 0) {
 			isDragging = true;
 			_isScrolling = true;
+			console.log("ドラッグスタート", velocity);
 			dispatch("willBeginDragging");
 			return;
-		}
-	}
-
-	function _scrollDetection() {
-		if (velocity.x != 0 || velocity.y != 0) {
-			_isScrolling = true;
-			console.log(velocity);
 		}
 	}
 
@@ -110,13 +108,12 @@
 	function _deceleratingDetection() {
 		if (isDragging) return;
 		if (_isScrolling == false) return;
-		if (velocity.x != 0 || velocity.y != 0) return;
-
-		_isScrolling = false;
-
-		if (_scrollingByScrollTo) return;
-		console.log("スクロール停止", velocity);
-		dispatch("didEndDecelerating", getContentOffset());
+		console.log(velocity);
+		if (velocity.x == 0 && velocity.y == 0) {
+			_isScrolling = false;
+			console.log("スクロール停止");
+			dispatch("didEndDecelerating", getContentOffset());
+		}
 	}
 
 	const contentStyle =
@@ -130,7 +127,6 @@
 <div
 	class="UIScrollView"
 	bind:this={root_ref}
-	on:scroll={onScroll}
 	on:touchstart={onTouchStart}
 	on:touchend={onTouchEnd}
 	class:noScrollIndicator={showsScrollIndicator == false}
