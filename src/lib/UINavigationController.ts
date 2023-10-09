@@ -57,6 +57,7 @@ export class UINavigationController extends UIViewController {
 		await this.topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" })
 		this.topElement.setUserInteractionEnabled(true);
 		this.transitioning = false;
+		console.log("Push完了")
 	}
 
 	async pop(animated: boolean = true) {
