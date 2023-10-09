@@ -3,6 +3,7 @@ import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
+import type NavigationViewElement from "./internal/NavigationViewElement.svelte";
 
 export class UINavigationController extends UIViewController {
 
@@ -21,9 +22,8 @@ export class UINavigationController extends UIViewController {
 		this.push(rootViewController, false)
 	}
 
-	private get topElement() {
-		const componentInstance = this.view.componentInstance as NavigationView;
-		return componentInstance.getTopElement()
+	private get topElement():NavigationViewElement{
+		return get(this.topViewController).navigationElementInstance;
 	}
 
 	transitioning = false;
@@ -54,7 +54,7 @@ export class UINavigationController extends UIViewController {
 		});
 		this.topElement.setUserInteractionEnabled(false);
 		await this.topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" })
-		this.topElement.setUserInteractionEnabled(true);
+		// this.topElement.setUserInteractionEnabled(true);
 		this.transitioning = false;
 	}
 

@@ -1,13 +1,8 @@
 <script lang="ts">
 	import type { UINavigationController } from "$lib/UINavigationController.js";
-	import { get } from "svelte/store";
 	import NavigationViewElement from "./internal/NavigationViewElement.svelte";
 
 	export let viewController: UINavigationController;
-	export function getTopElement(): NavigationViewElement {
-		const topVC = get(viewController.topViewController);
-		return topVC.navigationElementInstance;
-	}
 	const viewControllers = viewController.viewControllers;
 </script>
 
