@@ -31,6 +31,16 @@ export async function tween<T>(from: T, to: T, options: TweenedOptions<T>, run: 
 	unsubscribe();
 }
 
+export function waitForEvent(target: any, eventName: string) {
+	return new Promise(resolve => {
+		function handleEvent(event: Event) {
+			target.removeEventListener(eventName, handleEvent); // 一度のみ発火させるためイベントリスナーを削除
+			resolve(event);
+		}
+		target.addEventListener(eventName, handleEvent);
+	});
+}
+
 export function waitForNextFrame() {
 	return new Promise((resolve) => {
 		let count = 0;
