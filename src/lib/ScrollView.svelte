@@ -98,8 +98,8 @@
 		if (velocity.x != 0 || velocity.y != 0) return;
 
 		_scrolling = false;
-		console.log("スクロール停止", velocity);
-		dispatch("didEndDecelerating");
+		// console.log("スクロール停止", velocity);
+		dispatch("didEndDecelerating", getContentOffset());
 	}
 
 	const contentStyle =

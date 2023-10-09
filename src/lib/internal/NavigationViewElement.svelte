@@ -6,10 +6,10 @@
 
 	export let viewController: UIViewController;
 	export let isRoot: boolean = false;
-	export function getScrollView(){
+	export function getScrollView() {
 		return scrollView;
 	}
-	export function setUserInteractionEnabled(value:boolean){
+	export function setUserInteractionEnabled(value: boolean) {
 		isUserInteractionEnabled = value;
 	}
 
@@ -26,6 +26,12 @@
 	function onBackButtonTap() {
 		viewController.navigationController?.pop();
 	}
+	function didEndDecelerating(e:CustomEvent<CGPoint>) {
+		isUserInteractionEnabled = true;
+		if( e.detail.x == 0 ){
+			viewController.navigationController?.pop(false);
+		}
+	}
 </script>
 
 <div
@@ -41,6 +47,7 @@
 		showsScrollIndicator={false}
 		on:willEndDragging={willEndDragging}
 		on:didScroll={onScroll}
+		on:didEndDecelerating={didEndDecelerating}
 		scrollDirection="horizontal"
 	>
 		<div class="contents" class:isRoot>
@@ -52,7 +59,10 @@
 				<ViewControllerRenderer {viewController} />
 
 				{#if !viewController.hidesNavigationBarWhenPushed}
-					<UiNavigationBar item={viewController.navigationItem} on:backButtonTap={onBackButtonTap} />
+					<UiNavigationBar
+						item={viewController.navigationItem}
+						on:backButtonTap={onBackButtonTap}
+					/>
 				{/if}
 			</div>
 		</div>
@@ -74,7 +84,7 @@
 		width: 100%;
 	}
 	.page {
-		position:relative;
+		position: relative;
 		width: 100%;
 		height: 100%;
 		scroll-snap-align: center;
