@@ -15,20 +15,23 @@
 	export function scrollToTop() {
 		root_ref.scrollTop = 0;
 	}
+
+	let _scrollingByScrollTo = false;
 	export async function scrollTo(options: ScrollToOptions) {
 		root_ref.scrollTo(options);
 		if (options.behavior != "smooth") {
 			return;
 		}
+		_scrollingByScrollTo = true;
 		while (true) {
-			// await sleep(50); // 1フレーム以下待つだけだと移動を検出できないので多めに。
 			await waitForNextFrame();
-			console.log(velocity);
+			// console.log(velocity);
 			if (velocity.x == 0 && velocity.y == 0) {
 				break;
 			}
 		}
 		console.log("完了");
+		_scrollingByScrollTo = false;
 	}
 	export function scrollToBottom(animated: boolean = true) {
 		if (animated) {
@@ -98,7 +101,9 @@
 		if (velocity.x != 0 || velocity.y != 0) return;
 
 		_scrolling = false;
-		// console.log("スクロール停止", velocity);
+
+		if (_scrollingByScrollTo) return;
+		console.log("スクロール停止", velocity);
 		dispatch("didEndDecelerating", getContentOffset());
 	}
 
