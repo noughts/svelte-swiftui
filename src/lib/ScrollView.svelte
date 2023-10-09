@@ -71,17 +71,15 @@
 	// なお、onScroll でも 120hz は対応してないので onEnterFrame を使う弊害はありません。
 	onMount(() => {
 		addEventListener("onEnterFrame", _observeStartScroll);
-		root_ref.addEventListener("scrollend", onScrollEnd);
 		// addEventListener("onEnterFrame", _deceleratingDetection);
 		return () => {
 			removeEventListener("onEnterFrame", _observeStartScroll);
-			root_ref.removeEventListener("scrollend", onScrollEnd);
 			// removeEventListener("onEnterFrame", _deceleratingDetection);
 		};
 	});
 
 	let _isScrolling = false;
-	function onScroll(e:any) {
+	function onScroll() {
 		const currentOffset = getContentOffset();
 		velocity = {
 			x: prevContentOffset.x - currentOffset.x,
@@ -89,13 +87,6 @@
 		};
 		prevContentOffset = currentOffset;
 		dispatch("didScroll", currentOffset);
-	}
-
-	// システムによるスクロールが終了したときにも呼ばれます。
-	function onScrollEnd(e:any){
-		_isScrolling = false;
-		console.log(e)
-		dispatch("didEndDecelerating", getContentOffset());
 	}
 
 	function _observeStartScroll() {
@@ -106,6 +97,26 @@
 			dispatch("willBeginDragging");
 			return;
 		}
+	}
+
+	function _scrollDetection() {
+		if (velocity.x != 0 || velocity.y != 0) {
+			_isScrolling = true;
+			console.log(velocity);
+		}
+	}
+
+	// 減衰関連
+	function _deceleratingDetection() {
+		if (isDragging) return;
+		if (_isScrolling == false) return;
+		if (velocity.x != 0 || velocity.y != 0) return;
+
+		_isScrolling = false;
+
+		if (_scrollingByScrollTo) return;
+		console.log("スクロール停止", velocity);
+		dispatch("didEndDecelerating", getContentOffset());
 	}
 
 	const contentStyle =

@@ -28,7 +28,7 @@
 	}
 	function didEndDecelerating(e:CustomEvent<CGPoint>) {
 		isUserInteractionEnabled = true;
-		console.log(e.detail)
+		console.log("didEndDecelerating", e.detail)
 		if( e.detail.x == 0 ){
 			viewController.navigationController?.pop(false);
 		}
