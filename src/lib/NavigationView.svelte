@@ -1,12 +1,13 @@
 <script lang="ts">
 	import type { UINavigationController } from "$lib/UINavigationController.js";
+	import { get } from "svelte/store";
 	import NavigationViewElement from "./internal/NavigationViewElement.svelte";
 
 	export let viewController: UINavigationController;
-	export function getTopElement():NavigationViewElement{
-		return topElement;
+	export function getTopElement(): NavigationViewElement {
+		const topVC = get(viewController.topViewController);
+		return topVC.navigationElementInstance;
 	}
-	let topElement:any;
 	const viewControllers = viewController.viewControllers;
 </script>
 
@@ -14,7 +15,11 @@
 	<slot />
 	<div class="elements">
 		{#each $viewControllers as viewController, index}
-			<NavigationViewElement bind:this={topElement} {viewController} isRoot={index == 0} />
+			<NavigationViewElement
+				bind:this={viewController.navigationElementInstance}
+				{viewController}
+				isRoot={index == 0}
+			/>
 		{/each}
 	</div>
 </div>

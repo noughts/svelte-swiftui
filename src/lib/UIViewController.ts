@@ -27,6 +27,7 @@ export class UIViewController extends EventTarget {
 	tabBarItem: UITabBarItem = { title: "placeholder", icon: { name: "" } };
 	presentingViewController?: UIViewController;
 	modalPresentationStyle: UIModalPresentationStyle = UIModalPresentationStyle.pageSheet;
+	navigationElementInstance:any;
 
 	constructor(readonly view: UIView, readonly options?: UIViewControllerOptions) {
 		super();
