@@ -2,9 +2,9 @@
 
 <script lang="ts">
 	import type { Properties } from "csstype";
-	import { sleep, styleToString, waitForNextFrame } from "./internal/Util.js";
-	import { createEventDispatcher, onMount, tick } from "svelte";
+	import { createEventDispatcher } from "svelte";
 	import { calculateDistance, type CGPoint, type UIEdgeInsets } from "./index.js";
+	import { sleep, styleToString } from "./internal/Util.js";
 	let root_ref: HTMLDivElement;
 	export let style: Properties = {};
 	export let contentInset: UIEdgeInsets = { top: 44, bottom: 49 };
@@ -62,9 +62,6 @@
 		}
 	}
 
-	// onScroll だと発行タイミングの関係上 velocity が 0 になるのを検出できないので onEnterFrame で処理します。
-	// なお、onScroll でも 120hz は対応してないので onEnterFrame を使う弊害はありません。
-
 	let _isScrolling = false;
 	let timer = 0;
 	function onScroll() {
@@ -85,7 +82,7 @@
 			velocity.x = 0;
 			velocity.y = 0;
 			dispatch("didEndDecelerating", getContentOffset());
-		}, 100); // 150ミリ秒の間スクロールがない場合に scrollend と見なす
+		}, 100); // nミリ秒の間スクロールがない場合に scrollend と見なす
 	}
 
 	const contentStyle =
