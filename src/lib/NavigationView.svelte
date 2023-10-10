@@ -1,34 +1,22 @@
 <script lang="ts">
 	import type { UINavigationController } from "$lib/UINavigationController.js";
 	import NavigationViewElement from "./internal/NavigationViewElement.svelte";
-	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 
 	export let viewController: UINavigationController;
-
 	const viewControllers = viewController.viewControllers;
-	const topViewController = viewController.topViewController;
-	const navigatioBarTranslateX = viewController.navigationBarTranslateX;
-
-	function back() {
-		viewController.pop();
-	}
 </script>
 
 <div class="NavigationView">
 	<slot />
 	<div class="elements">
 		{#each $viewControllers as viewController, index}
-			<NavigationViewElement {viewController} isRoot={index == 0} />
+			<NavigationViewElement
+				bind:this={viewController.navigationElementInstance}
+				{viewController}
+				isRoot={index == 0}
+			/>
 		{/each}
 	</div>
-	{#if !$topViewController.hidesNavigationBarWhenPushed}
-		<div class="navBar" style="transform: translateX({$navigatioBarTranslateX});">
-			<UiNavigationBar
-				items={$viewControllers.map((x) => x.navigationItem)}
-				on:backButtonTap={back}
-			/>
-		</div>
-	{/if}
 </div>
 
 <style>
@@ -36,13 +24,6 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
-	}
-	.navBar {
-		position: absolute;
-		top: 0px;
-		left: 0;
-		right: 0;
-		z-index: 2;
 	}
 	.elements {
 		height: 100%;

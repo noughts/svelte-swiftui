@@ -5,16 +5,12 @@
     import type { UINavigationItem } from "./UINavigationItem.js";
 	export let showBackButton: boolean;
 	export let item:UINavigationItem
-	const opacity = item.opacity;
-	const translateX = item.translateX;
 
 	const dispatch = createEventDispatcher();
 </script>
 
 <div
 	class="NavigationBarItemView"
-	style:opacity={$opacity}
-	style:transform="translate({$translateX}, 0)"
 >
 	{#if item.leftBarButtonItem}
 		<Button

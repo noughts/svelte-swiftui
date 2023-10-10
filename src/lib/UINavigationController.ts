@@ -1,9 +1,9 @@
-import { cubicOut } from "svelte/easing";
+import { tick } from "svelte";
 import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
-import { tween } from "./internal/Util.js";
+import type NavigationViewElement from "./internal/NavigationViewElement.svelte";
 
 export class UINavigationController extends UIViewController {
 
@@ -12,83 +12,81 @@ export class UINavigationController extends UIViewController {
 	readonly topViewController = derived(this.viewControllers, $a => {
 		return $a[$a.length - 1];
 	})
-	readonly navigationBarTranslateX = writable("0");
 
-	constructor(rootViewController: UIViewController, view?: UIView | null, options?: UIViewControllerOptions) {
-		if (view) {
-			super(view, options)
-		} else {
-			super(new UIView(NavigationView), options)
+	constructor(rootViewController: UIViewController, subview?: UIView | null, options?: UIViewControllerOptions) {
+		const view = new UIView(NavigationView);
+		if (subview) {
+			view.addSubView(subview);
 		}
+		super(view, options)
 		this.push(rootViewController, false)
 	}
 
-	unsubscribe?: Unsubscriber;
+	private get topElement():NavigationViewElement{
+		return get(this.topViewController).navigationElementInstance;
+	}
+
+	transitioning = false;
+	unsubscribe?:Unsubscriber;
 	async push(viewController: UIViewController, animated: boolean = true) {
+		if (this.transitioning) {
+			console.warn("トランジション中です")
+			return;
+		}
+		this.transitioning = true;
 		viewController.presentingViewController = this;
 		const vcs = get(this.viewControllers);
 		this.viewControllers.set(vcs.concat(viewController));
 		if (animated == false) {
+			this.transitioning = false;
 			return;
 		}
 
+		await tick();// viewControllersが反映されるのを待つ
+		const screenWidth = get(this.view.width);
+
 		// アニメーション
 		const fromVC = vcs[vcs.length - 1];
-		viewController.isTransitioning.set(true)// containerScrollTop.subscribeの前に行ってください
-
-		const screenWidth = get(this.view.width);
 		this.unsubscribe = viewController.view.containerScrollLeft.subscribe(x => {
 			const pct = x / screenWidth;
 			fromVC.view.brightness.set(100 - (pct * 50));
 			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
-			if (fromVC.hidesNavigationBarWhenPushed) {
-				this.navigationBarTranslateX.set(`${100 - pct * 100}%`)
-				fromVC.navigationItem.opacity.set(0);
-			} else {
-				viewController.navigationItem.opacity.set(pct);
-				fromVC.navigationItem.opacity?.set(1 - pct);
-				fromVC.navigationItem.translateX.set(`-${(pct * 100) * 0.25}%`);
-			}
-
-			if (get(viewController.isTransitioning) == false) {
-				if (pct <= 0) {
-					this.pop(false);
-				}
-			}
 		});
-		await tween(0, screenWidth, { duration: 333, easing: cubicOut }, x => {
-			viewController.view.containerScrollLeft.set(x)
-		})
-		viewController.isTransitioning.set(false);
+
+		this.topElement.setUserInteractionEnabled(false);
+		await this.topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" })
+		this.topElement.setUserInteractionEnabled(true);
+		this.transitioning = false;
+		console.log("Push完了")
 	}
 
-
 	async pop(animated: boolean = true) {
+		if (this.transitioning) {
+			console.warn("トランジション中です")
+			return;
+		}
 		if (get(this.viewControllers).length <= 1) {
 			return;
 		}
 		const newAry = [...get(this.viewControllers)];
 		const fromVC = newAry.pop();
-		const toVC = newAry[newAry.length-1];
+		const toVC = newAry[newAry.length - 1];
 		if (!fromVC) throw "popできませんでした"
 
 		if (!animated) {
 			toVC.view.brightness.set(100);
 			toVC.view.translateX.set("0");
-			toVC.navigationItem.opacity?.set(1);
-			toVC.navigationItem.translateX.set(`0`);
-			this.unsubscribe && this.unsubscribe();
 			this.viewControllers.set(newAry);
 			return;
 		}
 
 		// アニメーション
-		fromVC.isTransitioning.set(true)
-		await tween(get(fromVC.view.containerScrollLeft), 0, { duration: 333, easing: cubicOut }, x => {
-			fromVC.view.containerScrollLeft.set(x)
-		})
-		fromVC.isTransitioning.set(false)
+		this.transitioning = true;
+		this.topElement.setUserInteractionEnabled(false);
+		await this.topElement.getScrollView().scrollTo({ left: 0, behavior: "smooth" })
+		this.transitioning = false;
 		this.viewControllers.set(newAry);
 		this.unsubscribe && this.unsubscribe();
+
 	}
 }
