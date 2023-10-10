@@ -30,23 +30,21 @@ The code to implement [standard tab bar navigation](https://developer.apple.com/
 <!-- src/routes/+page.svelte -->
 
 <script lang="ts">
-    import { UISceneController, UITabBarController, UIView, UIViewController, View } from "@noughts/svelte-uikit";
+    import { UISceneController, UITabBarController, UIView, UIViewController, App } from "@noughts/svelte-uikit";
     // imports some Svelte Components here. e.g.: import WorldClockView from "./WorldClockView.svelte";
 </script>
 
-<div class="root">
-    <View
-        viewController={new UISceneController(
-            new UITabBarController([
-                new UIViewController(new UIView(WorldClockView), { tabBarItem: { title: "World Clock", icon: "language" } }),
-                new UIViewController(new UIView(AlermView), { tabBarItem: { title: "Alarm", icon: "alarm" } }),
-                new UIViewController(new UIView(BedtimeView), { tabBarItem: { title: "Bedtime", icon: "bed" } }),
-                new UIViewController(new UIView(StopwatchView), { tabBarItem: { title: "Stopwatch", icon: "timer" } }),
-                new UIViewController(new UIView(TimerView), { tabBarItem: { title: "Timer", icon: "pace" } }),
-            ])
-        )}
-    />
-</div>
+<App
+    viewController={new UISceneController(
+        new UITabBarController([
+            new UIViewController(new UIView(WorldClockView), { tabBarItem: { title: "World Clock", icon: "language" } }),
+            new UIViewController(new UIView(AlermView), { tabBarItem: { title: "Alarm", icon: "alarm" } }),
+            new UIViewController(new UIView(BedtimeView), { tabBarItem: { title: "Bedtime", icon: "bed" } }),
+            new UIViewController(new UIView(StopwatchView), { tabBarItem: { title: "Stopwatch", icon: "timer" } }),
+            new UIViewController(new UIView(TimerView), { tabBarItem: { title: "Timer", icon: "pace" } }),
+        ])
+    )}
+/>
 
 <style>
     :global(*) {
@@ -55,34 +53,42 @@ The code to implement [standard tab bar navigation](https://developer.apple.com/
         box-sizing: border-box;
         --ui-tint-color:orange !important;
     }
-    .root {
-        width: 100dvw;
-        max-width: 480px;
-        height: 100dvh;
-        overflow: hidden;
-    }
 </style>
 ```
 
-# Extending NavigationView
+# Add a SubView to NavigationView.
 
-For example, if you want to place a floating button on a View represented by UINavigationController, you can extend it as follows.
+For example, if you want to place a floating button on a View represented by UINavigationController, you can do it as follows.
 
 ```svelte
+<!-- +page.svelte -->
+<App
+    viewController={new UITabBarController([
+        new UINavigationController(
+            new UIViewController(new UIView(LandmarkList), {
+                hidesNavigationBarWhenPushed: true,
+            }),
+            {tabBarItem: { title: "wo/NavBar", icon: { name: "home" } }},
+            new UIView(Fab)
+        )
+    ])}
+/>
+```
+
+
+```svelte
+<!-- Fab.svelte -->
 <script lang="ts">
-    import { NavigationView, UINavigationController, UIView, UIViewController } from "@noughts/svelte-uikit";
-    import WorldClockView from "./WorldClockView.svelte";
-
-    export let viewController: UINavigationController;
-
+    import { UIView } from "$lib/UIView.js";
+    import { UIViewController } from "$lib/UIViewController.js";
+    import DemoScreen from "./DemoScreen.svelte";
+    export let viewController: UIViewController;
     function onFabClick() {
-        viewController.present(new UIViewController(new UIView(WorldClockView), {}));
+        viewController.present(new UIViewController(new UIView(DemoScreen), {}));
     }
 </script>
 
-<NavigationView {viewController}>
-    <button class="fab" on:click={onFabClick}>FAB</button>
-</NavigationView>
+<button class="fab" on:click={onFabClick}>FAB</button>
 
 <style>
     .fab {
@@ -94,5 +100,4 @@ For example, if you want to place a floating button on a View represented by UIN
         z-index: 100;
     }
 </style>
-
 ```

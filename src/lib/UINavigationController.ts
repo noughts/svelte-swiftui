@@ -13,7 +13,7 @@ export class UINavigationController extends UIViewController {
 		return $a[$a.length - 1];
 	})
 
-	constructor(rootViewController: UIViewController, subview?: UIView | null, options?: UIViewControllerOptions) {
+	constructor(rootViewController: UIViewController, options?: UIViewControllerOptions, subview?: UIView | null) {
 		const view = new UIView(NavigationView);
 		if (subview) {
 			view.addSubView(subview);
