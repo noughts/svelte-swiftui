@@ -74,7 +74,7 @@
 	.NavigationViewElement {
 		position: absolute;
 		inset: 0;
-		background-color: rgba(255 0 0/10%);
+		/* background-color: rgba(255 0 0/10%); */
 	}
 	.contents {
 		display: flex;
