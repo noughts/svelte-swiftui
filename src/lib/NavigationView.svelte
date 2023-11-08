@@ -1,18 +1,43 @@
 <script lang="ts">
 	import type { UINavigationController } from "$lib/UINavigationController.js";
-	import ViewControllerRenderer from "./ViewControllerRenderer.svelte";
+	import { fly } from "svelte/transition";
+	import UiNavigationBar from "./internal/UINavigationBar.svelte";
+    import { swipe } from "./internal/swipe.js";
+    import ViewControllerRenderer from "./ViewControllerRenderer.svelte";
 
 	export let viewController: UINavigationController;
+
 	const viewControllers = viewController.viewControllers;
+	const topViewController = viewController.topViewController;
+
+	function back() {
+		viewController.pop();
+	}
 </script>
 
 <div class="NavigationView">
 	<slot />
-	<div class="elements">
-		{#each $viewControllers as viewController, index}
-			<ViewControllerRenderer {viewController} />
+	<div class="views">
+		{#each $viewControllers as vc, index}
+			{@const top = index == $viewControllers.length - 1}
+			<div
+				class="item"
+				use:swipe={{
+					onSwipeRight: back,
+				}}
+				class:top
+				class:navBarHidden={vc.hidesNavigationBarWhenPushed}
+				transition:fly={{ x: "100%", opacity: 1 }}
+			>
+				<ViewControllerRenderer viewController={vc} />
+			</div>
 		{/each}
 	</div>
+	{#if !$topViewController.hidesNavigationBarWhenPushed}
+		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
+			<UiNavigationBar items={$viewControllers.map((x) => x.navigationItem)} on:backButtonTap={back} />
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -21,8 +46,31 @@
 		height: 100%;
 		position: relative;
 	}
-	.elements {
+	.navBar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 2;
+	}
+	.views {
 		height: 100%;
 		position: relative;
+	}
+	.item {
+		position: absolute;
+		inset: 0;
+
+		transition-property: transform, filter;
+		transition-duration: 0.3s;
+		transform: translateX(-50%);
+		filter: brightness(80%);
+	}
+	.navBarHidden {
+		top: 0;
+	}
+	.top {
+		transform: translateX(0);
+		filter: brightness(100%);
 	}
 </style>
