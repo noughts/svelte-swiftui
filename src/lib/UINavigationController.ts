@@ -3,7 +3,8 @@ import { derived, get, writable, type Unsubscriber } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
-import type NavigationViewElement from "./internal/NavigationViewElement.svelte";
+import { tween } from "./internal/Util.js";
+import { cubicOut } from "svelte/easing";
 
 export class UINavigationController extends UIViewController {
 
@@ -22,9 +23,6 @@ export class UINavigationController extends UIViewController {
 		this.push(rootViewController, false)
 	}
 
-	private get topElement():NavigationViewElement{
-		return get(this.topViewController).navigationElementInstance;
-	}
 
 	transitioning = false;
 	unsubscribe?:Unsubscriber;
@@ -52,10 +50,11 @@ export class UINavigationController extends UIViewController {
 			fromVC.view.brightness.set(100 - (pct * 50));
 			fromVC.view.translateX.set(`-${(pct * 100) * 0.25}%`);
 		});
+		fromVC.view.opacity.set(0.5)
 
-		this.topElement.setUserInteractionEnabled(false);
-		await this.topElement.getScrollView().scrollTo({ left: screenWidth, behavior: "smooth" })
-		this.topElement.setUserInteractionEnabled(true);
+		await tween(100, 0, { duration: 333, easing: cubicOut }, x => {
+			viewController.view.translateX.set(`${x}%`)
+		})
 		this.transitioning = false;
 		console.log("Push完了")
 	}
@@ -82,8 +81,9 @@ export class UINavigationController extends UIViewController {
 
 		// アニメーション
 		this.transitioning = true;
-		this.topElement.setUserInteractionEnabled(false);
-		await this.topElement.getScrollView().scrollTo({ left: 0, behavior: "smooth" })
+		await tween(0, 100, { duration: 333, easing: cubicOut }, x => {
+			fromVC.view.containerScrollLeft.set(x)
+		})
 		this.transitioning = false;
 		this.viewControllers.set(newAry);
 		this.unsubscribe && this.unsubscribe();

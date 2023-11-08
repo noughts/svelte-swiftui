@@ -6,6 +6,7 @@ export class UIView<Props extends DefaultProps = any>{
 	readonly width = writable(0);
 	readonly height = writable(0);
 	readonly brightness = writable(100);
+	readonly opacity = writable(1);
 	readonly translateX = writable("0");
 	readonly containerScrollTop = writable(0)
 	readonly containerScrollLeft = writable(0);

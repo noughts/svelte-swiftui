@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { UINavigationController } from "$lib/UINavigationController.js";
-	import NavigationViewElement from "./internal/NavigationViewElement.svelte";
+	import ViewControllerRenderer from "./ViewControllerRenderer.svelte";
 
 	export let viewController: UINavigationController;
 	const viewControllers = viewController.viewControllers;
@@ -10,11 +10,7 @@
 	<slot />
 	<div class="elements">
 		{#each $viewControllers as viewController, index}
-			<NavigationViewElement
-				bind:this={viewController.navigationElementInstance}
-				{viewController}
-				isRoot={index == 0}
-			/>
+			<ViewControllerRenderer {viewController} />
 		{/each}
 	</div>
 </div>
