@@ -1,7 +1,7 @@
 {
 	"name": "@noughts/svelte-uikit",
 	"license": "MIT",
-	"version": "0.8.7",
+	"version": "0.8.8",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "npm version patch && vite build && npm run package",
@@ -45,7 +45,5 @@
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"type": "module",
-	"dependencies": {
-		
-	}
+	"dependencies": {}
 }
