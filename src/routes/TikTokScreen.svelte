@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { ScrollView, type UIViewController } from "$lib/index.js";
+	import { UIScrollView, type UIViewController } from "$lib/index.js";
 	import TikTokCell from "./TikTokCell.svelte";
 	export let viewController: UIViewController;
 	const colors: string[] = ["red", "blue", "green", "yellow", "purple"];
 </script>
 
 <div class="root">
-	<ScrollView
+	<UIScrollView
 		isPagingEnabled={true}
 		showsScrollIndicator={false}
 		contentInset={{ top: 0, bottom: 49 }}
@@ -16,7 +16,7 @@
 				<TikTokCell {color} />
 			{/each}
 		</div>
-	</ScrollView>
+	</UIScrollView>
 </div>
 
 <style>
