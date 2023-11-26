@@ -9,7 +9,7 @@
 	<UIScrollView
 		isPagingEnabled={true}
 		showsScrollIndicator={false}
-		contentInset={{ top: 0, bottom: 49 }}
+		contentInset={{ top: 44, bottom: 49 }}
 	>
 		<div class="cells">
 			{#each colors as color}
