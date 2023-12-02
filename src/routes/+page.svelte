@@ -34,7 +34,7 @@
         }),
 
         new UINavigationController(new UIViewController(new UIView(ShortContentScreen)), {
-            tabBarItem: { title: "履歴", icon: { name: "search", fill: true } },
+            tabBarItem: { title: "検索", icon: { name: "search", fill: true } },
         }),
         new UIViewController(new UIView(TikTokScreen), {
             tabBarItem: { title: "TikTok", icon: { name: "star", fill: true } },
