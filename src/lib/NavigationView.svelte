@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { UINavigationController } from "$lib/UINavigationController.js";
+	import { UINavigationController } from "$lib/UINavigationController.js";
 	import { fly } from "svelte/transition";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
     import { swipe } from "./internal/swipe.js";
@@ -34,7 +34,7 @@
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
-		<div class="navBar" transition:fly={{ x: "100%", opacity: 1 }}>
+		<div class="navBar" transition:fly={{ x: "100%", opacity: 1, duration:UINavigationController.animationDuration }}>
 			<UiNavigationBar items={$viewControllers.map((x) => x.navigationItem)} on:backButtonTap={back} />
 		</div>
 	{/if}

@@ -5,13 +5,10 @@
 	import { VStack } from "$lib/index.js";
 	import type { Landmark } from "./Landmark.js";
 	import MapView from "./MapView.svelte";
+	import {DateTime} from "luxon"
 
 	export let viewController: UIViewController;
 	export let landmark: Landmark;
-	export let rnd = Math.random();
-	export function getRnd() {
-		return rnd;
-	}
 	viewController.navigationItem.title = landmark.name;
 	viewController.navigationItem.rightBarButtonItem = {
 		title: "Debug",
@@ -36,7 +33,7 @@
 			{#each nullArray as tmp}
 				<h1>Detail</h1>
 				<h2>{landmark.name}</h2>
-				<div>{rnd}</div>
+				<div>{DateTime.now().plus({hour:2})}</div>
 				<button on:click={showMap}>show map</button>
 			{/each}
 		</VStack>
