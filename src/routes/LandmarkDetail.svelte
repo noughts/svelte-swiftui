@@ -3,7 +3,6 @@
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
 	import { VStack } from "$lib/index.js";
-    import { onMount } from "svelte";
 	import type { Landmark } from "./Landmark.js";
 	import MapView from "./MapView.svelte";
 	import {DateTime} from "luxon"
@@ -20,15 +19,7 @@
 	};
 
 
-	let nullArray: any[] = new Array(1).fill(null);
-
-	onMount(()=>{
-		setTimeout(()=>{
-			nullArray = new Array(1000).fill(null);
-		},10)
-		
-	})
-
+	let nullArray: any[] = new Array(10).fill(null);
 
 	function showMap() {
 		viewController.navigationController?.push(

@@ -14,7 +14,7 @@
 	class="View"
 	style:filter="brightness({$brightness}%)"
 	style:opacity={$opacity}
-	style:transform="scale({$scale}) translate({$translateX}, 0)"
+	style:transform="translate({$translateX}, 0)"
 >
 	<svelte:component bind:this={view.componentInstance} this={view.component} {...view.props} {viewController} />
 
