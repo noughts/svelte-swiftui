@@ -5,7 +5,7 @@ import { UIViewController, type UIViewControllerOptions } from "./UIViewControll
 
 export class UINavigationController extends UIViewController {
 
-	static animationDuration = 5000;
+	static animationDuration = 500;
 	readonly className: string = "UINavigationController";
 	readonly viewControllers = writable<UIViewController[]>([]);
 	readonly topViewController = derived(this.viewControllers, $a => {
