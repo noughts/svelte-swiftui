@@ -2,8 +2,9 @@
 	import { UINavigationController } from "$lib/UINavigationController.js";
 	import { fly } from "svelte/transition";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
-    import { swipe } from "./internal/swipe.js";
-    import ViewControllerRenderer from "./ViewControllerRenderer.svelte";
+	import { swipe } from "./internal/swipe.js";
+	import ViewControllerRenderer from "./ViewControllerRenderer.svelte";
+	import { quintOut } from "svelte/easing";
 
 	export let viewController: UINavigationController;
 
@@ -22,20 +23,37 @@
 			{@const top = index == $viewControllers.length - 1}
 			<div
 				class="item"
+				style:transition-duration={`${UINavigationController.animationDuration}ms`}
 				use:swipe={{
 					onSwipeRight: back,
 				}}
 				class:top
 				class:navBarHidden={vc.hidesNavigationBarWhenPushed}
-				transition:fly={{ x: "100%", opacity: 1 }}
+				transition:fly={{
+					x: "100%",
+					opacity: 1,
+					easing: quintOut,
+					duration: UINavigationController.animationDuration,
+				}}
 			>
 				<ViewControllerRenderer viewController={vc} />
 			</div>
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
-		<div class="navBar" transition:fly={{ x: "100%", opacity: 1, duration:UINavigationController.animationDuration }}>
-			<UiNavigationBar items={$viewControllers.map((x) => x.navigationItem)} on:backButtonTap={back} />
+		<div
+			class="navBar"
+			transition:fly={{
+				x: "100%",
+				opacity: 1,
+				easing: quintOut,
+				duration: UINavigationController.animationDuration,
+			}}
+		>
+			<UiNavigationBar
+				items={$viewControllers.map((x) => x.navigationItem)}
+				on:backButtonTap={back}
+			/>
 		</div>
 	{/if}
 </div>
@@ -62,7 +80,7 @@
 		inset: 0;
 
 		transition-property: transform, filter;
-		transition-duration: 0.3s;
+		transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 		transform: translateX(-50%);
 		filter: brightness(80%);
 	}
