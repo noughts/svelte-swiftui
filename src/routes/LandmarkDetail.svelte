@@ -2,7 +2,7 @@
 	import UiScrollView from "$lib/UIScrollView.svelte";
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
-    import { VStack } from "$lib/index.js";
+	import { VStack } from "$lib/index.js";
 	import type { Landmark } from "./Landmark.js";
 	import MapView from "./MapView.svelte";
 
@@ -21,44 +21,25 @@
 		},
 	};
 
+	const nullArray: any[] = new Array(1000).fill(null);
+
 	function showMap() {
-		viewController.navigationController?.push(new UIViewController(new UIView(MapView, { landmark })));
+		viewController.navigationController?.push(
+			new UIViewController(new UIView(MapView, { landmark })),
+		);
 	}
 </script>
 
 <div class="LandmarkDetail">
 	<UiScrollView>
-		<VStack spacing={16} style={{padding:"16px"}}>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
+		<VStack spacing={16} style={{ padding: "16px" }}>
+			{#each nullArray as tmp}
+				<h1>Detail</h1>
+				<h2>{landmark.name}</h2>
+				<div>{rnd}</div>
+				<button on:click={showMap}>show map</button>
+			{/each}
 		</VStack>
-
 	</UiScrollView>
 </div>
 
