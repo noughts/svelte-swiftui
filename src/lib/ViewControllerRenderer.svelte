@@ -20,7 +20,7 @@
 	class="View"
 	style:filter="brightness({$brightness}%)"
 	style:opacity={$opacity}
-	style:transform="translate({$translateX}%, 0)"
+	style:transform="translate({$translateX}, 0)"
 >
 	<svelte:component
 		this={view.component}
@@ -41,5 +41,8 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
+		transition-property: transform;
+		transition-duration: 500ms;
+		transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 	}
 </style>

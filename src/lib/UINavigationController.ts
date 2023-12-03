@@ -35,15 +35,15 @@ export class UINavigationController extends UIViewController {
 			return;
 		}
 		this.transitioning = true;
-		viewController.view.translateX.set(99, { duration: 0 });
+		viewController.view.translateX.set("99%");
 	}
 	async onChildMount(viewController: UIViewController) {
 		await sleep(1)
-		viewController.view.translateX.set(0);
+		viewController.view.translateX.set("0%");
 		const vcs = get(this.viewControllers);
 		const prev_vc = vcs[vcs.length - 2];
 		if (prev_vc) {
-			prev_vc.view.translateX.set(-50);
+			prev_vc.view.translateX.set("-50%");
 			prev_vc.view.brightness.set(50)
 		}
 		setTimeout(() => {
@@ -68,7 +68,7 @@ export class UINavigationController extends UIViewController {
 
 		this.transitioning = true;
 		const next_vc = newAry[newAry.length - 1];
-		next_vc.view.translateX.set(0);
+		next_vc.view.translateX.set("0");
 		next_vc.view.brightness.set(100)
 		setTimeout(() => {
 			this.transitioning = false;

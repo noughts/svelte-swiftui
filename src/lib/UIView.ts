@@ -1,16 +1,13 @@
 import type { SvelteComponent } from "svelte";
-import { quintOut } from "svelte/easing";
-import { tweened } from "svelte/motion";
 import { writable } from "svelte/store";
-import { UINavigationController } from "./index.js";
 
 export class UIView<Props extends DefaultProps = any>{
 
 	readonly width = writable(0);
 	readonly height = writable(0);
-	readonly brightness = tweened(100, { easing: quintOut, duration: UINavigationController.animationDuration });
+	readonly brightness = writable(100);
 	readonly opacity = writable(1);
-	readonly translateX = tweened(0, { easing: quintOut, duration: UINavigationController.animationDuration });
+	readonly translateX = writable("0%");
 	readonly containerScrollTop = writable(0)
 	readonly containerScrollLeft = writable(0);
 	readonly scale = writable(1);

@@ -19,7 +19,7 @@
 		},
 	};
 
-	let nullArray: any[] = new Array(1000).fill(null);
+	let nullArray: any[] = new Array(100).fill(null);
 
 	function showMap() {
 		viewController.navigationController?.push(
