@@ -13,10 +13,12 @@
 			class="item"
 			class:top={index == items.length - 1}
 			style:transition-duration={`${UINavigationController.animationDuration}ms`}
+			style:transition-delay={`${UINavigationController.animationDelay}ms`}
 			transition:fly={{
 				x: "50%",
 				easing: quintOut,
 				duration: UINavigationController.animationDuration,
+				delay: UINavigationController.animationDelay,
 			}}
 		>
 			<NavigationBarItemView {item} showBackButton={index >= 1} on:backButtonTap />
@@ -37,6 +39,7 @@
 	.item {
 		position: absolute;
 		inset: 0;
+		will-change: transform, opacity;
 		transition-property: transform, opacity;
 		transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 		transform: translateX(-50%);

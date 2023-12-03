@@ -10,7 +10,6 @@
 
 	const viewControllers = viewController.viewControllers;
 	const topViewController = viewController.topViewController;
-	const delay = 50;// delayを入れることで、pushアニメーションのはじめのカクツキを軽減できます。
 
 	function back() {
 		viewController.pop();
@@ -25,7 +24,7 @@
 			<div
 				class="item"
 				style:transition-duration={`${UINavigationController.animationDuration}ms`}
-				style:transition-delay={`${delay}ms`}
+				style:transition-delay={`${UINavigationController.animationDelay}ms`}
 				use:swipe={{
 					onSwipeRight: back,
 				}}
@@ -34,7 +33,7 @@
 				transition:fly={{
 					x: "100%",
 					opacity: 1,
-					delay,
+					delay: UINavigationController.animationDelay,
 					easing: quintOut,
 					duration: UINavigationController.animationDuration,
 				}}
@@ -49,7 +48,7 @@
 			transition:fly={{
 				x: "100%",
 				opacity: 1,
-				delay,
+				delay: UINavigationController.animationDelay,
 				easing: quintOut,
 				duration: UINavigationController.animationDuration,
 			}}
@@ -83,6 +82,7 @@
 		position: absolute;
 		inset: 0;
 
+		will-change: transform, filter;
 		transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 		transform: translateX(-50%);
 		filter: brightness(80%);

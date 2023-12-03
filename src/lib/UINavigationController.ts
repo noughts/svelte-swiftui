@@ -6,6 +6,7 @@ import { UIViewController, type UIViewControllerOptions } from "./UIViewControll
 export class UINavigationController extends UIViewController {
 
 	static animationDuration = 500;
+	static animationDelay = 0;// delayを入れることで、pushアニメーションのはじめのカクツキを軽減できます。
 	readonly className: string = "UINavigationController";
 	readonly viewControllers = writable<UIViewController[]>([]);
 	readonly topViewController = derived(this.viewControllers, $a => {
