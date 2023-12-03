@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { fly } from "svelte/transition";
 	import type { UISceneController } from "../UISceneController.js";
 	import "../svelte-swiftui.css";
-	import SceneViewElement from "./SceneViewElement.svelte";
+    import ViewControllerRenderer from "$lib/ViewControllerRenderer.svelte";
 	export let viewController: UISceneController;
 	const viewControllers = viewController.viewControllers;
 </script>
@@ -17,21 +18,29 @@
 	/>
 </svelte:head>
 
-<div class="SceneView">
+<div class="SvelteScene">
 	{#each $viewControllers as viewController, index}
-		<SceneViewElement
-			{viewController}
-			isRoot={index == 0}
-		/>
+		<div class="view" class:top={index == $viewControllers.length - 1} transition:fly={{ y: "100%", opacity: 1 }}>
+			<ViewControllerRenderer {viewController} />
+		</div>
 	{/each}
 </div>
 
 <style>
-	.SceneView {
+	.SvelteScene {
 		width: 100%;
 		height: 100%;
-		background-color: black;
+		background-color: white;
 		position: relative;
 		overflow: hidden;
+	}
+	.view {
+		position: absolute;
+		inset: 0;
+		transition: filter 0.3s;
+		filter: brightness(80%);
+	}
+	.top {
+		filter: brightness(100%);
 	}
 </style>

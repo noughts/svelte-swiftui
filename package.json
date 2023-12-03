@@ -1,10 +1,11 @@
 {
 	"name": "@noughts/svelte-uikit",
 	"license": "MIT",
-	"version": "0.7.0",
+	"version": "0.8.19",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "npm version patch && vite build && npm run package",
+		"build": "vite build && npm run package",
+		"pub": "npm version patch && vite build && npm run package && npm publish",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
@@ -33,6 +34,7 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
 		"@sveltejs/package": "^2.0.0",
+		"csstype": "^3.1.2",
 		"publint": "^0.1.9",
 		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
@@ -44,6 +46,7 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"csstype": "^3.1.2"
+		"@types/luxon": "^3.3.6",
+		"luxon": "^3.4.4"
 	}
 }

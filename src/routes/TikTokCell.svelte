@@ -14,6 +14,6 @@
 		width: 100%;
 		scroll-snap-align: start;
 		scroll-snap-stop: always;
-		height: calc(100dvh - 49px - env(safe-area-inset-bottom));
+		height: calc(100dvh - 49px - 44px - env(safe-area-inset-bottom));
 	}
 </style>

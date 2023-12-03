@@ -18,12 +18,12 @@
             new UIViewController(new UIView(LandmarkList), {
                 hidesNavigationBarWhenPushed: true,
             }),
-            new UIView(Fab),
             {
                 tabBarItem: { title: "wo/NavBar", icon: { name: "home" } },
-            }
+            },
+            new UIView(Fab)
         ),
-        new UINavigationController(new UIViewController(new UIView(LandmarkList)), null, {
+        new UINavigationController(new UIViewController(new UIView(LandmarkList)), {
             tabBarItem: {
                 title: "よく使う項目",
                 icon: { name: "partly_cloudy_day", fill: false },
@@ -33,8 +33,8 @@
             tabBarItem: { title: "Modal", icon: { name: "star", weight: 400 } },
         }),
 
-        new UINavigationController(new UIViewController(new UIView(ShortContentScreen)), null, {
-            tabBarItem: { title: "履歴", icon: { name: "search", fill: true } },
+        new UINavigationController(new UIViewController(new UIView(ShortContentScreen)), {
+            tabBarItem: { title: "検索", icon: { name: "search", fill: true } },
         }),
         new UIViewController(new UIView(TikTokScreen), {
             tabBarItem: { title: "TikTok", icon: { name: "star", fill: true } },

@@ -1,17 +1,14 @@
 <script lang="ts">
-	import UiScrollView from "$lib/ScrollView.svelte";
+	import UiScrollView from "$lib/UIScrollView.svelte";
 	import { UIView } from "$lib/UIView.js";
 	import { UIViewController } from "$lib/UIViewController.js";
-    import { VStack } from "$lib/index.js";
+	import { VStack } from "$lib/index.js";
 	import type { Landmark } from "./Landmark.js";
 	import MapView from "./MapView.svelte";
+	import {DateTime} from "luxon"
 
 	export let viewController: UIViewController;
 	export let landmark: Landmark;
-	export let rnd = Math.random();
-	export function getRnd() {
-		return rnd;
-	}
 	viewController.navigationItem.title = landmark.name;
 	viewController.navigationItem.rightBarButtonItem = {
 		title: "Debug",
@@ -21,44 +18,26 @@
 		},
 	};
 
+
+	let nullArray: any[] = new Array(10).fill(null);
+
 	function showMap() {
-		viewController.navigationController?.push(new UIViewController(new UIView(MapView, { landmark })));
+		viewController.navigationController?.push(
+			new UIViewController(new UIView(MapView, { landmark })),
+		);
 	}
 </script>
 
 <div class="LandmarkDetail">
 	<UiScrollView>
-		<VStack spacing={16} style={{padding:"16px"}}>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
-			<h1>Detail</h1>
-			<h2>{landmark.name}</h2>
-			<div>{rnd}</div>
-			<button on:click={showMap}>show map</button>
+		<VStack spacing={16} style={{ padding: "16px" }}>
+			{#each nullArray as tmp}
+				<h1>Detail</h1>
+				<h2>{landmark.name}</h2>
+				<div>{DateTime.fromISO("2023-11-23T11:22").plus({hour:2})}</div>
+				<button on:click={showMap}>show map</button>
+			{/each}
 		</VStack>
-
 	</UiScrollView>
 </div>
 

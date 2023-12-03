@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
 	import VStack from "$lib/VStack.svelte";
-	import { ScrollView } from "$lib/index.js";
+	import { UIScrollView } from "$lib/index.js";
 	export let title: string = "dummy";
 	export let viewController: UIViewController;
 	viewController.navigationItem.title = "Hello!!";
@@ -25,7 +25,7 @@
 </script>
 
 <div class="root">
-	<ScrollView>
+	<UIScrollView>
 		<VStack spacing={32} style={{ padding: "16px" }}>
 			<h1>{title}</h1>
 			<div>page2</div>
@@ -43,7 +43,7 @@
 			<div>page2</div>
 			<button on:click={onDismissButtonTap}>Dismiss</button>
 		</VStack>
-	</ScrollView>
+	</UIScrollView>
 </div>
 
 <style>

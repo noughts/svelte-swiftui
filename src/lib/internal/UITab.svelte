@@ -6,7 +6,7 @@
 </script>
 
 <button on:click class="root" class:selected>
-	<MaterialSymbol icon={item.icon.name} fill={item.icon.fill} opticalSize={28} weight={item.icon.weight} />
+	<MaterialSymbol icon={item.icon.name} fill={item.icon.fill} opticalSize={30} weight={item.icon.weight} />
 	<div class="name">{item.title}</div>
 </button>
 
@@ -25,9 +25,8 @@
 		color: gray;
 	}
 	.name {
-		font-size: 9px;
-		font-weight: 400;
-		font-feature-settings: "palt";
+		font-size: 9.5px;
+		font-weight: 500;
 		line-height: 1;
 	}
 	.selected {

@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { ScrollView, UIViewController } from "$lib/index.js";
+	import { UIScrollView, UIViewController } from "$lib/index.js";
 	import type { Landmark } from "./Landmark.js";
 	export let viewController: UIViewController;
 	export let landmark: Landmark;
 </script>
 
 <div class="root">
-	<ScrollView style={{ padding: "16px" }}>
+	<UIScrollView style={{ padding: "16px" }}>
 		Map of {landmark.name}
-	</ScrollView>
+	</UIScrollView>
 </div>
 
 <style>

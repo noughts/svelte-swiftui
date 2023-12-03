@@ -105,6 +105,7 @@
 	style:overscroll-behavior={bounces ? "unset" : "none"}
 	style:overflow-y={scrollDirection == "vertical" ? "scroll" : "hidden"}
 	style:overflow-x={scrollDirection == "horizontal" ? "scroll" : "hidden"}
+	style:scroll-padding-top="{contentInset.top}px"
 >
 	<div style={contentStyle}>
 		<slot />
