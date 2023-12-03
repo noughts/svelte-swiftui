@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { fly } from "svelte/transition";
 	import ViewControllerRenderer from "./ViewControllerRenderer.svelte";
-	import type { UINavigationController, UIViewController } from "./index.js";
+	import { UINavigationController, type UIViewController } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
+	import { quintOut } from "svelte/easing";
 
 	export let viewController: UINavigationController;
 
@@ -38,7 +40,15 @@
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
-		<div class="navBar">
+		<div
+			class="navBar"
+			transition:fly={{
+				x: "100%",
+				opacity: 1,
+				easing: quintOut,
+				duration: UINavigationController.animationDuration,
+			}}
+		>
 			<UiNavigationBar
 				items={$viewControllers.map((x) => x.navigationItem)}
 				on:backButtonTap={back}

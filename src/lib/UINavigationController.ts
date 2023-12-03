@@ -25,6 +25,7 @@ export class UINavigationController extends UIViewController {
 		this.push(rootViewController, false)
 	}
 	async push(viewController: UIViewController, animated: boolean = true) {
+		
 		viewController.presentingViewController = this;
 		const current = get(this.viewControllers);
 		this.viewControllers.set(current.concat(viewController));
