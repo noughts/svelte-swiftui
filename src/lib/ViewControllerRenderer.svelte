@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
 	import { createEventDispatcher, onMount } from "svelte";
+	import { UINavigationController } from "./index.js";
 	export let viewController: UIViewController;
 	const view = viewController.view;
 	const brightness = view.brightness;
@@ -19,8 +20,8 @@
 	bind:clientWidth={$width}
 	class="View"
 	style:filter="brightness({$brightness}%)"
-	style:opacity={$opacity}
 	style:transform="translate({$translateX}, 0)"
+	style:transition-duration="{UINavigationController.animationDuration}ms"
 >
 	<svelte:component
 		this={view.component}
@@ -41,8 +42,8 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		transition-property: transform;
-		transition-duration: 500ms;
+		will-change: transform, filter;
+		transition-property: transform, filter;
 		transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 	}
 </style>
