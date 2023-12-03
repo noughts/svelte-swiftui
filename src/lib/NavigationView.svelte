@@ -12,7 +12,7 @@
 	const topViewController = viewController.topViewController;
 
 	function back() {
-		viewController.pop();
+		viewController.pop(true);
 	}
 	function onChildMount(vc: UIViewController) {
 		viewController.onChildMount(vc);
@@ -29,6 +29,12 @@
 					onSwipeRight: back,
 				}}
 				class:navBarHidden={vc.hidesNavigationBarWhenPushed}
+				out:fly={{
+					duration: UINavigationController.animationDuration,
+					easing: quintOut,
+					x: "100%",
+					opacity: 1,
+				}}
 			>
 				<ViewControllerRenderer
 					viewController={vc}

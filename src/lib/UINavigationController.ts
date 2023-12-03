@@ -1,5 +1,3 @@
-import { tick } from "svelte";
-import { cubicInOut, quintOut } from "svelte/easing";
 import { derived, get, writable } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
@@ -9,7 +7,7 @@ import { sleep } from "./internal/Util.js";
 export class UINavigationController extends UIViewController {
 
 	static animationDuration = 500;
-	static animationDelay = 0;// delayを入れることで、pushアニメーションのはじめのカクツキを軽減できます。
+	transitioning = false;
 	readonly className: string = "UINavigationController";
 	readonly viewControllers = writable<UIViewController[]>([]);
 	readonly topViewController = derived(this.viewControllers, $a => {
@@ -25,26 +23,55 @@ export class UINavigationController extends UIViewController {
 		this.push(rootViewController, false)
 	}
 	async push(viewController: UIViewController, animated: boolean = true) {
-		
+		if (this.transitioning) {
+			console.warn("現在遷移中です")
+			return;
+		}
 		viewController.presentingViewController = this;
 		const current = get(this.viewControllers);
 		this.viewControllers.set(current.concat(viewController));
 
-		if( !animated){
+		if (!animated) {
 			return;
 		}
+		this.transitioning = true;
 		viewController.view.translateX.set(99, { duration: 0 });
 	}
-	async onChildMount(viewController:UIViewController){
+	async onChildMount(viewController: UIViewController) {
 		await sleep(1)
-		viewController.view.translateX.set(0, { duration: UINavigationController.animationDuration });
+		viewController.view.translateX.set(0);
+		const vcs = get(this.viewControllers);
+		const prev_vc = vcs[vcs.length - 2];
+		if (prev_vc) {
+			prev_vc.view.translateX.set(-50);
+			prev_vc.view.brightness.set(50)
+		}
+		setTimeout(() => {
+			this.transitioning = false;
+		}, UINavigationController.animationDuration);
 	}
-	pop() {
+	pop(animated: boolean) {
+		if (this.transitioning) {
+			console.warn("現在遷移中です")
+			return;
+		}
 		if (get(this.viewControllers).length <= 1) {
 			return;
 		}
 		const newAry = [...get(this.viewControllers)];
 		newAry.pop();
 		this.viewControllers.set(newAry);
+
+		if (!animated) {
+			return;
+		}
+
+		this.transitioning = true;
+		const next_vc = newAry[newAry.length - 1];
+		next_vc.view.translateX.set(0);
+		next_vc.view.brightness.set(100)
+		setTimeout(() => {
+			this.transitioning = false;
+		}, UINavigationController.animationDuration);
 	}
 }
