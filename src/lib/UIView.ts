@@ -1,4 +1,6 @@
 import type { SvelteComponent } from "svelte";
+import { quintOut } from "svelte/easing";
+import { tweened } from "svelte/motion";
 import { writable } from "svelte/store";
 
 export class UIView<Props extends DefaultProps = any>{
@@ -7,7 +9,7 @@ export class UIView<Props extends DefaultProps = any>{
 	readonly height = writable(0);
 	readonly brightness = writable(100);
 	readonly opacity = writable(1);
-	readonly translateX = writable("0");
+	readonly translateX = tweened(0, { easing: quintOut });
 	readonly containerScrollTop = writable(0)
 	readonly containerScrollLeft = writable(0);
 	readonly scale = writable(1);
@@ -18,7 +20,6 @@ export class UIView<Props extends DefaultProps = any>{
 	componentInstance: any;
 
 	constructor(readonly component: SvelteUIComponent<Props>, readonly props?: Omit<Props, "viewController">) {
-
 	}
 
 	addSubView(view: UIView) {

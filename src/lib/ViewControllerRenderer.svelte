@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { UIViewController } from "$lib/UIViewController.js";
+	import { createEventDispatcher, onMount } from "svelte";
 	export let viewController: UIViewController;
 	const view = viewController.view;
 	const brightness = view.brightness;
@@ -7,6 +8,11 @@
 	const opacity = view.opacity;
 	const translateX = view.translateX;
 	const width = view.width;
+
+	const dispatch = createEventDispatcher();
+	onMount(() => {
+		dispatch("mount");
+	});
 </script>
 
 <div
@@ -14,9 +20,14 @@
 	class="View"
 	style:filter="brightness({$brightness}%)"
 	style:opacity={$opacity}
-	style:transform="translate({$translateX}, 0)"
+	style:transform="translate({$translateX}%, 0)"
 >
-	<svelte:component bind:this={view.componentInstance} this={view.component} {...view.props} {viewController} />
+	<svelte:component
+		this={view.component}
+		bind:this={view.componentInstance}
+		{...view.props}
+		{viewController}
+	/>
 
 	{#each view.subviews as subview}
 		<svelte:component this={subview.component} {...subview.props} {viewController} />
@@ -26,8 +37,8 @@
 <style>
 	.View {
 		position: absolute;
-		top:0;
-		left:0;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
 	}

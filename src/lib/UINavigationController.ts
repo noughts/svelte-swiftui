@@ -1,7 +1,10 @@
+import { tick } from "svelte";
+import { cubicInOut, quintOut } from "svelte/easing";
 import { derived, get, writable } from "svelte/store";
 import NavigationView from "./NavigationView.svelte";
 import { UIView } from "./UIView.js";
 import { UIViewController, type UIViewControllerOptions } from "./UIViewController.js";
+import { sleep } from "./internal/Util.js";
 
 export class UINavigationController extends UIViewController {
 
@@ -21,10 +24,19 @@ export class UINavigationController extends UIViewController {
 		super(view, options)
 		this.push(rootViewController, false)
 	}
-	push(viewController: UIViewController, animated: boolean = true) {
+	async push(viewController: UIViewController, animated: boolean = true) {
 		viewController.presentingViewController = this;
 		const current = get(this.viewControllers);
 		this.viewControllers.set(current.concat(viewController));
+
+		if( !animated){
+			return;
+		}
+		viewController.view.translateX.set(99, { duration: 0 });
+	}
+	async onChildMount(viewController:UIViewController){
+		await sleep(1)
+		viewController.view.translateX.set(0, { duration: UINavigationController.animationDuration });
 	}
 	pop() {
 		if (get(this.viewControllers).length <= 1) {

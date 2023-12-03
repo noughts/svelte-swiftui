@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { UINavigationController } from "$lib/UINavigationController.js";
-	import { fly } from "svelte/transition";
+	import ViewControllerRenderer from "./ViewControllerRenderer.svelte";
+	import type { UINavigationController, UIViewController } from "./index.js";
 	import UiNavigationBar from "./internal/UINavigationBar.svelte";
 	import { swipe } from "./internal/swipe.js";
-	import ViewControllerRenderer from "./ViewControllerRenderer.svelte";
-	import { quintOut } from "svelte/easing";
 
 	export let viewController: UINavigationController;
 
@@ -14,45 +12,33 @@
 	function back() {
 		viewController.pop();
 	}
+	function onChildMount(vc: UIViewController) {
+		viewController.onChildMount(vc);
+	}
 </script>
 
 <div class="NavigationView">
 	<slot />
 	<div class="views">
-		{#each $viewControllers as vc, index}
-			{@const top = index == $viewControllers.length - 1}
+		{#each $viewControllers as vc}
 			<div
 				class="item"
-				style:transition-duration={`${UINavigationController.animationDuration}ms`}
-				style:transition-delay={`${UINavigationController.animationDelay}ms`}
 				use:swipe={{
 					onSwipeRight: back,
 				}}
-				class:top
 				class:navBarHidden={vc.hidesNavigationBarWhenPushed}
-				transition:fly={{
-					x: "100%",
-					opacity: 1,
-					delay: UINavigationController.animationDelay,
-					easing: quintOut,
-					duration: UINavigationController.animationDuration,
-				}}
 			>
-				<ViewControllerRenderer viewController={vc} />
+				<ViewControllerRenderer
+					viewController={vc}
+					on:mount={(e) => {
+						onChildMount(vc);
+					}}
+				/>
 			</div>
 		{/each}
 	</div>
 	{#if !$topViewController.hidesNavigationBarWhenPushed}
-		<div
-			class="navBar"
-			transition:fly={{
-				x: "100%",
-				opacity: 1,
-				delay: UINavigationController.animationDelay,
-				easing: quintOut,
-				duration: UINavigationController.animationDuration,
-			}}
-		>
+		<div class="navBar">
 			<UiNavigationBar
 				items={$viewControllers.map((x) => x.navigationItem)}
 				on:backButtonTap={back}
@@ -81,17 +67,8 @@
 	.item {
 		position: absolute;
 		inset: 0;
-
-		will-change: transform, filter;
-		transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-		transform: translateX(-50%);
-		filter: brightness(80%);
 	}
 	.navBarHidden {
 		top: 0;
-	}
-	.top {
-		transform: translateX(0);
-		filter: brightness(100%);
 	}
 </style>
